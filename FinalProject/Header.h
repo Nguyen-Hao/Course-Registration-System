@@ -1,4 +1,4 @@
-﻿#ifndef  _HEADER_H_
+﻿#ifndef _HEADER_H_
 #define _HEADER_H_
 #include <iostream>
 #include <Windows.h>
@@ -22,8 +22,10 @@
 #define BACKSPACE 8
 #define SPACE 32
 
-using namespace std;
+#define FILEDSSV "DSSinhVien.txt"
+#define FILEDSLOP "DSLop.txt"
 
+using namespace std;
 
 struct Date
 {
@@ -112,3 +114,5 @@ struct semester
 };
 
 #endif // ! _HEADER_H_
+
+void ReadFileClass(ListLop& ds);
