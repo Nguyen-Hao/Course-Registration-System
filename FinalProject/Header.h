@@ -24,6 +24,7 @@
 
 #define FILEDSSV "DSSinhVien.txt"
 #define FILEDSLOP "DSLop.txt"
+#define FILECOURSES "ListCourses.txt"
 
 using namespace std;
 
@@ -88,8 +89,8 @@ struct Course
 {
 	int Sememster;				// 1/2/3
 	char ID[20];
-	char Name[20];				//Tên khóa học
-	char TeacherName[20];		//Tên GV
+	char Name[50];				//Tên khóa học
+	char TeacherName[50];		//Tên GV
 	int NumOfCredits;			//số tín chỉ
 	int MaxNumOfStudents = 50;
 	PhienGio Session1;			//Buổi học 1
