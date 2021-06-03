@@ -6,12 +6,8 @@
 #include "student.h"
 int main()
 {
-	ListLop ds;
-	ds.n = 0;
-	FixConsoleWindow();
-	resizeConsole(1000, 600);
-	ReadFileClass(ds);
-	ReadFileStudent(ds);
-	system("pause");
+	int x;
+	ViewListOfCourse(x);
+
 	return 0;
 }

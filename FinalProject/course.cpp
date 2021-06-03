@@ -1,5 +1,9 @@
 ﻿#include "course.h"
-#include "Header.h"
+
+void initListCourses(ListCourses& list)
+{
+	list.head = NULL;
+}
 
 void createNewCourse()
 {
@@ -47,4 +51,104 @@ void createNewCourse()
 	file << a.Session2.Thu << endl;
 	file << a.Session2.Gio << endl;
 	file.close();
+}
+
+ListCourses ReadListCourses(int x)
+{
+	ListCourses temp;
+	initListCourses(temp);
+	ifstream file;
+	file.open(FILECOURSES);
+	while (!file.eof())
+	{
+		int temp1;
+		file >> temp1;
+		file.ignore();
+		if (temp1 == x)
+		{
+			Course temp0;
+			temp0.Sememster = temp1;
+			file.getline(temp0.ID, 20);
+			file.getline(temp0.Name, 50);
+			file.getline(temp0.TeacherName, 50);
+			file >> temp0.NumOfCredits;
+			file.ignore();
+			file >> temp0.MaxNumOfStudents;
+			file.ignore();
+			file.getline(temp0.Session1.Thu, 10);
+			file.getline(temp0.Session1.Gio, 10);
+			file.getline(temp0.Session2.Thu, 10);
+			file.getline(temp0.Session2.Gio, 10);
+			NodeCourse* temp2 = new NodeCourse;
+			temp2->next = NULL;
+			temp2->course = temp0;
+			if (temp.head == NULL)
+				temp.head = temp2;
+			else
+			{
+				temp2->next = temp.head;
+				temp.head = temp2;
+			}
+			temp1 = 0;
+		}
+		else
+		{
+			Course temp0;
+			temp0.Sememster = temp1;
+			file.getline(temp0.ID, 20);
+			file.getline(temp0.Name, 50);
+			file.getline(temp0.TeacherName, 50);
+			file >> temp0.NumOfCredits;
+			file.ignore();
+			file >> temp0.MaxNumOfStudents;
+			file.ignore();
+			file.getline(temp0.Session1.Thu, 10);
+			file.getline(temp0.Session1.Gio, 10);
+			file.getline(temp0.Session2.Thu, 10);
+			file.getline(temp0.Session2.Gio, 10);
+		}
+	}
+	return temp;
+}
+
+void ViewListOfCourse(int& x)
+{
+repeat:
+	cout << "input credit: ";
+	cin >> x;
+	if (x <= 0 || x > 3)
+	{
+		cout << "credit is false!!" << endl;
+		cout << "Do you want to repeat?? " << endl;
+		cout << "1: yes, 2: no. ";
+		int n;
+		cin >> n;
+		switch (n)
+		{
+		case 1:
+		{
+			goto repeat;
+		}
+		default:
+			break;
+		}
+	}
+	else {
+		cout << setw(20) << left << "ID" << setw(50) << left << "Name of course";
+		cout << setw(50) << left << "Teacher name" << setw(8) << left << "Credit";
+		cout << setw(20) << "Number of student";
+		cout << setw(10) << left << "Thu" << setw(10) << left << "Time";
+		cout << setw(10) << left << "Thu" << setw(10) << left << "Time" << endl;
+		ListCourses temp = ReadListCourses(x);
+		NodeCourse* temp1 = temp.head;
+		while (temp1 != NULL)
+		{
+			cout << setw(20) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
+			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
+			cout << setw(20) << temp1->course.MaxNumOfStudents;
+			cout << setw(10) << left << temp1->course.Session1.Thu << setw(10) << left << temp1->course.Session1.Gio;
+			cout << setw(10) << left << temp1->course.Session2.Thu << setw(10) << left << temp1->course.Session2.Gio << endl;
+			temp1 = temp1->next;
+		}
+	}
 }

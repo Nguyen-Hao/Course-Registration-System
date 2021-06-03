@@ -1,9 +1,2 @@
-﻿  Source.cpp
-  console.cpp
-  course.cpp
-  login.cpp
-  main.cpp
-  staff.cpp
-  student.cpp
-  Generating Code...
-  FinalProject.vcxproj -> C:\Users\PC\Desktop\FinalProject\x64\Debug\FinalProject.exe
+﻿  course.cpp
+  FinalProject.vcxproj -> D:\Final-Project-master\FinalProject\x64\Debug\FinalProject.exe
