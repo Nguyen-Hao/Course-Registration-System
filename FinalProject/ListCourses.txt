@@ -1,30 +1,30 @@
 1
-MTH00001
-Toan roi rac
-Le Van Luyen
+MTH0004
+Dai so tuyen tinh
+Le Van Hop
 4
 150
-hai
-7.30
-sau
-9.00
+Ba
+7h30
+Sau
+12h30
 2
-CSC00004
+CSC00002
 Ky thuat lap trinh
 Nguyen Le Hoang Dung
 4
-150
-sau
-12.30
-hai
-7.30
-3
-PHY00001
-Vat ly dai cuong 1
-Trinh Hoa Lang
+200
+Sau
+12h30
+Bay
+9h00
+2
+MTH00001
+Vi tich phan 1B
+Le Van Chanh
 4
-150
-ba
-12.30
-nam
-7.30
+155
+Tu
+7h30
+Sau
+8h30
