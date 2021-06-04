@@ -24,3 +24,19 @@ void ReadFileClass(ListLop& dsl)
 	}
 	file.close();
 }
+//Hàm lấy thời gian hệ thống
+Time getTime()
+{
+	struct tm newtime;
+	time_t now = time(0);
+	localtime_s(&newtime, &now);
+	Time a;
+	// các thành phần của cấu trúc tm struct
+	a.year = 1900 + newtime.tm_year;
+	a.month = 1 + newtime.tm_mon;
+	a.day = newtime.tm_mday;
+	a.hour = newtime.tm_hour;
+	a.minute = newtime.tm_min;
+	a.second = newtime.tm_sec;
+	return a;
+}

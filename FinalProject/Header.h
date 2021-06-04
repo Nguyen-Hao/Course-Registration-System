@@ -1,5 +1,4 @@
-﻿#ifndef _HEADER_H_
-#define _HEADER_H_
+﻿#pragma once
 #include <iostream>
 #include <Windows.h>
 #include <iomanip>
@@ -27,6 +26,16 @@
 #define FILECOURSES "ListCourses.txt"
 
 using namespace std;
+
+struct Time
+{
+	int day;
+	int month;
+	int year;
+	int hour;
+	int minute;
+	int second;
+};
 
 struct Date
 {
@@ -114,6 +123,8 @@ struct semester
 	ListCourses lis;
 };
 
-#endif // ! _HEADER_H_
+
 
 void ReadFileClass(ListLop& ds);
+
+Time getTime();
