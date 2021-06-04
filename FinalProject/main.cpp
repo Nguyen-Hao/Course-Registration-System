@@ -6,8 +6,15 @@
 #include "student.h"
 int main()
 {
-	int x;
-	ViewListOfCourse(x);
-
+	ListLop dsl;
+	dsl.n = 0;
+	FixConsoleWindow();
+	resizeConsole(1400, 600);
+	ReadFileClass(dsl);
+	ReadFileStudent(dsl);
+	UpdateCSV(dsl);
+	//int x;
+	//ViewListOfCourse(x);
+	//updateCourse();
 	return 0;
 }

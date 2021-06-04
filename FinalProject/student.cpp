@@ -103,7 +103,7 @@ void ReadFileStudent(ListLop& dsl)
 	}
 	file.close();
 }
-void CapNhapCSV(ListLop& ds)
+void UpdateCSV(ListLop& ds)
 {
 	ifstream f1;
 	f1.open(FILECSV, ios::in | ios::out);
@@ -111,12 +111,10 @@ void CapNhapCSV(ListLop& ds)
 	int ViTriLop;
 	ofstream file;
 	file.open(FILEDSSV, ios_base::out);
-	f1.ignore(3);
 	while (f1.good())
 	{
 		char MaLop[10];
 		getline(f1, line);
-		//cout << line << endl << endl;
 		if (line.size() == 0) break;
 		stringstream s(line);
 		vector<string> row;
