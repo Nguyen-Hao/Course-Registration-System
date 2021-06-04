@@ -115,6 +115,7 @@ void UpdateCSV(ListLop& ds)
 	{
 		char MaLop[10];
 		getline(f1, line);
+		cout << line;
 		if (line.size() == 0) break;
 		stringstream s(line);
 		vector<string> row;
