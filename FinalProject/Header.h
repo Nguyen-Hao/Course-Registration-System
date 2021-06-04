@@ -25,7 +25,7 @@
 #define FILEDSSV "DSSinhVien.txt"
 #define FILEDSLOP "DSLop.txt"
 #define FILECOURSES "ListCourses.txt"
-
+#define FILECSV "Filecsv.csv"
 using namespace std;
 
 struct Date

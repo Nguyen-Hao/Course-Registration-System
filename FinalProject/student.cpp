@@ -103,8 +103,47 @@ void ReadFileStudent(ListLop& dsl)
 	}
 	file.close();
 }
-void ReadFileCSV(ListLop& ds)
+void CapNhapCSV(ListLop& ds)
 {
 	ifstream f1;
-	f1.open("Source1.csv", ios::in | ios::out);
+	f1.open(FILECSV, ios::in | ios::out);
+	string line = "", word;
+	int ViTriLop;
+	ofstream file;
+	file.open(FILEDSSV, ios_base::out);
+	f1.ignore(3);
+	while (f1.good())
+	{
+		char MaLop[10];
+		getline(f1, line);
+		//cout << line << endl << endl;
+		if (line.size() == 0) break;
+		stringstream s(line);
+		vector<string> row;
+		while (getline(s, word, ','))
+		{
+			row.push_back(word);
+		}
+		strcpy_s(MaLop, 10, row[0].c_str());
+		int KT = CheckClass(ds, MaLop, ds.n);
+		if (KT != 0)
+		{
+			if (KT == -1)	ViTriLop = 0;
+			else ViTriLop = KT;
+		}
+		SinhVien sv;
+		strcpy_s(sv.ID, 10, row[2].c_str());
+		strcpy_s(sv.FirstName, 50, row[3].c_str());
+		strcpy_s(sv.LastName, 50, row[4].c_str());
+		strcpy_s(sv.Gender, 10, row[5].c_str());
+		strcpy_s(sv.DateOfBirth, 50, row[6].c_str());
+		strcpy_s(sv.SocialID, 10, row[7].c_str());
+		bool flat = true;
+		for (ListSV* k = ds.l[ViTriLop].pHead; k != NULL; k = k->pNext)
+			if (strcmp(k->info.ID, sv.ID) == 0 && strcmp(k->info.FirstName, sv.FirstName) == 0 && strcmp(k->info.LastName, sv.LastName) == 0 && strcmp(k->info.SocialID, sv.SocialID) == 0 && strcmp(k->info.ID, sv.ID) == 0 && strcmp(k->info.Gender, sv.Gender) == 0)
+				flat = false;
+		if (flat == true) AddTailStudent(ds.l[ViTriLop].pHead, sv);
+	}
+	WriteFileStudent(ds);
+	file.close();
 }
