@@ -128,3 +128,7 @@ struct semester
 void ReadFileClass(ListLop& ds);
 
 Time getTime();
+bool isLeapYear(int nYear);
+int sumOfDayInMonth(int nMonth, int nYear);
+bool isDate(int nDay, int nMonth, int nYear);
+bool isTime(int h, int m, int s);
