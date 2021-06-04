@@ -1,5 +1,5 @@
 ﻿#include "course.h"
-
+#include "Header.h"
 void initListCourses(ListCourses& list)
 {
 	list.head = NULL;
@@ -151,4 +151,92 @@ repeat:
 			temp1 = temp1->next;
 		}
 	}
+}
+
+void updateCourse()
+{
+	Course a, b;
+	cout << "Nhap ID khoa hoc can update: ";
+	cin.get(a.ID, 20, '\n');
+	fstream file1, file2;
+	file1.open(FILECOURSES, ios::in);
+	file2.open("ListCourses1.txt", ios::out);
+	while (!file1.eof())
+	{
+		file1 >> b.Sememster;
+		file1.ignore();
+		file1.getline(b.ID, 20);
+		file1.getline(b.Name, 50);
+		file1.getline(b.TeacherName, 50);
+		file1 >> b.NumOfCredits;
+		file1.ignore();
+		file1 >> b.MaxNumOfStudents;
+		file1.ignore();
+		file1.getline(b.Session1.Thu, 10);
+		file1.getline(b.Session1.Gio, 10);
+		file1.getline(b.Session2.Thu, 10);
+		file1.getline(b.Session2.Gio, 10);
+		if (file1.eof()) break;
+		if (strcmp(a.ID, b.ID) == 0)
+		{
+			cout << "Nhap thong tin can cap nhat" << endl;
+			cout << "Nhap hoc ky: ";
+			cin >> a.Sememster;
+			cin.ignore();
+			cout << "Nhap ID khoa hoc: ";
+			cin.get(a.ID, 20, '\n');
+			cin.ignore();
+			cout << "Nhap ten khoa hoc: ";
+			cin.get(a.Name, 50, '\n');
+			cin.ignore();
+			cout << "Nhap ten giao vien: ";
+			cin.get(a.TeacherName, 50, '\n');
+			cout << "Nhap so tin chi: ";
+			cin >> a.NumOfCredits;
+			cout << "Nhap so luong sinh vien toi da: ";
+			cin >> a.MaxNumOfStudents;
+			cin.ignore();
+			cout << "Nhap buoi hoc thu 1: ";
+			cout << "Thu: ";
+			cin.get(a.Session1.Thu, 10, '\n');
+			cout << "Gio: ";
+			cin.ignore();
+			cin.get(a.Session1.Gio, 10, '\n');
+			cin.ignore();
+			cout << "Nhap buoi hoc thu 2: ";
+			cout << "Thu: ";
+			cin.get(a.Session2.Thu, 10, '\n');
+			cout << "Gio: ";
+			cin.ignore();
+			cin.get(a.Session2.Gio, 10, '\n');
+			cin.ignore();
+			file2 << a.Sememster << endl;
+			file2 << a.ID << endl;
+			file2 << a.Name << endl;
+			file2 << a.TeacherName << endl;
+			file2 << a.NumOfCredits << endl;
+			file2 << a.MaxNumOfStudents << endl;
+			file2 << a.Session1.Thu << endl;
+			file2 << a.Session1.Gio << endl;
+			file2 << a.Session2.Thu << endl;
+			file2 << a.Session2.Gio << endl;
+		}
+		else 
+		{
+			file2 << b.Sememster << endl;
+			file2 << b.ID << endl;
+			file2 << b.Name << endl;
+			file2 << b.TeacherName << endl;
+			file2 << b.NumOfCredits << endl;
+			file2 << b.MaxNumOfStudents << endl;
+			file2 << b.Session1.Thu << endl;
+			file2 << b.Session1.Gio << endl;
+			file2 << b.Session2.Thu << endl;
+			file2 << b.Session2.Gio << endl;
+		}
+	}
+	file1.close();
+	file2.close();
+	remove(FILECOURSES);
+	rename("ListCourses1.txt", FILECOURSES);
 }

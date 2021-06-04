@@ -6,8 +6,10 @@
 #include "student.h"
 int main()
 {
-	int x;
-	ViewListOfCourse(x);
-
+	FixConsoleWindow();
+	resizeConsole(1400, 600);
+	//int x;
+	//ViewListOfCourse(x);
+	updateCourse();
 	return 0;
 }

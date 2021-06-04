@@ -1,20 +1,30 @@
 1
-MT0032
-Ki thuat lap trinh
-nguyen le hoang dung
-3
+MTH0004
+Dai so tuyen tinh
+Le Van Hop
+4
 150
-hai
+Ba
 7h30
-nam
+Sau
 12h30
-1
-T0321
-toan roi rac
-an
 2
-150
-ba
-7h30
-sau
+CSC00002
+Ky thuat lap trinh
+Nguyen Le Hoang Dung
+4
+200
+Sau
 12h30
+Bay
+9h00
+2
+MTH00001
+Vi tich phan 1B
+Le Van Chanh
+4
+155
+Tu
+7h30
+Sau
+8h30
