@@ -10,12 +10,13 @@ int main()
 	dsl.n = 0;
 	FixConsoleWindow();
 	resizeConsole(1400, 600);
-	CreateCourseRegistrationSession();
+	//CreateCourseRegistrationSession();
 	//ReadFileClass(dsl);
 	//ReadFileStudent(dsl);
 	//UpdateCSV(dsl);
 	//int x;
 	//ViewListOfCourse(x);
 	//updateCourse();
+	UpdateStudent();
 	return 0;
 }
