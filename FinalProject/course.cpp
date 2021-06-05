@@ -240,3 +240,84 @@ void updateCourse()
 	remove(FILECOURSES);
 	rename("ListCourses1.txt", FILECOURSES);
 }
+
+//Tạo phiên đăng ký khóa học (ĐKHP)
+void CreateCourseRegistrationSession()
+{
+	Time a;
+	cout << "Nhap thoi gian bat dau: " << endl;
+	cout << "Ngay: ";
+	cin >> a.day;
+	cout << "Thang: ";
+	cin >> a.month;
+	cout << "Nam: ";
+	cin >> a.year;
+	while (!isDate(a.day, a.month, a.year))
+	{
+		cout << "Ngay thang nam khong hop le! Moi nhap lai: " << endl;
+		cout << "Nhap thoi gian bat dau: " << endl;
+		cout << "Ngay: ";
+		cin >> a.day;
+		cout << "Thang: ";
+		cin >> a.month;
+		cout << "Nam: ";
+		cin >> a.year;
+	}
+	cout << "Gio: ";
+	cin >> a.hour;
+	cout << "Phut: ";
+	cin >> a.minute;
+	cout << "Giay: ";
+	cin >> a.second;
+	while (!isTime(a.hour, a.minute, a.second))
+	{
+		cout << "Gio phut giay khong hop le! Moi nhap lai: " << endl;
+		cout << "Gio: ";
+		cin >> a.hour;
+		cout << "Phut: ";
+		cin >> a.minute;
+		cout << "Giay: ";
+		cin >> a.second;
+	}
+	fstream file;
+	file.open(FILETIMEDKHP, ios::out);
+	file << a.day << " " << a.month << " " << a.year
+		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
+	cout << "Nhap thoi gian ket thuc: " << endl;
+	cout << "Ngay: ";
+	cin >> a.day;
+	cout << "Thang: ";
+	cin >> a.month;
+	cout << "Nam: ";
+	cin >> a.year;
+	while (!isDate(a.day, a.month, a.year))
+	{
+		cout << "Ngay thang nam khong hop le! Moi nhap lai: " << endl;
+		cout << "Nhap thoi gian bat dau: " << endl;
+		cout << "Ngay: ";
+		cin >> a.day;
+		cout << "Thang: ";
+		cin >> a.month;
+		cout << "Nam: ";
+		cin >> a.year;
+	}
+	cout << "Gio: ";
+	cin >> a.hour;
+	cout << "Phut: ";
+	cin >> a.minute;
+	cout << "Giay: ";
+	cin >> a.second;
+	while (!isTime(a.hour, a.minute, a.second))
+	{
+		cout << "Gio phut giay khong hop le! Moi nhap lai: " << endl;
+		cout << "Gio: ";
+		cin >> a.hour;
+		cout << "Phut: ";
+		cin >> a.minute;
+		cout << "Giay: ";
+		cin >> a.second;
+	}
+	file << a.day << " " << a.month << " " << a.year
+		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
+	file.close();
+}

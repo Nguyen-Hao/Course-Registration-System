@@ -152,3 +152,64 @@ void UpdateCSV(ListLop& ds)
 	WriteFileStudent(ds);
 	file.close();
 }
+
+void UpdateStudent()
+{
+	Time temp = getTime();
+	SinhVien temp1;
+	fstream file, file1;
+	file.open("ListYearStudent.txt", ios::in | ios::out);
+	file1.open("list.txt", ios::out);
+	while (!file.eof())
+	{
+		file.getline(temp1.Class, 10);
+		file.getline(temp1.ID, 10);
+		file.getline(temp1.FirstName, 50);
+		file.getline(temp1.LastName, 50);
+		file.getline(temp1.Gender, 10);
+		file.getline(temp1.DateOfBirth, 50);
+		for (int i = 0; i < 3; i++)
+		{
+			file >> temp1.begin[i];
+		}
+		file.ignore();
+		file >> temp1.YearStudent;
+		file.ignore();
+		file.getline(temp1.SocialID, 10);
+		file.ignore();
+		file1 << temp1.Class << endl;
+		file1 << temp1.ID << endl;
+		file1 << temp1.FirstName << endl;
+		file1 << temp1.LastName << endl;
+		file1 << temp1.Gender << endl;
+		file1 << temp1.DateOfBirth << endl;
+
+		file1 << temp1.begin[0] << " " << temp1.begin[1] << " " << temp1.begin[2] << endl;
+		if (((temp.day >= temp1.begin[0]) && (temp.month == temp1.begin[1]) &&
+			(temp.year > temp1.begin[2])) ||
+			((temp.year > temp1.begin[2]) && (temp.month > temp1.begin[1])))
+		{
+			int a = temp.year - temp1.begin[2];
+			temp1.YearStudent = 1 + a;
+			if (temp1.YearStudent > 6)
+			{
+				file1 << 7 << endl;
+			}//sinh vien có yearStudent=7 la sinh vien da ra truong
+			else
+			{
+				file1 << temp1.YearStudent << endl;
+			}
+		}
+		else
+		{
+			file1 << temp1.YearStudent << endl;
+
+		}
+		file1 << temp1.SocialID << endl;
+
+	}
+	file.close();
+	file1.close();
+	remove("ListYearStudent.txt");
+	rename("list.txt", "ListYearStudent.txt");
+}

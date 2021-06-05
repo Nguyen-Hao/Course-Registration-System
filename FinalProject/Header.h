@@ -25,6 +25,7 @@
 #define FILEDSLOP "DSLop.txt"
 #define FILECOURSES "ListCourses.txt"
 #define FILECSV "Filecsv.csv"
+#define FILETIMEDKHP "TimeDKHP.txt"
 using namespace std;
 
 struct Time

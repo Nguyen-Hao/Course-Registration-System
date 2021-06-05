@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>D:\Năm 1\Kì 2\1. Kĩ thuật lập trình (Programming Fudamentals)\[LT] - Final_Project\Git_\x64\Debug\FinalProject.exe</FullPath>
+=======
+      <FullPath>D:\Final-Project-master\FinalProject\x64\Debug\FinalProject.exe</FullPath>
+>>>>>>> f8c7b88c3db6e1b3872f010c02fdd7073307e926
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

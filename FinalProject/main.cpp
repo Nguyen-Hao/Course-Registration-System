@@ -16,5 +16,6 @@ int main()
 	//int x;
 	//ViewListOfCourse(x);
 	//updateCourse();
+	UpdateStudent();
 	return 0;
 }
