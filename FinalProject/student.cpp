@@ -30,6 +30,7 @@ void AddStudent_Input(ListLop& dsl)
 {
 	cin.ignore();
 	char c[10];
+	char Pass[10] = "123456";
 	SinhVien sv;
 	cout << "Nhap ID lop: "; cin.get(c, 10, '\n');
 	int STTLop;
@@ -51,6 +52,7 @@ void AddStudent_Input(ListLop& dsl)
 		if (KT == -1)
 			STTLop = 0;
 		else STTLop = KT;
+		strcpy_s(sv.pass, 10, Pass);
 		AddTailStudent(dsl.l[STTLop].pHead, sv);
 	}
 	else
@@ -65,9 +67,12 @@ void WriteFileStudent(ListLop& dsl)
 	file.open(FILEDSSV, ios::out);
 	for (int i = 0; i < dsl.n; i++)
 	{
-		file << dsl.l[i].Ma << endl;
-		for (ListSV* k = dsl.l[i].pHead; k != NULL; k = k->pNext)
-			file << k->info.ID << endl << k->info.FirstName << endl << k->info.LastName << endl << k->info.Gender << endl << k->info.DateOfBirth << endl << k->info.SocialID << endl;
+		for (ListSV* k = dsl.l[i].pHead; k != NULL; k = k->pNext) 
+		{
+			file << dsl.l[i].Ma << endl; // ten lop
+			file << k->info.ID << endl << k->info.pass << endl; // id + pass
+			file << k->info.FirstName << endl << k->info.LastName << endl << k->info.Gender << endl << k->info.DateOfBirth << endl << k->info.SocialID << endl;
+		}
 	}
 }
 void ReadFileStudent(ListLop& dsl)
@@ -115,7 +120,6 @@ void UpdateCSV(ListLop& ds)
 	{
 		char MaLop[10];
 		getline(f1, line);
-		cout << line;
 		if (line.size() == 0) break;
 		stringstream s(line);
 		vector<string> row;
@@ -137,6 +141,8 @@ void UpdateCSV(ListLop& ds)
 		strcpy_s(sv.Gender, 10, row[5].c_str());
 		strcpy_s(sv.DateOfBirth, 50, row[6].c_str());
 		strcpy_s(sv.SocialID, 10, row[7].c_str());
+		char Pass[10] = "123456";
+		strcpy_s(sv.pass, 10, Pass);
 		bool flat = true;
 		for (ListSV* k = ds.l[ViTriLop].pHead; k != NULL; k = k->pNext)
 			if (strcmp(k->info.ID, sv.ID) == 0 && strcmp(k->info.FirstName, sv.FirstName) == 0 && strcmp(k->info.LastName, sv.LastName) == 0 && strcmp(k->info.SocialID, sv.SocialID) == 0 && strcmp(k->info.ID, sv.ID) == 0 && strcmp(k->info.Gender, sv.Gender) == 0)

@@ -36,7 +36,7 @@
     <ClCompile Include="course.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="semester.cpp">
+    <ClCompile Include="Dk_mon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,7 +59,7 @@
     <ClInclude Include="course.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Semester.h">
+    <ClInclude Include="Dk_mon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

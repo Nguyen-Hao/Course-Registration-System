@@ -9,11 +9,10 @@ int main()
 	ListLop dsl;
 	dsl.n = 0;
 	FixConsoleWindow();
-	resizeConsole(1400, 600);
-	//CreateCourseRegistrationSession();
-	//ReadFileClass(dsl);
-	//ReadFileStudent(dsl);
-	//UpdateCSV(dsl);
+	resizeConsole(1200, 600);
+	ReadFileClass(dsl);
+	ReadFileStudent(dsl);
+	UpdateCSV(dsl);
 	//int x;
 	//ViewListOfCourse(x);
 	//updateCourse();
