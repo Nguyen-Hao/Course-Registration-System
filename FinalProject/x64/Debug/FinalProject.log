@@ -1,11 +1,2 @@
-﻿  console.cpp
-  course.cpp
-  Dk_mon.cpp
-  login.cpp
-C:\Users\taiga\Desktop\New folder (4)\FinalProject\login.cpp(183,3): warning C4551: function call missing argument list
-  main.cpp
-  Source.cpp
-  staff.cpp
-  student.cpp
-  Generating Code...
-  FinalProject.vcxproj -> C:\Users\taiga\Desktop\New folder (4)\x64\Debug\FinalProject.exe
+﻿  main.cpp
+  FinalProject.vcxproj -> D:\Final-Project-master\FinalProject\x64\Debug\FinalProject.exe
