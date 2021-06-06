@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="console.cpp" />
     <ClCompile Include="course.cpp" />
+    <ClCompile Include="Dk_mon.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="console.h" />
     <ClInclude Include="course.h" />
+    <ClInclude Include="Dk_mon.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="login.h" />
     <ClInclude Include="staff.h" />
