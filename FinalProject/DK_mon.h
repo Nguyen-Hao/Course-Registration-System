@@ -11,4 +11,12 @@ struct danhsachdangkymon
 {
 	monhoc dsdk_mon[5];
 	int n;
+	char namhoc[10];
 };
+struct list_dsdk_mon
+{
+	danhsachdangkymon* arr;
+	int top;
+	int capacity;
+};
+void xu_ly_menu_student();

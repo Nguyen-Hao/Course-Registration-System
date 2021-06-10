@@ -87,6 +87,7 @@ struct Lop
 	char Ma[16];
 	char Ten[30];
 	char NienKhoa[10];
+	int soluong;
 	ListSV* pHead;
 };
 struct ListLop

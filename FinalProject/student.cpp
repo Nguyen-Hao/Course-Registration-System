@@ -67,7 +67,7 @@ void WriteFileStudent(ListLop& dsl)
 	file.open(FILEDSSV, ios::out);
 	for (int i = 0; i < dsl.n; i++)
 	{
-		for (ListSV* k = dsl.l[i].pHead; k != NULL; k = k->pNext)
+		for (ListSV* k = dsl.l[i].pHead; k != NULL; k = k->pNext) 
 		{
 			file << dsl.l[i].Ma << endl; // ten lop
 			file << k->info.ID << endl << k->info.pass << endl; // id + pass
@@ -120,7 +120,6 @@ void UpdateCSV(ListLop& ds)
 	{
 		char MaLop[10];
 		getline(f1, line);
-		cout << line;
 		if (line.size() == 0) break;
 		stringstream s(line);
 		vector<string> row;

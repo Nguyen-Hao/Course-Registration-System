@@ -1,13 +1,11 @@
 ﻿  console.cpp
   course.cpp
-  DK_mon.cpp
+  Dk_mon.cpp
   login.cpp
-C:\Users\LENOVO\source\repos\NguyenHao-us\FinalProject\FinalProject\login.cpp(183,3): warning C4551: function call missing argument list
+C:\Users\taiga\Desktop\New folder\FinalProject\login.cpp(183,3): warning C4551: function call missing argument list
   main.cpp
-  semester.cpp
   Source.cpp
   staff.cpp
   student.cpp
   Generating Code...
-  LINK : C:\Users\LENOVO\Source\Repos\NguyenHao-us\FinalProject\x64\Debug\FinalProject.exe not found or not built by the last incremental link; performing full link
-  FinalProject.vcxproj -> C:\Users\LENOVO\Source\Repos\NguyenHao-us\FinalProject\x64\Debug\FinalProject.exe
+  FinalProject.vcxproj -> C:\Users\taiga\Desktop\New folder\x64\Debug\FinalProject.exe

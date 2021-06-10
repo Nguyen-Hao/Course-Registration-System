@@ -36,10 +36,7 @@
     <ClCompile Include="course.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="semester.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DK_mon.cpp">
+    <ClCompile Include="Dk_mon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,11 +59,22 @@
     <ClInclude Include="course.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Semester.h">
+    <ClInclude Include="Dk_mon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DK_mon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="DSSinhVien.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="DSLop.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="TimeDKHP.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="Dssv_trong_lop.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
