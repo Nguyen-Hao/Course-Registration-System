@@ -9,7 +9,7 @@ int main()
 {
 	ListLop dsl;
 	dsl.n = 0;
-	xu_ly_menu_student();
+	//xu_ly_menu_student();
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
 	ReadFileClass(dsl);
@@ -18,6 +18,8 @@ int main()
 	//int x;
 	//ViewListOfCourse(x);
 	//updateCourse();
-	UpdateStudent();
+	//UpdateStudent();
+	ViewListOfStudentInClass(dsl);
+	ViewListOfClass(dsl);
 	return 0;
 }

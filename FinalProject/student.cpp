@@ -1,6 +1,6 @@
 #include "student.h"
 #include "Header.h"
-
+#include "console.h"
 void AddTailStudent(ListSV*& ds, SinhVien sv)
 {
 	ListSV* s = new ListSV;
@@ -38,6 +38,8 @@ void AddStudent_Input(ListLop& dsl)
 	if (KT != 0)
 	{
 		cin.ignore();
+		cout << "Ngay nhap hoc: (dd mm yyyy)"; cin.get(sv.begin, 50, '\n');
+		cin.ignore();
 		cout << "Nhap ID: "; cin.get(sv.ID, 10, '\n');
 		cin.ignore();
 		cout << "Nhap ho: "; cin.get(sv.FirstName, 50, '\n');
@@ -52,6 +54,8 @@ void AddStudent_Input(ListLop& dsl)
 		if (KT == -1)
 			STTLop = 0;
 		else STTLop = KT;
+		sv.YearStudent = 1;
+		sv.Semester = 1;
 		strcpy_s(sv.pass, 10, Pass);
 		AddTailStudent(dsl.l[STTLop].pHead, sv);
 	}
@@ -72,6 +76,7 @@ void WriteFileStudent(ListLop& dsl)
 			file << dsl.l[i].Ma << endl; // ten lop
 			file << k->info.ID << endl << k->info.pass << endl; // id + pass
 			file << k->info.FirstName << endl << k->info.LastName << endl << k->info.Gender << endl << k->info.DateOfBirth << endl << k->info.SocialID << endl;
+			file << k->info.begin << endl << k->info.YearStudent << endl << k->info.Semester << endl;
 		}
 	}
 }
@@ -89,22 +94,18 @@ void ReadFileStudent(ListLop& dsl)
 		if (s.size() == 0) break;
 		strcpy_s(a, 10, s.c_str());
 		int KT = CheckClass(dsl, a, dsl.n);
-		if (KT != 0)
-		{
-			if (KT == -1)
-				STTLop = 0;
-			else STTLop = KT;
-		}
-		else
-		{
-			strcpy_s(sv.ID, 10, a);
-			getline(file, s);	strcpy_s(sv.FirstName, 50, s.c_str());
-			getline(file, s);	strcpy_s(sv.LastName, 50, s.c_str());
-			getline(file, s);	strcpy_s(sv.Gender, 10, s.c_str());
-			getline(file, s);	strcpy_s(sv.DateOfBirth, 50, s.c_str());
-			getline(file, s);	strcpy_s(sv.SocialID, 10, s.c_str());
-			AddTailStudent(dsl.l[STTLop].pHead, sv);
-		}
+		if (KT == -1) STTLop = 0;
+		getline(file, s);	strcpy_s(sv.ID, 10, s.c_str());
+		getline(file, s);	strcpy_s(sv.pass, 20, s.c_str());
+		getline(file, s);	strcpy_s(sv.FirstName, 50, s.c_str());
+		getline(file, s);	strcpy_s(sv.LastName, 50, s.c_str());
+		getline(file, s);	strcpy_s(sv.Gender, 10, s.c_str());
+		getline(file, s);	strcpy_s(sv.DateOfBirth, 50, s.c_str());
+		getline(file, s);	strcpy_s(sv.SocialID, 10, s.c_str());
+		getline(file, s);	strcpy_s(sv.begin, 50, s.c_str());
+		file >> sv.YearStudent; 
+		file >> sv.Semester;
+		AddTailStudent(dsl.l[STTLop].pHead, sv);
 	}
 	file.close();
 }
@@ -142,7 +143,10 @@ void UpdateCSV(ListLop& ds)
 		strcpy_s(sv.DateOfBirth, 50, row[6].c_str());
 		strcpy_s(sv.SocialID, 10, row[7].c_str());
 		char Pass[10] = "123456";
-		strcpy_s(sv.pass, 10, Pass);
+		strcpy_s(sv.pass, 10, Pass); // pass mac dinh
+		sv.Semester = 1;
+		sv.YearStudent = 1;
+		char Begin[] =  "5/10/2020"; strcpy_s(sv.begin, 50, Begin); // ngay mac dinh nhap hoc la 5/10/2020
 		bool flat = true;
 		for (ListSV* k = ds.l[ViTriLop].pHead; k != NULL; k = k->pNext)
 			if (strcmp(k->info.ID, sv.ID) == 0 && strcmp(k->info.FirstName, sv.FirstName) == 0 && strcmp(k->info.LastName, sv.LastName) == 0 && strcmp(k->info.SocialID, sv.SocialID) == 0 && strcmp(k->info.ID, sv.ID) == 0 && strcmp(k->info.Gender, sv.Gender) == 0)
@@ -212,4 +216,46 @@ void UpdateStudent()
 	file1.close();
 	remove("ListYearStudent.txt");
 	rename("list.txt", "ListYearStudent.txt");
+}
+void ViewListOfClass(ListLop& ds)
+{
+	gotoxy(15, 5); cout << "+---------------------------------------------------------------------------------+" << endl;
+	gotoxy(15, 6); cout << char(124) << "  " << setw(5) << left << " STT " << char(124) << "  " << setw(15) << left << "   Ma lop   " << char(124) << "  " << setw(40) << left << "                  Ten lop " << char(124) << "  " << setw(10) << left << "Nam hoc" << char(124) << endl;
+	gotoxy(15, 7); cout << "+---------------------------------------------------------------------------------+" << endl;
+
+	for (int i = 0;i < ds.n;i++)
+	{
+		gotoxy(15, 8 + i);
+		cout << char(124) << "  " << setw(5) << left << i + 1 << char(124) << "  " << setw(15) << left << ds.l[i].Ma << char(124) << "  " << setw(40) << left << ds.l[i].Ten << char(124) << "  " << setw(10) << left << ds.l[i].NienKhoa << char(124);
+	}
+	gotoxy(15, 8 + ds.n); cout << "+---------------------------------------------------------------------------------+" << endl;
+}
+void ViewListOfStudentInClass(ListLop& ds)
+{
+	cout << "Nhap ma lop: ";
+	int ViTriLop;
+	char Malop[10];
+	int STT = 1;
+	cin.get(Malop, 10, '\n');
+	int KT = CheckClass(ds, Malop, ds.n);
+	if (KT == 0) {
+		cout << "Khong ton tai ma lop " << Malop << endl;
+		return;
+	}
+	else if (KT == -1) ViTriLop = 0;
+	else ViTriLop = KT;
+	if (ds.l[ViTriLop].pHead == NULL) {
+		cout << "Chua co sinh vien nao trong lop" << endl;
+		return;
+	}
+	gotoxy(10, 3);cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------";
+	gotoxy(5, 5); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
+	gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
+	gotoxy(5, 7); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
+	for (ListSV* k = ds.l[ViTriLop].pHead;k != NULL; k = k->pNext) {
+		gotoxy(5, 7 + STT);
+		cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
+	}
+	gotoxy(5, 7 + STT); cout << "+--------------------=-----------------------------------------------------------------------------------------+" << endl;
+	gotoxy(0, 7 + STT + 1);
 }

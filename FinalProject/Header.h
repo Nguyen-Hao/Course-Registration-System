@@ -72,8 +72,9 @@ struct SinhVien
 	char Gender[10];
 	char DateOfBirth[50];
 	char SocialID[10];
-	int begin[3];
+	char begin[50];
 	int YearStudent; // Năm nhập học
+	int Semester;
 };
 
 struct ListSV

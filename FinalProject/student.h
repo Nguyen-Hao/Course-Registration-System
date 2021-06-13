@@ -8,3 +8,5 @@ void WriteFileStudent(ListLop& dsl);
 void ReadFileStudent(ListLop& dsl);
 void UpdateCSV(ListLop& ds);
 void UpdateStudent();
+void ViewListOfClass(ListLop& ds);
+void ViewListOfStudentInClass(ListLop& ds);
