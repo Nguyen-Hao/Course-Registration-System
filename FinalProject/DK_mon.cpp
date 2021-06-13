@@ -397,7 +397,39 @@ void dang_ky_mon(ListLop& listlop, ListSV* student, danhsachdangkymon& dsdkmon)
 void load_mon(ListLop listlop, list_dsdk_mon &dsdk_mon, ListSV* student)
 {
 	int namhoc = student->info.YearStudent;
-	int hocki = 1;
+	int hocki = student->info.Semester;
+	for (int a = 0; a < hocki; a++)
+	{
+		int i = 0;
+		while (i < listlop.n)
+		{
+			ListSV* p = listlop.l[i].pHead;
+			while (p != NULL)
+			{
+				if (strcmp(student->info.ID, p->info.ID) == 0)
+				{
+					if (dsdk_mon.arr[a].n == dsdk_mon.capacity)
+					{
+						cout << "Stack is Full!" << endl;
+						exit(0);
+					}
+					else
+					{
+						dsdk_mon.arr[a].n++;
+						int b = dsdk_mon.arr[a].n;
+						strcpy_s(dsdk_mon.arr[a].dsdk_mon[b].Ma, listlop.l[i].Ma);
+						strcpy_s(dsdk_mon.arr[a].dsdk_mon[b].NienKhoa, listlop.l[i].NienKhoa);
+						strcpy_s(dsdk_mon.arr[a].dsdk_mon[b].Ten, listlop.l[i].Ten);
+
+					}
+
+				}
+				p = p->pNext;
+			}
+			i++;
+		}
+	}
+	
 }
 int Menu_Student(ListSV* student)
 {
@@ -419,6 +451,7 @@ void xu_ly_menu_student()
 	//
 	list_dsdk_mon dsdk_mon;
 	init_stack_list_dsdk_mon(dsdk_mon);
+	
 	if (isEmpty(dsdk_mon) == 1)
 	{
 		dsdk_mon.top++;
@@ -428,6 +461,7 @@ void xu_ly_menu_student()
 	//
 	system("cls");
 	ListSV* student = xu_ly_menu_dang_nhap();
+	load_mon(listlop, dsdk_mon, student);
 	while (true)
 	{
 		int luachon = Menu_Student(student);

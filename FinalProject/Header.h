@@ -74,6 +74,7 @@ struct SinhVien
 	char SocialID[10];
 	int begin[3];
 	int YearStudent; // Năm nhập học
+	int Semester;
 };
 
 struct ListSV
