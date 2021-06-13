@@ -38,7 +38,7 @@ void AddStudent_Input(ListLop& dsl)
 	if (KT != 0)
 	{
 		cin.ignore();
-		cout << "Ngay nhap hoc: (dd mm yyyy)"; cin.get(sv.begin, 50, '\n');
+		cout << "Ngay nhap hoc: (dd mm yyyy)"; for (int i = 0;i < 3;i++) cin >> sv.begin[i];
 		cin.ignore();
 		cout << "Nhap ID: "; cin.get(sv.ID, 10, '\n');
 		cin.ignore();
@@ -76,7 +76,7 @@ void WriteFileStudent(ListLop& dsl)
 			file << dsl.l[i].Ma << endl; // ten lop
 			file << k->info.ID << endl << k->info.pass << endl; // id + pass
 			file << k->info.FirstName << endl << k->info.LastName << endl << k->info.Gender << endl << k->info.DateOfBirth << endl << k->info.SocialID << endl;
-			file << k->info.begin << endl << k->info.YearStudent << endl << k->info.Semester << endl;
+			file << k->info.begin[0] << " " << k->info.begin[1] << " " << k->info.begin[2] << " " << endl << k->info.YearStudent << endl << k->info.Semester << endl;
 		}
 	}
 }
@@ -102,7 +102,7 @@ void ReadFileStudent(ListLop& dsl)
 		getline(file, s);	strcpy_s(sv.Gender, 10, s.c_str());
 		getline(file, s);	strcpy_s(sv.DateOfBirth, 50, s.c_str());
 		getline(file, s);	strcpy_s(sv.SocialID, 10, s.c_str());
-		getline(file, s);	strcpy_s(sv.begin, 50, s.c_str());
+		for (int i = 0;i < 3;i++) file >> sv.begin[i];
 		file >> sv.YearStudent; 
 		file >> sv.Semester;
 		AddTailStudent(dsl.l[STTLop].pHead, sv);
@@ -146,7 +146,7 @@ void UpdateCSV(ListLop& ds)
 		strcpy_s(sv.pass, 10, Pass); // pass mac dinh
 		sv.Semester = 1;
 		sv.YearStudent = 1;
-		char Begin[] =  "5/10/2020"; strcpy_s(sv.begin, 50, Begin); // ngay mac dinh nhap hoc la 5/10/2020
+		sv.begin[0] = 5; sv.begin[1] = 10; sv.begin[2] = 2002;
 		bool flat = true;
 		for (ListSV* k = ds.l[ViTriLop].pHead; k != NULL; k = k->pNext)
 			if (strcmp(k->info.ID, sv.ID) == 0 && strcmp(k->info.FirstName, sv.FirstName) == 0 && strcmp(k->info.LastName, sv.LastName) == 0 && strcmp(k->info.SocialID, sv.SocialID) == 0 && strcmp(k->info.ID, sv.ID) == 0 && strcmp(k->info.Gender, sv.Gender) == 0)
