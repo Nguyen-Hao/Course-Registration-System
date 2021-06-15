@@ -125,6 +125,17 @@ struct semester
 	Date end;
 	ListCourses lis;
 };
+void BackGround();
+void InfoTeam();
+void XYWordColor(int x, int y, string c, int color);
+int MenuFirst();
+void KhungDangNhap(int item);
+void DangNhapThanhCong();
+void DangNhapThatBai();
+ListSV* DangNhapSV(ListLop ds);
+int AfterLoginSV(ListLop ds, ListSV*& p);
+void MenuSV(ListLop ds, ListSV*& p);
+
 
 
 

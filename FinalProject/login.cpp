@@ -65,6 +65,7 @@ List_Sv doc_file_Dssv_TXT(string namefile)
 		file.getline(sv.Gender, 20);
 		file.getline(sv.DateOfBirth, 20);
 		file.getline(sv.SocialID, 20);
+		file >> sv.begin[0] >> sv.begin[1] >> sv.begin[2] >> sv.YearStudent >> sv.Semester;
 		ListSV* a;
 		a = Create_Node_Sv(sv);
 		if (dssv.pHead == NULL)
@@ -77,39 +78,6 @@ List_Sv doc_file_Dssv_TXT(string namefile)
 			dssv.pTail->pNext = a;
 			dssv.pTail = a;
 		}
-		//file.get(dot, 3, 27);
-		/*for(int i=0;i<dsl.n;i++)
-			for (ListSV* p = dsl.l[i].pHead; p != NULL;p = p->pNext)
-			{
-				char dot[3];
-				SinhVien sv;
-				strcpy_s(sv.ID, 10, p->info.ID);
-				strcpy_s(sv.DateOfBirth, 50, p->info.DateOfBirth);
-				strcpy_s(sv.FirstName, 50, p->info.FirstName);
-				strcpy_s(sv.Gender, 10, p->info.Gender);
-				strcpy_s(sv.LastName, 50, p->info.LastName);
-				strcpy_s(sv.SocialID, 10, p->info.SocialID);
-				strcpy_s(sv.pass, 20, p->info.pass);
-				ListSV* a;
-				a = Create_Node_Sv(sv);
-				if (b == NULL)
-				{
-					b = a;
-					dssv.pHead = a;
-					dssv.pTail = a;
-				}
-				else
-				{
-					dssv.pTail->pNext = a;
-					dssv.pTail = a;
-				}
-			}
-
-
-		/*if (strcmp(dot, ".") == 1)
-		{
-			continue;
-		}*/
 	}
 	file.close();
 	return dssv;

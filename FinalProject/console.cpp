@@ -21,7 +21,10 @@ void resizeConsole(int width, int height)
 
 }
 
-
+void TextColor(int x)
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), x);
+}
 // Ham dich chuyen con tro den toa do x, y.
 void gotoxy(SHORT x, SHORT y)
 {
@@ -61,10 +64,11 @@ void setBackgroundColor(WORD color)
 
 	SetConsoleTextAttribute(hConsoleOutput, wAttributes);
 }
-
-
-
-
-
-
-
+int GetKey()
+{
+	char key;
+	key = _getch();
+	if (key == -32 || key == 0)
+		return -_getch();
+	else return key;
+}

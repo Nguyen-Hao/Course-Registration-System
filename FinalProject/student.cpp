@@ -95,6 +95,8 @@ void ReadFileStudent(ListLop& dsl)
 		strcpy_s(a, 10, s.c_str());
 		int KT = CheckClass(dsl, a, dsl.n);
 		if (KT == -1) STTLop = 0;
+		else STTLop = KT;
+		strcpy_s(sv.Class, 10, s.c_str());
 		getline(file, s);	strcpy_s(sv.ID, 10, s.c_str());
 		getline(file, s);	strcpy_s(sv.pass, 20, s.c_str());
 		getline(file, s);	strcpy_s(sv.FirstName, 50, s.c_str());
@@ -130,12 +132,10 @@ void UpdateCSV(ListLop& ds)
 		}
 		strcpy_s(MaLop, 10, row[0].c_str());
 		int KT = CheckClass(ds, MaLop, ds.n);
-		if (KT != 0)
-		{
-			if (KT == -1)	ViTriLop = 0;
-			else ViTriLop = KT;
-		}
+		if (KT == -1)	ViTriLop = 0;
+		else ViTriLop = KT;
 		SinhVien sv;
+		strcpy_s(sv.Class, 10, MaLop);
 		strcpy_s(sv.ID, 10, row[2].c_str());
 		strcpy_s(sv.FirstName, 50, row[3].c_str());
 		strcpy_s(sv.LastName, 50, row[4].c_str());

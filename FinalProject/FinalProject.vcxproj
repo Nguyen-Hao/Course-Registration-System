@@ -144,6 +144,7 @@
     <ClCompile Include="Dk_mon.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="student.cpp" />
