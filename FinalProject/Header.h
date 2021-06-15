@@ -143,3 +143,15 @@ bool isLeapYear(int nYear);
 int sumOfDayInMonth(int nMonth, int nYear);
 bool isDate(int nDay, int nMonth, int nYear);
 bool isTime(int h, int m, int s);
+
+
+void BackGround();
+void InfoTeam();
+void XYWordColor(int x, int y, string c, int color);
+int MenuFirst();
+void KhungDangNhap(int item);
+void DangNhapThanhCong();
+void DangNhapThatBai();
+ListSV* DangNhapSV(ListLop ds);
+int AfterLoginSV(ListLop ds, ListSV*& p);
+void MenuSV(ListLop ds, ListSV*& p);
