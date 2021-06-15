@@ -145,6 +145,7 @@
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="semester.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="student.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Dk_mon.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="login.h" />
+    <ClInclude Include="Semester.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="student.h" />
   </ItemGroup>
@@ -162,7 +164,12 @@
     <Text Include="DSLop.txt" />
     <Text Include="DSSinhVien.txt" />
     <Text Include="Dssv_trong_lop.txt" />
+    <Text Include="Dssv_trong_lop_out.txt" />
+    <Text Include="ListCourses.txt" />
     <Text Include="TimeDKHP.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Filecsv.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
