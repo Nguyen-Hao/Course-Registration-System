@@ -1,13 +1,2 @@
 ﻿  main.cpp
-C:\Users\taiga\Desktop\New folder (3)\FinalProject\main.cpp(25,6): warning C4101: 'x': unreferenced local variable
-  Menu.cpp
-C:\Users\taiga\Desktop\New folder (3)\FinalProject\Menu.cpp(72,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\taiga\Desktop\New folder (3)\FinalProject\Menu.cpp(80,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\taiga\Desktop\New folder (3)\FinalProject\Menu.cpp(173,9): warning C4101: 'pre': unreferenced local variable
-C:\Users\taiga\Desktop\New folder (3)\FinalProject\Menu.cpp(287,9): warning C4101: 'pre': unreferenced local variable
-C:\Users\taiga\Desktop\New folder (3)\FinalProject\Menu.cpp(417,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\taiga\Desktop\New folder (3)\FinalProject\Menu.cpp(425,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  student.cpp
-C:\Users\taiga\Desktop\New folder (3)\FinalProject\student.cpp(234,21): warning C4805: '==': unsafe mix of type 'char' and type 'bool' in operation
-  Generating Code...
-  FinalProject.vcxproj -> C:\Users\taiga\Desktop\New folder (3)\x64\Debug\FinalProject.exe
+  FinalProject.vcxproj -> C:\Users\PC\Desktop\FinalProject\x64\Debug\FinalProject.exe
