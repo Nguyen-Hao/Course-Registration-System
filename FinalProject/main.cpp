@@ -17,10 +17,10 @@ int main()
 	ReadFileClass(dsl);
 	ReadFileStudent(dsl);
 	UpdateCSV(dsl);
+	MenuSV(dsl, p);
 	//ListSV* temp = DangNhapSV(dsl);
 	//cout << temp->info.Class << endl << temp->info.DateOfBirth << endl;
 	//int c = AfterLoginSV(dsl, p);
-	MenuSV(dsl, p);
 	//int x;
 	//ViewListOfCourse(x);
 	//updateCourse();
