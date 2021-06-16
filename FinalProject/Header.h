@@ -121,10 +121,30 @@ struct semester
 {
 	int name;
 	char schoolyear[11];
+	int studentYear;
 	Date begin;
 	Date end;
 	ListCourses lis;
 };
+struct NodeSemester
+{
+	semester semes;
+	NodeSemester* next;
+};
+struct listSemester
+{
+	NodeSemester* head;
+	NodeSemester* tail;
+};
+
+void ReadFileClass(ListLop& ds);
+Time getTime();
+bool isLeapYear(int nYear);
+int sumOfDayInMonth(int nMonth, int nYear);
+bool isDate(int nDay, int nMonth, int nYear);
+bool isTime(int h, int m, int s);
+
+
 void BackGround();
 void InfoTeam();
 void XYWordColor(int x, int y, string c, int color);
@@ -135,14 +155,3 @@ void DangNhapThatBai();
 ListSV* DangNhapSV(ListLop ds);
 int AfterLoginSV(ListLop ds, ListSV*& p);
 void MenuSV(ListLop ds, ListSV*& p);
-
-
-
-
-void ReadFileClass(ListLop& ds);
-
-Time getTime();
-bool isLeapYear(int nYear);
-int sumOfDayInMonth(int nMonth, int nYear);
-bool isDate(int nDay, int nMonth, int nYear);
-bool isTime(int h, int m, int s);
