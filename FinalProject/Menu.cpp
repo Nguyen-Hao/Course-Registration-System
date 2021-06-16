@@ -102,10 +102,10 @@ int MenuFirst()
 
 void HuongDan()
 {
-	KhungHCN(125, 28, 25, 4);
-	gotoxy(130, 29); cout << "ESC: Back";
-	gotoxy(130, 30); cout << "Enter: Log in";
-	gotoxy(130, 30); cout << "Tab: UP/DOWN ";
+	KhungHCN(125, 27, 25, 5);
+	gotoxy(130, 28); cout << "ESC: Back";
+	gotoxy(130, 30); cout << "Enter: DOWN/Login";
+	gotoxy(130, 29); cout << "Tab: UP/DOWN ";
 	gotoxy(130, 31); cout << char(30) <<": UP";
 	gotoxy(130, 32); cout << char(31) << ": DOWN";
 }
@@ -179,13 +179,13 @@ ESCAPE:
 				gotoxy(55 + i++, 18);
 				char c;
 				c = GetKey();
-				if (c == DOWN || c == '\t' || c == UP && pass == false)
+				if (c == DOWN || c == '\t' || c == UP)
 				{
 					i--;
 					goto PASS;
 				}
 				else if (c == LEFT || c == RIGHT) i--;
-				else if (c == DOWN && pass == true) i--;
+				//else if (c == DOWN && pass == true) i--;
 				else if (c == BACKSPACE && User.size() == 0)
 					i--;
 				else if (c == BACKSPACE) {
@@ -196,18 +196,16 @@ ESCAPE:
 					if (!User.empty())
 						User.erase(User.size() - 1);
 				}
-				else if (c != BACKSPACE && c != ENTER && User.size() == 20)
-				{
-					i--;
-				}
-				else if (c == ENTER)
-				{
-					user = true;
-					break;
-				}
-				else if (c == ESC) 
+				else if (c == ESC)
 				{
 					goto ESCAPE;
+				}
+				else if (c != BACKSPACE && c != ENTER && User.size() == 20)
+					i--;
+				else if (c == ENTER)
+				{
+					i--;
+					break;
 				}
 				else {
 					User += c;
@@ -220,15 +218,13 @@ ESCAPE:
 				gotoxy(55 + j++, 24);
 				c = GetKey();
 				if (c == ENTER) break;
-				else if ((c == UP || c == DOWN || c == '\t') && user == false)
+				else if (c == UP || c == DOWN || c == '\t')
 				{
 					j--;
 					goto USER;
 				}
 				else if (c == LEFT || c == RIGHT) j--;
-				else if (c == UP || c == DOWN && user == true) j--;
-				else if (c == BACKSPACE && Pass.size() == 0)
-					j--;
+				else if (c == BACKSPACE && Pass.size() == 0)	j--;
 				else if (c == BACKSPACE)
 				{
 					printf("\b ");
@@ -239,14 +235,10 @@ ESCAPE:
 					if (!Pass.empty())
 						Pass.erase(Pass.size() - 1);
 				}
-				else if (c != BACKSPACE && c != ENTER && Pass.size() == 20)
-				{
-					j--;
-				}
 				else if (c == ESC)
-				{
 					goto ESCAPE;
-				}
+				else if (c != BACKSPACE && c != ENTER && Pass.size() == 20)	
+					j--;
 				else
 				{
 					Pass += c;
@@ -293,20 +285,16 @@ ESCAPE:
 				gotoxy(55 + i++, 18);
 				char c;
 				c = GetKey();
-				if (c == DOWN || c == '\t' || c == UP && pass == false)
+				if (c == DOWN || c == '\t' || c == UP )
 				{
 					i--;
 					goto PASSGV;
 				}
 				else if (c == LEFT || c == RIGHT) i--;
-				else if (c == DOWN && pass == true) i--;
 				else if (c == BACKSPACE && User.size() == 0)
 					i--;
-				else if (c != BACKSPACE && c != ENTER && User.size() == 20)
+				else if (c == BACKSPACE) 
 				{
-					i--;
-				}
-				else if (c == BACKSPACE) {
 					printf("\b ");
 					i -= 2;
 					if (i < 0) i = 0;
@@ -320,9 +308,9 @@ ESCAPE:
 					break;
 				}
 				else if (c == ESC)
-				{
 					goto ESCAPE;
-				}
+				else if (c != BACKSPACE && c != ENTER && User.size() == 20)
+					i--;
 				else {
 					User += c;
 					cout << c;
@@ -334,13 +322,12 @@ ESCAPE:
 				gotoxy(55 + j++, 24);
 				c = GetKey();
 				if (c == ENTER) break;
-				else if ((c == UP || c == DOWN || c == '\t') && user == false)
+				else if ((c == UP || c == DOWN || c == '\t'))
 				{
 					j--;
 					goto USERGV;
 				}
 				else if (c == LEFT || c == RIGHT) j--;
-				else if (c == UP || c == DOWN && user == true) j--;
 				else if (c == BACKSPACE && Pass.size() == 0)
 					j--;
 				else if (c == BACKSPACE)
@@ -353,14 +340,12 @@ ESCAPE:
 					if (!Pass.empty())
 						Pass.erase(Pass.size() - 1);
 				}
-				else if (c != BACKSPACE && c != ENTER && Pass.size() == 20)
-				{
-					j--;
-				}
 				else if (c == ESC)
 				{
 					goto ESCAPE;
 				}
+				else if (c != BACKSPACE && c != ENTER && Pass.size() == 20)
+					j--;
 				else
 				{
 					Pass += c;

@@ -183,6 +183,7 @@ void UpdateCSV(ListLop& ds)
 		if (KT == -1)	ViTriLop = 0;
 		else ViTriLop = KT;
 		SinhVien sv;
+		strcpy_s(sv.Class, 10, MaLop);
 		strcpy_s(sv.ID, 10, row[2].c_str());
 		strcpy_s(sv.FirstName, 50, row[3].c_str());
 		strcpy_s(sv.LastName, 50, row[4].c_str());
