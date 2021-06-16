@@ -6,22 +6,28 @@
 #include "student.h"
 #include "Dk_mon.h"
 #include"Semester.h"
+#include "Menu.h"
 int main()
 {
 	ListLop dsl;
+	List_GV dsgv;
+	dsgv.pHead = NULL;
 	dsl.n = 0;
+	ListSV* p = new ListSV;
 	//xu_ly_menu_student();
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
-	//ReadFileClass(dsl);
-	//ReadFileStudent(dsl);
-	//UpdateCSV(dsl);
-	//int x;
+	ReadFileClass(dsl);
+	ReadFileStudent(dsl);
+	Read_File_DSGV(dsgv);
+	UpdateCSV(dsl);
+	MenuSV(dsl, p, dsgv);
+	int x;
 	//ViewListOfCourse(x);
 	//updateCourse();
 	//UpdateStudent();
-	//ViewListOfStudentInClass(dsl);
+	///ViewListOfStudentInClass(dsl);
 	//ViewListOfClass(dsl);
-	UpdateStudent();
+	//UpdateStudent();
 	return 0;
 }

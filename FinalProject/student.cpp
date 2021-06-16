@@ -112,6 +112,53 @@ void ReadFileStudent(ListLop& dsl)
 	}
 	file.close();
 }
+//
+//
+ListSV* Create_Node_Sv(SinhVien sv)
+{
+	ListSV* a = new ListSV;
+	a->info = sv;
+	a->pNext = NULL;
+	return a;
+}
+void Read_File_DSGV(List_GV &dsgv)
+{
+	dsgv.pHead = NULL;
+	ifstream file;
+	file.open("DsGiaoVien.txt");
+	if (file.fail())
+	{
+		cout << "Failed to open this file!" << endl;
+		exit(0);
+	}
+	while (!file.eof())
+	{
+		SinhVien gv;
+		file.clear();
+		file.getline(gv.ID, 10);
+		file.getline(gv.pass, 20);
+		file.getline(gv.FirstName, 20);
+		file.getline(gv.LastName, 20);
+		file.getline(gv.Gender, 20);
+		file.getline(gv.DateOfBirth, 20);
+		file.getline(gv.SocialID, 20);
+		ListSV* a = Create_Node_Sv(gv);
+		if (dsgv.pHead == NULL)
+		{
+			dsgv.pHead = a;
+		}
+		else
+		{
+			ListSV* k = dsgv.pHead;
+			while (k->pNext != NULL)
+				k = k->pNext;
+			k->pNext = a;
+		}
+	}
+	file.close();
+}
+//
+//
 void UpdateCSV(ListLop& ds)
 {
 	ifstream f1;

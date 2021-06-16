@@ -150,7 +150,7 @@ void DangNhapThatBai()
 	gotoxy(57, 29); cout << "Ten tai khoan hoac mat khau khong dung..";
 	TextColor(224);
 }
-ListSV* DangNhapSV(ListLop ds)
+ListSV* DangNhapSV(ListLop ds, List_GV dsgv)
 {
 ESCAPE: 
 	int choice = MenuFirst();
@@ -367,16 +367,15 @@ ESCAPE:
 					cout << "*";
 				}
 			}
-			/*for (int i = 0;i < ds.n;i++)
-				for (ListSV* k = ds.l[i].pHead; k != NULL;k = k->pNext)
+			for (ListSV* k = dsgv.pHead; k != NULL; k = k->pNext)
+			{
+				if (strcmp(k->info.ID, User.c_str()) == 0 && strcmp(k->info.pass, Pass.c_str()) == 0)
 				{
-					if (strcmp(k->info.ID, User.c_str()) == 0 && strcmp(k->info.pass, Pass.c_str()) == 0)
-					{
-						Login = true;
-						p = k;
-						break;
-					}
-				}*/
+					Login = true;
+					p = k;
+					break;
+				}
+			}
 			if (Login == true)
 			{
 				DangNhapThanhCong();
@@ -398,9 +397,9 @@ char* TOUPPER(char* c)
 		toupper(c[i]);
 	return c;
 }
-int AfterLoginSV(ListLop ds, ListSV*& p)
+int AfterLoginSV(ListLop ds, ListSV*& p, List_GV dsgv)
 {
-	p = DangNhapSV(ds);
+	p = DangNhapSV(ds, dsgv);
 	int vitri = 0;
 	while (true)
 	{
@@ -445,10 +444,10 @@ int AfterLoginSV(ListLop ds, ListSV*& p)
 			return vitri + 1;
 	}
 }
-void MenuSV(ListLop ds, ListSV*& p)
+void MenuSV(ListLop ds, ListSV*& p, List_GV dsgv)
 {
 REPEAT:
-	int choice = AfterLoginSV(ds,p);
+	int choice = AfterLoginSV(ds,p,dsgv);
 	while (choice !=6)
 	{
 		if (choice == 1) 

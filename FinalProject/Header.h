@@ -22,6 +22,7 @@
 #define SPACE 32
 
 #define FILEDSSV "DSSinhVien.txt"
+#define FILEDSGV "DsGiaoVien.txt"
 #define FILEDSLOP "DSLop.txt"
 #define FILECOURSES "ListCourses.txt"
 #define FILECSV "Filecsv.csv"
@@ -95,6 +96,21 @@ struct ListLop
 {
 	int n;						// so luong lop
 	Lop l[maxlop];
+};
+
+struct GiaoVien
+{
+	char ID[10];
+	char pass[20];
+	char FirstName[50];
+	char LastName[50];
+	char Gender[10];
+	char DateOfBirth[50];
+	char SocialID[10];
+};
+struct List_GV
+{
+	ListSV* pHead;
 };
 
 struct Course
