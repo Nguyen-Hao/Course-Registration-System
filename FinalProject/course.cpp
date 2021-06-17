@@ -27,18 +27,31 @@ void createNewCourse()
 	cin >> a.MaxNumOfStudents;
 	cin.ignore();
 	cout << "Nhap buoi hoc thu 1: ";
-	cout << "Thu: ";
-	cin.get(a.Session1.Thu, 10, '\n');
-	cout << "Gio: ";
-	cin.ignore();
-	cin.get(a.Session1.Gio, 10, '\n');
-	cin.ignore();
+	do
+	{
+		cout << "Thu: ";
+		cin >> a.Session1.thu;
+	} while (a.Session1.thu < 2 || a.Session1.thu > 8);
+	do
+	{
+		cout << "Gio: ";
+		cin >> a.Session1.gio;
+		cout << "Phut: ";
+		cin >> a.Session1.phut;
+	} while (!isTime(a.Session1.gio, a.Session1.phut, 0));
 	cout << "Nhap buoi hoc thu 2: ";
-	cout << "Thu: ";
-	cin.get(a.Session2.Thu, 10, '\n');
-	cout << "Gio: ";
-	cin.ignore();
-	cin.get(a.Session2.Gio, 10, '\n');
+	do
+	{
+		cout << "Thu: ";
+		cin >> a.Session2.thu;
+	} while (a.Session2.thu < 2 || a.Session2.thu > 8);
+	do
+	{
+		cout << "Gio: ";
+		cin >> a.Session2.gio;
+		cout << "Phut: ";
+		cin >> a.Session2.phut;
+	} while (!isTime(a.Session2.gio, a.Session2.phut, 0));
 	cin.ignore();
 	file << a.Sememster << endl;
 	file << a.ID << endl;
@@ -46,10 +59,12 @@ void createNewCourse()
 	file << a.TeacherName << endl;
 	file << a.NumOfCredits << endl;
 	file << a.MaxNumOfStudents << endl;
-	file << a.Session1.Thu << endl;
-	file << a.Session1.Gio << endl;
-	file << a.Session2.Thu << endl;
-	file << a.Session2.Gio << endl;
+	file << a.Session1.thu << endl;
+	file << a.Session1.gio << endl;
+	file << a.Session1.phut << endl;
+	file << a.Session2.thu << endl;
+	file << a.Session2.gio << endl;
+	file << a.Session2.phut << endl;
 	file.close();
 }
 
@@ -75,10 +90,18 @@ ListCourses ReadListCourses(int x)
 			file.ignore();
 			file >> temp0.MaxNumOfStudents;
 			file.ignore();
-			file.getline(temp0.Session1.Thu, 10);
-			file.getline(temp0.Session1.Gio, 10);
-			file.getline(temp0.Session2.Thu, 10);
-			file.getline(temp0.Session2.Gio, 10);
+			file >> temp0.Session1.thu;
+			file.ignore();
+			file >> temp0.Session1.gio;
+			file.ignore();
+			file >> temp0.Session1.phut;
+			file.ignore();
+			file >> temp0.Session2.thu;
+			file.ignore();
+			file >> temp0.Session2.gio;
+			file.ignore();
+			file >> temp0.Session2.phut;
+			file.ignore();
 			NodeCourse* temp2 = new NodeCourse;
 			temp2->next = NULL;
 			temp2->course = temp0;
@@ -102,10 +125,18 @@ ListCourses ReadListCourses(int x)
 			file.ignore();
 			file >> temp0.MaxNumOfStudents;
 			file.ignore();
-			file.getline(temp0.Session1.Thu, 10);
-			file.getline(temp0.Session1.Gio, 10);
-			file.getline(temp0.Session2.Thu, 10);
-			file.getline(temp0.Session2.Gio, 10);
+			file >> temp0.Session1.thu;
+			file.ignore();
+			file >> temp0.Session1.gio;
+			file.ignore();
+			file >> temp0.Session1.phut;
+			file.ignore();
+			file >> temp0.Session2.thu;
+			file.ignore();
+			file >> temp0.Session2.gio;
+			file.ignore();
+			file >> temp0.Session2.phut;
+			file.ignore();
 		}
 	}
 	return temp;
@@ -146,8 +177,9 @@ repeat:
 			cout << setw(20) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
 			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
 			cout << setw(20) << temp1->course.MaxNumOfStudents;
-			cout << setw(10) << left << temp1->course.Session1.Thu << setw(10) << left << temp1->course.Session1.Gio;
-			cout << setw(10) << left << temp1->course.Session2.Thu << setw(10) << left << temp1->course.Session2.Gio << endl;
+			cout << setw(10) << left << temp1->course.Session1.thu << setw(2) << left << temp1->course.Session1.gio <<":" << setw(8)<<temp1->course.Session1.phut;
+			cout << setw(10) << left << temp1->course.Session2.thu << setw(2)<<left<<temp1->course.Session2.gio <<":"<<temp1->course.Session2.phut
+				<< endl;
 			temp1 = temp1->next;
 		}
 	}
@@ -172,10 +204,9 @@ void updateCourse()
 		file1.ignore();
 		file1 >> b.MaxNumOfStudents;
 		file1.ignore();
-		file1.getline(b.Session1.Thu, 10);
-		file1.getline(b.Session1.Gio, 10);
-		file1.getline(b.Session2.Thu, 10);
-		file1.getline(b.Session2.Gio, 10);
+		file1 >> b.Session1.thu >> b.Session1.gio >> b.Session1.phut;
+		file1 >> b.Session2.thu >> b.Session2.gio >> b.Session2.phut;
+		file1.ignore();
 		if (file1.eof()) break;
 		if (strcmp(a.ID, b.ID) == 0)
 		{
@@ -197,18 +228,31 @@ void updateCourse()
 			cin >> a.MaxNumOfStudents;
 			cin.ignore();
 			cout << "Nhap buoi hoc thu 1: ";
-			cout << "Thu: ";
-			cin.get(a.Session1.Thu, 10, '\n');
-			cout << "Gio: ";
-			cin.ignore();
-			cin.get(a.Session1.Gio, 10, '\n');
-			cin.ignore();
+			do
+			{
+				cout << "Thu: ";
+				cin >> a.Session1.thu;
+			} while (a.Session1.thu < 2 || a.Session1.thu > 8);
+			do
+			{
+				cout << "Gio: ";
+				cin >> a.Session1.gio;
+				cout << "Phut: ";
+				cin >> a.Session1.phut;
+			} while (!isTime(a.Session1.gio, a.Session1.phut, 0));
 			cout << "Nhap buoi hoc thu 2: ";
-			cout << "Thu: ";
-			cin.get(a.Session2.Thu, 10, '\n');
-			cout << "Gio: ";
-			cin.ignore();
-			cin.get(a.Session2.Gio, 10, '\n');
+			do
+			{
+				cout << "Thu: ";
+				cin >> a.Session2.thu;
+			} while (a.Session2.thu < 2 || a.Session2.thu > 8);
+			do
+			{
+				cout << "Gio: ";
+				cin >> a.Session2.gio;
+				cout << "Phut: ";
+				cin >> a.Session2.phut;
+			} while (!isTime(a.Session2.gio, a.Session2.phut, 0));
 			cin.ignore();
 			file2 << a.Sememster << endl;
 			file2 << a.ID << endl;
@@ -216,10 +260,12 @@ void updateCourse()
 			file2 << a.TeacherName << endl;
 			file2 << a.NumOfCredits << endl;
 			file2 << a.MaxNumOfStudents << endl;
-			file2 << a.Session1.Thu << endl;
-			file2 << a.Session1.Gio << endl;
-			file2 << a.Session2.Thu << endl;
-			file2 << a.Session2.Gio << endl;
+			file2 << a.Session1.thu << endl;
+			file2 << a.Session1.gio << endl;
+			file2 << a.Session1.phut << endl;
+			file2 << a.Session2.thu << endl;
+			file2 << a.Session2.gio << endl;
+			file2 << a.Session2.phut << endl;
 		}
 		else 
 		{
@@ -229,10 +275,12 @@ void updateCourse()
 			file2 << b.TeacherName << endl;
 			file2 << b.NumOfCredits << endl;
 			file2 << b.MaxNumOfStudents << endl;
-			file2 << b.Session1.Thu << endl;
-			file2 << b.Session1.Gio << endl;
-			file2 << b.Session2.Thu << endl;
-			file2 << b.Session2.Gio << endl;
+			file2 << b.Session1.thu << endl;
+			file2 << b.Session1.gio << endl;
+			file2 << b.Session1.phut << endl;
+			file2 << b.Session2.thu << endl;
+			file2 << b.Session2.gio << endl;
+			file2 << b.Session2.phut << endl;
 		}
 	}
 	file1.close();

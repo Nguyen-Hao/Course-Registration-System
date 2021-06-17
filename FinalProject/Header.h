@@ -47,8 +47,9 @@ struct Date
 };
 struct PhienGio
 {
-	char Thu[10];
-	char Gio[10];
+	int thu;//Monday=2, Tuesday=3, ..., Sunday=8
+	int gio;
+	int phut;
 };
 
 struct DiemMonHoc

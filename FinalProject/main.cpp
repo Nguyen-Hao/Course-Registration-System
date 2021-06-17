@@ -22,6 +22,16 @@ int main()
 	ReadFileStudent(dsl);
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
-	Menu(dsl,dsgv, sv, gv);
+	MenuSV(dsl, p, dsgv);
+	//ListSV* temp = DangNhapSV(dsl);
+	//cout << temp->info.Class << endl << temp->info.DateOfBirth << endl;
+	//int c = AfterLoginSV(dsl, p);
+	//int x;
+	//ViewListOfCourse(x);
+	//updateCourse();
+	//UpdateStudent();
+	///ViewListOfStudentInClass(dsl);
+	//ViewListOfClass(dsl);
+	//UpdateStudent();
 	return 0;
 }
