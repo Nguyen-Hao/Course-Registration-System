@@ -25,7 +25,7 @@ void CreateSemester(semester& sesmes)
 	file << sesmes.schoolyear << endl;
 	file << sesmes.begin.ngay << " " << sesmes.begin.thang << " " << sesmes.begin.nam << endl;
 	file << sesmes.end.ngay << " " << sesmes.end.thang << " " << sesmes.end.nam << endl;
-	sesmes.lis = ReadListCourses(sesmes.name);
+	sesmes.lis = ReadListCourses();
 }
 
 void readListSemester(listSemester& l)

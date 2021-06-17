@@ -128,7 +128,7 @@ NodeGV* CreateNodeGV(GiaoVien gv)
 	a->pNext = NULL;
 	return a;
 }
-void AddTailGV(ListGV &dsgv, GiaoVien gv)
+void AddTailGV(ListGV& dsgv, GiaoVien gv)
 {
 	NodeGV* p = CreateNodeGV(gv);
 	if (dsgv.pHead == NULL)
@@ -141,7 +141,7 @@ void AddTailGV(ListGV &dsgv, GiaoVien gv)
 		k->pNext = p;
 	}
 }
-void Read_File_DSGV(ListGV &dsgv)
+void Read_File_DSGV(ListGV&dsgv)
 {
 	dsgv.pHead = NULL;
 	ifstream file;
@@ -217,12 +217,13 @@ void UpdateCSV(ListLop& ds)
 void UpdateStudent()
 {
 	Time temp = getTime();
-	SinhVien temp1;
+
 	fstream file, file1;
 	file.open("DSSinhVien.txt", ios::in);
 	file1.open("list.txt", ios::out);
 	while (!file.eof())
 	{
+		SinhVien temp1;
 		file.getline(temp1.Class, 10);
 		file.getline(temp1.ID, 10);
 		file.getline(temp1.pass, 20);
@@ -232,41 +233,46 @@ void UpdateStudent()
 		file.getline(temp1.DateOfBirth, 50);
 		file.getline(temp1.SocialID, 10);
 		for (int i = 0; i < 3; i++)
-		{
 			file >> temp1.begin[i];
-		}
-		file.ignore();
+		file.get();
 		file >> temp1.YearStudent;
-		file.ignore();
+		file.get();
 		file >> temp1.Semester;
-		char c;
-		file >> c;
-		if (c == file1.eof()) break;
-		file1 << temp1.Class << endl;
-		file1 << temp1.ID << endl;
-		file1 << temp1.pass << endl;
-		file1 << temp1.FirstName << endl;
-		file1 << temp1.LastName << endl;
-		file1 << temp1.Gender << endl;
-		file1 << temp1.DateOfBirth << endl;
-		file1 << temp1.SocialID << endl;
-		file1 << temp1.begin[0] << " " << temp1.begin[1] << " " << temp1.begin[2] << endl;
-		if (temp.year - temp1.begin[2] == 1)
-			if ((temp.month == temp1.begin[1] && temp.day >= temp1.begin[0]) || (temp.month > temp1.begin[1]))
-				temp1.YearStudent = 2;
-		if (temp.year - temp1.begin[2] > 1)
-			if (temp.month < temp1.begin[1])
-				temp1.YearStudent = temp.year - temp1.begin[2] - 1;
-			else if (temp.month > temp1.begin[1])
-				temp1.YearStudent = temp.year - temp1.begin[2];
-		if (temp1.YearStudent > 6)
-		{
-			file1 << 7 << endl;
-		}//sinh vien có yearStudent=7 la sinh vien da ra truong
+		file.get();
+		if (strcmp(temp1.Class, "") == 0) break;
 		else
-			file1 << temp1.YearStudent << endl;
-		file1 << temp1.Semester << endl;
+		{
+			file1 << temp1.Class << endl;
+			file1 << temp1.ID << endl;
+			file1 << temp1.pass << endl;
+			file1 << temp1.FirstName << endl;
+			file1 << temp1.LastName << endl;
+			file1 << temp1.Gender << endl;
+			file1 << temp1.DateOfBirth << endl;
+			file1 << temp1.SocialID << endl;
+			file1 << temp1.begin[0] << " " << temp1.begin[1] << " " << temp1.begin[2] << endl;
+			if (temp.year - temp1.begin[2] == 1)
+			{
+				if ((temp.month == temp1.begin[1] && temp.day >= temp1.begin[0]) || (temp.month > temp1.begin[1]))
+					temp1.YearStudent = 2;
+			}
+			else if (temp.year - temp1.begin[2] > 1)
+			{
+				if (temp.month < temp1.begin[1])
+					temp1.YearStudent = temp.year - temp1.begin[2] - 1;
+				else if (temp.month > temp1.begin[1])
+					temp1.YearStudent = temp.year - temp1.begin[2];
+			}
+			else temp1.YearStudent = 1;
+			if (temp1.YearStudent > 6)
+			{
+				file1 << 7 << endl;
+			}//sinh vien có yearStudent=7 la sinh vien da ra truong
+			else
+				file1 << temp1.YearStudent << endl;
+			file1 << temp1.Semester << endl;
 
+		}
 	}
 	file.close();
 	file1.close();

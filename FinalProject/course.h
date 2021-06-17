@@ -2,7 +2,7 @@
 #include"Header.h"
 void createNewCourse();
 void initListCourses(ListCourses& list);
-ListCourses ReadListCourses(int x);
-void ViewListOfCourse(int& x);
+ListCourses ReadListCourses();
+void ViewListOfCourse();
 void updateCourse();
 void CreateCourseRegistrationSession();

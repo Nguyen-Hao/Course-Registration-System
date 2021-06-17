@@ -36,13 +36,16 @@
     <ClCompile Include="course.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dk_mon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="semester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dk_mon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DKMon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,7 +74,7 @@
     <ClInclude Include="Semester.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
+    <ClInclude Include="DKMon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -90,6 +93,16 @@
     </Text>
     <Text Include="Dssv_trong_lop_out.txt" />
     <Text Include="ListCourses.txt" />
+    <Text Include="StudentOfSubject.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="Text.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="DsGiaoVien.txt" />
+    <Text Include="ListYearStudent.txt" />
+    <Text Include="temp.txt" />
+    <Text Include="test.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Filecsv.csv" />

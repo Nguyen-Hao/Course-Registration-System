@@ -47,7 +47,7 @@ struct Date
 };
 struct PhienGio
 {
-	int thu;//Monday=2, Tuesday=3, ..., Sunday=8
+	int thu;
 	int gio;
 	int phut;
 };
@@ -118,11 +118,10 @@ struct ListGV
 {
 	NodeGV* pHead;
 };
-
 struct Course
 {
 	int Sememster;				// 1/2/3
-	char ID[20];
+	char ID[10];
 	char Name[50];				//Tên khóa học
 	char TeacherName[50];		//Tên GV
 	int NumOfCredits;			//số tín chỉ

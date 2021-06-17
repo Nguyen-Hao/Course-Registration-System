@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="console.cpp" />
     <ClCompile Include="course.cpp" />
+    <ClCompile Include="DKMon.cpp" />
     <ClCompile Include="Dk_mon.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
@@ -153,20 +154,26 @@
   <ItemGroup>
     <ClInclude Include="console.h" />
     <ClInclude Include="course.h" />
+    <ClInclude Include="DKMon.h" />
     <ClInclude Include="Dk_mon.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="login.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="Semester.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="student.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="DsGiaoVien.txt" />
     <Text Include="DSLop.txt" />
     <Text Include="DSSinhVien.txt" />
     <Text Include="Dssv_trong_lop.txt" />
     <Text Include="Dssv_trong_lop_out.txt" />
     <Text Include="ListCourses.txt" />
+    <Text Include="ListYearStudent.txt" />
+    <Text Include="StudentOfSubject.txt" />
+    <Text Include="temp.txt" />
+    <Text Include="test.txt" />
+    <Text Include="Text.txt" />
     <Text Include="TimeDKHP.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ void createNewCourse()
 	cin >> a.Sememster;
 	cin.ignore();
 	cout << "Nhap ID khoa hoc: ";
-	cin.get(a.ID, 20, '\n');
+	cin.get(a.ID, 10, '\n');
 	cin.ignore();
 	cout << "Nhap ten khoa hoc: ";
 	cin.get(a.Name, 50, '\n');
@@ -68,7 +68,7 @@ void createNewCourse()
 	file.close();
 }
 
-ListCourses ReadListCourses(int x)
+ListCourses ReadListCourses()
 {
 	ListCourses temp;
 	initListCourses(temp);
@@ -76,14 +76,11 @@ ListCourses ReadListCourses(int x)
 	file.open(FILECOURSES);
 	while (!file.eof())
 	{
-		int temp1;
-		file >> temp1;
-		file.ignore();
-		if (temp1 == x)
-		{
+		
 			Course temp0;
-			temp0.Sememster = temp1;
-			file.getline(temp0.ID, 20);
+			file>> temp0.Sememster;
+			file.ignore();
+			file.getline(temp0.ID, 10);
 			file.getline(temp0.Name, 50);
 			file.getline(temp0.TeacherName, 50);
 			file >> temp0.NumOfCredits;
@@ -112,77 +109,31 @@ ListCourses ReadListCourses(int x)
 				temp2->next = temp.head;
 				temp.head = temp2;
 			}
-			temp1 = 0;
-		}
-		else
-		{
-			Course temp0;
-			temp0.Sememster = temp1;
-			file.getline(temp0.ID, 20);
-			file.getline(temp0.Name, 50);
-			file.getline(temp0.TeacherName, 50);
-			file >> temp0.NumOfCredits;
-			file.ignore();
-			file >> temp0.MaxNumOfStudents;
-			file.ignore();
-			file >> temp0.Session1.thu;
-			file.ignore();
-			file >> temp0.Session1.gio;
-			file.ignore();
-			file >> temp0.Session1.phut;
-			file.ignore();
-			file >> temp0.Session2.thu;
-			file.ignore();
-			file >> temp0.Session2.gio;
-			file.ignore();
-			file >> temp0.Session2.phut;
-			file.ignore();
-		}
 	}
 	return temp;
 }
 
-void ViewListOfCourse(int& x)
+void ViewListOfCourse()
 {
-repeat:
-	cout << "input credit: ";
-	cin >> x;
-	if (x <= 0 || x > 3)
-	{
-		cout << "credit is false!!" << endl;
-		cout << "Do you want to repeat?? " << endl;
-		cout << "1: yes, 2: no. ";
-		int n;
-		cin >> n;
-		switch (n)
-		{
-		case 1:
-		{
-			goto repeat;
-		}
-		default:
-			break;
-		}
-	}
-	else {
-		cout << setw(20) << left << "ID" << setw(50) << left << "Name of course";
+
+	
+		cout << setw(10) << left << "ID" << setw(50) << left << "Name of course";
 		cout << setw(50) << left << "Teacher name" << setw(8) << left << "Credit";
 		cout << setw(20) << "Number of student";
 		cout << setw(10) << left << "Thu" << setw(10) << left << "Time";
 		cout << setw(10) << left << "Thu" << setw(10) << left << "Time" << endl;
-		ListCourses temp = ReadListCourses(x);
+		ListCourses temp = ReadListCourses();
 		NodeCourse* temp1 = temp.head;
 		while (temp1 != NULL)
 		{
-			cout << setw(20) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
+			cout << setw(10) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
 			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
 			cout << setw(20) << temp1->course.MaxNumOfStudents;
-			cout << setw(10) << left << temp1->course.Session1.thu << setw(2) << left << temp1->course.Session1.gio <<":" << setw(8)<<temp1->course.Session1.phut;
-			cout << setw(10) << left << temp1->course.Session2.thu << setw(2)<<left<<temp1->course.Session2.gio <<":"<<temp1->course.Session2.phut
-				<< endl;
+			cout << setw(10) << left << temp1->course.Session1.thu << setw(2) << left << temp1->course.Session1.gio << ":" << setw(8) << temp1->course.Session1.phut;
+			cout << setw(10) << left << temp1->course.Session2.thu << setw(2) << left << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut<< endl;
 			temp1 = temp1->next;
 		}
-	}
+
 }
 
 void updateCourse()
@@ -197,7 +148,7 @@ void updateCourse()
 	{
 		file1 >> b.Sememster;
 		file1.ignore();
-		file1.getline(b.ID, 20);
+		file1.getline(b.ID, 10);
 		file1.getline(b.Name, 50);
 		file1.getline(b.TeacherName, 50);
 		file1 >> b.NumOfCredits;
@@ -215,7 +166,7 @@ void updateCourse()
 			cin >> a.Sememster;
 			cin.ignore();
 			cout << "Nhap ID khoa hoc: ";
-			cin.get(a.ID, 20, '\n');
+			cin.get(a.ID, 10, '\n');
 			cin.ignore();
 			cout << "Nhap ten khoa hoc: ";
 			cin.get(a.Name, 50, '\n');
@@ -228,6 +179,7 @@ void updateCourse()
 			cin >> a.MaxNumOfStudents;
 			cin.ignore();
 			cout << "Nhap buoi hoc thu 1: ";
+			cout << "Thu: ";
 			do
 			{
 				cout << "Thu: ";
@@ -241,6 +193,7 @@ void updateCourse()
 				cin >> a.Session1.phut;
 			} while (!isTime(a.Session1.gio, a.Session1.phut, 0));
 			cout << "Nhap buoi hoc thu 2: ";
+			cout << "Thu: ";
 			do
 			{
 				cout << "Thu: ";
@@ -253,7 +206,6 @@ void updateCourse()
 				cout << "Phut: ";
 				cin >> a.Session2.phut;
 			} while (!isTime(a.Session2.gio, a.Session2.phut, 0));
-			cin.ignore();
 			file2 << a.Sememster << endl;
 			file2 << a.ID << endl;
 			file2 << a.Name << endl;
