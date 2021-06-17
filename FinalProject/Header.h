@@ -10,7 +10,7 @@
 #include <conio.h>
 #include <sstream>
 #include <string>
-#define maxlop 50
+#define maxlop 100
 #define maxsv 100
 #define DOWN -80
 #define UP -72
@@ -108,9 +108,14 @@ struct GiaoVien
 	char DateOfBirth[50];
 	char SocialID[10];
 };
-struct List_GV
+struct NodeGV
 {
-	ListSV* pHead;
+	GiaoVien info;
+	NodeGV* pNext;
+};
+struct ListGV
+{
+	NodeGV* pHead;
 };
 
 struct Course
@@ -163,11 +168,10 @@ bool isTime(int h, int m, int s);
 
 void BackGround();
 void InfoTeam();
-void XYWordColor(int x, int y, string c, int color);
 int MenuFirst();
 void KhungDangNhap(int item);
 void DangNhapThanhCong();
 void DangNhapThatBai();
-ListSV* DangNhapSV(ListLop ds);
-int AfterLoginSV(ListLop ds, ListSV*& p);
-void MenuSV(ListLop ds, ListSV*& p);
+int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv);
+int AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice);
+void Menu(ListLop& ds, ListGV& dsgv, SinhVien& sv, GiaoVien& gv);

@@ -6,7 +6,7 @@ int CheckClass(ListLop dsl, char a[100], int n);
 void AddStudent_Input(ListLop& dsl);
 void WriteFileStudent(ListLop& dsl);
 void ReadFileStudent(ListLop& dsl);
-void Read_File_DSGV(List_GV& dsgv);
+void Read_File_DSGV(ListGV& dsgv);
 void UpdateCSV(ListLop& ds);
 void UpdateStudent();
 void ViewListOfClass(ListLop& ds);

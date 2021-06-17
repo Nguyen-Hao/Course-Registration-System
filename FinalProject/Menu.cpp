@@ -6,8 +6,8 @@
 #include <string>
 
 string Menubegin[3] = { "1. Nhan vien - giang vien", "2. Sinh vien","3. Thoat" };
-string AfterLogin[6] = { "1. Dang ky mon hoc", "2. Xem danh sach mon hoc dang ky", "3. Xoa mon hoc da dang ky", "4. Xem danh sach khoa hoc da dang ky", "5. Dang xuat" , "6. Thoat"};
-
+string AfterLoginSV[6] = { "1. Dang ky mon hoc", "2. Xem danh sach mon hoc dang ky", "3. Xoa mon hoc da dang ky", "4. Xem danh sach khoa hoc da dang ky", "5. Dang xuat" , "6. Thoat"};
+string AfterLoginGV[5] = { "1. Tao nam hoc moi", "2. Tao ki moi", "3. Them sinh vien vao lop " ,"4. Dang Xuat", "5. Thoat"};
 void BackGround()
 {
 	TextColor(176);
@@ -150,7 +150,229 @@ void DangNhapThatBai()
 	gotoxy(57, 29); cout << "Ten tai khoan hoac mat khau khong dung..";
 	TextColor(224);
 }
-ListSV* DangNhapSV(ListLop ds, List_GV dsgv)
+int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv)
+{
+ESCAPE: 
+	int choice = MenuFirst();
+	bool Login = false;
+	//ListSV* p = new ListSV;
+	if (choice == 3)
+	{
+		gotoxy(0, 30);
+		exit(0);
+	}
+	if (choice == 2)
+	{
+		while (Login == false)
+		{
+			string User = "", Pass = "";
+			system("cls");
+			int i = 0, j = 0;
+			char pre;
+		USER:
+			while (true)
+			{
+				BackGround();
+				KhungDangNhap(1);
+				gotoxy(55 + i++, 18);
+				char c;
+				c = GetKey();
+				if (c == DOWN || c == '\t' || c == UP)
+				{
+					i--;
+					goto PASS;
+				}
+				else if (c == LEFT || c == RIGHT) i--;
+				//else if (c == DOWN && pass == true) i--;
+				else if (c == BACKSPACE && User.size() == 0)
+					i--;
+				else if (c == BACKSPACE) {
+					printf("\b ");
+					i -= 2;
+					if (i < 0) i = 0;
+					gotoxy(55 + i, 18);
+					if (!User.empty())
+						User.erase(User.size() - 1);
+				}
+				else if (c == ESC)
+				{
+					goto ESCAPE;
+				}
+				else if (c != BACKSPACE && c != ENTER && User.size() == 20)
+					i--;
+				else if (c == ENTER)
+				{
+					i--;
+					break;
+				}
+				else {
+					User += c;
+					cout << c;
+				}
+			}
+
+		PASS:
+			while (1) {
+				gotoxy(55 + j++, 24);
+				c = GetKey();
+				if (c == ENTER) break;
+				else if (c == UP || c == DOWN || c == '\t')
+				{
+					j--;
+					goto USER;
+				}
+				else if (c == LEFT || c == RIGHT) j--;
+				else if (c == BACKSPACE && Pass.size() == 0)	j--;
+				else if (c == BACKSPACE)
+				{
+					printf("\b ");
+					j -= 2;
+					if (j < 0) j = 0;
+					gotoxy(55 + j, 21);
+
+					if (!Pass.empty())
+						Pass.erase(Pass.size() - 1);
+				}
+				else if (c == ESC)
+					goto ESCAPE;
+				else if (c != BACKSPACE && c != ENTER && Pass.size() == 20)	
+					j--;
+				else
+				{
+					Pass += c;
+					cout << "*";
+				}
+			}
+			for (int i = 0;i < ds.n;i++)
+				for (ListSV* k = ds.l[i].pHead; k != NULL;k = k->pNext)
+				{
+					if (strcmp(k->info.ID, User.c_str()) == 0 && strcmp(k->info.pass, Pass.c_str()) == 0)
+					{
+						Login = true;
+						sv = k->info;	
+						break;
+					}
+				}
+			if (Login == true)
+			{
+				DangNhapThanhCong();
+				Sleep(2000);
+				break;
+			}
+			else
+			{
+				DangNhapThatBai();
+				Sleep(2000);
+			}
+		}
+	}
+	if (choice == 1)
+	{
+		while (Login == false)
+		{
+			string User = "", Pass = "";
+			system("cls");
+			int i = 0, j = 0;
+			char pre;
+		USERGV:
+			while (true)
+			{
+				BackGround();
+				KhungDangNhap(0);
+				gotoxy(55 + i++, 18);
+				char c;
+				c = GetKey();
+				if (c == DOWN || c == '\t' || c == UP )
+				{
+					i--;
+					goto PASSGV;
+				}
+				else if (c == LEFT || c == RIGHT) i--;
+				else if (c == BACKSPACE && User.size() == 0)
+					i--;
+				else if (c == BACKSPACE) 
+				{
+					printf("\b ");
+					i -= 2;
+					if (i < 0) i = 0;
+					gotoxy(55 + i, 18);
+					if (!User.empty())
+						User.erase(User.size() - 1);
+				}
+				else if (c == ENTER)
+				{
+					break;
+				}
+				else if (c == ESC)
+					goto ESCAPE;
+				else if (c != BACKSPACE && c != ENTER && User.size() == 20)
+					i--;
+				else {
+					User += c;
+					cout << c;
+				}
+			}
+
+		PASSGV:
+			while (1) {
+				gotoxy(55 + j++, 24);
+				c = GetKey();
+				if (c == ENTER) break;
+				else if ((c == UP || c == DOWN || c == '\t'))
+				{
+					j--;
+					goto USERGV;
+				}
+				else if (c == LEFT || c == RIGHT) j--;
+				else if (c == BACKSPACE && Pass.size() == 0)
+					j--;
+				else if (c == BACKSPACE)
+				{
+					printf("\b ");
+					j -= 2;
+					if (j < 0) j = 0;
+					gotoxy(55 + j, 21);
+
+					if (!Pass.empty())
+						Pass.erase(Pass.size() - 1);
+				}
+				else if (c == ESC)
+				{
+					goto ESCAPE;
+				}
+				else if (c != BACKSPACE && c != ENTER && Pass.size() == 20)
+					j--;
+				else
+				{
+					Pass += c;
+					cout << "*";
+				}
+			}
+			for (NodeGV* k = dsgv.pHead; k != NULL; k = k->pNext)
+			{
+				if (strcmp(k->info.ID, User.c_str()) == 0 && strcmp(k->info.pass, Pass.c_str()) == 0)
+				{
+					Login = true;
+					gv = k->info;
+					break;
+				}
+			}
+			if (Login == true)
+			{
+				DangNhapThanhCong();
+				Sleep(2000);
+				break;
+			}
+			else
+			{
+				DangNhapThatBai();
+				Sleep(2000);
+			}
+		}
+	}
+	return choice;
+}
+/*ListSV* DangNhap(ListLop ds, List_GV dsgv)
 {
 ESCAPE: 
 	int choice = MenuFirst();
@@ -166,7 +388,6 @@ ESCAPE:
 	{
 		while (Login == false)
 		{
-			bool user = false, pass = false;
 			string User = "", Pass = "";
 			system("cls");
 			int i = 0, j = 0;
@@ -272,7 +493,6 @@ ESCAPE:
 	{
 		while (Login == false)
 		{
-			bool user = false, pass = false;
 			string User = "", Pass = "";
 			system("cls");
 			int i = 0, j = 0;
@@ -304,7 +524,6 @@ ESCAPE:
 				}
 				else if (c == ENTER)
 				{
-					user = true;
 					break;
 				}
 				else if (c == ESC)
@@ -375,86 +594,168 @@ ESCAPE:
 		}
 	}
 	return p;
-}
+}*/
 char* TOUPPER(char* c)
 {
 	for (int i = 0;i < strlen(c);i++)
 		toupper(c[i]);
 	return c;
 }
-int AfterLoginSV(ListLop ds, ListSV*& p, List_GV dsgv)
+int AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice)
 {
-	p = DangNhapSV(ds, dsgv);
+	choice = DangNhap(ds, dsgv , p, gv);
 	int vitri = 0;
-	while (true)
+	if (choice == 2) {
+		while (true)
+		{
+			system("cls");
+			BackGround();
+			_strupr_s(p.FirstName, 50);
+			_strupr_s(p.LastName, 50);
+			gotoxy(10, 34); cout << "Xin chao: " << p.FirstName << " " << p.LastName << " - " << p.Class;
+			int n = 0;
+			for (int i = 0;i < 6;i++)
+			{
+				if (i == vitri)
+				{
+					gotoxy(12, 8 + i * 4); TextColor(160);
+					n = strlen(AfterLoginSV[i].c_str());
+					for (int i = 0;i < n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4);  cout << AfterLoginSV[i];
+					gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+				}
+				else
+				{
+					gotoxy(12, 8 + i * 4); TextColor(240);
+					n = strlen(AfterLoginSV[i].c_str());
+					for (int i = 0;i < n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4);  cout << AfterLoginSV[i];
+					gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+				}
+				TextColor(224);
+			}
+			c = GetKey();
+			if (c == DOWN)
+			{
+				vitri += 1;
+				if (vitri == 6) vitri = 0;
+			}
+			if (c == UP)
+			{
+				vitri -= 1;
+				if (vitri == -1) vitri = 5;
+			}
+			if (c == ENTER)
+				return vitri + 1;
+		}
+	}
+	else if (choice == 1)
 	{
-		system("cls");
-		BackGround();
-		_strupr_s(p->info.FirstName,50);
-		_strupr_s(p->info.LastName,50);
-		gotoxy(10, 34); cout << "Xin chao: " << p->info.FirstName << " " << p->info.LastName <<" - " << p->info.Class;
-		int n = 0;
-		for (int i = 0;i < 6;i++)
+		while (true)
 		{
-			if (i == vitri)
+			system("cls");
+			BackGround();
+			_strupr_s(gv.FirstName, 50);
+			_strupr_s(gv.LastName, 50);
+			gotoxy(10, 34); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName ;
+			int n = 0;
+			for (int i = 0;i < 5;i++)
 			{
-				gotoxy(12, 8 + i * 4); TextColor(160);
-				n = strlen(AfterLogin[i].c_str());
-				for (int i = 0;i < n;i++)	cout << " ";
-				gotoxy(12, 9+ i * 4);  cout << AfterLogin[i];
-				gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+				if (i == vitri)
+				{
+					gotoxy(12, 8 + i * 4); TextColor(160);
+					n = strlen(AfterLoginGV[i].c_str());
+					for (int i = 0;i < n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4);  cout << AfterLoginGV[i];
+					gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+				}
+				else
+				{
+					gotoxy(12, 8 + i * 4); TextColor(240);
+					n = strlen(AfterLoginGV[i].c_str());
+					for (int i = 0;i < n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4);  cout << AfterLoginGV[i];
+					gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+				}
+				TextColor(224);
 			}
-			else
+			c = GetKey();
+			if (c == DOWN)
 			{
-				gotoxy(12, 8 + i * 4); TextColor(240);
-				n = strlen(AfterLogin[i].c_str());
-				for (int i = 0;i < n;i++)	cout << " ";
-				gotoxy(12, 9 + i * 4);  cout << AfterLogin[i];
-				gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+				vitri += 1;
+				if (vitri == 5) vitri = 0;
 			}
-			TextColor(224);
+			if (c == UP)
+			{
+				vitri -= 1;
+				if (vitri == -1) vitri = 4;
+			}
+			if (c == ENTER)
+				return vitri + 1;
 		}
-		c = GetKey();
-		if (c == DOWN)
-		{
-			vitri += 1;
-			if (vitri == 6) vitri = 0;
-		}
-		if (c == UP)
-		{
-			vitri -= 1;
-			if (vitri == -1) vitri = 5;
-		}
-		if (c == ENTER)
-			return vitri + 1;
 	}
 }
-void MenuSV(ListLop ds, ListSV*& p, List_GV dsgv)
+void Menu(ListLop& ds,ListGV& dsgv, SinhVien& sv, GiaoVien &gv)
 {
 REPEAT:
-	int choice = AfterLoginSV(ds,p,dsgv);
-	while (choice !=6)
+	int choose;
+	int choice = AfterLogin(ds, dsgv, sv,gv, choose);
+	if (choose == 2)
 	{
-		if (choice == 1) 
+		while (choice != 6)
 		{
-			// Code Phan dang ky mon hoc
+			if (choice == 1)
+			{
+				// Code Phan dang ky mon hoc
+			}
+			else if (choice == 2)
+			{
+				//Code phan xem danh sach mon hoc da dang ky
+			}
+			else if (choice == 3)
+			{
+				// code phan xoa mon hoc
+			}
+			else if (choice == 4)
+			{
+				// code phan xem danh sach mon hoc cua minh
+			}
+			else if (choice == 5)
+			{
+				goto REPEAT;
+				break;
+			}
+			else if (choice == 6)
+			{
+				exit(1);
+			}
 		}
-		else if (choice == 2)
+	}
+	else if (choose == 1)
+	{
+		while (choice != 6)
 		{
-			//Code phan xem danh sach mon hoc da dang ky
-		}
-		else if (choice == 3)
-		{
-			// code phan xoa mon hoc
-		}
-		else if (choice == 4)
-		{
-			// code phan xem danh sach mon hoc cua minh
-		}
-		else if (choice == 5)
-		{
-			goto REPEAT;
-			break;
+			if (choice == 1)
+			{
+				// Code Phan dang ky mon hoc
+			}
+			else if (choice == 2)
+			{
+				//Code phan xem danh sach mon hoc da dang ky
+			}
+			else if (choice == 3)
+			{
+				// code phan xoa mon hoc
+			}
+			else if (choice == 4)
+			{
+				goto REPEAT;
+				break;
+			}
+			else if (choice == 5)
+			{
+				exit(1);
+			}
 		}
 	}
 }

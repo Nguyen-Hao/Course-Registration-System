@@ -121,11 +121,31 @@ ListSV* Create_Node_Sv(SinhVien sv)
 	a->pNext = NULL;
 	return a;
 }
-void Read_File_DSGV(List_GV &dsgv)
+NodeGV* CreateNodeGV(GiaoVien gv)
+{
+	NodeGV* a = new NodeGV;
+	a->info = gv;
+	a->pNext = NULL;
+	return a;
+}
+void AddTailGV(ListGV &dsgv, GiaoVien gv)
+{
+	NodeGV* p = CreateNodeGV(gv);
+	if (dsgv.pHead == NULL)
+		dsgv.pHead = p;
+	else
+	{
+		NodeGV* k = dsgv.pHead;
+		while (k->pNext != NULL)
+			k = k->pNext;
+		k->pNext = p;
+	}
+}
+void Read_File_DSGV(ListGV &dsgv)
 {
 	dsgv.pHead = NULL;
 	ifstream file;
-	file.open("DsGiaoVien.txt");
+	file.open(FILEDSGV);
 	if (file.fail())
 	{
 		cout << "Failed to open this file!" << endl;
@@ -133,7 +153,7 @@ void Read_File_DSGV(List_GV &dsgv)
 	}
 	while (!file.eof())
 	{
-		SinhVien gv;
+		GiaoVien gv;
 		file.clear();
 		file.getline(gv.ID, 10);
 		file.getline(gv.pass, 20);
@@ -142,18 +162,7 @@ void Read_File_DSGV(List_GV &dsgv)
 		file.getline(gv.Gender, 20);
 		file.getline(gv.DateOfBirth, 20);
 		file.getline(gv.SocialID, 20);
-		ListSV* a = Create_Node_Sv(gv);
-		if (dsgv.pHead == NULL)
-		{
-			dsgv.pHead = a;
-		}
-		else
-		{
-			ListSV* k = dsgv.pHead;
-			while (k->pNext != NULL)
-				k = k->pNext;
-			k->pNext = a;
-		}
+		AddTailGV(dsgv, gv);
 	}
 	file.close();
 }

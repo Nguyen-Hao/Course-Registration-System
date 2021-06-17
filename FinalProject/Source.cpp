@@ -15,9 +15,9 @@ void ReadFileClass(ListLop& dsl)
 	while (file.good())
 	{
 		getline(file, c);
-		strcpy_s(dsl.l[dsl.n].Ma, 50, c.c_str());
-		getline(file, c);	strcpy_s(dsl.l[dsl.n].Ten, 50, c.c_str());
-		getline(file, c);	strcpy_s(dsl.l[dsl.n].NienKhoa, 50, c.c_str());
+		strcpy_s(dsl.l[dsl.n].Ma, 16, c.c_str());
+		getline(file, c);	strcpy_s(dsl.l[dsl.n].Ten, 30, c.c_str());
+		getline(file, c);	strcpy_s(dsl.l[dsl.n].NienKhoa, 10, c.c_str());
 		dsl.l[dsl.n].pHead = NULL;
 		if (c.size() == 0) break;
 		dsl.n++;
