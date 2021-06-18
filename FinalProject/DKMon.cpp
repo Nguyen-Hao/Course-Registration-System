@@ -216,10 +216,11 @@ void dangki(ListCourses& l, const SinhVien& S)
 				}
 				file.close();
 				file1.close();
+				remove("StudentOfSubject.txt");
+				rename("temp.txt", "StudentOfSubject.txt");
+				cout << "dang ki thanh cong!!!" << endl;
 			}
-			remove("StudentOfSubject.txt");
-			rename("temp.txt", "StudentOfSubject.txt");
-			cout << "dang ki thanh cong!!!" << endl;
+			
 		}
 	}
 }
@@ -245,6 +246,85 @@ void view_Enrol_Course(const SinhVien& S)
 			cout << setw(10) << left << temp1->course.Session1.thu << setw(2) << left << temp1->course.Session1.gio << ":" << setw(8) << temp1->course.Session1.phut;
 			cout << setw(10) << left << temp1->course.Session2.thu << setw(2) << left << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut << endl;
 			temp1 = temp1->next;
+		}
+	}
+}
+void eraser_erol_course(const SinhVien& S)
+{
+	char id[10];
+	cout << "nhap id mon can huy dang ki: ";
+	cin.get(id, 10, '\n');
+	cin.ignore();
+	ListCourses l = ReadListCourses();
+	if (ktra(l, id) == false)
+		cout << "id mon ban nhap khong ton tai" << endl;
+	else
+	{
+		ListCourses temp = courseOfStudent(l, S);
+		if (ktra(temp, id) == false)
+			cout << "mon nay ban chua dang ki" << endl;
+		else
+		{
+			fstream file, file1;
+			file.open("StudentOfSubject.txt", ios::in);
+			file1.open("temp.txt", ios::out);
+			char ch[10] = "\0", CH[10] = "\n";
+			file.getline(ch, 10);
+			while (!file.eof())
+			{
+				file1 << ch << endl;
+				while (ktra(l, CH) == false)
+				{
+					file.getline(CH, 10);
+					if (ktra(l, CH) == true || strcmp(CH, "\0") == 0) break;
+					else
+					{
+						SinhVien s;
+						strcpy_s(s.Class, 10, CH);
+						file.getline(s.ID, 10);
+						file.getline(s.pass, 20);
+						file.getline(s.FirstName, 50);
+						file.getline(s.LastName, 50);
+						file.getline(s.Gender, 10);
+						file.getline(s.DateOfBirth, 50);
+						file.getline(s.SocialID, 10);
+						for (int i = 0; i < 3; i++)
+						{
+							file >> s.begin[i];
+						}
+						file.ignore();
+						file >> s.YearStudent;
+						file.ignore();
+						file >> s.Semester;
+						file.ignore();
+						if (strcmp(s.ID, S.ID) == 0 && strcmp(ch, id) == 0)
+							continue;
+						else
+						{
+							file1 << s.Class << endl;
+							file1 << s.ID << endl;
+							file1 << s.pass << endl;
+							file1 << s.FirstName << endl;
+							file1 << s.LastName << endl;
+							file1 << s.Gender << endl;
+							file1 << s.DateOfBirth << endl;
+							file1 << s.SocialID << endl;
+							file1 << s.begin[0] << " " << s.begin[1] << " " << s.begin[2] << endl;
+							file1 << s.YearStudent << endl;
+							file1 << s.Semester << endl;
+						}
+
+					}
+				}
+				strcpy_s(ch, 10, CH);
+				strcpy_s(CH, 10, "\n");
+			}
+			file.close();
+			file1.close();
+			remove("StudentOfSubject.txt");
+			rename("temp.txt", "StudentOfSubject.txt");
+			cout << "eraser thanh cong!!!" << endl;
+
 		}
 	}
 }

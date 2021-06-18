@@ -66,9 +66,9 @@ int main()
 	file >> S.Semester;
 	file.ignore();
 	file.close();
-	dangki(l, S);
+	//dangki(l, S);
 	//view_Enrol_Course(S);
 	//ViewListOfCourse();
-	//eraser_erol_course(S);
+	eraser_erol_course(S);
 	return 0;
 }

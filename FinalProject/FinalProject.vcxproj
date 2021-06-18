@@ -171,7 +171,6 @@
     <Text Include="ListCourses.txt" />
     <Text Include="ListYearStudent.txt" />
     <Text Include="StudentOfSubject.txt" />
-    <Text Include="temp.txt" />
     <Text Include="test.txt" />
     <Text Include="Text.txt" />
     <Text Include="TimeDKHP.txt" />

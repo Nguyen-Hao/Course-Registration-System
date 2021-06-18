@@ -1,0 +1,48 @@
+1
+CSC0005
+KY THUAT LT
+Nguyen Le Hoang Dung
+4
+150
+2
+23
+50
+4
+17
+30
+2
+CSC0003
+Nhap mon lap trinh
+Truong Toan Thinh
+4
+133
+2
+8
+0
+5
+12
+35
+3
+MTH0004
+Dai so tuyen tinh
+Le Van Hop
+4
+200
+3
+7
+30
+7
+9
+0
+3
+MTH00007
+Vi tich phan 2B
+Nguyen Vu Huy
+3
+120
+4
+7
+35
+7
+5
+30

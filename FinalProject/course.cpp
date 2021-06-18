@@ -76,7 +76,6 @@ ListCourses ReadListCourses()
 	file.open(FILECOURSES);
 	while (!file.eof())
 	{
-
 		Course temp0;
 		file >> temp0.Sememster;
 		file.ignore();
@@ -84,15 +83,21 @@ ListCourses ReadListCourses()
 		file.getline(temp0.Name, 50);
 		file.getline(temp0.TeacherName, 50);
 		file >> temp0.NumOfCredits;
+		file.ignore();
 		file >> temp0.MaxNumOfStudents;
+		file.ignore();
 		file >> temp0.Session1.thu;
+		file.ignore();
 		file >> temp0.Session1.gio;
+		file.ignore();
 		file >> temp0.Session1.phut;
+		file.ignore();
 		file >> temp0.Session2.thu;
+		file.ignore();
 		file >> temp0.Session2.gio;
+		file.ignore();
 		file >> temp0.Session2.phut;
 		file.ignore();
-		if (file.eof()) break;
 		NodeCourse* temp2 = new NodeCourse;
 		temp2->next = NULL;
 		temp2->course = temp0;
