@@ -6,3 +6,4 @@ ListCourses ReadListCourses();
 void ViewListOfCourse();
 void updateCourse();
 void CreateCourseRegistrationSession();
+void deleteCourse();

@@ -84,21 +84,15 @@ ListCourses ReadListCourses()
 			file.getline(temp0.Name, 50);
 			file.getline(temp0.TeacherName, 50);
 			file >> temp0.NumOfCredits;
-			file.ignore();
 			file >> temp0.MaxNumOfStudents;
-			file.ignore();
 			file >> temp0.Session1.thu;
-			file.ignore();
 			file >> temp0.Session1.gio;
-			file.ignore();
 			file >> temp0.Session1.phut;
-			file.ignore();
 			file >> temp0.Session2.thu;
-			file.ignore();
 			file >> temp0.Session2.gio;
-			file.ignore();
 			file >> temp0.Session2.phut;
 			file.ignore();
+			if (file.eof()) break;
 			NodeCourse* temp2 = new NodeCourse;
 			temp2->next = NULL;
 			temp2->course = temp0;
@@ -115,8 +109,17 @@ ListCourses ReadListCourses()
 
 void ViewListOfCourse()
 {
-
-	
+	ifstream f;
+	f.open(FILECOURSES);
+	f.seekg(0, ios::end);
+	int i = f.tellg();
+	f.close();
+	if (i==0)
+	{
+		cout << "Chua co khoa hoc nao trong danh sach" << endl;
+	}
+	else
+	{
 		cout << setw(10) << left << "ID" << setw(50) << left << "Name of course";
 		cout << setw(50) << left << "Teacher name" << setw(8) << left << "Credit";
 		cout << setw(20) << "Number of student";
@@ -130,14 +133,15 @@ void ViewListOfCourse()
 			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
 			cout << setw(20) << temp1->course.MaxNumOfStudents;
 			cout << setw(10) << left << temp1->course.Session1.thu << setw(2) << left << temp1->course.Session1.gio << ":" << setw(8) << temp1->course.Session1.phut;
-			cout << setw(10) << left << temp1->course.Session2.thu << setw(2) << left << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut<< endl;
+			cout << setw(10) << left << temp1->course.Session2.thu << setw(2) << left << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut << endl;
 			temp1 = temp1->next;
 		}
-
+	}
 }
 
 void updateCourse()
 {
+	ViewListOfCourse();
 	Course a, b;
 	cout << "Nhap ID khoa hoc can update: ";
 	cin.get(a.ID, 20, '\n');
@@ -320,4 +324,53 @@ void CreateCourseRegistrationSession()
 	file << a.day << " " << a.month << " " << a.year
 		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
 	file.close();
+}
+void deleteCourse()
+{
+	ViewListOfCourse();
+	Course a, b;
+	cout << "Nhap ID khoa hoc muon xoa: ";
+	cin.get(a.ID, 20, '\n');
+	fstream file1, file2;
+	file1.open(FILECOURSES, ios::in);
+	file2.open("ListCourses1.txt", ios::out);
+	while (!file1.eof())
+	{
+		file1 >> b.Sememster;
+		file1.ignore();
+		file1.getline(b.ID, 10);
+		file1.getline(b.Name, 50);
+		file1.getline(b.TeacherName, 50);
+		file1 >> b.NumOfCredits;
+		file1.ignore();
+		file1 >> b.MaxNumOfStudents;
+		file1.ignore();
+		file1 >> b.Session1.thu >> b.Session1.gio >> b.Session1.phut;
+		file1 >> b.Session2.thu >> b.Session2.gio >> b.Session2.phut;
+		file1.ignore();
+		if (file1.eof()) break;
+		if (strcmp(a.ID, b.ID) == 0)
+		{
+			
+		}
+		else
+		{
+			file2 << b.Sememster << endl;
+			file2 << b.ID << endl;
+			file2 << b.Name << endl;
+			file2 << b.TeacherName << endl;
+			file2 << b.NumOfCredits << endl;
+			file2 << b.MaxNumOfStudents << endl;
+			file2 << b.Session1.thu << endl;
+			file2 << b.Session1.gio << endl;
+			file2 << b.Session1.phut << endl;
+			file2 << b.Session2.thu << endl;
+			file2 << b.Session2.gio << endl;
+			file2 << b.Session2.phut << endl;
+		}
+	}
+	file1.close();
+	file2.close();
+	remove(FILECOURSES);
+	rename("ListCourses1.txt", FILECOURSES);
 }
