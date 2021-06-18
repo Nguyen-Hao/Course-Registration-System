@@ -212,6 +212,9 @@ void dangki(ListCourses& l, SinhVien S)
 			}
 		}
 	}
+	
 	file.close();
 	file1.close();
+	remove("StudentOfSubject.txt");
+	rename("temp.txt", "StudentOfSubject.txt");
 }
