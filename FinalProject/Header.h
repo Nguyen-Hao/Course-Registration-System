@@ -52,18 +52,7 @@ struct PhienGio
 	int phut;
 };
 
-struct DiemMonHoc
-{
-	double MidTerm;
-	double Final;
-	double Other; // Qua Trinh
-	double Total;
-};
-struct ListDiem
-{
-	DiemMonHoc data;
-	ListDiem* pNext;
-};
+
 struct SinhVien
 {
 	char Class[10];
@@ -84,7 +73,24 @@ struct ListSV
 	SinhVien info;
 	ListSV* pNext;
 };
-
+struct DiemMonHoc
+{
+	double MidTerm;
+	double Final;
+	double Other; // Qua Trinh
+	double Total;
+};
+struct NodeDiem
+{
+	SinhVien info;
+	DiemMonHoc data;
+	NodeDiem* pNext;
+};
+struct ListDiem
+{
+	NodeDiem* head;
+	NodeDiem* tail;
+};
 struct Lop
 {
 	char Ma[16];

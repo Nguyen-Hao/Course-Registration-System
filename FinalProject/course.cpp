@@ -76,33 +76,33 @@ ListCourses ReadListCourses()
 	file.open(FILECOURSES);
 	while (!file.eof())
 	{
-		
-			Course temp0;
-			file>> temp0.Sememster;
-			file.ignore();
-			file.getline(temp0.ID, 10);
-			file.getline(temp0.Name, 50);
-			file.getline(temp0.TeacherName, 50);
-			file >> temp0.NumOfCredits;
-			file >> temp0.MaxNumOfStudents;
-			file >> temp0.Session1.thu;
-			file >> temp0.Session1.gio;
-			file >> temp0.Session1.phut;
-			file >> temp0.Session2.thu;
-			file >> temp0.Session2.gio;
-			file >> temp0.Session2.phut;
-			file.ignore();
-			if (file.eof()) break;
-			NodeCourse* temp2 = new NodeCourse;
-			temp2->next = NULL;
-			temp2->course = temp0;
-			if (temp.head == NULL)
-				temp.head = temp2;
-			else
-			{
-				temp2->next = temp.head;
-				temp.head = temp2;
-			}
+
+		Course temp0;
+		file >> temp0.Sememster;
+		file.ignore();
+		file.getline(temp0.ID, 10);
+		file.getline(temp0.Name, 50);
+		file.getline(temp0.TeacherName, 50);
+		file >> temp0.NumOfCredits;
+		file >> temp0.MaxNumOfStudents;
+		file >> temp0.Session1.thu;
+		file >> temp0.Session1.gio;
+		file >> temp0.Session1.phut;
+		file >> temp0.Session2.thu;
+		file >> temp0.Session2.gio;
+		file >> temp0.Session2.phut;
+		file.ignore();
+		if (file.eof()) break;
+		NodeCourse* temp2 = new NodeCourse;
+		temp2->next = NULL;
+		temp2->course = temp0;
+		if (temp.head == NULL)
+			temp.head = temp2;
+		else
+		{
+			temp2->next = temp.head;
+			temp.head = temp2;
+		}
 	}
 	return temp;
 }
@@ -114,7 +114,7 @@ void ViewListOfCourse()
 	f.seekg(0, ios::end);
 	int i = f.tellg();
 	f.close();
-	if (i==0)
+	if (i == 0)
 	{
 		cout << "Chua co khoa hoc nao trong danh sach" << endl;
 	}
@@ -223,7 +223,7 @@ void updateCourse()
 			file2 << a.Session2.gio << endl;
 			file2 << a.Session2.phut << endl;
 		}
-		else 
+		else
 		{
 			file2 << b.Sememster << endl;
 			file2 << b.ID << endl;
@@ -351,7 +351,7 @@ void deleteCourse()
 		if (file1.eof()) break;
 		if (strcmp(a.ID, b.ID) == 0)
 		{
-			
+
 		}
 		else
 		{

@@ -6,15 +6,14 @@
 #include "student.h"
 #include "Dk_mon.h"
 #include"Semester.h"
-#include "Menu.h"
 #include"DKMon.h"
 int main()
 {
-	ListLop dsl;
-	ListGV dsgv;
-	dsgv.pHead = NULL;
-	dsl.n = 0;
-	ListSV* p = new ListSV;
+	//ListLop dsl;
+	//ListGV dsgv;
+	//dsgv.pHead = NULL;
+	//dsl.n = 0;
+	//ListSV* p = new ListSV;
 	//xu_ly_menu_student();
 	//FixConsoleWindow();
 	//resizeConsole(1200, 600);
@@ -59,7 +58,7 @@ int main()
 	file.getline(S.SocialID, 20);
 	for (int i = 0; i < 3; i++)
 	{
-		file>>S.begin[i];
+		file >> S.begin[i];
 	}
 	file.ignore();
 	file >> S.YearStudent;
@@ -68,5 +67,8 @@ int main()
 	file.ignore();
 	file.close();
 	dangki(l, S);
+	//view_Enrol_Course(S);
+	//ViewListOfCourse();
+	//eraser_erol_course(S);
 	return 0;
 }
