@@ -1,31 +1,79 @@
 #include"Header.h"
 #include"course.h"
+#include "console.h"
 void init(listSemester& l)
 {
 	l.head = NULL;
 	l.tail = NULL;
 }
-void CreateSemester(semester& sesmes)
+bool CreateSemester(semester& sesmes)
 {
-	cout << "input nam of semester: (1,2 or 3)";
-	cin >> sesmes.name;
+	bool f = true;
+	gotoxy(102, 9); cin >> sesmes.name; 
 	cin.ignore();
-	cout << "choose year for semester: ";
-	cin.get(sesmes.schoolyear, 10, '\n');
+	gotoxy(102, 13); cin.get(sesmes.schoolyear, 10, '\n');
 	cin.ignore();
-	cout << "what year student? ";
-	cin >> sesmes.studentYear;
-	cout << "day/month/year begin:";
-	cin >> sesmes.begin.ngay >> sesmes.begin.thang >> sesmes.begin.nam;
-	cout << "day/month/year end:";
-	cin >> sesmes.end.ngay >> sesmes.end.thang >> sesmes.end.nam;
+	gotoxy(102, 17); cin >> sesmes.studentYear;
+	gotoxy(102, 21); cin >> sesmes.begin.ngay;
+	gotoxy(115, 21); cin >> sesmes.begin.thang;
+	gotoxy(126, 21); cin >> sesmes.begin.nam;
+	
+	gotoxy(102, 25); cin >> sesmes.end.ngay;
+	gotoxy(115, 25); cin >> sesmes.end.thang;
+	gotoxy(126, 25); cin >> sesmes.end.nam;
+	TextColor(234);
+	gotoxy(112, 13); cout << "Right";
+	if (sesmes.studentYear < 1 || sesmes.studentYear >= 7) {
+		TextColor(228);
+		gotoxy(112, 17); cout << "Wrong";
+		f = false;
+	}
+	else 
+	{
+		TextColor(234);
+		gotoxy(112, 17); cout << "Right";
+	}
+	if (sesmes.begin.ngay < 1 || sesmes.begin.ngay > 31 || sesmes.begin.thang < 1 || sesmes.begin.thang > 12 ) {
+		TextColor(228);
+		gotoxy(137, 21); 
+		cout << "Wrong";
+		f = false;
+	}
+	else
+	{
+		TextColor(234);
+		gotoxy(137, 21); cout << "Right";
+	}
+	if (sesmes.name < 1 || sesmes.name > 3)
+	{
+		TextColor(228);
+		gotoxy(112, 9); cout << "Wrong";
+		f = false;
+	}
+	else
+	{
+		TextColor(234);
+		gotoxy(112, 9); cout << "Right";
+	}
+	if (sesmes.end.ngay < 1 || sesmes.end.ngay > 31 || sesmes.end.thang < 1 || sesmes.end.thang > 12) {
+		TextColor(228); gotoxy(137, 25); cout << "Wrong";
+		f = false;
+	}
+	else
+	{
+		TextColor(234);
+		gotoxy(137, 25); cout << "Right";
+	}
+	if (f == false) return false;
+	TextColor(228);
 	ofstream file;
-	file.open("sesmester.txt");
+	file.open("sesmester.txt", ios_base::app);
 	file << sesmes.name << endl;
 	file << sesmes.schoolyear << endl;
 	file << sesmes.begin.ngay << " " << sesmes.begin.thang << " " << sesmes.begin.nam << endl;
 	file << sesmes.end.ngay << " " << sesmes.end.thang << " " << sesmes.end.nam << endl;
 	sesmes.lis = ReadListCourses(sesmes.name);
+	return true;
 }
 
 void readListSemester(listSemester& l)

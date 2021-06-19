@@ -2,12 +2,14 @@
 #include "Header.h"
 #include "login.h"
 #include "student.h"
+#include "Semester.h"
 #include <cctype>
 #include <string>
 
 string Menubegin[3] = { "1. Nhan vien - giang vien", "2. Sinh vien","3. Thoat" };
 string AfterLoginSV[6] = { "1. Dang ky mon hoc", "2. Xem danh sach mon hoc dang ky", "3. Xoa mon hoc da dang ky", "4. Xem danh sach khoa hoc da dang ky", "5. Dang xuat" , "6. Thoat"};
 string AfterLoginGV[5] = { "1. Tao nam hoc moi", "2. Tao ki moi", "3. Them sinh vien vao lop " ,"4. Dang Xuat", "5. Thoat"};
+string ThaoTac[4] = { "DANG NHAP THANH CONG..", "Ten tai khoan hoac mat khau khong dung..", "TAO THANH CONG", "TAO KHONG THANH CONG"};
 void BackGround()
 {
 	TextColor(176);
@@ -56,9 +58,9 @@ int MenuFirst()
 	{
 		system("cls");
 		TextColor(224);
-		KhungHCN(128, 29, 10, 2);
-		gotoxy(130, 30); cout << char(30) << ": UP";
-		gotoxy(130, 31); cout << char(31) << ": DOWN";
+		KhungHCN(138, 29, 10, 2);
+		gotoxy(140, 30); cout << char(30) << ": UP";
+		gotoxy(140, 31); cout << char(31) << ": DOWN";
 		BackGround();
 		InfoTeam();
 		KhungHCN(8, 12, 22, 1);
@@ -66,21 +68,26 @@ int MenuFirst()
 		int n = 0;
 		for (int i = 0;i < 3;i++)
 		{
+			int k = strlen(Menubegin[i].c_str());
+			if (k > n) n = k;
+		}
+		for (int i = 0;i < 3;i++)
+		{
 			if (i == vitri)
 			{
-				gotoxy(12, 17 + i * 4); TextColor(160);
-				n = strlen(Menubegin[i].c_str());
-				for (int i = 0;i < n;i++)	cout << " ";
+				TextColor(160);
+				gotoxy(12, 17 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+				gotoxy(12, 18 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				gotoxy(12, 18 + i * 4);  cout << Menubegin[i];
-				gotoxy(12, 19 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+				gotoxy(12, 19 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 			}
 			else
 			{
-				gotoxy(12, 17 + i * 4); TextColor(240);
-				n = strlen(Menubegin[i].c_str());
-				for (int i = 0;i < n;i++)	cout << " ";
+				TextColor(240);
+				gotoxy(12, 17 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+				gotoxy(12, 18 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				gotoxy(12, 18 + i * 4);  cout << Menubegin[i];
-				gotoxy(12, 19 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+				gotoxy(12, 19 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 			}
 			TextColor(224);
 		}
@@ -102,12 +109,14 @@ int MenuFirst()
 
 void HuongDan()
 {
+	TextColor(224);
 	KhungHCN(125, 27, 25, 5);
 	gotoxy(130, 28); cout << "ESC: Back";
 	gotoxy(130, 30); cout << "Enter: DOWN/Login";
 	gotoxy(130, 29); cout << "Tab: UP/DOWN ";
 	gotoxy(130, 31); cout << char(30) <<": UP";
 	gotoxy(130, 32); cout << char(31) << ": DOWN";
+	TextColor(228);
 }
 void KhungDangNhap(int item)
 {
@@ -115,18 +124,7 @@ void KhungDangNhap(int item)
 	gotoxy(63, 11);
 	if (item == 0) cout << "DANG NHAP - GIAO VIEN";
 	else cout << "DANG NHAP - SINH VIEN";
-	gotoxy(60, 9); for (int i = 20;i <= 50;i++) cout << char(196);
-	gotoxy(60, 13); for (int i = 20;i <= 50;i++) cout << char(196);
-	for (int i = 0;i < 3;i++)
-	{
-		gotoxy(60, 10 + i); cout << char(179);
-		gotoxy(90, 10 + i); cout << char(179);
-	}
-	gotoxy(90, 9); cout << (char)191;
-	gotoxy(60, 13); cout << (char)192;
-	gotoxy(60, 9); cout << (char)218;
-	gotoxy(90, 13); cout << (char)217;
-
+	KhungHCN(60, 9, 30, 3);
 	gotoxy(50, 16); cout << "Ten dang nhap: (Toi da 20 ky tu) ";
 	KhungHCN(50, 17, 50, 2);
 
@@ -134,22 +132,38 @@ void KhungDangNhap(int item)
 	KhungHCN(50, 23, 50, 2);
 
 }
-void DangNhapThanhCong()
+void TaoThanhCong(int x, int y, string c)
 {
-	TextColor(160); gotoxy(54, 28); for (int i = 0;i < 35;i++) cout << " ";
-	gotoxy(54, 29); for (int i = 0;i < 35;i++) cout << " ";
-	gotoxy(54, 30); for (int i = 0;i < 35;i++) cout << " ";
-	gotoxy(57, 29); cout << "DANG NHAP THANH CONG ..";
+	TextColor(160); 
+	gotoxy(x, y); for (int i = 0;i <= c.size()+3;i++) cout << " ";
+	gotoxy(x, y+1); for (int i = 0;i <= c.size()+3;i++) cout << " ";
+	gotoxy(x, y+2); for (int i = 0;i <= c.size()+3;i++) cout << " ";
+	gotoxy(x+3, y+1); cout << c;
 	TextColor(224);
 }
-void DangNhapThatBai()
+void TaoThatBai(int x, int y , string c)
 {
-	TextColor(207); gotoxy(54, 28); for (int i = 0;i < 47;i++) cout << " ";
-	gotoxy(54, 29); for (int i = 0;i < 47;i++) cout << " ";
-	gotoxy(54, 30); for (int i = 0;i < 47;i++) cout << " ";
-	gotoxy(57, 29); cout << "Ten tai khoan hoac mat khau khong dung..";
+	TextColor(207); 
+	gotoxy(x, y); for (int i = 0;i <= c.size() +3 ;i++) cout << " ";
+	gotoxy(x, y+1); for (int i = 0;i <= c.size() + 3;i++) cout << " ";
+	gotoxy(x, y+2); for (int i = 0;i <= c.size()+3;i++) cout << " ";
+	gotoxy(x+3, y+1); cout << c;
 	TextColor(224);
 }
+void KhungTaoKiMoi()
+{
+	
+	TextColor(224);
+	gotoxy(75, 9); cout << "Ki: ";KhungHCN(100, 8, 10, 1); gotoxy(125, 9); cout << "Ex: 1,2,3";// khung nhap ki 
+	gotoxy(75, 13); cout << "Nam hoc: "; KhungHCN(100, 12, 10, 1); gotoxy(125, 13); cout << "Ex: 2020, 2021";// nam
+	gotoxy(75, 17); cout << "Cho sinh vien nam: "; KhungHCN(100, 16, 10, 1); gotoxy(125, 17); cout << "Ex: 1,2,3,4,5,6";// sinh vien nam ?
+	gotoxy(75, 21); cout << "Ngay bat dau: "; KhungHCN(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; KhungHCN(113, 20, 10, 1); gotoxy(124, 21); cout << "/"; KhungHCN(126, 20, 10, 1);
+	gotoxy(75, 25); cout << "Ngay ket thuc: "; KhungHCN(100, 24, 10, 1); gotoxy(111, 25); cout << "/"; KhungHCN(113, 24, 10, 1); gotoxy(124, 25); cout << "/"; KhungHCN(126, 24, 10, 1);
+	KhungHCN(130, 28, 30, 3);
+	gotoxy(132, 30); cout << "ENTER: Fill Next-Create";
+	TextColor(228);
+}
+
 int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv)
 {
 ESCAPE: 
@@ -255,13 +269,13 @@ ESCAPE:
 				}
 			if (Login == true)
 			{
-				DangNhapThanhCong();
+				TaoThanhCong(54, 28, ThaoTac[0]);
 				Sleep(2000);
 				break;
 			}
 			else
 			{
-				DangNhapThatBai();
+				TaoThatBai(54, 28, ThaoTac[1]);
 				Sleep(2000);
 			}
 		}
@@ -359,32 +373,37 @@ ESCAPE:
 			}
 			if (Login == true)
 			{
-				DangNhapThanhCong();
+				TaoThanhCong(54, 28, ThaoTac[0]);
 				Sleep(2000);
 				break;
 			}
 			else
 			{
-				DangNhapThatBai();
+				TaoThatBai(54, 28, ThaoTac[1]);
 				Sleep(2000);
 			}
 		}
 	}
 	return choice;
 }
+
 char* TOUPPER(char* c)
 {
 	for (int i = 0;i < strlen(c);i++)
 		toupper(c[i]);
 	return c;
 }
-int AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice)
+
+void AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice)
 {
+HOME:
 	choice = DangNhap(ds, dsgv , p, gv);
 	int vitri = 0;
+	semester s;
 	if (choice == 2) {
 		while (true)
 		{
+REPEATSV:
 			system("cls");
 			BackGround();
 			_strupr_s(p.FirstName, 50);
@@ -393,21 +412,26 @@ int AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice)
 			int n = 0;
 			for (int i = 0;i < 6;i++)
 			{
+				int k = strlen(AfterLoginSV[i].c_str());
+				if (k > n) n = k;
+			}
+			for (int i = 0;i < 6;i++)
+			{
 				if (i == vitri)
 				{
-					gotoxy(12, 8 + i * 4); TextColor(160);
-					n = strlen(AfterLoginSV[i].c_str());
-					for (int i = 0;i < n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4);  cout << AfterLoginSV[i];
-					gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+					TextColor(160);
+					gotoxy(12, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4); cout << AfterLoginSV[i];
+					gotoxy(12, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				}
 				else
 				{
-					gotoxy(12, 8 + i * 4); TextColor(240);
-					n = strlen(AfterLoginSV[i].c_str());
-					for (int i = 0;i < n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4);  cout << AfterLoginSV[i];
-					gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+					TextColor(240);
+					gotoxy(12, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4); cout << AfterLoginSV[i];
+					gotoxy(12, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				}
 				TextColor(224);
 			}
@@ -423,13 +447,51 @@ int AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice)
 				if (vitri == -1) vitri = 5;
 			}
 			if (c == ENTER)
-				return vitri + 1;
+			{
+				int c = vitri + 1;
+				while (true)
+				{
+					if (c == 1)
+					{
+						// Code Phan dang ky mon hoc
+						system("pause");
+						goto REPEATSV;
+					}
+					else if (c == 2)
+					{
+						//Code phan xem danh sach mon hoc da dang ky
+						system("pause");
+						goto REPEATSV;
+					}
+					else if (c == 3)
+					{
+						// code phan xoa mon hoc
+						system("pause");
+						goto REPEATSV;
+					}
+					else if (c == 4)
+					{
+						// code phan xem danh sach mon hoc cua minh
+						system("pause");
+						goto REPEATSV;
+					}
+					else if (c == 5)
+					{
+						goto HOME;
+					}
+					else if (c == 6)
+					{
+						exit(1);
+					}
+				}
+			}
 		}
 	}
-	else if (choice == 1)
+	else if (choice == 1) // giao vien
 	{
 		while (true)
 		{
+REPEATGV:
 			system("cls");
 			BackGround();
 			_strupr_s(gv.FirstName, 50);
@@ -438,21 +500,26 @@ int AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice)
 			int n = 0;
 			for (int i = 0;i < 5;i++)
 			{
+				int k = strlen(AfterLoginGV[i].c_str());
+				if (k > n) n = k;
+			}
+			for (int i = 0;i < 5;i++)
+			{
 				if (i == vitri)
 				{
-					gotoxy(12, 8 + i * 4); TextColor(160);
-					n = strlen(AfterLoginGV[i].c_str());
-					for (int i = 0;i < n;i++)	cout << " ";
+					TextColor(160);
+					gotoxy(12, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 					gotoxy(12, 9 + i * 4);  cout << AfterLoginGV[i];
-					gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+					gotoxy(12, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				}
 				else
 				{
-					gotoxy(12, 8 + i * 4); TextColor(240);
-					n = strlen(AfterLoginGV[i].c_str());
-					for (int i = 0;i < n;i++)	cout << " ";
+					TextColor(240);
+					gotoxy(12, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(12, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 					gotoxy(12, 9 + i * 4);  cout << AfterLoginGV[i];
-					gotoxy(12, 10 + i * 4); for (int i = 0;i < n;i++)	cout << " ";
+					gotoxy(12, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				}
 				TextColor(224);
 			}
@@ -468,70 +535,40 @@ int AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice)
 				if (vitri == -1) vitri = 4;
 			}
 			if (c == ENTER)
-				return vitri + 1;
-		}
-	}
-}
-void Menu(ListLop& ds,ListGV& dsgv, SinhVien& sv, GiaoVien &gv)
-{
-REPEAT:
-	int choose;
-	int choice = AfterLogin(ds, dsgv, sv,gv, choose);
-	if (choose == 2)
-	{
-		while (choice != 6)
-		{
-			if (choice == 1)
 			{
-				// Code Phan dang ky mon hoc
-			}
-			else if (choice == 2)
-			{
-				//Code phan xem danh sach mon hoc da dang ky
-			}
-			else if (choice == 3)
-			{
-				// code phan xoa mon hoc
-			}
-			else if (choice == 4)
-			{
-				// code phan xem danh sach mon hoc cua minh
-			}
-			else if (choice == 5)
-			{
-				goto REPEAT;
-				break;
-			}
-			else if (choice == 6)
-			{
-				exit(1);
-			}
-		}
-	}
-	else if (choose == 1)
-	{
-		while (choice != 6)
-		{
-			if (choice == 1)
-			{
-				// Code Phan dang ky mon hoc
-			}
-			else if (choice == 2)
-			{
-				//Code phan xem danh sach mon hoc da dang ky
-			}
-			else if (choice == 3)
-			{
-				// code phan xoa mon hoc
-			}
-			else if (choice == 4)
-			{
-				goto REPEAT;
-				break;
-			}
-			else if (choice == 5)
-			{
-				exit(1);
+				int c = vitri + 1;
+				while (c != 6)
+				{
+					if (c == 1)
+					{
+						// Code Phan dang ky mon hoc
+						gotoxy(70, 32); system("pause");
+						goto REPEATGV;
+					}
+					else if (c == 2)
+					{
+						KhungTaoKiMoi();
+						bool f = CreateSemester(s);
+						if (f == true) TaoThanhCong(90, 28, ThaoTac[2]);
+						else TaoThatBai(90, 28, ThaoTac[3]);
+						gotoxy(70, 32); system("pause");
+						goto REPEATGV;
+					}
+					else if (c == 3)
+					{
+						// code phan xoa mon hoc
+						gotoxy(70, 32); system("pause");
+						goto REPEATGV;
+					}
+					else if (c == 4)
+					{
+						goto HOME;
+					}
+					else if (c == 5)
+					{
+						exit(1);
+					}
+				}
 			}
 		}
 	}
