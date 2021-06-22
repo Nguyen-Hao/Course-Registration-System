@@ -9,18 +9,19 @@
 #include"DKMon.h"
 int main()
 {
-	//ListLop dsl;
-	//ListGV dsgv;
-	//dsgv.pHead = NULL;
-	//dsl.n = 0;
-	//ListSV* p = new ListSV;
-	//xu_ly_menu_student();
-	//FixConsoleWindow();
-	//resizeConsole(1200, 600);
-	//ReadFileClass(dsl);
-	//ReadFileStudent(dsl);
-	//Read_File_DSGV(dsgv);
-	//UpdateCSV(dsl);
+	ListLop dsl;
+	ListGV dsgv;
+	dsgv.pHead = NULL;
+	dsl.n = 0;
+	ListSV* p = new ListSV;
+	/*xu_ly_menu_student();*/
+	FixConsoleWindow();
+	resizeConsole(1200, 600);
+	ReadFileClass(dsl);
+	ReadFileStudent(dsl);
+	Read_File_DSGV(dsgv);
+	UpdateCSV(dsl);
+	ViewListOfStudentInClass(dsl);
 	//MenuSV(dsl, p, dsgv);
 	//int x;
 	//ListLop dsl;			// Dung xoa cai nay khi chay chuong trinh
@@ -43,32 +44,32 @@ int main()
 	///ViewListOfStudentInClass(dsl);
 	//ViewListOfClass(dsl);
 	//UpdateStudent();
-	ListCourses l;
-	initListCourses(l);
-	SinhVien S;
-	fstream file;
-	file.open("Text.txt", ios::in);
-	file.getline(S.Class, 10);
-	file.getline(S.ID, 10);
-	file.getline(S.pass, 20);
-	file.getline(S.FirstName, 20);
-	file.getline(S.LastName, 20);
-	file.getline(S.Gender, 20);
-	file.getline(S.DateOfBirth, 20);
-	file.getline(S.SocialID, 20);
-	for (int i = 0; i < 3; i++)
-	{
-		file >> S.begin[i];
-	}
-	file.ignore();
-	file >> S.YearStudent;
-	file.ignore();
-	file >> S.Semester;
-	file.ignore();
-	file.close();
+	//ListCourses l;
+	//initListCourses(l);
+	//SinhVien S;
+	//fstream file;
+	//file.open("Text.txt", ios::in);
+	//file.getline(S.Class, 10);
+	//file.getline(S.ID, 10);
+	//file.getline(S.pass, 20);
+	//file.getline(S.FirstName, 20);
+	//file.getline(S.LastName, 20);
+	//file.getline(S.Gender, 20);
+	//file.getline(S.DateOfBirth, 20);
+	//file.getline(S.SocialID, 20);
+	//for (int i = 0; i < 3; i++)
+	//{
+	//	file >> S.begin[i];
+	//}
+	//file.ignore();
+	//file >> S.YearStudent;
+	//file.ignore();
+	//file >> S.Semester;
+	//file.ignore();
+	//file.close();
 	//dangki(l, S);
 	//view_Enrol_Course(S);
 	//ViewListOfCourse();
-	eraser_erol_course(S);
+	/*eraser_erol_course(S);*/
 	return 0;
 }

@@ -1,5 +1,1 @@
-﻿  DKMon.cpp
-  course.cpp
-D:\FinalProject\FinalProject\course.cpp(120,8): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
-  Generating Code...
-  FinalProject.vcxproj -> D:\FinalProject\x64\Debug\FinalProject.exe
+﻿  FinalProject.vcxproj -> C:\Users\taiga\Desktop\New folder\x64\Debug\FinalProject.exe
