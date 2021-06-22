@@ -166,6 +166,24 @@ void Read_File_DSGV(ListGV&dsgv)
 	}
 	file.close();
 }
+void writeFileTeacher(ListGV dsgv)
+{
+	ofstream file;
+	file.open(FILEDSGV);
+	if (file.fail())
+	{
+		cout << "Failed to open this file!" << endl;
+		exit(0);
+	}
+	NodeGV* p = dsgv.pHead;
+	while (p != NULL)
+	{
+		file << p->info.ID << endl << p->info.pass << endl << p->info.FirstName << endl << p->info.LastName << endl;
+		file << p->info.Gender << endl << p->info.DateOfBirth << endl << p->info.SocialID << endl;
+		p = p->pNext;
+	}
+	file.close();
+}
 //
 //
 void UpdateCSV(ListLop& ds)
@@ -320,4 +338,28 @@ void ViewListOfStudentInClass(ListLop& ds)
 	}
 	gotoxy(5, 7 + STT); cout << "+--------------------=-----------------------------------------------------------------------------------------+" << endl;
 	gotoxy(0, 7 + STT + 1);
+}
+///
+//
+//
+void export_list_student_to_csv(ListLop l)
+{
+	ofstream file;
+	int count = 1;
+	file.open("dssv_ouput.csv");
+	if (file.fail())
+	{
+
+	}
+	for (int i = 0; i < l.n; i++)
+	{
+		ListSV* p = l.l[i].pHead;
+		while (p != NULL)
+		{
+			file << p->info.Class << "," << count << "," << p->info.ID << "," << p->info.FirstName << "," << p->info.LastName << "," << p->info.Gender << ",";
+			file << p->info.DateOfBirth << "," << p->info.SocialID << endl;
+			p = p->pNext;
+			count++;
+		}
+	}
 }

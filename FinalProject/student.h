@@ -7,6 +7,7 @@ void AddStudent_Input(ListLop& dsl);
 void WriteFileStudent(ListLop& dsl);
 void ReadFileStudent(ListLop& dsl);
 void Read_File_DSGV(ListGV& dsgv);
+void writeFileTeacher(ListGV dsgv);
 void UpdateCSV(ListLop& ds);
 void UpdateStudent();
 void ViewListOfClass(ListLop& ds);

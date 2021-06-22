@@ -536,3 +536,35 @@ REPEAT:
 		}
 	}
 }
+///
+//
+//
+void doi_password_sv(ListSV* sv, ListLop& dsl, char newpass[])
+{
+	strcpy_s(sv->info.pass, newpass);
+	for (int i = 0; i < dsl.n; i++)
+	{
+		for (ListSV* p = dsl.l[i].pHead; p != NULL; p = p->pNext)
+		{
+			if (strcmp(sv->info.ID, p->info.ID) == 0)
+			{
+				strcpy_s(p->info.pass, sv->info.pass);
+				break;
+			}
+		}
+	}
+	WriteFileStudent(dsl);
+}
+void doi_password_gv(NodeGV* gv, ListGV dsgv, char newpass[])
+{
+	strcpy_s(gv->info.pass, newpass);
+	for (NodeGV* p = dsgv.pHead; p != NULL; p = p->pNext)
+	{
+		if (strcmp(gv->info.ID, p->info.ID) == 0)
+		{
+			strcpy_s(p->info.pass, gv->info.pass);
+			break;
+		}
+	}
+	writeFileTeacher(dsgv);
+}
