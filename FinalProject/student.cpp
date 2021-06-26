@@ -2,6 +2,8 @@
 #include "Header.h"
 #include "console.h"
 #include"Semester.h"
+#include "DKMon.h"
+#include "course.h"
 void AddTailStudent(ListSV*& ds, SinhVien sv)
 {
 	ListSV* s = new ListSV;
@@ -363,3 +365,104 @@ void export_list_student_to_csv(ListLop l)
 		}
 	}
 }
+//
+//
+int Checkcourses(ListCourses dsl, char a[100])
+{
+	NodeCourse* p = dsl.head;
+	int i = 0;
+	for (p; p != NULL; p = p->next)
+	{
+		if (strcmp(p->course.ID, a) == 0)
+			if (i == 0) return -1; //neu dau tien thi tra ve -1 
+			else return i;
+		i++;
+	}
+	return 0; // tra ve 0 khi khong tim thay
+}
+//
+ListSV* findStudentOfCourses(const ListCourses& l, char mamon[])
+{
+	ListSV* lsv = NULL;
+	fstream file;
+	file.open("StudentOfSubject.txt", ios::in);
+	char ch[10] = "\0", CH[10] = "\n";
+	file.getline(ch, 10);
+	while (!file.eof())
+	{
+		while (ktra(l, CH) == false)
+		{
+			file.getline(CH, 10);
+			if ((ktra(l, CH) == true || strcmp(CH, "\0") == 0) && strcmp(CH, mamon) != 0)
+				break;
+			else
+			{
+				SinhVien s;
+				strcpy_s(s.Class, 10, CH);
+				file.getline(s.ID, 10);
+				file.getline(s.pass, 20);
+				file.getline(s.FirstName, 50);
+				file.getline(s.LastName, 50);
+				file.getline(s.Gender, 10);
+				file.getline(s.DateOfBirth, 50);
+				file.getline(s.SocialID, 10);
+				for (int i = 0; i < 3; i++)
+				{
+					file >> s.begin[i];
+				}
+				file.ignore();
+				file >> s.YearStudent;
+				file.ignore();
+				file >> s.Semester;
+				file.ignore();
+				AddTailStudent(lsv, s);
+			}
+		}
+		strcpy_s(ch, 10, CH);
+		strcpy_s(CH, 10, "\n");
+	}
+	file.close();
+	return lsv;
+}
+//
+void ViewListOfStudentIncourses()
+{
+	ListCourses ds = ReadListCourses();
+	ViewListOfCourse();
+	cout << "Nhap ma mon: ";
+	int n = countNodeCourses(ds);
+	int ViTrimon;
+	char Mamon[10];
+	int STT = 1;
+	cin.get(Mamon, 10, '\n');
+	int KT = Checkcourses(ds, Mamon);
+	if (KT == 0) {
+		cout << "Khong ton tai ma mon " << Mamon << endl;
+		return;
+	}
+	else if (KT == -1) ViTrimon = 0;
+	else ViTrimon = KT;
+	NodeCourse* p = ds.head;
+	for (int i = 0; i < ViTrimon; i++)
+	{
+		p = p->next;
+	}
+	ListSV* Lsv_Of_Courses = NULL;
+	Lsv_Of_Courses = findStudentOfCourses(ds, Mamon);
+	if (Lsv_Of_Courses == NULL) {
+		cout << "Chua co sinh vien nao trong mon" << endl;
+		return;
+	}
+	system("cls");
+	gotoxy(10, 3); cout << "---------------------------- " << p->course.Name << " ----------------------------";
+	gotoxy(5, 5); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
+	gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
+	gotoxy(5, 7); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
+	for (ListSV* k = Lsv_Of_Courses; k != NULL; k = k->pNext) {
+		gotoxy(5, 7 + STT);
+		cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
+	}
+	gotoxy(5, 7 + STT); cout << "+--------------------=-----------------------------------------------------------------------------------------+" << endl;
+	gotoxy(0, 7 + STT + 1);
+}
+

@@ -13,7 +13,8 @@ int main()
 	ListGV dsgv;
 	dsgv.pHead = NULL;
 	dsl.n = 0;
-	ListSV* p = new ListSV;
+	SinhVien sv;
+	GiaoVien gv;
 	/*xu_ly_menu_student();*/
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
@@ -21,8 +22,10 @@ int main()
 	ReadFileStudent(dsl);
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
-	ViewListOfStudentInClass(dsl);
-	//MenuSV(dsl, p, dsgv);
+	ViewListOfStudentIncourses();
+	//ViewListOfStudentInClass(dsl);
+	
+	//Menu(dsl, dsgv, sv, gv);
 	//int x;
 	//ListLop dsl;			// Dung xoa cai nay khi chay chuong trinh
 	//dsl.n = 0;				// Dung xoa cai nay khi chay chuong trinh

@@ -12,3 +12,5 @@ void UpdateCSV(ListLop& ds);
 void UpdateStudent();
 void ViewListOfClass(ListLop& ds);
 void ViewListOfStudentInClass(ListLop& ds);
+
+void ViewListOfStudentIncourses();

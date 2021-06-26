@@ -95,8 +95,6 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv)
 	file.close();
 	return result;
 }
-
-
 NodeCourse* find(const ListCourses& l, char id[10])
 {
 	NodeCourse* ptr = l.head;
