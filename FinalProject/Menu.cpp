@@ -3,18 +3,20 @@
 #include "login.h"
 #include "student.h"
 #include "Semester.h"
+#include "DKMon.h"
+#include "course.h"
 #include <cctype>
 #include <string>
 
 string Menubegin[3] = { "1. Nhan vien - giang vien", "2. Sinh vien","3. Thoat" };
-string AfterLoginSV[6] = { "1. Dang ky mon hoc", "2. Xem danh sach mon hoc dang ky", "3. Xoa mon hoc da dang ky", "4. Xem danh sach khoa hoc da dang ky", "5. Dang xuat" , "6. Thoat"};
-string AfterLoginGV[5] = { "1. Tao nam hoc moi", "2. Tao ki moi", "3. Them sinh vien vao lop " ,"4. Dang Xuat", "5. Thoat"};
+string AfterLoginSV[6] = { "1. Dang ky mon hoc", "2. Xem danh sach mon hoc dang ky", "3. Xoa mon hoc da dang ky","4. Xem danh sach khoa hoc theo hoc", "5. Dang xuat" , "6. Thoat"};
+string AfterLoginGV[6] = { "1. Tao nam hoc moi", "2. Tao ki moi", "3. Them sinh vien vao lop " ,"4. Dang Xuat", "5. Thoat","6. Tao mon hoc"};
 string ThaoTac[4] = { "DANG NHAP THANH CONG..", "Ten tai khoan hoac mat khau khong dung..", "TAO THANH CONG", "TAO KHONG THANH CONG"};
 void BackGround()
 {
 	TextColor(176);
-	for (int j = 0;j < 6;j++)
-		for (int i = 55;i <= 100;i++)
+	for (int j = 0; j < 6; j++)
+		for (int i = 55; i <= 100; i++)
 		{
 			gotoxy(i, j); cout << " ";
 		}
@@ -27,8 +29,8 @@ void BackGround()
 
 void KhungHCN(int x, int y, int width, int length)
 {
-	gotoxy(x, y); for (int i = 0;i < width;i++) cout << char(196);
-	for (int i = 0;i < length;i++)
+	gotoxy(x, y); for (int i = 0; i < width; i++) cout << char(196);
+	for (int i = 0; i < length; i++)
 	{
 		gotoxy(x - 1, y + i + 1); cout << char(179);
 		gotoxy(x + width, y + i + 1); cout << char(179);
@@ -37,7 +39,7 @@ void KhungHCN(int x, int y, int width, int length)
 	gotoxy(x - 1, y + length + 1); cout << (char)192;
 	gotoxy(x - 1, y); cout << (char)218;
 	gotoxy(x + width, y + length + 1); cout << (char)217;
-	gotoxy(x, y + length + 1); for (int i = 0;i < width;i++) cout << char(196);
+	gotoxy(x, y + length + 1); for (int i = 0; i < width; i++) cout << char(196);
 }
 void InfoTeam()
 {
@@ -66,7 +68,7 @@ int MenuFirst()
 		KhungHCN(8, 12, 22, 1);
 		gotoxy(10, 13); cout << "DANG NHAP DANH CHO: ";
 		int n = 0;
-		for (int i = 0;i < 3;i++)
+		for (int i = 0; i < 3; i++)
 		{
 			int k = strlen(Menubegin[i].c_str());
 			if (k > n) n = k;
@@ -114,7 +116,7 @@ void HuongDan()
 	gotoxy(130, 28); cout << "ESC: Back";
 	gotoxy(130, 30); cout << "Enter: DOWN/Login";
 	gotoxy(130, 29); cout << "Tab: UP/DOWN ";
-	gotoxy(130, 31); cout << char(30) <<": UP";
+	gotoxy(130, 31); cout << char(30) << ": UP";
 	gotoxy(130, 32); cout << char(31) << ": DOWN";
 	TextColor(228);
 }
@@ -166,7 +168,7 @@ void KhungTaoKiMoi()
 
 int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv)
 {
-ESCAPE: 
+ESCAPE:
 	int choice = MenuFirst();
 	bool Login = false;
 	//ListSV* p = new ListSV;
@@ -249,7 +251,7 @@ ESCAPE:
 				}
 				else if (c == ESC)
 					goto ESCAPE;
-				else if (c != BACKSPACE && c != ENTER && Pass.size() == 20)	
+				else if (c != BACKSPACE && c != ENTER && Pass.size() == 20)
 					j--;
 				else
 				{
@@ -257,13 +259,13 @@ ESCAPE:
 					cout << "*";
 				}
 			}
-			for (int i = 0;i < ds.n;i++)
-				for (ListSV* k = ds.l[i].pHead; k != NULL;k = k->pNext)
+			for (int i = 0; i < ds.n; i++)
+				for (ListSV* k = ds.l[i].pHead; k != NULL; k = k->pNext)
 				{
 					if (strcmp(k->info.ID, User.c_str()) == 0 && strcmp(k->info.pass, Pass.c_str()) == 0)
 					{
 						Login = true;
-						sv = k->info;	
+						sv = k->info;
 						break;
 					}
 				}
@@ -296,7 +298,7 @@ ESCAPE:
 				gotoxy(55 + i++, 18);
 				char c;
 				c = GetKey();
-				if (c == DOWN || c == '\t' || c == UP )
+				if (c == DOWN || c == '\t' || c == UP)
 				{
 					i--;
 					goto PASSGV;
@@ -304,7 +306,7 @@ ESCAPE:
 				else if (c == LEFT || c == RIGHT) i--;
 				else if (c == BACKSPACE && User.size() == 0)
 					i--;
-				else if (c == BACKSPACE) 
+				else if (c == BACKSPACE)
 				{
 					printf("\b ");
 					i -= 2;
@@ -389,15 +391,15 @@ ESCAPE:
 
 char* TOUPPER(char* c)
 {
-	for (int i = 0;i < strlen(c);i++)
+	for (int i = 0; i < strlen(c); i++)
 		toupper(c[i]);
 	return c;
 }
 
-void AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice)
+void AfterLogin(ListLop ds, ListGV dsgv,ListCourses dsmon,  SinhVien& sv, GiaoVien& gv, int& choice)
 {
 HOME:
-	choice = DangNhap(ds, dsgv , p, gv);
+	choice = DangNhap(ds, dsgv , sv, gv);
 	int vitri = 0;
 	semester s;
 	if (choice == 2) {
@@ -406,11 +408,11 @@ HOME:
 REPEATSV:
 			system("cls");
 			BackGround();
-			_strupr_s(p.FirstName, 50);
-			_strupr_s(p.LastName, 50);
-			gotoxy(10, 34); cout << "Xin chao: " << p.FirstName << " " << p.LastName << " - " << p.Class;
+			_strupr_s(sv.FirstName, 50);
+			_strupr_s(sv.LastName, 50);
+			gotoxy(10, 34); cout << "Xin chao: " << sv.FirstName << " " << sv.LastName << " - " << sv.Class;
 			int n = 0;
-			for (int i = 0;i < 6;i++)
+			for (int i = 0; i < 6; i++)
 			{
 				int k = strlen(AfterLoginSV[i].c_str());
 				if (k > n) n = k;
@@ -453,25 +455,30 @@ REPEATSV:
 				{
 					if (c == 1)
 					{
-						// Code Phan dang ky mon hoc
+						gotoxy(60, 9);
+						dangki(dsmon , sv);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 2)
 					{
-						//Code phan xem danh sach mon hoc da dang ky
+						gotoxy(60, 9);
+						view_Enrol_Course(sv);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 3)
 					{
-						// code phan xoa mon hoc
+						gotoxy(60, 9);
+						eraser_erol_course(sv);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 4)
 					{
+						gotoxy(60, 9);
 						// code phan xem danh sach mon hoc cua minh
+						view_Enrol_Course(sv);
 						system("pause");
 						goto REPEATSV;
 					}
@@ -496,14 +503,14 @@ REPEATGV:
 			BackGround();
 			_strupr_s(gv.FirstName, 50);
 			_strupr_s(gv.LastName, 50);
-			gotoxy(10, 34); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName ;
+			gotoxy(10, 34); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
 			int n = 0;
-			for (int i = 0;i < 5;i++)
+			for (int i = 0; i < 5; i++)
 			{
 				int k = strlen(AfterLoginGV[i].c_str());
 				if (k > n) n = k;
 			}
-			for (int i = 0;i < 5;i++)
+			for (int i = 0;i < 6;i++)
 			{
 				if (i == vitri)
 				{
@@ -527,21 +534,22 @@ REPEATGV:
 			if (c == DOWN)
 			{
 				vitri += 1;
-				if (vitri == 5) vitri = 0;
+				if (vitri == 6) vitri = 0;
 			}
 			if (c == UP)
 			{
 				vitri -= 1;
-				if (vitri == -1) vitri = 4;
+				if (vitri == -1) vitri = 5;
 			}
 			if (c == ENTER)
 			{
 				int c = vitri + 1;
-				while (c != 6)
+				while (true)
 				{
-					if (c == 1)
+					if (c == 1) // tao mon hoc
 					{
-						// Code Phan dang ky mon hoc
+						gotoxy(60, 9);
+						createNewCourse();
 						gotoxy(70, 32); system("pause");
 						goto REPEATGV;
 					}
@@ -567,6 +575,13 @@ REPEATGV:
 					else if (c == 5)
 					{
 						exit(1);
+					}
+					else if (c == 6)
+					{
+						
+						createNewCourse();
+						gotoxy(70, 32); system("pause");
+						goto REPEATGV;
 					}
 				}
 			}

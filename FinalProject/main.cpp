@@ -5,34 +5,23 @@
 #include "staff.h"
 #include "student.h"
 #include "Dk_mon.h"
-#include"Semester.h"
-#include "Menu.h"
+#include "Semester.h"
+#include "DKMon.h"
 int main()
 {
-	ListLop dsl;
-	ListGV dsgv;
-	dsgv.pHead = NULL;
-	dsl.n = 0;
+	TextColor(224);
+	ListLop dsl;	dsl.n = 0;
+	ListGV dsgv;	dsgv.pHead = NULL;
 	SinhVien sv;
 	GiaoVien gv;
 	int choice;
-	//xu_ly_menu_student();
+	ListCourses course = ReadListCourses();
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
 	ReadFileClass(dsl);
 	ReadFileStudent(dsl);
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
-	AfterLogin(dsl,dsgv,sv, gv, choice);
-	//ListSV* temp = DangNhapSV(dsl);
-	//cout << temp->info.Class << endl << temp->info.DateOfBirth << endl;
-	//int c = AfterLoginSV(dsl, p);
-	//int x;
-	//ViewListOfCourse(x);
-	//updateCourse();
-	//UpdateStudent();
-	///ViewListOfStudentInClass(dsl);
-	//ViewListOfClass(dsl);
-	//UpdateStudent();
+	AfterLogin(dsl,dsgv,course,sv, gv, choice);
 	return 0;
 }

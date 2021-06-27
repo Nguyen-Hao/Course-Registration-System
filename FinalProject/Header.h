@@ -27,6 +27,7 @@
 #define FILECOURSES "ListCourses.txt"
 #define FILECSV "Filecsv.csv"
 #define FILETIMEDKHP "TimeDKHP.txt"
+#define FILEDSSVMON "StudentOfSubject.txt"
 using namespace std;
 
 struct Time
@@ -47,23 +48,12 @@ struct Date
 };
 struct PhienGio
 {
-	int thu;//Monday=2, Tuesday=3, ..., Sunday=8
+	int thu;
 	int gio;
 	int phut;
 };
 
-struct DiemMonHoc
-{
-	double MidTerm;
-	double Final;
-	double Other; // Qua Trinh
-	double Total;
-};
-struct ListDiem
-{
-	DiemMonHoc data;
-	ListDiem* pNext;
-};
+
 struct SinhVien
 {
 	char Class[10];
@@ -84,7 +74,24 @@ struct ListSV
 	SinhVien info;
 	ListSV* pNext;
 };
-
+struct DiemMonHoc
+{
+	double MidTerm;
+	double Final;
+	double Other; // Qua Trinh
+	double Total;
+};
+struct NodeDiem
+{
+	SinhVien info;
+	DiemMonHoc data;
+	NodeDiem* pNext;
+};
+struct ListDiem
+{
+	NodeDiem* head;
+	NodeDiem* tail;
+};
 struct Lop
 {
 	char Ma[16];
@@ -118,11 +125,10 @@ struct ListGV
 {
 	NodeGV* pHead;
 };
-
 struct Course
 {
 	int Sememster;				// 1/2/3
-	char ID[20];
+	char ID[10];
 	char Name[50];				//Tên khóa học
 	char TeacherName[50];		//Tên GV
 	int NumOfCredits;			//số tín chỉ
@@ -175,4 +181,4 @@ void TaoThanhCong(int x, int y, string c);
 void TaoThatBai(int x, int y, string c);
 void KhungTaoKiMoi();
 int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv);
-void AfterLogin(ListLop ds, ListGV dsgv, SinhVien& p, GiaoVien& gv, int& choice);
+void AfterLogin(ListLop ds, ListGV dsgv,ListCourses dsmon, SinhVien& p, GiaoVien& gv, int& choice);
