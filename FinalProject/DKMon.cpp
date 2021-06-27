@@ -28,12 +28,12 @@ void themvaolist(ListCourses& result, ListCourses l, char id[10])
 	}
 }
 
-bool ktra(const ListCourses& l, char c[10])
+bool ktra(const ListCourses& l, string c)
 {
 	NodeCourse* temp = l.head;
 	while (temp != NULL)
 	{
-		if (strcmp(temp->course.ID, c) == 0)
+		if (strcmp(temp->course.ID, c.c_str()) == 0)
 			return true;
 		temp = temp->next;
 	}
@@ -95,8 +95,6 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv)
 	file.close();
 	return result;
 }
-
-
 NodeCourse* find(const ListCourses& l, char id[10])
 {
 	NodeCourse* ptr = l.head;

@@ -129,18 +129,20 @@ void ViewListOfCourse()
 	}
 	else
 	{
+		cout << "   ";
 		cout << setw(10) << left << "ID" << setw(50) << left << "Name of course";
-		cout << setw(50) << left << "Teacher name" << setw(8) << left << "Credit";
-		cout << setw(20) << "Number of student";
+		cout << setw(35) << left << "Teacher name" << setw(8) << left << "Credit";
+		cout << setw(15) << "Number of student";
 		cout << setw(10) << left << "Thu" << setw(10) << left << "Time";
 		cout << setw(10) << left << "Thu" << setw(10) << left << "Time" << endl;
 		ListCourses temp = ReadListCourses();
 		NodeCourse* temp1 = temp.head;
 		while (temp1 != NULL)
 		{
+			cout << "   ";
 			cout << setw(10) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
-			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
-			cout << setw(20) << temp1->course.MaxNumOfStudents;
+			cout << setw(35) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
+			cout << setw(15) << temp1->course.MaxNumOfStudents;
 			cout << setw(10) << left << temp1->course.Session1.thu << setw(2) << left << temp1->course.Session1.gio << ":" << setw(8) << temp1->course.Session1.phut;
 			cout << setw(10) << left << temp1->course.Session2.thu << setw(2) << left << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut << endl;
 			temp1 = temp1->next;

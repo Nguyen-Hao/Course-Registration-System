@@ -10,7 +10,7 @@
 
 string Menubegin[3] = { "1. Nhan vien - giang vien", "2. Sinh vien","3. Thoat" };
 string AfterLoginSV[6] = { "1. Dang ky mon hoc", "2. Xem danh sach mon hoc dang ky", "3. Xoa mon hoc da dang ky","4. Xem danh sach khoa hoc theo hoc", "5. Dang xuat" , "6. Thoat"};
-string AfterLoginGV[6] = { "1. Tao nam hoc moi", "2. Tao ki moi", "3. Them sinh vien vao lop " ,"4. Dang Xuat", "5. Thoat","6. Tao mon hoc"};
+string AfterLoginGV[7] = { "1. Tao nam hoc moi", "2. Tao ki moi", "3. Them sinh vien vao lop " ,"4. Dang Xuat", "5. Thoat","6. Tao mon hoc","7. Xem DSSV in course"};
 string ThaoTac[4] = { "DANG NHAP THANH CONG..", "Ten tai khoan hoac mat khau khong dung..", "TAO THANH CONG", "TAO KHONG THANH CONG"};
 void BackGround()
 {
@@ -395,7 +395,35 @@ char* TOUPPER(char* c)
 		toupper(c[i]);
 	return c;
 }
-
+void doi_password_sv(ListSV* sv, ListLop& dsl, char newpass[])
+{
+	strcpy_s(sv->info.pass, newpass);
+	for (int i = 0; i < dsl.n; i++)
+	{
+		for (ListSV* p = dsl.l[i].pHead; p != NULL; p = p->pNext)
+		{
+			if (strcmp(sv->info.ID, p->info.ID) == 0)
+			{
+				strcpy_s(p->info.pass, sv->info.pass);
+				break;
+			}
+		}
+	}
+	WriteFileStudent(dsl);
+}
+void doi_password_gv(NodeGV* gv, ListGV dsgv, char newpass[])
+{
+	strcpy_s(gv->info.pass, newpass);
+	for (NodeGV* p = dsgv.pHead; p != NULL; p = p->pNext)
+	{
+		if (strcmp(gv->info.ID, p->info.ID) == 0)
+		{
+			strcpy_s(p->info.pass, gv->info.pass);
+			break;
+		}
+	}
+	writeFileTeacher(dsgv);
+}
 void AfterLogin(ListLop ds, ListGV dsgv,ListCourses dsmon,  SinhVien& sv, GiaoVien& gv, int& choice)
 {
 HOME:
@@ -477,7 +505,6 @@ REPEATSV:
 					else if (c == 4)
 					{
 						gotoxy(60, 9);
-						// code phan xem danh sach mon hoc cua minh
 						view_Enrol_Course(sv);
 						system("pause");
 						goto REPEATSV;
@@ -510,7 +537,7 @@ REPEATGV:
 				int k = strlen(AfterLoginGV[i].c_str());
 				if (k > n) n = k;
 			}
-			for (int i = 0;i < 6;i++)
+			for (int i = 0;i < 7;i++)
 			{
 				if (i == vitri)
 				{
@@ -534,12 +561,12 @@ REPEATGV:
 			if (c == DOWN)
 			{
 				vitri += 1;
-				if (vitri == 6) vitri = 0;
+				if (vitri == 7) vitri = 0;
 			}
 			if (c == UP)
 			{
 				vitri -= 1;
-				if (vitri == -1) vitri = 5;
+				if (vitri == -1) vitri = 6;
 			}
 			if (c == ENTER)
 			{
@@ -580,6 +607,12 @@ REPEATGV:
 					{
 						
 						createNewCourse();
+						gotoxy(70, 32); system("pause");
+						goto REPEATGV;
+					}
+					else if (c == 7)
+					{
+						ViewListOfStudentIncourses();
 						gotoxy(70, 32); system("pause");
 						goto REPEATGV;
 					}
