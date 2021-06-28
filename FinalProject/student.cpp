@@ -1,7 +1,7 @@
 #include "student.h"
 #include "Header.h"
 #include "console.h"
-#include"Semester.h"
+#include "Semester.h"
 #include "DKMon.h"
 #include "course.h"
 void AddTailStudent(ListSV*& ds, SinhVien sv)
@@ -388,79 +388,50 @@ ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50])
 	fstream file;
 	file.open("StudentOfSubject.txt", ios::in);
 	string s;
-	getline(file, s);
-	while (!file.eof()) 
+	while (getline(file, s))
 	{
 		if (strcmp(s.c_str(), mamon) == 0)
 		{
 			getline(file, s);
-			while(ktra(l,s) != true)
+			while (true) 
 			{
+
 				SinhVien sv;
 				strcpy_s(sv.Class, 10, s.c_str());
 				getline(file, s);	strcpy_s(sv.ID, 10, s.c_str());
-				getline(file, s);	strcpy_s(sv.pass, 20, s.c_str());
+				getline(file, s);	strcpy_s(sv.pass, 20, s.c_str()); 
 				getline(file, s);	strcpy_s(sv.FirstName, 50, s.c_str());
-				getline(file, s);	strcpy_s(sv.LastName, 50, s.c_str());
-				getline(file, s);	strcpy_s(sv.Gender, 10, s.c_str());
-				getline(file, s);	strcpy_s(sv.DateOfBirth, 50, s.c_str());
-				getline(file, s);	strcpy_s(sv.SocialID, 10, s.c_str());
+				getline(file, s);	strcpy_s(sv.LastName, 50, s.c_str()); 
+				getline(file, s);	strcpy_s(sv.Gender, 10, s.c_str()); 
+				getline(file, s);	strcpy_s(sv.DateOfBirth, 50, s.c_str()); 
+				getline(file, s);	strcpy_s(sv.SocialID, 10, s.c_str()); 
 				for (int i = 0; i < 3; i++) file >> sv.begin[i];
-				file >> sv.YearStudent;
-				file >> sv.Semester;
+				file >> sv.YearStudent; 
+				file >> sv.Semester; 
 				AddTailStudent(lsv, sv);
-				getline(file, s);
+				file.ignore();
+				getline(file, s); 
+				if(ktra(l,s) == true) break;
 			}
 			break;
 		}
-		else	getline(file, s);
 	}
-		/*while (ktra(l, CH) == false)
-		{
-			file.getline(CH, 10);
-			if ((ktra(l, CH) == true || strcmp(CH, "\0") == 0) && strcmp(CH, mamon) != 0)
-				break;
-			else
-			{
-				SinhVien s;
-				strcpy_s(s.Class, 10, CH);
-				file.getline(s.ID, 10);
-				file.getline(s.pass, 20);
-				file.getline(s.FirstName, 50);
-				file.getline(s.LastName, 50);
-				file.getline(s.Gender, 10);
-				file.getline(s.DateOfBirth, 50);
-				file.getline(s.SocialID, 10);
-				for (int i = 0; i < 3; i++)
-				{
-					file >> s.begin[i];
-				}
-				file.ignore();
-				file >> s.YearStudent;
-				file.ignore();
-				file >> s.Semester;
-				file.ignore();
-				AddTailStudent(lsv, s);
-			}
-		}
-		strcpy_s(ch, 10, CH);
-		strcpy_s(CH, 10, "\n");
-	}*/
 	file.close();
 	return lsv;
 }
 //
 void ViewListOfStudentIncourses()
 {
+	cin.ignore();
 	ListCourses ds = ReadListCourses();
-	//ViewListOfCourse();
+	ViewListOfCourse();
 	cout << "Nhap ma mon: ";
-	//int n = countNodeCourses(ds);
+	int n = countNodeCourses(ds);
 	int ViTrimon;
 	char Mamon[50];
 	int STT = 1;
 	cin.get(Mamon, 50, '\n');
-	/*int KT = Checkcourses(ds, Mamon);
+	int KT = Checkcourses(ds, Mamon);
 	if (KT == 0) {
 		cout << "Khong ton tai ma mon " << Mamon << endl;
 		return;
@@ -471,7 +442,7 @@ void ViewListOfStudentIncourses()
 	for (int i = 0; i < ViTrimon; i++)
 	{
 		p = p->next;
-	}*/
+	}
 	ListSV* Lsv_Of_Courses = findStudentOfCourses(ds, Mamon);
 	ListSV* k = Lsv_Of_Courses;
 	if (Lsv_Of_Courses == NULL) {
@@ -479,7 +450,7 @@ void ViewListOfStudentIncourses()
 		return;
 	}
 	system("cls");
-	gotoxy(10, 3); cout << "---------------------------- " << /*p->course.Name*/Mamon << " ----------------------------";
+	gotoxy(10, 3); cout << "---------------------------- " << p->course.Name << " ----------------------------";
 	gotoxy(5, 5); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
 	gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
 	gotoxy(5, 7); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
@@ -489,6 +460,5 @@ void ViewListOfStudentIncourses()
 	}
 	gotoxy(5, 7 + STT); cout << "+--------------------=-----------------------------------------------------------------------------------------+" << endl;
 	gotoxy(0, 7 + STT + 1);
-	cin.ignore();
 }
 

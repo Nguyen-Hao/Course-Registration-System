@@ -7,6 +7,7 @@
 #include "Dk_mon.h"
 #include "Semester.h"
 #include "DKMon.h"
+
 int main()
 {
 	TextColor(224);
@@ -22,6 +23,6 @@ int main()
 	ReadFileStudent(dsl);
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
-	AfterLogin(dsl,dsgv,course,sv, gv, choice);
+	AfterLogin(dsl, dsgv, course, sv, gv, choice);
 	return 0;
 }

@@ -12,5 +12,5 @@ void UpdateCSV(ListLop& ds);
 void UpdateStudent();
 void ViewListOfClass(ListLop& ds);
 void ViewListOfStudentInClass(ListLop& ds);
-
+ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50]);
 void ViewListOfStudentIncourses();
