@@ -15,3 +15,4 @@ void ViewListOfStudentInClass(ListLop& ds);
 ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50]);
 void ViewListOfStudentIncourses();
 void export_list_student_in_a_course_to_csv();
+void ExportListStudentInCourseToEnterScore();

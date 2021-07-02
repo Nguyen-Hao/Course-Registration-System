@@ -402,6 +402,7 @@ ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50])
 //
 void export_list_student_in_a_course_to_csv()
 {
+	cin.ignore();
 	ListCourses ds = ReadListCourses();
 	ViewListOfCourse();
 	cout << "Nhap ma mon: ";
@@ -484,3 +485,45 @@ void ViewListOfStudentIncourses()
 	gotoxy(0, 7 + STT + 1);
 }
 
+void ExportListStudentInCourseToEnterScore()
+{
+	cin.ignore();
+	ListCourses ds = ReadListCourses();
+	ViewListOfCourse();
+	cout << "Nhap ma mon: ";
+	int n = countNodeCourses(ds);
+	int ViTrimon;
+	char Mamon[50];
+	int STT = 1;
+	cin.get(Mamon, 50, '\n');
+	int KT = Checkcourses(ds, Mamon);
+	if (KT == 0) {
+		cout << "Khong ton tai ma mon " << Mamon << endl;
+		return;
+	}
+	else if (KT == -1) ViTrimon = 0;
+	else ViTrimon = KT;
+	NodeCourse* p = ds.head;
+	for (int i = 0; i < ViTrimon; i++)
+	{
+		p = p->next;
+	}
+	ListSV* Lsv_Of_Courses = findStudentOfCourses(ds, Mamon);
+	ListSV* k = Lsv_Of_Courses;
+	if (Lsv_Of_Courses == NULL) {
+		cout << "Chua co sinh vien nao trong mon" << endl;
+		return;
+	}
+	ofstream file;
+	int count = 0;
+	string mamon = Mamon;
+	string link = "ScoreBoard_" + mamon + ".csv";
+	file.open(link);
+	file << "STT,ID,First Name,Last Name,Total Mark, Final Mark, Midterm Mark, Other Mark" << endl;
+	for (k; k != NULL; k = k->pNext)
+	{
+		count++;
+		file << count << "," << k->info.ID << "," << k->info.FirstName << "," << k->info.LastName << endl;
+	}
+	file.close();
+}

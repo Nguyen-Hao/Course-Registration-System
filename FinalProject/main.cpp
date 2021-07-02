@@ -22,6 +22,7 @@ int main()
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
 	export_list_student_in_a_course_to_csv();
+	ExportListStudentInCourseToEnterScore();
 	/*
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
