@@ -344,27 +344,7 @@ void ViewListOfStudentInClass(ListLop& ds)
 ///
 //
 //
-void export_list_student_to_csv(ListLop l)
-{
-	ofstream file;
-	int count = 1;
-	file.open("dssv_ouput.csv");
-	if (file.fail())
-	{
 
-	}
-	for (int i = 0; i < l.n; i++)
-	{
-		ListSV* p = l.l[i].pHead;
-		while (p != NULL)
-		{
-			file << p->info.Class << "," << count << "," << p->info.ID << "," << p->info.FirstName << "," << p->info.LastName << "," << p->info.Gender << ",";
-			file << p->info.DateOfBirth << "," << p->info.SocialID << endl;
-			p = p->pNext;
-			count++;
-		}
-	}
-}
 //
 //
 int Checkcourses(ListCourses dsl, char a[10])
@@ -418,6 +398,48 @@ ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50])
 	}
 	file.close();
 	return lsv;
+}
+//
+void export_list_student_in_a_course_to_csv()
+{
+	ListCourses ds = ReadListCourses();
+	ViewListOfCourse();
+	cout << "Nhap ma mon: ";
+	int n = countNodeCourses(ds);
+	int ViTrimon;
+	char Mamon[50];
+	int STT = 1;
+	cin.get(Mamon, 50, '\n');
+	int KT = Checkcourses(ds, Mamon);
+	if (KT == 0) {
+		cout << "Khong ton tai ma mon " << Mamon << endl;
+		return;
+	}
+	else if (KT == -1) ViTrimon = 0;
+	else ViTrimon = KT;
+	NodeCourse* p = ds.head;
+	for (int i = 0; i < ViTrimon; i++)
+	{
+		p = p->next;
+	}
+	ListSV* Lsv_Of_Courses = findStudentOfCourses(ds, Mamon);
+	ListSV* k = Lsv_Of_Courses;
+	if (Lsv_Of_Courses == NULL) {
+		cout << "Chua co sinh vien nao trong mon" << endl;
+		return;
+	}
+	ofstream file;
+	int count=0;
+	string mamon = Mamon;
+	string link = "DSSV_" + mamon + ".csv";
+	file.open(link);
+	file << "STT,ID,First Name,Last Name" << endl;
+	for (k; k != NULL; k = k->pNext)
+	{
+		count++;
+		file << count << "," << k->info.ID << "," << k->info.FirstName << "," << k->info.LastName << endl;
+	}
+	file.close();
 }
 //
 void ViewListOfStudentIncourses()

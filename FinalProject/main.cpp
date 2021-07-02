@@ -17,12 +17,18 @@ int main()
 	GiaoVien gv;
 	int choice;
 	ListCourses course = ReadListCourses();
+	ReadFileClass(dsl);
+	ReadFileStudent(dsl);
+	Read_File_DSGV(dsgv);
+	UpdateCSV(dsl);
+	export_list_student_in_a_course_to_csv();
+	/*
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
 	ReadFileClass(dsl);
 	ReadFileStudent(dsl);
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
-	AfterLogin(dsl, dsgv, course, sv, gv, choice);
+	AfterLogin(dsl, dsgv, course, sv, gv, choice);*/
 	return 0;
 }

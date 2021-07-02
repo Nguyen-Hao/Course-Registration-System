@@ -20,3 +20,7 @@ void CreateNewClass(ListLop& ds)
 	ds.n++;
 	f.close();
 }
+void importScoreBoardOfACourse(Course course)
+{
+
+}
