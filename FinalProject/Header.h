@@ -127,14 +127,14 @@ struct ListGV
 };
 struct Course
 {
-	int Sememster;				// 1/2/3
+	int Sememster;		
 	char ID[10];
-	char Name[50];				//Tên khóa học
-	char TeacherName[50];		//Tên GV
-	int NumOfCredits;			//số tín chỉ
+	char Name[50];		
+	char TeacherName[50];
+	int NumOfCredits;	
 	int MaxNumOfStudents = 50;
-	PhienGio Session1;			//Buổi học 1
-	PhienGio Session2;			//Buổi học 2
+	PhienGio Session1;			
+	PhienGio Session2;			
 };
 struct NodeCourse
 {

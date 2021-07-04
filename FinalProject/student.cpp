@@ -527,3 +527,45 @@ void ExportListStudentInCourseToEnterScore()
 	}
 	file.close();
 }
+void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon)
+{
+	string s, word;
+	int STT = 1;
+	string link = "ScoreBoard_" + mamon + ".csv";
+	ifstream fin(link);
+	if (!fin.is_open())
+	{
+		cout << "Khong ton tai ma mon " << mamon  << endl;
+		return;
+	}
+	else
+	{
+		NodeCourse* k = dsmon.head;
+		for (k; k != NULL;k = k->next)
+		{
+			if (strcmp(k->course.ID, mamon.c_str()) == 0)
+				break;
+		}
+		getline(fin, s);
+		gotoxy(10, 3); cout << "---------------------------- " << k->course.Name << " ----------------------------";
+		gotoxy(5, 5); cout << "+-----------------------------------------------------------------------+" << endl;
+		gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "        Ten" << char(124) << endl;
+		gotoxy(5, 7); cout << "+-----------------------------------------------------------------------+" << endl;
+		while (!fin.eof())
+		{
+			getline(fin, s);
+			if (s.size() == 0) break;
+			stringstream si(s);
+			vector<string> row;
+			while (getline(si, word, ','))
+			{
+				row.push_back(word);
+			}
+			gotoxy(5, 7 + STT);
+			cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << row[1] << char(124) << "  " << setw(20) << left << row[2] << char(124) << "  " << setw(20) << row[3] << char(124);
+			gotoxy(5, 7 + STT); cout << "+-----------------------------------------------------------------------+" << endl;
+			gotoxy(0, 7 + STT + 1);
+		}
+	}
+}
+	

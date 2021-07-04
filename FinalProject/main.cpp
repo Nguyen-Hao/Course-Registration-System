@@ -21,8 +21,11 @@ int main()
 	ReadFileStudent(dsl);
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
-	export_list_student_in_a_course_to_csv();
-	ExportListStudentInCourseToEnterScore();
+	//export_list_student_in_a_course_to_csv();
+	//ExportListStudentInCourseToEnterScore();
+	string s;
+	cin >> s;
+	ViewScoreBoardOfAClass(dsl, s);
 	/*
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
