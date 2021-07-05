@@ -68,7 +68,7 @@ void createNewCourse()
 	file << a.Session1.phut << endl;
 	file << a.Session2.thu << endl;
 	file << a.Session2.gio << endl;
-	file << a.Session2.phut << endl;
+	file << a.Session2.phut<<endl;
 	file.close();
 }
 
@@ -102,15 +102,17 @@ ListCourses ReadListCourses()
 		file.ignore();
 		file >> temp0.Session2.phut;
 		file.ignore();
-		NodeCourse* temp2 = new NodeCourse;
-		temp2->next = NULL;
-		temp2->course = temp0;
-		if (temp.head == NULL)
-			temp.head = temp2;
-		else
 		{
-			temp2->next = temp.head;
-			temp.head = temp2;
+			NodeCourse* temp2 = new NodeCourse;
+			temp2->next = NULL;
+			temp2->course = temp0;
+			if (temp.head == NULL)
+				temp.head = temp2;
+			else
+			{
+				temp2->next = temp.head;
+				temp.head = temp2;
+			}
 		}
 	}
 	return temp;
@@ -136,7 +138,9 @@ void ViewListOfCourse()
 		cout << setw(10) << left << "Thu" << setw(10) << left << "Time";
 		cout << setw(10) << left << "Thu" << setw(10) << left << "Time" << endl;
 		ListCourses temp = ReadListCourses();
-		NodeCourse* temp1 = temp.head;
+		NodeCourse* temp1;
+		if (temp.head != NULL) temp1 = temp.head->next;
+		else temp1 = temp.head;
 		while (temp1 != NULL)
 		{
 			cout << "   ";

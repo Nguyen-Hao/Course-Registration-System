@@ -17,3 +17,4 @@ void ViewListOfStudentIncourses();
 void export_list_student_in_a_course_to_csv();
 void ExportListStudentInCourseToEnterScore();
 void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon);
+void updateAStudentResult();

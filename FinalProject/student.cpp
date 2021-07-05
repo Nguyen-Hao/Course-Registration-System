@@ -445,7 +445,6 @@ void export_list_student_in_a_course_to_csv()
 //
 void ViewListOfStudentIncourses()
 {
-	cin.ignore();
 	ListCourses ds = ReadListCourses();
 	ViewListOfCourse();
 	cout << "Nhap ma mon: ";
@@ -571,4 +570,103 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon)
 		}
 	}
 }
-	
+void updateAStudentResult()
+{
+	cin.ignore();
+	ListCourses ds = ReadListCourses();
+	ViewListOfCourse();
+	cout << "Nhap ma mon: ";
+	int n = countNodeCourses(ds);
+	int ViTrimon;
+	char Mamon[50];
+	int STT = 1;
+	cin.get(Mamon, 50, '\n');
+	int KT = Checkcourses(ds, Mamon);
+	if (KT == 0) {
+		cout << "Khong ton tai ma mon " << Mamon << endl;
+		return;
+	}
+	else if (KT == -1) ViTrimon = 0;
+	else ViTrimon = KT;
+	NodeCourse* p = ds.head;
+	for (int i = 0; i < ViTrimon; i++)
+	{
+		p = p->next;
+	}
+	ListSV* Lsv_Of_Courses = findStudentOfCourses(ds, Mamon);
+	ListSV* k = Lsv_Of_Courses;
+	if (Lsv_Of_Courses == NULL) {
+		cout << "Chua co sinh vien nao trong mon" << endl;
+		return;
+	}
+	char ID[10];
+	cin.ignore();
+	cout << "Nhap ID sinh vien: ";
+	cin.get(ID, 10, '\n');
+	bool check = false;
+	for (ListSV*i=k; i != NULL; i = i->pNext)
+	{
+		if (strcmp(i->info.ID, ID) == 0)
+		{
+			check = true;
+			break;
+		}
+	}
+	if (!check)
+	{
+		cout << "Khong ton tai sinh vien nay trong khoa hoc!" << endl;
+		return;
+	}
+	ifstream file;
+	ofstream file1;
+	int count = 0;
+	string mamon = Mamon;
+	string link = "ScoreBoard_" + mamon + ".csv";
+	file.open(link);
+	if (!file.is_open())
+	{
+		cout << "Bang diem khoa hoc nay chua duoc nhap!" << endl;
+		return;
+	}
+	file1.open("tam.csv");
+	file1 << "STT,ID,First Name,Last Name,Total Mark, Final Mark, Midterm Mark, Other Mark" << endl;
+	string s;
+	getline(file, s);
+	DiemMonHoc a;
+	for (k; k != NULL; k = k->pNext)
+	{
+		file >> count;
+		file.ignore();
+		file.get(k->info.ID, strlen(k->info.ID)+1, ',');
+		file.ignore();
+		file.get(k->info.FirstName, strlen(k->info.FirstName)+1, ',');
+		file.ignore();
+		file.get(k->info.LastName, strlen(k->info.LastName)+1, ',');
+		file.ignore();
+		file >> a.Total;
+		file.ignore();
+		file >> a.Final;
+		file.ignore();
+		file >> a.MidTerm;
+		file.ignore();
+		file>> a.Other;
+		if (strcmp(k->info.ID, ID) == 0)
+		{
+			cout << "Nhap diem cap nhat:" << endl;
+			cout << "Total mark: ";
+			cin >> a.Total;
+			cout << "Final mark: ";
+			cin >> a.Final;
+			cout << "Midterm mark: ";
+			cin >> a.MidTerm;
+			cout << "Other mark: ";
+			cin >> a.Other;
+		}
+		file1 << count << "," << k->info.ID << "," << k->info.FirstName << ","
+			<< k->info.LastName << "," << a.Total << "," << a.Final << "," << a.MidTerm << "," << a.Other << endl;
+	}
+	file.close();
+	file1.close();
+	remove(link.c_str());
+	rename("tam.csv",link.c_str());
+}

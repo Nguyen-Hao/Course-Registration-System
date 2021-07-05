@@ -21,8 +21,9 @@ int main()
 	ReadFileStudent(dsl);
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
+	updateAStudentResult();
 	//export_list_student_in_a_course_to_csv();
-	ExportListStudentInCourseToEnterScore();
+	//ExportListStudentInCourseToEnterScore();
 	//string s;
 	//cin >> s;
 	//system("cls");

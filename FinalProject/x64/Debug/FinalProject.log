@@ -1,5 +1,13 @@
-﻿  main.cpp
+﻿  Menu.cpp
+C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(73,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(187,9): warning C4101: 'pre': unreferenced local variable
+C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(292,9): warning C4101: 'pre': unreferenced local variable
+C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(445,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(537,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
 C:\Users\PC\Desktop\FinalProject\FinalProject\main.cpp(18,6): warning C4101: 'choice': unreferenced local variable
 C:\Users\PC\Desktop\FinalProject\FinalProject\main.cpp(16,11): warning C4101: 'sv': unreferenced local variable
 C:\Users\PC\Desktop\FinalProject\FinalProject\main.cpp(17,11): warning C4101: 'gv': unreferenced local variable
+  student.cpp
+  Generating Code...
   FinalProject.vcxproj -> C:\Users\PC\Desktop\FinalProject\x64\Debug\FinalProject.exe
