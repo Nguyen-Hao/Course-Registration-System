@@ -516,6 +516,8 @@ void ExportListStudentInCourseToEnterScore()
 	}
 	ofstream file;
 	int count = 0;
+	DiemMonHoc a;
+	a.Final = a.MidTerm = a.Other = a.Total = 0.0;
 	string mamon = Mamon;
 	string link = "ScoreBoard_" + mamon + ".csv";
 	file.open(link);
@@ -523,7 +525,8 @@ void ExportListStudentInCourseToEnterScore()
 	for (k; k != NULL; k = k->pNext)
 	{
 		count++;
-		file << count << "," << k->info.ID << "," << k->info.FirstName << "," << k->info.LastName << endl;
+		file << count << "," << k->info.ID << "," << k->info.FirstName << "," 
+			<< k->info.LastName << ","<<a.Total<<","<<a.Final<<","<<a.MidTerm<<","<<a.Other<<endl;
 	}
 	file.close();
 }

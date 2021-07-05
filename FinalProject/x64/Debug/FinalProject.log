@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\PC\Desktop\FinalProject\FinalProject\main.cpp(18,6): warning C4101: 'choice': unreferenced local variable
+C:\Users\PC\Desktop\FinalProject\FinalProject\main.cpp(16,11): warning C4101: 'sv': unreferenced local variable
+C:\Users\PC\Desktop\FinalProject\FinalProject\main.cpp(17,11): warning C4101: 'gv': unreferenced local variable
+  FinalProject.vcxproj -> C:\Users\PC\Desktop\FinalProject\x64\Debug\FinalProject.exe
