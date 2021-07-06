@@ -21,7 +21,12 @@ int main()
 	ReadFileStudent(dsl);
 	Read_File_DSGV(dsgv);
 	UpdateCSV(dsl);
-	updateAStudentResult();
+	//updateAStudentResult();
+	//string s;
+	//cin >> s;
+	//ViewScoreBoardOfACourse(course, s);
+	char s[30] = "20CTT2";
+	ViewScoreOfAClass(dsl, course, s);
 	//export_list_student_in_a_course_to_csv();
 	//ExportListStudentInCourseToEnterScore();
 	//string s;

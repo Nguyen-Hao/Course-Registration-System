@@ -331,14 +331,14 @@ void ViewListOfStudentInClass(ListLop& ds)
 		return;
 	}
 	gotoxy(10, 3); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------";
-	gotoxy(5, 5); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
+	gotoxy(5, 5); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 	gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
 	gotoxy(5, 7); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
 	for (ListSV* k = ds.l[ViTriLop].pHead; k != NULL; k = k->pNext) {
 		gotoxy(5, 7 + STT);
 		cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
 	}
-	gotoxy(5, 7 + STT); cout << "+--------------------=-----------------------------------------------------------------------------------------+" << endl;
+	gotoxy(5, 7 + STT); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 	gotoxy(0, 7 + STT + 1);
 }
 ///
@@ -475,12 +475,12 @@ void ViewListOfStudentIncourses()
 	gotoxy(10, 3); cout << "---------------------------- " << p->course.Name << " ----------------------------";
 	gotoxy(5, 5); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
 	gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
-	gotoxy(5, 7); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
+	gotoxy(5, 7); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 	for (k; k != NULL; k = k->pNext) {
 		gotoxy(5, 7 + STT);
 		cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
 	}
-	gotoxy(5, 7 + STT); cout << "+--------------------=-----------------------------------------------------------------------------------------+" << endl;
+	gotoxy(5, 7 + STT); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 	gotoxy(0, 7 + STT + 1);
 }
 
@@ -549,10 +549,10 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon)
 				break;
 		}
 		getline(fin, s);
-		gotoxy(10, 3); cout << "---------------------------- " << k->course.Name << " ----------------------------";
-		gotoxy(5, 5); cout << "+-----------------------------------------------------------------------+" << endl;
-		gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "        Ten" << char(124) << endl;
-		gotoxy(5, 7); cout << "+-----------------------------------------------------------------------+" << endl;
+		gotoxy(10, 3); cout << "\t\t---------------------------- " << k->course.Name << " ----------------------------";
+		gotoxy(5, 5); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "        Ten" << char(124) << setw(10) << "  Total" << char(124) << setw(10) << "  Final" << char(124) << setw(10) << "  Midterm" << char(124) << setw(10) << "  Other" << char(124) << endl;
+		gotoxy(5, 7); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
 		while (!fin.eof())
 		{
 			getline(fin, s);
@@ -564,8 +564,8 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon)
 				row.push_back(word);
 			}
 			gotoxy(5, 7 + STT);
-			cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << row[1] << char(124) << "  " << setw(20) << left << row[2] << char(124) << "  " << setw(20) << row[3] << char(124);
-			gotoxy(5, 7 + STT); cout << "+-----------------------------------------------------------------------+" << endl;
+			cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << row[1] << char(124) << "  " << setw(20) << left << row[2] << char(124) << "  " << setw(20) << row[3] << char(124) << setw(10) << row[4] << char(124) << setw(10) << row[5] << char(124) << setw(10) << row[6] << char(124) << setw(10) << row[7] << char(124) << endl;
+			gotoxy(5, 7 + STT); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
 			gotoxy(0, 7 + STT + 1);
 		}
 	}
@@ -669,4 +669,72 @@ void updateAStudentResult()
 	file1.close();
 	remove(link.c_str());
 	rename("tam.csv",link.c_str());
+}
+void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, char malop[50])
+{
+	ListCourses ds = ReadListCourses();
+	bool flat = false;
+	int VitriLop;
+	int KT = CheckClass(dsl, malop, dsl.n);
+	if (KT == 0)
+	{
+		cout << "Khong ton tai ma lop " << malop << endl;
+		return;
+	}
+	if (KT == -1) VitriLop = 0;
+	else
+		VitriLop = KT;
+	NodeCourse* p = ds.head;
+	for (int i = 0; i < VitriLop; i++)
+	{
+		p = p->next;
+	}
+	gotoxy(10, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
+	gotoxy(5, 5); cout << "+-------------------------------------------------------------------------------------------------------+" << endl;
+	gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(10) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
+	gotoxy(5, 7); cout << "+-------------------------------------------------------------------------------------------------------+" << endl;
+	int STT = 1, n = 1;
+	for (ListSV* k = dsl.l[VitriLop].pHead; k != NULL; k = k->pNext)
+	{
+		double TotalMark = 0;
+		int SoChi = 0;
+		for (NodeCourse* p = dsm.head;p->next != NULL; p = p->next)
+		{
+			ListSV* psv = findStudentOfCourses(dsm, p->course.ID);
+			for (psv; psv != NULL;psv = psv->pNext)
+			{
+				if (strcmp(psv->info.ID, k->info.ID))
+				{
+					string link = "ScoreBoard_" + string(p->course.ID) + ".csv";
+					ifstream f(link);
+					if (f.is_open()) {
+						string s;
+						getline(f, s);
+						while (f.good())
+						{
+							getline(f, s);
+							if (s.size() == 0) break;
+							stringstream ss(s);
+							vector<string> row;
+							while (getline(ss, s, ','))
+							{
+								row.push_back(s);
+							}
+							if (strcmp(row[1].c_str(), k->info.ID) == 0)
+							{
+								SoChi += p->course.NumOfCredits;
+								TotalMark += stoi(row[4]) * p->course.NumOfCredits;
+								flat = true;
+								gotoxy(5, 7 + n);
+								cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << row[1] << char(124) << "  " << setw(20) << left << row[2] << char(124) << "  " << setw(10) << row[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << row[4] << char(124) << endl;
+								gotoxy(0, 7 + ++n + 1);
+							}
+						}
+					}
+					f.close();
+				}
+			}
+		}
+		gotoxy(5, 7 + n++); cout << "+-------------------------------------------- GPA ki: " <<setw(5)<< TotalMark / SoChi * 1.0 <<"+--------------------------------------------+" <<endl;
+	}
 }

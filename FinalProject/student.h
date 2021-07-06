@@ -18,3 +18,4 @@ void export_list_student_in_a_course_to_csv();
 void ExportListStudentInCourseToEnterScore();
 void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon);
 void updateAStudentResult();
+void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, char malop[50]);

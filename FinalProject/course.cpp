@@ -71,38 +71,51 @@ void createNewCourse()
 	file << a.Session2.phut<<endl;
 	file.close();
 }
-
+void AddTailListCourse(ListCourses& l, Course co)
+{
+	NodeCourse* p = new NodeCourse;
+	p->course = co;
+	p->next = NULL;
+	if (l.head == NULL)
+		l.head = p;
+	else
+	{
+		NodeCourse* k = l.head;
+		while (k->next != NULL)
+			k = k->next;
+		k->next = p;
+	}
+}
 ListCourses ReadListCourses()
 {
 	ListCourses temp;
 	initListCourses(temp);
 	ifstream file;
 	file.open(FILECOURSES);
-	while (!file.eof())
+	Course temp0;
+	while (file >> temp0.Sememster)
 	{
-		Course temp0;
-		file >> temp0.Sememster;
 		file.ignore();
 		file.getline(temp0.ID, 10);
 		file.getline(temp0.Name, 50);
 		file.getline(temp0.TeacherName, 50);
 		file >> temp0.NumOfCredits;
-		file.ignore();
+	//	file.ignore();
 		file >> temp0.MaxNumOfStudents;
-		file.ignore();
+	//	file.ignore();
 		file >> temp0.Session1.thu;
-		file.ignore();
+		//file.ignore();
 		file >> temp0.Session1.gio;
-		file.ignore();
+		//file.ignore();
 		file >> temp0.Session1.phut;
-		file.ignore();
+		//file.ignore();
 		file >> temp0.Session2.thu;
-		file.ignore();
+		//file.ignore();
 		file >> temp0.Session2.gio;
-		file.ignore();
+		//file.ignore();
 		file >> temp0.Session2.phut;
-		file.ignore();
-		{
+		//file.ignore();
+		/*{
 			NodeCourse* temp2 = new NodeCourse;
 			temp2->next = NULL;
 			temp2->course = temp0;
@@ -113,7 +126,8 @@ ListCourses ReadListCourses()
 				temp2->next = temp.head;
 				temp.head = temp2;
 			}
-		}
+		}*/
+		AddTailListCourse(temp, temp0);
 	}
 	return temp;
 }
