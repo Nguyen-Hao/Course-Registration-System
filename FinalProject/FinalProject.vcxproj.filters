@@ -74,9 +74,6 @@
     <ClInclude Include="DKMon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SchoolYear.h">
       <Filter>Header Files</Filter>
     </ClInclude>

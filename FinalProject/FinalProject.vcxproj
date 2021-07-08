@@ -157,7 +157,6 @@
     <ClInclude Include="DKMon.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="login.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="SchoolYear.h" />
     <ClInclude Include="Semester.h" />
     <ClInclude Include="staff.h" />

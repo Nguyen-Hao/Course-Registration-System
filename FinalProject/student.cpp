@@ -520,7 +520,7 @@ void ExportListStudentInCourseToEnterScore(const SchoolYear&Y)
 	DiemMonHoc a;
 	a.Final = a.MidTerm = a.Other = a.Total = 0.0;
 	string mamon = Mamon;
-	string link = "ScoreBoard_" + mamon + ".csv";
+	string link = "ScoreBoard" + Y.NameSchoolYear + "_" + mamon + ".csv";
 	file.open(link);
 	file << "STT,ID,First Name,Last Name,Total Mark, Final Mark, Midterm Mark, Other Mark" << endl;
 	for (k; k != NULL; k = k->pNext)
@@ -531,11 +531,11 @@ void ExportListStudentInCourseToEnterScore(const SchoolYear&Y)
 	}
 	file.close();
 }
-void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon)
+void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon, const SchoolYear&Y)
 {
 	string s, word;
 	int STT = 1;
-	string link = "ScoreBoard_" + mamon + ".csv";
+	string link = "ScoreBoard" + Y.NameSchoolYear + "_" + mamon + ".csv";
 	ifstream fin(link);
 	if (!fin.is_open())
 	{
@@ -623,7 +623,7 @@ void updateAStudentResult(const SchoolYear&Y)
 	ofstream file1;
 	int count = 0;
 	string mamon = Mamon;
-	string link = "ScoreBoard_" + mamon + ".csv";
+	string link = "ScoreBoard" + Y.NameSchoolYear + "_" + mamon + ".csv";
 	file.open(link);
 	if (!file.is_open())
 	{
@@ -707,7 +707,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, char malop[50],const School
 			{
 				if (strcmp(psv->info.ID, k->info.ID))
 				{
-					string link = "ScoreBoard_" + string(p->course.ID) + ".csv";
+					string link = "ScoreBoard" + Y.NameSchoolYear + "_" + string(p->course.ID) + ".csv";
 					ifstream f(link);
 					if (f.is_open()) {
 						string s;

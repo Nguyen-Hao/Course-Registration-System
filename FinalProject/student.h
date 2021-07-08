@@ -16,6 +16,6 @@ ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50], const SchoolY
 void ViewListOfStudentIncourses(const SchoolYear& Y);
 void export_list_student_in_a_course_to_csv(const SchoolYear& Y);
 void ExportListStudentInCourseToEnterScore(const SchoolYear& Y);
-void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon);
+void ViewScoreBoardOfACourse(ListCourses dsmon, string mamon, const SchoolYear& Y);
 void updateAStudentResult(const SchoolYear& Y);
 void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, char malop[50], const SchoolYear& Y);
