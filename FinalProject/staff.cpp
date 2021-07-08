@@ -1,10 +1,10 @@
 #include "staff.h"
 #include "Header.h"
 
-void CreateNewClass(ListLop& ds)
+void CreateNewClass(ListLop& ds,const SchoolYear&Y)
 {
 	ofstream f;
-	f.open(FILEDSLOP, ios::app);
+	f.open(Y.DSLop, ios::app);
 	Lop c;
 	cout << "Nhap ma lop: "; cin.get(c.Ma, 16, '\n');
 	f << c.Ma << endl;

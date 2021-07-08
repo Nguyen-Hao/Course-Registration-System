@@ -395,7 +395,7 @@ char* TOUPPER(char* c)
 		toupper(c[i]);
 	return c;
 }
-void doi_password_sv(ListSV* sv, ListLop& dsl, char newpass[])
+void doi_password_sv(ListSV* sv, ListLop& dsl, char newpass[],const SchoolYear&Y)
 {
 	strcpy_s(sv->info.pass, newpass);
 	for (int i = 0; i < dsl.n; i++)
@@ -409,9 +409,9 @@ void doi_password_sv(ListSV* sv, ListLop& dsl, char newpass[])
 			}
 		}
 	}
-	WriteFileStudent(dsl);
+	WriteFileStudent(dsl,Y);
 }
-void doi_password_gv(NodeGV* gv, ListGV dsgv, char newpass[])
+void doi_password_gv(NodeGV* gv, ListGV dsgv, char newpass[],const SchoolYear&Y)
 {
 	strcpy_s(gv->info.pass, newpass);
 	for (NodeGV* p = dsgv.pHead; p != NULL; p = p->pNext)
@@ -422,9 +422,9 @@ void doi_password_gv(NodeGV* gv, ListGV dsgv, char newpass[])
 			break;
 		}
 	}
-	writeFileTeacher(dsgv);
+	writeFileTeacher(dsgv,Y);
 }
-void AfterLogin(ListLop ds, ListGV dsgv,ListCourses dsmon,  SinhVien& sv, GiaoVien& gv, int& choice)
+void AfterLogin(ListLop ds, ListGV dsgv,ListCourses dsmon,  SinhVien& sv, GiaoVien& gv, int& choice,const SchoolYear&Y)
 {
 HOME:
 	choice = DangNhap(ds, dsgv , sv, gv);
@@ -484,28 +484,28 @@ REPEATSV:
 					if (c == 1)
 					{
 						gotoxy(60, 9);
-						dangki(dsmon , sv);
+						dangki(dsmon , sv,Y);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 2)
 					{
 						gotoxy(60, 9);
-						view_Enrol_Course(sv);
+						view_Enrol_Course(sv,Y);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 3)
 					{
 						gotoxy(60, 9);
-						eraser_erol_course(sv);
+						eraser_erol_course(sv,Y);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 4)
 					{
 						gotoxy(60, 9);
-						view_Enrol_Course(sv);
+						view_Enrol_Course(sv,Y);
 						system("pause");
 						goto REPEATSV;
 					}
@@ -576,14 +576,14 @@ REPEATGV:
 					if (c == 1) // tao mon hoc
 					{
 						gotoxy(60, 9);
-						createNewCourse();
+						createNewCourse(Y);
 						gotoxy(70, 32); system("pause");
 						goto REPEATGV;
 					}
 					else if (c == 2)
 					{
 						KhungTaoKiMoi();
-						bool f = CreateSemester(s);
+						bool f = CreateSemester(s,Y);
 						if (f == true) TaoThanhCong(90, 28, ThaoTac[2]);
 						else TaoThatBai(90, 28, ThaoTac[3]);
 						gotoxy(70, 32); system("pause");
@@ -606,13 +606,13 @@ REPEATGV:
 					else if (c == 6)
 					{
 						
-						createNewCourse();
+						createNewCourse(Y);
 						gotoxy(70, 32); system("pause");
 						goto REPEATGV;
 					}
 					else if (c == 7)
 					{
-						ViewListOfStudentIncourses();
+						ViewListOfStudentIncourses(Y);
 						gotoxy(70, 32); system("pause");
 						goto REPEATGV;
 					}

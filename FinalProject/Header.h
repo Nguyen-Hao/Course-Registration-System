@@ -165,7 +165,22 @@ struct listSemester
 	NodeSemester* tail;
 };
 
-void ReadFileClass(ListLop& ds);
+
+struct SchoolYear
+{
+	string NameSchoolYear;
+	string DSLop = "DSLop";  //txt
+	string DSSinhVien = "DSSinhVien"; //txt
+	string StudentOfSubject = "StudentOfSubject";  //txt
+	string TimeDKHP = "TimeDKHP";  //txt
+	string DsGiaoVien = "DsGiaoVien";  //txt
+	string Filecsv = "Filecsv";  //csv
+	string ListCourses = "ListCourses";  //txt
+	string sesmester = "sesmester";  //txt
+};
+
+
+void ReadFileClass(ListLop& dsl, const SchoolYear& Y);
 Time getTime();
 bool isLeapYear(int nYear);
 int sumOfDayInMonth(int nMonth, int nYear);
@@ -181,4 +196,4 @@ void TaoThanhCong(int x, int y, string c);
 void TaoThatBai(int x, int y, string c);
 void KhungTaoKiMoi();
 int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv);
-void AfterLogin(ListLop ds, ListGV dsgv,ListCourses dsmon, SinhVien& p, GiaoVien& gv, int& choice);
+void AfterLogin(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, const SchoolYear& Y);

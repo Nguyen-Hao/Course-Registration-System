@@ -6,7 +6,7 @@ void init(listSemester& l)
 	l.head = NULL;
 	l.tail = NULL;
 }
-bool CreateSemester(semester& sesmes)
+bool CreateSemester(semester& sesmes, const SchoolYear&Y)
 {
 	bool f = true;
 	gotoxy(102, 9); cin >> sesmes.name; 
@@ -67,20 +67,21 @@ bool CreateSemester(semester& sesmes)
 	if (f == false) return false;
 	TextColor(228);
 	ofstream file;
-	file.open("sesmester.txt", ios_base::app);
+	file.open(Y.sesmester, ios_base::app);
 	file << sesmes.name << endl;
 	file << sesmes.schoolyear << endl;
 	file << sesmes.begin.ngay << " " << sesmes.begin.thang << " " << sesmes.begin.nam << endl;
 	file << sesmes.end.ngay << " " << sesmes.end.thang << " " << sesmes.end.nam << endl;
-	sesmes.lis = ReadListCourses();
+	sesmes.lis = ReadListCourses(Y);
+	file.close();
 	return true;
 }
 
-void readListSemester(listSemester& l)
+void readListSemester(listSemester& l, const SchoolYear&Y)
 {
 	init(l);
 	fstream file;
-	file.open("semester.txt", ios::in);
+	file.open(Y.sesmester, ios::in);
 	while (!file.eof())
 	{
 		NodeSemester* ptr = new NodeSemester;
@@ -105,4 +106,5 @@ void readListSemester(listSemester& l)
 			l.tail = ptr;
 		}
 	}
+	file.close();
 }

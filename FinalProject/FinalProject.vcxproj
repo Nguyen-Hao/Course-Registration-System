@@ -142,10 +142,10 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="course.cpp" />
     <ClCompile Include="DKMon.cpp" />
-    <ClCompile Include="Dk_mon.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="SchoolYear.cpp" />
     <ClCompile Include="semester.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="staff.cpp" />
@@ -155,9 +155,10 @@
     <ClInclude Include="console.h" />
     <ClInclude Include="course.h" />
     <ClInclude Include="DKMon.h" />
-    <ClInclude Include="Dk_mon.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="login.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="SchoolYear.h" />
     <ClInclude Include="Semester.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="student.h" />
@@ -170,13 +171,23 @@
     <Text Include="Dssv_trong_lop_out.txt" />
     <Text Include="ListCourses.txt" />
     <Text Include="ListYearStudent.txt" />
+    <Text Include="SchoolYear.txt" />
+    <Text Include="sesmester.txt" />
     <Text Include="StudentOfSubject.txt" />
     <Text Include="test.txt" />
     <Text Include="Text.txt" />
     <Text Include="TimeDKHP.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DSSV_BAA00004.csv" />
+    <None Include="DSSV_MTH00007.csv" />
+    <None Include="dssv_ouput.csv" />
     <None Include="Filecsv.csv" />
+    <None Include="ScoreBoard_BAA00004.csv" />
+    <None Include="ScoreBoard_CSC0003.csv" />
+    <None Include="ScoreBoard_CSC0005.csv" />
+    <None Include="ScoreBoard_MTH00007.csv" />
+    <None Include="ScoreBoard_MTH0004.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #include"Header.h"
 #include"course.h"
+#include"SchoolYear.h"
 void copy(NodeCourse*& p, NodeCourse* p1)
 {
 	p->course = p1->course;
@@ -50,12 +51,12 @@ int countNodeCourses(const ListCourses& l)
 	}
 	return i;
 }
-ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv)
+ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const SchoolYear&Y)
 {
 	ListCourses result;
 	initListCourses(result);
 	fstream file;
-	file.open("StudentOfSubject.txt", ios::in);
+	file.open(Y.StudentOfSubject, ios::in);
 	char ch[10] = "\0", CH[10] = "\n";
 	file.getline(ch, 10);
 	while (!file.eof())
@@ -127,10 +128,10 @@ bool checkTrung(const ListCourses& l, NodeCourse* ptr)
 	}
 	return false;
 }
-void dangki(ListCourses& l, SinhVien& S)
+void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 {
-	l = ReadListCourses();
-	ListCourses temp = courseOfStudent(l, S);
+	l = ReadListCourses(Y);
+	ListCourses temp = courseOfStudent(l, S,Y);
 	if (countNodeCourses(temp) == 5)
 		cout << "da dang ki du 5 mon!!!" << endl;
 	else
@@ -150,7 +151,7 @@ void dangki(ListCourses& l, SinhVien& S)
 			else
 			{
 				fstream file, file1;
-				file.open("StudentOfSubject.txt", ios::in);
+				file.open(Y.StudentOfSubject, ios::in);
 				file1.open("temp.txt", ios::out);
 				char ch[10] = "\0", CH[10] = "\n";
 				file.getline(ch, 10);
@@ -214,18 +215,18 @@ void dangki(ListCourses& l, SinhVien& S)
 				}
 				file.close();
 				file1.close();
-				remove("StudentOfSubject.txt");
-				rename("temp.txt", "StudentOfSubject.txt");
+				remove((char*)&Y.StudentOfSubject);
+				rename("temp.txt", (char*)&Y.StudentOfSubject);
 				cout << "dang ki thanh cong!!!" << endl;
 			}
 			
 		}
 	}
 }
-void view_Enrol_Course(SinhVien& S)
+void view_Enrol_Course(SinhVien& S, const SchoolYear&Y)
 {
-	ListCourses l = ReadListCourses();
-	ListCourses list = courseOfStudent(l, S);
+	ListCourses l = ReadListCourses(Y);
+	ListCourses list = courseOfStudent(l, S,Y);
 	if (list.head == NULL)
 		cout << "chua dang ki mon nao!" << endl;
 	else
@@ -247,24 +248,24 @@ void view_Enrol_Course(SinhVien& S)
 		}
 	}
 }
-void eraser_erol_course(SinhVien& S)
+void eraser_erol_course(SinhVien& S,const SchoolYear&Y)
 {
 	char id[10];
 	cout << "nhap id mon can huy dang ki: ";
 	cin.get(id, 10, '\n');
 	cin.ignore();
-	ListCourses l = ReadListCourses();
+	ListCourses l = ReadListCourses(Y);
 	if (ktra(l, id) == false)
 		cout << "id mon ban nhap khong ton tai" << endl;
 	else
 	{
-		ListCourses temp = courseOfStudent(l, S);
+		ListCourses temp = courseOfStudent(l, S,Y);
 		if (ktra(temp, id) == false)
 			cout << "mon nay ban chua dang ki" << endl;
 		else
 		{
 			fstream file, file1;
-			file.open("StudentOfSubject.txt", ios::in);
+			file.open(Y.StudentOfSubject, ios::in);
 			file1.open("temp.txt", ios::out);
 			char ch[10] = "\0", CH[10] = "\n";
 			file.getline(ch, 10);
@@ -319,10 +320,9 @@ void eraser_erol_course(SinhVien& S)
 			}
 			file.close();
 			file1.close();
-			remove("StudentOfSubject.txt");
-			rename("temp.txt", "StudentOfSubject.txt");
+			remove((char*)&Y.StudentOfSubject);
+			rename("temp.txt", (char*)&Y.StudentOfSubject);
 			cout << "eraser thanh cong!!!" << endl;
-
 		}
 	}
 }

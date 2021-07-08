@@ -1,9 +1,9 @@
 ﻿#include "Header.h"
 
-void ReadFileClass(ListLop& dsl)
+void ReadFileClass(ListLop& dsl, const SchoolYear&Y)
 {
 	ifstream file;
-	file.open(FILEDSLOP, ios_base::in);
+	file.open(Y.DSLop, ios_base::in);
 	for (int i = 0; i < maxlop; i++)
 	{
 		dsl.l[i].Ma[0] = NULL;
