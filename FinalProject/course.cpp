@@ -6,7 +6,7 @@ void initListCourses(ListCourses& list)
 	list.head = NULL;
 }
 
-void createNewCourse(const SchoolYear&Y )
+void createNewCourse(const SchoolYear& Y)
 {
 	fstream file;
 	file.open(Y.ListCourses, ios::app);
@@ -69,7 +69,7 @@ void createNewCourse(const SchoolYear&Y )
 	file << a.Session1.phut << endl;
 	file << a.Session2.thu << endl;
 	file << a.Session2.gio << endl;
-	file << a.Session2.phut<<endl;
+	file << a.Session2.phut << endl;
 	file.close();
 }
 void AddTailListCourse(ListCourses& l, Course co)
@@ -101,9 +101,9 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 		file.getline(temp0.Name, 50);
 		file.getline(temp0.TeacherName, 50);
 		file >> temp0.NumOfCredits;
-	//	file.ignore();
+		//	file.ignore();
 		file >> temp0.MaxNumOfStudents;
-	//	file.ignore();
+		//	file.ignore();
 		file >> temp0.Session1.thu;
 		//file.ignore();
 		file >> temp0.Session1.gio;
@@ -133,7 +133,7 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 	return temp;
 }
 
-void ViewListOfCourse(const SchoolYear&Y)
+void ViewListOfCourse(const SchoolYear& Y)
 {
 	ifstream f;
 	f.open(Y.ListCourses);
@@ -169,7 +169,7 @@ void ViewListOfCourse(const SchoolYear&Y)
 	}
 }
 
-void updateCourse(const SchoolYear&Y)
+void updateCourse(const SchoolYear& Y)
 {
 	ViewListOfCourse(Y);
 	Course a, b;
@@ -276,7 +276,7 @@ void updateCourse(const SchoolYear&Y)
 }
 
 //Tạo phiên đăng ký khóa học (ĐKHP)
-void CreateCourseRegistrationSession(const SchoolYear&Y)
+void CreateCourseRegistrationSession(const SchoolYear& Y)
 {
 	Time a;
 	cout << "Nhap thoi gian bat dau: " << endl;

@@ -87,7 +87,6 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const Schoo
 				file.ignore();
 				if (strcmp(s.ID, sv.ID) == 0)
 					themvaolist(result, l, ch);
-
 			}
 		}
 		strcpy_s(ch, 10, CH);
@@ -215,8 +214,8 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 				}
 				file.close();
 				file1.close();
-				remove((char*)&Y.StudentOfSubject);
-				rename("temp.txt", (char*)&Y.StudentOfSubject);
+				remove(Y.StudentOfSubject.c_str());
+				rename("temp.txt", Y.StudentOfSubject.c_str());
 				cout << "dang ki thanh cong!!!" << endl;
 			}
 			
@@ -248,6 +247,8 @@ void view_Enrol_Course(SinhVien& S, const SchoolYear&Y)
 		}
 	}
 }
+
+
 void eraser_erol_course(SinhVien& S,const SchoolYear&Y)
 {
 	char id[10];
@@ -320,8 +321,8 @@ void eraser_erol_course(SinhVien& S,const SchoolYear&Y)
 			}
 			file.close();
 			file1.close();
-			remove((char*)&Y.StudentOfSubject);
-			rename("temp.txt", (char*)&Y.StudentOfSubject);
+			remove(Y.StudentOfSubject.c_str());
+			rename("temp.txt", Y.StudentOfSubject.c_str());
 			cout << "eraser thanh cong!!!" << endl;
 		}
 	}

@@ -118,6 +118,30 @@
     <Text Include="test.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="DsGiaoVien2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="DSLop2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="DSSinhVien2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="ListCourses2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="sesmester2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="StudentOfSubject2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TimeDKHP2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="DLgia.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="DSSV_BAA00004.csv">
@@ -145,6 +169,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="ScoreBoard_MTH00007.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Filecsv2021_2022.csv">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

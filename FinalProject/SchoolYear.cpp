@@ -78,10 +78,10 @@ void CreateSchoolYear(SchoolYear& S)
 }
 
 
-SchoolYear present()
+SchoolYear present(const string& S)
 {
 	fstream file;
-	file.open(FILESCHOOLYEAR, ios::in);
+	file.open(S, ios::in);
 	if (file.is_open())
 	{
 		unsigned int a = 0, b = 0;
@@ -106,4 +106,56 @@ SchoolYear present()
 		return c;
 	}
 	file.close();
+}
+ 
+void inputDL(const string& fileName1, const string& fileName2)
+{
+	fstream file1, file2;
+	file1.open(fileName1, ios::in);
+	if (file1.is_open())
+	{
+		file2.open(fileName2, ios::out);
+		string a;
+		getline(file1, a);
+		while (!file1.eof())
+		{
+			file2 << a << endl;
+			getline(file1, a);
+		}
+		file2.close();
+	}
+	file1.close();
+	
+}
+
+void taoDLgia(const SchoolYear& Y)
+{
+	SchoolYear y1 = present("DLgia.txt");
+	inputDL(y1.DsGiaoVien, Y.DsGiaoVien);
+	inputDL(y1.DSLop, Y.DSLop);
+	inputDL(y1.DSSinhVien, Y.DSSinhVien);
+	inputDL(y1.Filecsv, Y.Filecsv);
+	inputDL(y1.ListCourses, Y.ListCourses);
+	inputDL(y1.sesmester, Y.sesmester);
+	inputDL(y1.StudentOfSubject, Y.StudentOfSubject);
+	inputDL(y1.TimeDKHP, Y.TimeDKHP);
+}
+
+void ExportFileEmpty(const string& str)
+{
+	fstream file;
+	file.open(str, ios::out);
+	file.close();
+}
+
+void exportFileToImport(const SchoolYear& Y)
+{
+	ExportFileEmpty(Y.DsGiaoVien);
+	ExportFileEmpty(Y.DSLop);
+	ExportFileEmpty(Y.DSSinhVien);
+	ExportFileEmpty(Y.Filecsv);
+	ExportFileEmpty(Y.ListCourses);
+	ExportFileEmpty(Y.sesmester);
+	ExportFileEmpty(Y.StudentOfSubject);
+	ExportFileEmpty(Y.TimeDKHP);
 }

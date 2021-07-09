@@ -298,8 +298,8 @@ void UpdateStudent(const SchoolYear&Y)
 	}
 	file.close();
 	file1.close();
-	remove((char*)&Y.DSSinhVien);
-	rename("list.txt", (char*)&Y.DSSinhVien);
+	remove(Y.DSSinhVien.c_str());
+	rename("list.txt", Y.DSSinhVien.c_str());
 }
 void ViewListOfClass(ListLop& ds)
 {
