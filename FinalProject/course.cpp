@@ -6,7 +6,7 @@ void initListCourses(ListCourses& list)
 	list.head = NULL;
 }
 
-void createNewCourse(const SchoolYear&Y )
+void createNewCourse(const SchoolYear& Y)
 {
 	fstream file;
 	file.open(Y.ListCourses, ios::app);
@@ -69,7 +69,7 @@ void createNewCourse(const SchoolYear&Y )
 	file << a.Session1.phut << endl;
 	file << a.Session2.thu << endl;
 	file << a.Session2.gio << endl;
-	file << a.Session2.phut<<endl;
+	file << a.Session2.phut << endl;
 	file.close();
 }
 void AddTailListCourse(ListCourses& l, Course co)
@@ -98,42 +98,22 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 	{
 		file.ignore();
 		file.getline(temp0.ID, 10);
-		file.getline(temp0.Name, 50);
+		file.getline(temp0.Name, 50); 
 		file.getline(temp0.TeacherName, 50);
 		file >> temp0.NumOfCredits;
-	//	file.ignore();
 		file >> temp0.MaxNumOfStudents;
-	//	file.ignore();
 		file >> temp0.Session1.thu;
-		//file.ignore();
 		file >> temp0.Session1.gio;
-		//file.ignore();
 		file >> temp0.Session1.phut;
-		//file.ignore();
 		file >> temp0.Session2.thu;
-		//file.ignore();
 		file >> temp0.Session2.gio;
-		//file.ignore();
 		file >> temp0.Session2.phut;
-		//file.ignore();
-		/*{
-			NodeCourse* temp2 = new NodeCourse;
-			temp2->next = NULL;
-			temp2->course = temp0;
-			if (temp.head == NULL)
-				temp.head = temp2;
-			else
-			{
-				temp2->next = temp.head;
-				temp.head = temp2;
-			}
-		}*/
 		AddTailListCourse(temp, temp0);
 	}
 	return temp;
 }
 
-void ViewListOfCourse(const SchoolYear&Y)
+void ViewListOfCourse(const SchoolYear& Y)
 {
 	ifstream f;
 	f.open(Y.ListCourses);
@@ -152,10 +132,8 @@ void ViewListOfCourse(const SchoolYear&Y)
 		cout << setw(15) << "Number of student";
 		cout << setw(10) << left << "Thu" << setw(10) << left << "Time";
 		cout << setw(10) << left << "Thu" << setw(10) << left << "Time" << endl;
-		ListCourses temp = ReadListCourses(Y);
-		NodeCourse* temp1;
-		if (temp.head != NULL) temp1 = temp.head->next;
-		else temp1 = temp.head;
+		ListCourses temp =  ReadListCourses(Y);
+		NodeCourse* temp1 = temp.head;
 		while (temp1 != NULL)
 		{
 			cout << "   ";
@@ -169,7 +147,7 @@ void ViewListOfCourse(const SchoolYear&Y)
 	}
 }
 
-void updateCourse(const SchoolYear&Y)
+void updateCourse(const SchoolYear& Y)
 {
 	ViewListOfCourse(Y);
 	Course a, b;
@@ -276,7 +254,7 @@ void updateCourse(const SchoolYear&Y)
 }
 
 //Tạo phiên đăng ký khóa học (ĐKHP)
-void CreateCourseRegistrationSession(const SchoolYear&Y)
+void CreateCourseRegistrationSession(const SchoolYear& Y)
 {
 	Time a;
 	cout << "Nhap thoi gian bat dau: " << endl;

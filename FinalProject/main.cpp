@@ -1,4 +1,4 @@
-#include "Header.h"
+﻿#include "Header.h"
 #include "console.h"
 #include "course.h"
 #include "login.h"
@@ -10,18 +10,22 @@
 
 int main()
 {
-	
 	SchoolYear s;
-	CreateSchoolYear(s);
-	cout << s.NameSchoolYear << endl;
-	cout << s.DsGiaoVien << endl;
-	cout << s.DSLop << endl;
-	cout << s.DSSinhVien << endl;
-	cout << s.Filecsv << endl;
-	cout << s.ListCourses << endl;
-	cout << s.sesmester << endl;
-	cout << s.StudentOfSubject << endl;
-	cout << s.TimeDKHP << endl;
-
+	// ông chỉnh menu chỗ này xíu luôn.
+	//cin.ignore();
+	s = present("SchoolYear.txt");
+	taoDLgia(s);
+	TextColor(224);
+	ListLop dsl;	dsl.n = 0;
+	ListGV dsgv;	dsgv.pHead = NULL;
+	SinhVien sv;
+	GiaoVien gv;
+	int choice;
+	ListCourses dsmon = ReadListCourses(s);
+	ReadFileClass(dsl, s);
+	ReadFileStudent(dsl, s);
+	Read_File_DSGV(dsgv, s);
+	UpdateCSV(dsl, s);
+	Menu(dsl, dsgv, dsmon, sv, gv, choice, s);
 	return 0;
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include"Header.h"
+#include "Header.h"
 
 void copy(NodeCourse*& p, NodeCourse* p1);
 void themvaolist(ListCourses& result, ListCourses l, char id[10]);

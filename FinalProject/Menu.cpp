@@ -3,15 +3,20 @@
 #include "login.h"
 #include "student.h"
 #include "Semester.h"
+#include "staff.h"
 #include "DKMon.h"
+#include "SchoolYear.h"
 #include "course.h"
 #include <cctype>
 #include <string>
 
-string Menubegin[3] = { "1. Nhan vien - giang vien", "2. Sinh vien","3. Thoat" };
-string AfterLoginSV[6] = { "1. Dang ky mon hoc", "2. Xem danh sach mon hoc dang ky", "3. Xoa mon hoc da dang ky","4. Xem danh sach khoa hoc theo hoc", "5. Dang xuat" , "6. Thoat"};
-string AfterLoginGV[7] = { "1. Tao nam hoc moi", "2. Tao ki moi", "3. Them sinh vien vao lop " ,"4. Dang Xuat", "5. Thoat","6. Tao mon hoc","7. Xem DSSV in course"};
-string ThaoTac[4] = { "DANG NHAP THANH CONG..", "Ten tai khoan hoac mat khau khong dung..", "TAO THANH CONG", "TAO KHONG THANH CONG"};
+string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
+string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky"," 4. Tra cuu ket qua hoc tap", " 5. Dang xuat" , " 6. Thoat"};
+string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi" };
+string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc", " 4. Xoa khoa hoc" };
+string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
+string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Dang Xuat", " 5. Thoat"};
+string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai"};
 void BackGround()
 {
 	TextColor(176);
@@ -52,7 +57,7 @@ void InfoTeam()
 	gotoxy(113, 18); cout << "3. Nguyen Van Hao"; gotoxy(130, 18); cout << " - 20120470";
 	gotoxy(113, 19); cout << "4. Le Kim Hieu"; gotoxy(130, 19); cout << " - 20120474";
 }
-char c;
+char c, d;
 int MenuFirst()
 {
 	int vitri = 0;
@@ -108,7 +113,6 @@ int MenuFirst()
 			return vitri + 1;
 	}
 }
-
 void HuongDan()
 {
 	TextColor(224);
@@ -171,7 +175,6 @@ int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv)
 ESCAPE:
 	int choice = MenuFirst();
 	bool Login = false;
-	//ListSV* p = new ListSV;
 	if (choice == 3)
 	{
 		gotoxy(0, 30);
@@ -199,7 +202,6 @@ ESCAPE:
 					goto PASS;
 				}
 				else if (c == LEFT || c == RIGHT) i--;
-				//else if (c == DOWN && pass == true) i--;
 				else if (c == BACKSPACE && User.size() == 0)
 					i--;
 				else if (c == BACKSPACE) {
@@ -424,25 +426,54 @@ void doi_password_gv(NodeGV* gv, ListGV dsgv, char newpass[],const SchoolYear&Y)
 	}
 	writeFileTeacher(dsgv,Y);
 }
-void AfterLogin(ListLop ds, ListGV dsgv,ListCourses dsmon,  SinhVien& sv, GiaoVien& gv, int& choice,const SchoolYear&Y)
+void MenuCon(string s[], int &vitri, int size)
+{
+	int n = 0;
+	for (int i = 0; i < size; i++)
+	{
+		int k = strlen(s[i].c_str());
+		if (k > n) n = k;
+	}
+	for (int i = 0;i < size;i++)
+	{
+		if (i == vitri)
+		{
+			TextColor(160);
+			gotoxy(26, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+			gotoxy(26, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+			gotoxy(26, 9 + i * 4); cout << s[i];
+			gotoxy(26, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+		}
+		else
+		{
+			TextColor(240);
+			gotoxy(26, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+			gotoxy(26, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+			gotoxy(26, 9 + i * 4); cout << s[i];
+			gotoxy(26, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+		}
+		TextColor(224);
+	}
+}
+void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, SchoolYear Y)
 {
 HOME:
-	choice = DangNhap(ds, dsgv , sv, gv);
+	choice = DangNhap(ds, dsgv, sv, gv);
 	int vitri = 0;
 	semester s;
 	if (choice == 2) {
 		while (true)
 		{
-REPEATSV:
+		REPEATSV:
 			system("cls");
 			BackGround();
 			_strupr_s(sv.FirstName, 50);
 			_strupr_s(sv.LastName, 50);
-			gotoxy(10, 34); cout << "Xin chao: " << sv.FirstName << " " << sv.LastName << " - " << sv.Class;
+			gotoxy(4, 6); cout << "Xin chao : " << sv.FirstName << " " << sv.LastName << " - " << sv.Class;
 			int n = 0;
 			for (int i = 0; i < 6; i++)
 			{
-				int k = strlen(AfterLoginSV[i].c_str());
+				int k = strlen(MenuSV[i].c_str());
 				if (k > n) n = k;
 			}
 			for (int i = 0;i < 6;i++)
@@ -450,18 +481,18 @@ REPEATSV:
 				if (i == vitri)
 				{
 					TextColor(160);
-					gotoxy(12, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4); cout << AfterLoginSV[i];
-					gotoxy(12, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); cout << MenuSV[i];
+					gotoxy(4, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				}
 				else
 				{
 					TextColor(240);
-					gotoxy(12, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4); cout << AfterLoginSV[i];
-					gotoxy(12, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); cout << MenuSV[i];
+					gotoxy(4, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				}
 				TextColor(224);
 			}
@@ -484,29 +515,26 @@ REPEATSV:
 					if (c == 1)
 					{
 						gotoxy(60, 9);
-						dangki(dsmon , sv,Y);
+						dangki(dsmon, sv, Y);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 2)
 					{
 						gotoxy(60, 9);
-						view_Enrol_Course(sv,Y);
+						view_Enrol_Course(sv, Y);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 3)
 					{
 						gotoxy(60, 9);
-						eraser_erol_course(sv,Y);
+						eraser_erol_course(sv, Y);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 4)
 					{
-						gotoxy(60, 9);
-						view_Enrol_Course(sv,Y);
-						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 5)
@@ -521,7 +549,7 @@ REPEATSV:
 			}
 		}
 	}
-	else if (choice == 1) // giao vien
+	else if (choice == 1) 
 	{
 		while (true)
 		{
@@ -530,30 +558,30 @@ REPEATGV:
 			BackGround();
 			_strupr_s(gv.FirstName, 50);
 			_strupr_s(gv.LastName, 50);
-			gotoxy(10, 34); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
+			gotoxy(4, 6); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
 			int n = 0;
 			for (int i = 0; i < 5; i++)
 			{
-				int k = strlen(AfterLoginGV[i].c_str());
+				int k = strlen(MenuGV[i].c_str());
 				if (k > n) n = k;
 			}
-			for (int i = 0;i < 7;i++)
+			for (int i = 0;i < 5;i++)
 			{
 				if (i == vitri)
 				{
 					TextColor(160);
-					gotoxy(12, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4);  cout << AfterLoginGV[i];
-					gotoxy(12, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 9 + i * 4);  cout << MenuGV[i];
+					gotoxy(4, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				}
 				else
 				{
 					TextColor(240);
-					gotoxy(12, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(12, 9 + i * 4);  cout << AfterLoginGV[i];
-					gotoxy(12, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 9 + i * 4);  cout << MenuGV[i];
+					gotoxy(4, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
 				}
 				TextColor(224);
 			}
@@ -561,61 +589,191 @@ REPEATGV:
 			if (c == DOWN)
 			{
 				vitri += 1;
-				if (vitri == 7) vitri = 0;
+				if (vitri == 5) vitri = 0;
 			}
 			if (c == UP)
 			{
 				vitri -= 1;
-				if (vitri == -1) vitri = 6;
+				if (vitri == -1) vitri = 4;
 			}
 			if (c == ENTER)
 			{
 				int c = vitri + 1;
-				while (true)
+				if (c == 1) {
+					int vitricon = 0;
+					while (true)
+					{
+						MenuCon(MenuGV1, vitricon, 3);
+						d = GetKey();
+						if (d == DOWN)
+						{
+							vitricon += 1;
+							if (vitricon == 3) vitricon = 0;
+						}
+						if (d == UP)
+						{
+							vitricon -= 1;
+							if (vitricon == -1) vitricon = 2;
+						}
+						if (d == ESC)
+						{
+							goto REPEATGV;
+						}
+						if (d == ENTER)
+						{
+							if (vitricon == 0)
+							{
+								CreateSchoolYear(Y);
+								TaoThanhCong(90, 28, ThaoTac[2]);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 1)
+							{
+								KhungTaoKiMoi();
+								bool f = CreateSemester(s, Y);
+								if (f == true) TaoThanhCong(90, 28, ThaoTac[2]);
+								else TaoThatBai(90, 28, ThaoTac[3]);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 2)
+							{
+								CreateNewClass(ds, Y);
+								TaoThanhCong(90, 28, ThaoTac[2]);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+						}
+					}
+				}
+				else if (c == 3)
 				{
-					if (c == 1) // tao mon hoc
+					int vitricon = 0;
+					while (true)
 					{
-						gotoxy(60, 9);
-						createNewCourse(Y);
-						gotoxy(70, 32); system("pause");
-						goto REPEATGV;
+						MenuCon(MenuGV3, vitricon, 7);
+						d = GetKey();
+						if (d == DOWN)
+						{
+							vitricon += 1;
+							if (vitricon == 7) vitricon = 0;
+						}
+						if (d == UP)
+						{
+							vitricon -= 1;
+							if (vitricon == -1) vitricon = 6;
+						}
+						if (d == ESC)
+						{
+							goto REPEATGV;
+						}
+						if (d == ENTER)
+						{
+							if (vitricon == 0)
+							{
+								ViewListOfClass(ds);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 2)
+							{
+								ViewListOfCourse(Y);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 1)
+							{
+								ViewListOfStudentInClass(ds);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 3)
+							{
+								ViewListOfStudentIncourses(Y);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 4)
+							{
+								ViewScoreBoardOfACourse(dsmon, Y);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 5)
+							{
+								ViewScoreOfAClass(ds, dsmon, Y);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 6)
+							{
+								cin.ignore();
+								ExportListStudentInCourseToEnterScore(Y);
+								TaoThanhCong(90, 28, ThaoTac[2]);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+						}
 					}
-					else if (c == 2)
+				}
+				else if (c == 2)
+				{
+					int vitricon = 0;
+					while (true)
 					{
-						KhungTaoKiMoi();
-						bool f = CreateSemester(s,Y);
-						if (f == true) TaoThanhCong(90, 28, ThaoTac[2]);
-						else TaoThatBai(90, 28, ThaoTac[3]);
-						gotoxy(70, 32); system("pause");
-						goto REPEATGV;
+						MenuCon(MenuGV2, vitricon, 4);
+						d = GetKey();
+						if (d == DOWN)
+						{
+							vitricon += 1;
+							if (vitricon == 4) vitricon = 0;
+						}
+						if (d == UP)
+						{
+							vitricon -= 1;
+							if (vitricon == -1) vitricon = 3;
+						}
+						if (d == ESC)
+						{
+							goto REPEATGV;
+						}
+						if (d == ENTER)
+						{
+							if (vitricon == 0)
+							{
+								AddStudent_Input(ds);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 1)
+							{
+								CreateCourseRegistrationSession(Y);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 2)
+							{
+								createNewCourse(Y);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 3)
+							{
+								deleteCourse(Y);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+						}
 					}
-					else if (c == 3)
-					{
-						// code phan xoa mon hoc
-						gotoxy(70, 32); system("pause");
-						goto REPEATGV;
-					}
-					else if (c == 4)
-					{
-						goto HOME;
-					}
-					else if (c == 5)
-					{
-						exit(1);
-					}
-					else if (c == 6)
-					{
-						
-						createNewCourse(Y);
-						gotoxy(70, 32); system("pause");
-						goto REPEATGV;
-					}
-					else if (c == 7)
-					{
-						ViewListOfStudentIncourses(Y);
-						gotoxy(70, 32); system("pause");
-						goto REPEATGV;
-					}
+				}
+				else if (c == 4)
+				{
+					goto HOME;
+				}
+				else if (c == 5)
+				{
+					exit(1);
 				}
 			}
 		}

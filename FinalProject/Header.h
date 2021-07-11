@@ -196,4 +196,4 @@ void TaoThanhCong(int x, int y, string c);
 void TaoThatBai(int x, int y, string c);
 void KhungTaoKiMoi();
 int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv);
-void AfterLogin(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, const SchoolYear& Y);
+void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, SchoolYear Y);
