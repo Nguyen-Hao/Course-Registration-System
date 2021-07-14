@@ -532,6 +532,7 @@ void ExportListStudentInCourseToEnterScore(const SchoolYear&Y)
 	}
 	file.close();
 }
+
 void ViewScoreBoardOfACourse(ListCourses dsmon, const SchoolYear&Y)
 {
 	string s, word, mamon;
@@ -745,5 +746,73 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm,const SchoolYear&Y)
 		TextColor(79);
 		gotoxy(5, 7 + n++); cout << "+-------------------------------------------- GPA ki: " <<setw(5)<< TotalMark / SoChi * 1.0 <<"+--------------------------------------------+" <<endl;
 		TextColor(224);
+	}
+}
+
+DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, char* mamon)
+{
+	ifstream f1;
+	string link = "ScoreBoard" + Y.NameSchoolYear + "_" + mamon + ".csv";
+	f1.open(Y.Filecsv, ios::in | ios::out);
+	string line = "", word;
+	DiemMonHoc score;
+	score.Final = 0;
+	score.MidTerm = 0;
+	score.Other = 0;
+	score.Total = 0;
+	if (f1.is_open())
+	{
+		while (!f1.eof())
+		{
+
+			char Mssv[10];
+			strcpy(Mssv, S.ID);
+			getline(f1, line);
+			if (line.size() == 0) break;
+			stringstream s(line);
+			vector<string> row;
+			while (getline(s, word, ','))
+			{
+				row.push_back(word);
+			}
+			SinhVien sv;
+			strcpy_s(sv.ID, 10, row[1].c_str());
+			strcpy_s(sv.FirstName, 50, row[2].c_str());
+			strcpy_s(sv.LastName, 50, row[3].c_str());
+			score.Total = 1.0 * stoi(row[4].c_str());
+			score.Final = 1.0 * stoi(row[5].c_str());
+			score.MidTerm = 1.0 * stoi(row[6].c_str());
+			score.Other = 1.0 * stoi(row[7].c_str());
+			if (strcmp(sv.ID, Mssv) == 0)
+				break;
+		}
+	}
+	f1.close();
+	return score;
+}
+
+void viewScoreBoardOfStudent(SinhVien& S, const SchoolYear& Y)
+{
+	ListCourses l = ReadListCourses(Y);
+	ListCourses list = courseOfStudent(l, S, Y);
+	if (list.head == NULL)
+		cout << "chua dang ki mon nao!" << endl;
+	else
+	{
+		cout << setw(10) << left << "ID" << setw(50) << left << "Name of course";
+		cout << setw(50) << left << "Teacher name" << setw(8) << left << "Credit";
+		cout << setw(20) << "Score orther";
+		cout << setw(10) << left << "Score middle" << setw(10) << left << "Score Final";
+		cout << setw(10) << left << "Score total" << endl;
+		NodeCourse* temp1 = list.head;
+		while (temp1 != NULL)
+		{
+			DiemMonHoc score = ReadfileCSVScore(S, Y, temp1->course.ID);
+			cout << setw(10) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
+			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
+			cout << setw(20) << score.Other;
+			cout << setw(10) << left << score.MidTerm << setw(10) << left << score.Final << left << setw(10) << score.Total << endl;
+			temp1 = temp1->next;
+		}
 	}
 }
