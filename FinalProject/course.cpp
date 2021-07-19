@@ -110,6 +110,7 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 		file >> temp0.Session2.phut;
 		AddTailListCourse(temp, temp0);
 	}
+	file.close();
 	return temp;
 }
 
@@ -249,8 +250,8 @@ void updateCourse(const SchoolYear& Y)
 	}
 	file1.close();
 	file2.close();
-	remove((char*)&Y.ListCourses);
-	rename("ListCourses1.txt", (char*)&Y.ListCourses);
+	remove(Y.ListCourses.c_str());
+	rename("ListCourses1.txt", Y.ListCourses.c_str());
 }
 
 //Tạo phiên đăng ký khóa học (ĐKHP)
@@ -379,6 +380,6 @@ void deleteCourse(const SchoolYear& Y)
 	}
 	file1.close();
 	file2.close();
-	remove((char*)&Y.ListCourses);
-	rename("ListCourses1.txt", (char*)&Y.ListCourses);
+	remove(Y.ListCourses.c_str());
+	rename("ListCourses1.txt", Y.ListCourses.c_str());
 }

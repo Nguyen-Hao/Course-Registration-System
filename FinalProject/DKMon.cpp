@@ -1,6 +1,7 @@
 #include"Header.h"
 #include"course.h"
 #include"SchoolYear.h"
+#include"console.h"
 void copy(NodeCourse*& p, NodeCourse* p1)
 {
 	p->course = p1->course;
@@ -131,6 +132,8 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 {
 	l = ReadListCourses(Y);
 	ListCourses temp = courseOfStudent(l, S,Y);
+	gotoxy(0, 32);
+	ViewListOfCourse(Y);
 	if (countNodeCourses(temp) == 5)
 		cout << "da dang ki du 5 mon!!!" << endl;
 	else
@@ -226,6 +229,7 @@ void view_Enrol_Course(SinhVien& S, const SchoolYear&Y)
 {
 	ListCourses l = ReadListCourses(Y);
 	ListCourses list = courseOfStudent(l, S,Y);
+	gotoxy(0, 32);
 	if (list.head == NULL)
 		cout << "chua dang ki mon nao!" << endl;
 	else
@@ -257,7 +261,9 @@ void eraser_erol_course(SinhVien& S,const SchoolYear&Y)
 	cin.ignore();
 	ListCourses l = ReadListCourses(Y);
 	if (ktra(l, id) == false)
-		cout << "id mon ban nhap khong ton tai" << endl;
+	{
+		gotoxy(55, 10); cout << "id mon ban nhap khong ton tai" << endl;
+	}
 	else
 	{
 		ListCourses temp = courseOfStudent(l, S,Y);

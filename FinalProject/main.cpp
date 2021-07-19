@@ -1,7 +1,6 @@
 ﻿#include "Header.h"
 #include "console.h"
 #include "course.h"
-#include "login.h"
 #include "staff.h"
 #include "student.h"
 #include "Semester.h"
@@ -26,6 +25,7 @@ int main()
 	ReadFileStudent(dsl, s);
 	Read_File_DSGV(dsgv, s);
 	UpdateCSV(dsl, s);
+	UpdateStudent(s);
 	Menu(dsl, dsgv, dsmon, sv, gv, choice, s);
 	return 0;
 }

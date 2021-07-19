@@ -1,5 +1,6 @@
 #include"Header.h"
 #include"SchoolYear.h"
+#include"student.h"
 
 unsigned int nam()
 {
@@ -51,17 +52,19 @@ void CreateSchoolYear(SchoolYear& S)
 	}
 	else
 	{
+		SchoolYear Y;
 		string temp = to_string(n) + " " + to_string(n + 1);
 		string temp1 = to_string(n) + "_" + to_string(n + 1) + ".txt";
-		S.NameSchoolYear = temp;
-		S.DsGiaoVien += temp1;
-		S.DSLop += temp1;
-		S.DSSinhVien += temp1;
-		S.Filecsv += to_string(n) + "_" + to_string(n + 1) + ".csv";
-		S.ListCourses += temp1;
-		S.sesmester += temp1;
-		S.StudentOfSubject += temp1;
-		S.TimeDKHP += temp1;
+		Y.NameSchoolYear = temp;
+		Y.DsGiaoVien += temp1;
+		Y.DSLop += temp1;
+		Y.DSSinhVien += temp1;
+		Y.Filecsv += to_string(n) + "_" + to_string(n + 1) + ".csv";
+		Y.ListCourses += temp1;
+		Y.sesmester += temp1;
+		Y.StudentOfSubject += temp1;
+		Y.TimeDKHP += temp1;
+		S = Y;
 	}
 	fstream file;
 	file.open(FILESCHOOLYEAR, ios::app);
@@ -110,22 +113,25 @@ SchoolYear present(const string& S)
  
 void inputDL(const string& fileName1, const string& fileName2)
 {
-	fstream file1, file2;
+	fstream file1; 
+	fstream file2;
 	file1.open(fileName1, ios::in);
+	file2.open("temp.txt", ios::out);
+	string a;
 	if (file1.is_open())
 	{
-		file2.open(fileName2, ios::out);
-		string a;
-		getline(file1, a);
+		getline(file1, a, '\n');
 		while (!file1.eof())
 		{
 			file2 << a << endl;
-			getline(file1, a);
+			getline(file1, a, '\n');
 		}
-		file2.close();
 	}
+	file2.close();
 	file1.close();
-	
+	remove(fileName2.c_str());
+	rename("temp.txt", fileName2.c_str());
+
 }
 
 void taoDLgia(const SchoolYear& Y)

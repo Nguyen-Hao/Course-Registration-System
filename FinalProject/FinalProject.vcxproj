@@ -142,7 +142,6 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="course.cpp" />
     <ClCompile Include="DKMon.cpp" />
-    <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="SchoolYear.cpp" />
@@ -156,7 +155,6 @@
     <ClInclude Include="course.h" />
     <ClInclude Include="DKMon.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="login.h" />
     <ClInclude Include="SchoolYear.h" />
     <ClInclude Include="Semester.h" />
     <ClInclude Include="staff.h" />
@@ -168,10 +166,7 @@
     <Text Include="DsGiaoVien2021_2022.txt" />
     <Text Include="DSLop.txt" />
     <Text Include="DSLop2021_2022.txt" />
-    <Text Include="DSSinhVien.txt" />
     <Text Include="DSSinhVien2021_2022.txt" />
-    <Text Include="Dssv_trong_lop.txt" />
-    <Text Include="Dssv_trong_lop_out.txt" />
     <Text Include="ListCourses.txt" />
     <Text Include="ListCourses2021_2022.txt" />
     <Text Include="ListYearStudent.txt" />
@@ -180,8 +175,6 @@
     <Text Include="sesmester2021_2022.txt" />
     <Text Include="StudentOfSubject.txt" />
     <Text Include="StudentOfSubject2021_2022.txt" />
-    <Text Include="test.txt" />
-    <Text Include="Text.txt" />
     <Text Include="TimeDKHP.txt" />
     <Text Include="TimeDKHP2021_2022.txt" />
   </ItemGroup>
@@ -191,11 +184,11 @@
     <None Include="dssv_ouput.csv" />
     <None Include="Filecsv.csv" />
     <None Include="Filecsv2021_2022.csv" />
-    <None Include="ScoreBoard_BAA00004.csv" />
-    <None Include="ScoreBoard_CSC0003.csv" />
-    <None Include="ScoreBoard_CSC0005.csv" />
-    <None Include="ScoreBoard_MTH00007.csv" />
-    <None Include="ScoreBoard_MTH0004.csv" />
+    <None Include="ScoreBoard2021_2022_BAA00004.csv" />
+    <None Include="ScoreBoard2021_2022_CSC0003.csv" />
+    <None Include="ScoreBoard2021_2022_CSC0005.csv" />
+    <None Include="ScoreBoard2021_2022_MTH00007.csv" />
+    <None Include="ScoreBoard2021_2022_MTH0004.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,5 @@
 #include "console.h"
 #include "Header.h"
-#include "login.h"
 #include "student.h"
 #include "Semester.h"
 #include "staff.h"
@@ -684,12 +683,14 @@ REPEATGV:
 							}
 							else if (vitricon == 1)
 							{
+								cin.ignore();
 								ViewListOfStudentInClass(ds);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 3)
 							{
+								cin.ignore();
 								ViewListOfStudentIncourses(Y);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
@@ -708,7 +709,6 @@ REPEATGV:
 							}
 							else if (vitricon == 6)
 							{
-								cin.ignore();
 								ExportListStudentInCourseToEnterScore(Y);
 								TaoThanhCong(90, 28, ThaoTac[2]);
 								gotoxy(70, 32); system("pause");
