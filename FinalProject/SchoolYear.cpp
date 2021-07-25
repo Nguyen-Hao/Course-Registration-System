@@ -85,12 +85,12 @@ SchoolYear present(const string& S)
 {
 	fstream file;
 	file.open(S, ios::in);
+	SchoolYear c;
 	if (file.is_open())
 	{
 		unsigned int a = 0, b = 0;
 		file >> a;
 		file >> b;
-		SchoolYear c;
 		c.NameSchoolYear = to_string(a) + " " + to_string(b);
 		file.ignore();
 		while (!file.eof())
@@ -108,6 +108,7 @@ SchoolYear present(const string& S)
 		}
 		return c;
 	}
+	return c;
 	file.close();
 }
  

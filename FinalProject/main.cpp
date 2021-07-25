@@ -9,11 +9,13 @@
 
 int main()
 {
+	FixConsoleWindow();
+	resizeConsole(1200, 600);
 	SchoolYear s;
 	// ông chỉnh menu chỗ này xíu luôn.
 	//cin.ignore();
 	s = present("SchoolYear.txt");
-	taoDLgia(s);
+	//taoDLgia(s); 
 	TextColor(224);
 	ListLop dsl;	dsl.n = 0;
 	ListGV dsgv;	dsgv.pHead = NULL;

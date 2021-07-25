@@ -160,10 +160,9 @@ void KhungTaoKiMoi()
 	
 	TextColor(224);
 	gotoxy(75, 9); cout << "Ki: ";KhungHCN(100, 8, 10, 1); gotoxy(125, 9); cout << "Ex: 1,2,3";// khung nhap ki 
-	gotoxy(75, 13); cout << "Nam hoc: "; KhungHCN(100, 12, 10, 1); gotoxy(125, 13); cout << "Ex: 2020, 2021";// nam
-	gotoxy(75, 17); cout << "Cho sinh vien nam: "; KhungHCN(100, 16, 10, 1); gotoxy(125, 17); cout << "Ex: 1,2,3,4,5,6";// sinh vien nam ?
-	gotoxy(75, 21); cout << "Ngay bat dau: "; KhungHCN(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; KhungHCN(113, 20, 10, 1); gotoxy(124, 21); cout << "/"; KhungHCN(126, 20, 10, 1);
-	gotoxy(75, 25); cout << "Ngay ket thuc: "; KhungHCN(100, 24, 10, 1); gotoxy(111, 25); cout << "/"; KhungHCN(113, 24, 10, 1); gotoxy(124, 25); cout << "/"; KhungHCN(126, 24, 10, 1);
+	gotoxy(75, 13); cout << "Nam hoc: "; KhungHCN(100, 12, 15, 1);// nam
+	gotoxy(75, 17); cout << "Ngay bat dau: "; KhungHCN(100, 16, 10, 1); gotoxy(111, 17); cout << "/"; KhungHCN(113, 16, 10, 1); gotoxy(124, 17); cout << "/"; KhungHCN(126, 16, 10, 1);
+	gotoxy(75, 21); cout << "Ngay ket thuc: "; KhungHCN(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; KhungHCN(113, 20, 10, 1); gotoxy(124, 20); cout << "/"; KhungHCN(126, 20, 10, 1);
 	KhungHCN(130, 28, 30, 3);
 	gotoxy(132, 30); cout << "ENTER: Fill Next-Create";
 	TextColor(228);

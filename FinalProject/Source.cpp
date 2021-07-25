@@ -116,3 +116,26 @@ bool isTime(int h, int m, int s)
 {
 	return ((h >= 0) && (h <= 23) && (m >= 0) && (m <= 59) && (s >= 0) && (s <= 59));
 }
+
+bool isTimeIn(Time t, Time begin, Time end)
+{
+	if (begin.year > t.year) return false;
+	else if (begin.year == t.year)
+	{
+		if (begin.month > t.month) return false;
+		else if (begin.month == t.month)
+		{
+			if (begin.day > t.day) return false;
+		}
+	}
+	if (end.year < t.year) return false;
+	else if (end.year == t.year)
+	{
+		if (end.month < t.month) return false;
+		else if (end.month == t.month)
+		{
+			if (end.day < t.day) return false;
+		}
+	}
+	return true;
+}
