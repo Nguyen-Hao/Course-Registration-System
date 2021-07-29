@@ -2,6 +2,7 @@
 #include"course.h"
 #include"SchoolYear.h"
 #include"console.h"
+#include "Semester.h"
 void copy(NodeCourse*& p, NodeCourse* p1)
 {
 	p->course = p1->course;
@@ -57,7 +58,10 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const Schoo
 	ListCourses result;
 	initListCourses(result);
 	fstream file;
-	file.open(Y.StudentOfSubject, ios::in);
+	listSemester li;
+	init(li);
+	int se = getSemester(li, Y);
+	file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 	char ch[10] = "\0", CH[10] = "\n";
 	file.getline(ch, 10);
 	while (!file.eof())
@@ -138,6 +142,9 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 		cout << "da dang ki du 5 mon!!!" << endl;
 	else
 	{
+		listSemester li;
+		init(li);
+		int se = getSemester(li, Y);
 		char id[10];
 		cout << "nhap id mon can dang ki: ";
 		cin.get(id, 10, '\n');
@@ -153,7 +160,7 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 			else
 			{
 				fstream file, file1;
-				file.open(Y.StudentOfSubject, ios::in);
+				file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 				file1.open("temp.txt", ios::out);
 				char ch[10] = "\0", CH[10] = "\n";
 				file.getline(ch, 10);
@@ -217,8 +224,8 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 				}
 				file.close();
 				file1.close();
-				remove(Y.StudentOfSubject.c_str());
-				rename("temp.txt", Y.StudentOfSubject.c_str());
+				remove((to_string(se)+Y.StudentOfSubject).c_str());
+				rename("temp.txt", (to_string(se)+Y.StudentOfSubject).c_str());
 				cout << "dang ki thanh cong!!!" << endl;
 			}
 			
@@ -272,7 +279,10 @@ void eraser_erol_course(SinhVien& S,const SchoolYear&Y)
 		else
 		{
 			fstream file, file1;
-			file.open(Y.StudentOfSubject, ios::in);
+			listSemester li;
+			init(li);
+			int se = getSemester(li, Y);
+			file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 			file1.open("temp.txt", ios::out);
 			char ch[10] = "\0", CH[10] = "\n";
 			file.getline(ch, 10);
@@ -327,8 +337,8 @@ void eraser_erol_course(SinhVien& S,const SchoolYear&Y)
 			}
 			file.close();
 			file1.close();
-			remove(Y.StudentOfSubject.c_str());
-			rename("temp.txt", Y.StudentOfSubject.c_str());
+			remove((to_string(se)+Y.StudentOfSubject).c_str());
+			rename("temp.txt", (to_string(se)+Y.StudentOfSubject).c_str());
 			cout << "eraser thanh cong!!!" << endl;
 		}
 	}

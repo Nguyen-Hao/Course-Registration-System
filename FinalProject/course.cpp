@@ -1,6 +1,7 @@
 ﻿#include "course.h"
 #include "Header.h"
 #include"SchoolYear.h"
+#include "Semester.h"
 void initListCourses(ListCourses& list)
 {
 	list.head = NULL;
@@ -9,11 +10,12 @@ void initListCourses(ListCourses& list)
 void createNewCourse(const SchoolYear& Y)
 {
 	fstream file;
-	file.open(Y.ListCourses, ios::app);
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	file.open(to_string(se)+Y.ListCourses, ios::app);
 	Course a;
-	cout << "Nhap hoc ky: ";
-	cin >> a.Sememster;
-	cin.ignore();
+	a.Sememster = se;
 	cout << "Nhap ID khoa hoc: ";
 	cin.get(a.ID, 10, '\n');
 	cin.ignore();
@@ -30,7 +32,7 @@ void createNewCourse(const SchoolYear& Y)
 	cout << "Nhap buoi hoc thu 1: ";
 	do
 	{
-		cout << "Thu: ";
+		cout << "Thu (2-8): ";
 		cin >> a.Session1.thu;
 	} while (a.Session1.thu < 2 || a.Session1.thu > 8);
 	do
@@ -43,7 +45,7 @@ void createNewCourse(const SchoolYear& Y)
 	cout << "Nhap buoi hoc thu 2: ";
 	do
 	{
-		cout << "Thu: ";
+		cout << "Thu (2-8): ";
 		cin >> a.Session2.thu;
 	} while (a.Session2.thu < 2 || a.Session2.thu > 8);
 	do
@@ -55,7 +57,7 @@ void createNewCourse(const SchoolYear& Y)
 	} while (!isTime(a.Session2.gio, a.Session2.phut, 0));
 	cin.ignore();
 	ofstream g;
-	g.open(Y.StudentOfSubject, ios::app);
+	g.open(to_string(se)+Y.StudentOfSubject, ios::app);
 	g << a.ID << endl;
 	g.close();
 	file << a.Sememster << endl;
@@ -92,7 +94,10 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 	ListCourses temp;
 	initListCourses(temp);
 	ifstream file;
-	file.open(Y.ListCourses);
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	file.open(to_string(se)+Y.ListCourses);
 	Course temp0;
 	while (file >> temp0.Sememster)
 	{
@@ -117,7 +122,10 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 void ViewListOfCourse(const SchoolYear& Y)
 {
 	ifstream f;
-	f.open(Y.ListCourses);
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	f.open(to_string(se)+Y.ListCourses);
 	f.seekg(0, ios::end);
 	int i = f.tellg();
 	f.close();
@@ -155,7 +163,10 @@ void updateCourse(const SchoolYear& Y)
 	cout << "Nhap ID khoa hoc can update: ";
 	cin.get(a.ID, 20, '\n');
 	fstream file1, file2;
-	file1.open(Y.ListCourses, ios::in);
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	file1.open(to_string(se)+Y.ListCourses, ios::in);
 	file2.open("ListCourses1.txt", ios::out);
 	while (!file1.eof())
 	{
@@ -250,8 +261,8 @@ void updateCourse(const SchoolYear& Y)
 	}
 	file1.close();
 	file2.close();
-	remove(Y.ListCourses.c_str());
-	rename("ListCourses1.txt", Y.ListCourses.c_str());
+	remove((to_string(se)+Y.ListCourses).c_str());
+	rename("ListCourses1.txt", (to_string(se)+Y.ListCourses).c_str());
 }
 
 //Tạo phiên đăng ký khóa học (ĐKHP)
@@ -293,7 +304,10 @@ void CreateCourseRegistrationSession(const SchoolYear& Y)
 		cin >> a.second;
 	}
 	fstream file;
-	file.open(Y.TimeDKHP, ios::out);
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	file.open(to_string(se)+Y.TimeDKHP, ios::out);
 	file << a.day << " " << a.month << " " << a.year
 		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
 	cout << "Nhap thoi gian ket thuc: " << endl;
@@ -341,7 +355,10 @@ void deleteCourse(const SchoolYear& Y)
 	cout << "Nhap ID khoa hoc muon xoa: ";
 	cin.get(a.ID, 20, '\n');
 	fstream file1, file2;
-	file1.open(Y.ListCourses, ios::in);
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	file1.open(to_string(se)+Y.ListCourses, ios::in);
 	file2.open("ListCourses1.txt", ios::out);
 	while (!file1.eof())
 	{
@@ -380,6 +397,6 @@ void deleteCourse(const SchoolYear& Y)
 	}
 	file1.close();
 	file2.close();
-	remove(Y.ListCourses.c_str());
-	rename("ListCourses1.txt", Y.ListCourses.c_str());
+	remove((to_string(se)+Y.ListCourses).c_str());
+	rename("ListCourses1.txt", (to_string(se)+Y.ListCourses).c_str());
 }

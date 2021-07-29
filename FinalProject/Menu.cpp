@@ -52,7 +52,7 @@ void InfoTeam()
 	gotoxy(110, 14); cout << "Giang vien huong dan: ThS. Nguyen Le Hoang Dung";
 	gotoxy(110, 15); cout << "SINH VIEN THUC HIEN: ";
 	gotoxy(113, 16); cout << "1. To Tran Son Ba"; gotoxy(130, 16); cout << " - 20120431";
-	gotoxy(113, 17); cout << "2. Le Cong Dat"; gotoxy(130, 17); cout << " - 20120434";
+	gotoxy(113, 17); cout << "2. Le Cong Dat"; gotoxy(130, 17); cout << " - 20120454";
 	gotoxy(113, 18); cout << "3. Nguyen Van Hao"; gotoxy(130, 18); cout << " - 20120470";
 	gotoxy(113, 19); cout << "4. Le Kim Hieu"; gotoxy(130, 19); cout << " - 20120474";
 }

@@ -379,7 +379,10 @@ ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50],const SchoolYe
 {
 	ListSV* lsv = NULL;
 	fstream file;
-	file.open(Y.StudentOfSubject, ios::in);
+	listSemester li;
+	init(li);
+	int se = getSemester(li, Y);
+	file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 	string s;
 	while (getline(file, s))
 	{
@@ -444,7 +447,11 @@ void export_list_student_in_a_course_to_csv(const SchoolYear&Y)
 	ofstream file;
 	int count=0;
 	string mamon = Mamon;
-	string link = "DSSV_" + mamon + ".csv";
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	int t = nam();
+	string link = "DSSV_" + mamon + "_"+to_string(se)+"_"+to_string(n-1)+"_"+to_string(n)+".csv";
 	file.open(link);
 	file << "STT,ID,First Name,Last Name" << endl;
 	for (k; k != NULL; k = k->pNext)
@@ -515,7 +522,7 @@ void ExportListStudentInCourseToEnterScore(const SchoolYear&Y)
 	else if (KT == -1) ViTrimon = 0;
 	else ViTrimon = KT;
 	NodeCourse* p = ds.head;
-	for (int i = 0; i < ViTrimon; i++)
+	for (int i = 0; i <= ViTrimon; i++)
 	{
 		p = p->next;
 	}
@@ -531,7 +538,10 @@ void ExportListStudentInCourseToEnterScore(const SchoolYear&Y)
 	a.Final = a.MidTerm = a.Other = a.Total = 0.0;
 	string mamon = Mamon;
 	int t = nam();
-	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" + mamon + ".csv";
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" +to_string(se)+"_"+ mamon + ".csv";
 	file.open(link);
 	file << "STT,ID,First Name,Last Name,Total Mark, Final Mark, Midterm Mark, Other Mark" << endl;
 	for (k; k != NULL; k = k->pNext)
@@ -549,7 +559,10 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, const SchoolYear&Y)
 	string s, word, mamon;
 	cout << "Nhap ma mon: "; cin >> mamon;
 	int STT = 1;
-	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" + mamon + ".csv";
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" + to_string(se)+"_"+mamon + ".csv";
 	ifstream fin(link);
 	if (!fin.is_open())
 	{
@@ -638,7 +651,10 @@ void updateAStudentResult(const SchoolYear&Y)
 	int count = 0;
 	string mamon = Mamon;
 	int t = nam();
-	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" + mamon + ".csv";
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" + to_string(se)+"_"+mamon + ".csv";
 	file.open(link);
 	if (!file.is_open())
 	{
@@ -726,7 +742,10 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm,const SchoolYear&Y)
 			{
 				if (strcmp(psv->info.ID, k->info.ID))
 				{
-					string link = "ScoreBoard" + to_string(t-1) + "_" + to_string(t) + "_" + string(p->course.ID) + ".csv";
+					listSemester l;
+					init(l);
+					int se = getSemester(l, Y);
+					string link = "ScoreBoard" + to_string(t-1) + "_" + to_string(t) + "_" + to_string(se)+"_"+string(p->course.ID) + ".csv";
 					ifstream f(link);
 					if (f.is_open()) {
 						string s;
@@ -766,7 +785,10 @@ DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, char* mamon)
 {
 	int t = nam();
 	ifstream f1;
-	string link = "ScoreBoard" + to_string(t-1) + "_" + to_string(t) + "_" + mamon + ".csv";
+	listSemester l;
+	init(l);
+	int se = getSemester(l, Y);
+	string link = "ScoreBoard" + to_string(t-1) + "_" + to_string(t) + "_" +to_string(se)+"_"+ mamon + ".csv";
 	f1.open(link, ios::in | ios::out);
 	string line = "", word;
 	DiemMonHoc score;

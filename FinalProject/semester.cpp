@@ -40,7 +40,6 @@ void readListSemester(listSemester& l, const SchoolYear&Y)
 }
 int getSemester(listSemester l, const SchoolYear Y)
 {
-	int semester = 0;
 	readListSemester(l, Y);
 	Time time = getTime();
 	Time begin, end;
@@ -59,7 +58,9 @@ int getSemester(listSemester l, const SchoolYear Y)
 			break;
 		}
 	}
+	return 1;
 }
+
 
 bool CreateSemester(semester& sesmes, const SchoolYear& Y)
 {
