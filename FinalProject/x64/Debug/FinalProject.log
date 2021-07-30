@@ -1,2 +1,20 @@
-﻿  student.cpp
-  FinalProject.vcxproj -> C:\Users\PC\Desktop\FinalProject\x64\Debug\FinalProject.exe
+﻿  console.cpp
+  course.cpp
+C:\Users\taiga\Desktop\New folder\FinalProject\course.cpp(130,8): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  DKMon.cpp
+  main.cpp
+  Menu.cpp
+C:\Users\taiga\Desktop\New folder\FinalProject\Menu.cpp(78,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\taiga\Desktop\New folder\FinalProject\Menu.cpp(189,9): warning C4101: 'pre': unreferenced local variable
+C:\Users\taiga\Desktop\New folder\FinalProject\Menu.cpp(293,9): warning C4101: 'pre': unreferenced local variable
+C:\Users\taiga\Desktop\New folder\FinalProject\Menu.cpp(483,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\taiga\Desktop\New folder\FinalProject\Menu.cpp(525,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\taiga\Desktop\New folder\FinalProject\Menu.cpp(618,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  SchoolYear.cpp
+  semester.cpp
+C:\Users\taiga\Desktop\New folder\FinalProject\semester.cpp(84,3): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Source.cpp
+  staff.cpp
+  student.cpp
+  Generating Code...
+  FinalProject.vcxproj -> C:\Users\taiga\Desktop\New folder\x64\Debug\FinalProject.exe

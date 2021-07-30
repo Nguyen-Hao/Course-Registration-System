@@ -10,12 +10,13 @@
 #include <string>
 
 string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
-string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky"," 4. Tra cuu ket qua hoc tap", " 5. Dang xuat" , " 6. Thoat"};
+string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", "5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
 string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi" };
 string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc", " 4. Xoa khoa hoc" };
-string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
-string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Dang Xuat", " 5. Thoat"};
-string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai"};
+string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc" };
+string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " , "4. doi mat khau"," 5. Dang Xuat", " 6. Thoat" };
+string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai" };
+
 void BackGround()
 {
 	TextColor(176);
@@ -395,34 +396,84 @@ char* TOUPPER(char* c)
 		toupper(c[i]);
 	return c;
 }
-void doi_password_sv(ListSV* sv, ListLop& dsl, char newpass[],const SchoolYear&Y)
+void doi_password_sv(SinhVien sv, ListLop& dsl, char newpass[], const SchoolYear& Y)
 {
-	strcpy_s(sv->info.pass, newpass);
+	strcpy_s(sv.pass, newpass);
 	for (int i = 0; i < dsl.n; i++)
 	{
 		for (ListSV* p = dsl.l[i].pHead; p != NULL; p = p->pNext)
 		{
-			if (strcmp(sv->info.ID, p->info.ID) == 0)
+			if (strcmp(sv.ID, p->info.ID) == 0)
 			{
-				strcpy_s(p->info.pass, sv->info.pass);
+				strcpy_s(p->info.pass, sv.pass);
 				break;
 			}
 		}
 	}
-	WriteFileStudent(dsl,Y);
+	WriteFileStudent(dsl, Y);
 }
-void doi_password_gv(NodeGV* gv, ListGV dsgv, char newpass[],const SchoolYear&Y)
+int MenuDoiPasswordsv(SinhVien sv, ListLop& dsl, const SchoolYear& Y)
 {
-	strcpy_s(gv->info.pass, newpass);
+	char oldpass[30];
+	char newpass[30];
+	char newpassAgain[30];
+	gotoxy(26, 30); cout << "Nhap mat khau: "; cin.getline(oldpass, 30);
+	gotoxy(26, 35); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30);
+	gotoxy(26, 40); cout << "Nhap lai mat khau moi: "; cin.getline(newpassAgain, 30);
+	if (strcmp(sv.pass, oldpass) == 0)
+	{
+		gotoxy(26, 50); cout << "Mat Khau sai!";
+		return 0;
+	}
+	else if (strcmp(newpass, newpassAgain) == 0)
+	{
+		gotoxy(26, 50); cout << "Mat Khau khong khop!";
+		return 0;
+	}
+	else
+	{
+		doi_password_sv(sv, dsl, newpass, Y);
+		return 1;
+	}
+}
+void doi_password_gv(GiaoVien gv, ListGV dsgv, char newpass[], const SchoolYear& Y)
+{
+	strcpy_s(gv.pass, newpass);
 	for (NodeGV* p = dsgv.pHead; p != NULL; p = p->pNext)
 	{
-		if (strcmp(gv->info.ID, p->info.ID) == 0)
+		if (strcmp(gv.ID, p->info.ID) == 0)
 		{
-			strcpy_s(p->info.pass, gv->info.pass);
+			strcpy_s(p->info.pass, gv.pass);
 			break;
 		}
 	}
-	writeFileTeacher(dsgv,Y);
+	writeFileTeacher(dsgv, Y);
+}
+int MenuDoiPasswordgv(GiaoVien gv, ListGV dsgv, const SchoolYear& Y)
+{
+	char oldpass[30];
+	char newpass[30];
+	char newpassAgain[30];
+	gotoxy(26, 15); cout << "Nhap mat khau: "; cin.getline(oldpass, 30); 
+	gotoxy(26, 17); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30); 
+	gotoxy(26, 19); cout << "Nhap lai mat khau moi: "; cin.getline(newpassAgain, 30);
+	if (strcmp(gv.pass, oldpass) == 0)
+	{
+		gotoxy(26, 25); cout << "Mat Khau sai!" << endl;
+		system("pause");
+		return 0;
+	}
+	else if (strcmp(newpass, newpassAgain) == 0)
+	{
+		gotoxy(26, 25); cout << "Mat Khau khong khop!" << endl;
+		system("pause");
+		return 0;
+	}
+	else
+	{
+		doi_password_gv(gv, dsgv, newpass, Y);
+		return 1;
+	}
 }
 void MenuCon(string s[], int &vitri, int size)
 {
@@ -469,28 +520,28 @@ HOME:
 			_strupr_s(sv.LastName, 50);
 			gotoxy(4, 6); cout << "Xin chao : " << sv.FirstName << " " << sv.LastName << " - " << sv.Class;
 			int n = 0;
-			for (int i = 0; i < 6; i++)
+			for (int i = 0; i < 7; i++)
 			{
 				int k = strlen(MenuSV[i].c_str());
 				if (k > n) n = k;
 			}
-			for (int i = 0;i < 6;i++)
+			for (int i = 0; i < 7; i++)
 			{
 				if (i == vitri)
 				{
 					TextColor(160);
-					gotoxy(4, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(4, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 8 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 					gotoxy(4, 9 + i * 4); cout << MenuSV[i];
-					gotoxy(4, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 10 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 				}
 				else
 				{
 					TextColor(240);
-					gotoxy(4, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(4, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 8 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 					gotoxy(4, 9 + i * 4); cout << MenuSV[i];
-					gotoxy(4, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 10 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 				}
 				TextColor(224);
 			}
@@ -498,12 +549,12 @@ HOME:
 			if (c == DOWN)
 			{
 				vitri += 1;
-				if (vitri == 6) vitri = 0;
+				if (vitri == 7) vitri = 0;
 			}
 			if (c == UP)
 			{
 				vitri -= 1;
-				if (vitri == -1) vitri = 5;
+				if (vitri == -1) vitri = 6;
 			}
 			if (c == ENTER)
 			{
@@ -537,9 +588,13 @@ HOME:
 					}
 					else if (c == 5)
 					{
-						goto HOME;
+						//
 					}
 					else if (c == 6)
+					{
+						goto HOME;
+					}
+					else if (c == 7)
 					{
 						exit(1);
 					}
@@ -547,39 +602,39 @@ HOME:
 			}
 		}
 	}
-	else if (choice == 1) 
+	else if (choice == 1)
 	{
 		while (true)
 		{
-REPEATGV:
+		REPEATGV:
 			system("cls");
 			BackGround();
 			_strupr_s(gv.FirstName, 50);
 			_strupr_s(gv.LastName, 50);
 			gotoxy(4, 6); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
 			int n = 0;
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 6; i++)
 			{
 				int k = strlen(MenuGV[i].c_str());
 				if (k > n) n = k;
 			}
-			for (int i = 0;i < 5;i++)
+			for (int i = 0; i < 6; i++)
 			{
 				if (i == vitri)
 				{
 					TextColor(160);
-					gotoxy(4, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(4, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 8 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 					gotoxy(4, 9 + i * 4);  cout << MenuGV[i];
-					gotoxy(4, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 10 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 				}
 				else
 				{
 					TextColor(240);
-					gotoxy(4, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-					gotoxy(4, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 8 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
+					gotoxy(4, 9 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 					gotoxy(4, 9 + i * 4);  cout << MenuGV[i];
-					gotoxy(4, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+					gotoxy(4, 10 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 				}
 				TextColor(224);
 			}
@@ -587,12 +642,12 @@ REPEATGV:
 			if (c == DOWN)
 			{
 				vitri += 1;
-				if (vitri == 5) vitri = 0;
+				if (vitri == 6) vitri = 0;
 			}
 			if (c == UP)
 			{
 				vitri -= 1;
-				if (vitri == -1) vitri = 4;
+				if (vitri == -1) vitri = 5;
 			}
 			if (c == ENTER)
 			{
@@ -768,9 +823,18 @@ REPEATGV:
 				}
 				else if (c == 4)
 				{
-					goto HOME;
+				CHANGEPASSGV:
+					int k = MenuDoiPasswordgv(gv, dsgv, Y);
+					if (k == 1)
+						goto CHANGEPASSGV;
+					else
+						goto REPEATGV;
 				}
 				else if (c == 5)
+				{
+					goto HOME;
+				}
+				else if (c == 6)
 				{
 					exit(1);
 				}
