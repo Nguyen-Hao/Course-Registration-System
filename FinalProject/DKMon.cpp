@@ -135,7 +135,48 @@ bool checkTrung(const ListCourses& l, NodeCourse* ptr)
 }
 void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 {
+	Time t = getTime();
+	ifstream ifs;
+	listSemester li;
+	init(li);
+	int se = getSemester(li, Y);
+	ifs.open(to_string(se) + Y.TimeDKHP);
+	Time begin, end;
+	if (!ifs.is_open())
+	{
+		cout << "Chua co phien dang ky hoc phan!" << endl;
+		return;
+	}
+	else
+	{
+		ifs >> begin.day >> begin.month >> begin.year >>begin.hour>>begin.minute>>begin.second
+			>>end.day >> end.month >> end.year>>end.hour>>end.minute>>end.second;
+		if (!isTimeIn(t, begin, end))
+		{
+			cout << "Chua den thoi gian dang ky hoc phan!" << endl;
+			cout << "Thoi gian dang ky hoc phan tu ";
+			cout << begin.hour << ":";
+			if (begin.minute < 10) cout << "0";
+			cout << begin.minute << ":";
+			if (begin.second < 10) cout << "0";
+			cout<< begin.second;
+			cout << " ngay " << begin.day << "/" << begin.month << "/" << begin.year << " den ";
+			cout << end.hour << ":";
+			if (end.minute < 10) cout << "0";
+			cout << end.minute << ":";
+			if (end.second < 10) cout << "0";
+			cout<< end.second;
+			cout << " ngay " << end.day << "/" << end.month << "/" << end.year;
+			return;
+		}
+	}
+	ifs.close();
 	l = ReadListCourses(Y);
+	if (l.head == NULL)
+	{
+		cout << "Chua co khoa hoc nao!" << endl;
+		return;
+	}
 	ListCourses temp = courseOfStudent(l, S,Y);
 	gotoxy(0, 32);
 	f = true;	
@@ -146,9 +187,6 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 	}
 	else
 	{
-		listSemester li;
-		init(li);
-		int se = getSemester(li, Y);
 		char id[10];
 		cout << "nhap id mon can dang ki: ";
 		cin.get(id, 10, '\n');
@@ -244,6 +282,11 @@ void view_Enrol_Course(SinhVien& S, const SchoolYear&Y)
 {
 	system("cls");
 	ListCourses l = ReadListCourses(Y);
+	if (l.head == NULL)
+	{
+		cout << "Chua dang ky mon nao!";
+		return;
+	}
 	ListCourses list = courseOfStudent(l, S,Y);
 	gotoxy(0, 32);
 	int STT = 0;
