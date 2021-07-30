@@ -5,7 +5,7 @@
 #include "DKMon.h"
 #include "course.h"
 #include "staff.h"
-#include"SchoolYear.h"
+#include "SchoolYear.h"
 
 void AddTailStudent(ListSV*& ds, SinhVien sv)
 {
@@ -125,8 +125,7 @@ void ReadFileStudent(ListLop& dsl, const SchoolYear&Y)
 	}
 	file.close();
 }
-//
-//
+
 ListSV* Create_Node_Sv(SinhVien sv)
 {
 	ListSV* a = new ListSV;
@@ -313,20 +312,20 @@ void UpdateStudent(const SchoolYear&Y)
 }
 void ViewListOfClass(ListLop& ds)
 {
-	gotoxy(85, 10); cout << "+---------------------------------------------------------------------------------+" << endl;
-	gotoxy(85, 11); cout << char(124) << "  " << setw(5) << left << " STT " << char(124) << "  " << setw(15) << left << "   Ma lop   " << char(124) << "  " << setw(40) << left << "                  Ten lop " << char(124) << "  " << setw(10) << left << "Nam hoc" << char(124) << endl;
-	gotoxy(85, 12); cout << "+---------------------------------------------------------------------------------+" << endl;
+	gotoxy(20, 4); cout << "+---------------------------------------------------------------------------------+" << endl;
+	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << " STT " << char(124) << "  " << setw(15) << left << "   Ma lop   " << char(124) << "  " << setw(40) << left << "                  Ten lop " << char(124) << "  " << setw(10) << left << "Nam hoc" << char(124) << endl;
+	gotoxy(20, 6); cout << "+---------------------------------------------------------------------------------+" << endl;
 
 	for (int i = 0; i < ds.n; i++)
 	{
-		gotoxy(85, 13 + i);
+		gotoxy(20, 7 + i);
 		cout << char(124) << "  " << setw(5) << left << i + 1 << char(124) << "  " << setw(15) << left << ds.l[i].Ma << char(124) << "  " << setw(40) << left << ds.l[i].Ten << char(124) << "  " << setw(10) << left << ds.l[i].NienKhoa << char(124);
 	}
-	gotoxy(85, 13 + ds.n); cout << "+---------------------------------------------------------------------------------+" << endl;
+	gotoxy(20, 7 + ds.n); cout << "+---------------------------------------------------------------------------------+" << endl;
 }
 void ViewListOfStudentInClass(ListLop& ds)
 {
-	gotoxy(90, 7);
+	gotoxy(10, 3);
 	cout << "Nhap ma lop: ";
 	int ViTriLop;
 	char Malop[10];
@@ -343,16 +342,16 @@ void ViewListOfStudentInClass(ListLop& ds)
 		cout << "Chua co sinh vien nao trong lop" << endl;
 		return;
 	}
-	gotoxy(95, 8); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------";
-	gotoxy(80, 10); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(80, 11); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
-	gotoxy(80, 12); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
+	gotoxy(35, 3); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------";
+	gotoxy(20, 4); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
+	gotoxy(20, 6); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 	for (ListSV* k = ds.l[ViTriLop].pHead; k != NULL; k = k->pNext) {
-		gotoxy(80, 12 + STT);
+		gotoxy(20, 6 + STT);
 		cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
 	}
-	gotoxy(80, 12 + STT); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(75, 12 + STT + 1);
+	gotoxy(20, 6 + STT); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+	gotoxy(15, 6 + STT + 1);
 }
 ///
 //
@@ -710,10 +709,10 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm,const SchoolYear&Y)
 	{
 		p = p->next;
 	}
-	gotoxy(10, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
-	gotoxy(5, 5); cout << "+-------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(10) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
-	gotoxy(5, 7); cout << "+-------------------------------------------------------------------------------------------------------+" << endl;
+	gotoxy(35, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
+	gotoxy(20, 4); cout << "+-------------------------------------------------------------------------------------------------------+" << endl;
+	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(10) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
+	gotoxy(20, 6); cout << "+-------------------------------------------------------------------------------------------------------+" << endl;
 	int STT = 1, n = 1;
 	for (ListSV* k = dsl.l[VitriLop].pHead; k != NULL; k = k->pNext)
 	{
@@ -746,9 +745,9 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm,const SchoolYear&Y)
 								SoChi += p->course.NumOfCredits;
 								TotalMark += stoi(row[4]) * p->course.NumOfCredits;
 								flat = true;
-								gotoxy(5, 7 + n);
+								gotoxy(20, 7 + n);
 								cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << row[1] << char(124) << "  " << setw(20) << left << row[2] << char(124) << "  " << setw(10) << row[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << row[4] << char(124) << endl;
-								gotoxy(0, 7 + ++n + 1);
+								gotoxy(20, 7 + ++n + 1);
 							}
 						}
 					}
@@ -757,7 +756,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm,const SchoolYear&Y)
 			}
 		}
 		TextColor(79);
-		gotoxy(5, 7 + n++); cout << "+-------------------------------------------- GPA ki: " <<setw(5)<< TotalMark / SoChi * 1.0 <<"+--------------------------------------------+" <<endl;
+		gotoxy(20, 7 + n++); cout << "+-------------------------------------------- GPA ki: " <<setw(5)<< TotalMark / SoChi * 1.0 <<"+--------------------------------------------+" <<endl;
 		TextColor(224);
 	}
 }

@@ -15,7 +15,7 @@ string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc m
 string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc", " 4. Xoa khoa hoc" };
 string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Dang Xuat", " 5. Thoat"};
-string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai"};
+string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai", "Huy thanh cong", "Huy that bai"};
 void BackGround()
 {
 	TextColor(176);
@@ -464,7 +464,6 @@ HOME:
 		{
 		REPEATSV:
 			system("cls");
-			BackGround();
 			_strupr_s(sv.FirstName, 50);
 			_strupr_s(sv.LastName, 50);
 			gotoxy(4, 6); cout << "Xin chao : " << sv.FirstName << " " << sv.LastName << " - " << sv.Class;
@@ -512,8 +511,14 @@ HOME:
 				{
 					if (c == 1)
 					{
+						bool f;
+						system("cls");
 						gotoxy(60, 9);
-						dangki(dsmon, sv, Y);
+						string s;
+						dangki(dsmon, sv, Y, s, f);
+						if (f) TaoThanhCong(55, 15, s);
+						else TaoThatBai(55, 15, s);
+						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
 					}
@@ -521,18 +526,26 @@ HOME:
 					{
 						gotoxy(60, 9);
 						view_Enrol_Course(sv, Y);
+						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 3)
 					{
+						bool f;
 						gotoxy(60, 9);
-						eraser_erol_course(sv, Y);
+						eraser_erol_course(sv, Y, f);
+						if (f) TaoThanhCong(55, 15, ThaoTac[4]);
+						else TaoThatBai(55, 15, "Xoa Khong thanh cong");
+						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 4)
 					{
+						ViewScoreBoardOfACourse(dsmon, Y);
+						gotoxy(20, 20);
+						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 5)
@@ -553,7 +566,6 @@ HOME:
 		{
 REPEATGV:
 			system("cls");
-			BackGround();
 			_strupr_s(gv.FirstName, 50);
 			_strupr_s(gv.LastName, 50);
 			gotoxy(4, 6); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
@@ -670,18 +682,21 @@ REPEATGV:
 						{
 							if (vitricon == 0)
 							{
+								system("cls");
 								ViewListOfClass(ds);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 2)
 							{
+								system("cls");
 								ViewListOfCourse(Y);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 1)
 							{
+								system("cls");
 								cin.ignore();
 								ViewListOfStudentInClass(ds);
 								gotoxy(70, 32); system("pause");
@@ -689,6 +704,7 @@ REPEATGV:
 							}
 							else if (vitricon == 3)
 							{
+								system("cls");
 								cin.ignore();
 								ViewListOfStudentIncourses(Y);
 								gotoxy(70, 32); system("pause");
@@ -696,12 +712,14 @@ REPEATGV:
 							}
 							else if (vitricon == 4)
 							{
+								system("cls");
 								ViewScoreBoardOfACourse(dsmon, Y);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 5)
 							{
+								system("cls");
 								ViewScoreOfAClass(ds, dsmon, Y);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
@@ -760,6 +778,7 @@ REPEATGV:
 							else if (vitricon == 3)
 							{
 								deleteCourse(Y);
+								TaoThanhCong(55, 10, ThaoTac[4]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}

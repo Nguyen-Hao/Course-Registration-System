@@ -2,6 +2,7 @@
 #include"course.h"
 #include"SchoolYear.h"
 #include"console.h"
+#include <string>
 void copy(NodeCourse*& p, NodeCourse* p1)
 {
 	p->course = p1->course;
@@ -128,14 +129,17 @@ bool checkTrung(const ListCourses& l, NodeCourse* ptr)
 	}
 	return false;
 }
-void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
+void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 {
 	l = ReadListCourses(Y);
 	ListCourses temp = courseOfStudent(l, S,Y);
 	gotoxy(0, 32);
+	f = true;	
 	ViewListOfCourse(Y);
-	if (countNodeCourses(temp) == 5)
-		cout << "da dang ki du 5 mon!!!" << endl;
+	if (countNodeCourses(temp) == 5) {
+		c = "Da dang ki du 5 mon";
+		f = false;
+	}
 	else
 	{
 		char id[10];
@@ -144,12 +148,16 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 		cin.ignore();
 		NodeCourse* ptr = find(l, id);
 
-		if (ktra(l, id) == false)
-			cout << "khong co mon hoc";
+		if (ktra(l, id) == false) {
+			c = "Khong ton tai ma mon hoc";
+			f = false;
+		}
 		else
 		{
-			if (checkTrung(temp, ptr) == true)
-				cout << "phien gio hoc bi trung ";
+			if (checkTrung(temp, ptr) == true) {
+				c = "Trung lich hoc";
+				f = false;
+			}
 			else
 			{
 				fstream file, file1;
@@ -219,7 +227,7 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 				file1.close();
 				remove(Y.StudentOfSubject.c_str());
 				rename("temp.txt", Y.StudentOfSubject.c_str());
-				cout << "dang ki thanh cong!!!" << endl;
+				c = "Dang ki thanh cong";
 			}
 			
 		}
@@ -227,48 +235,52 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y)
 }
 void view_Enrol_Course(SinhVien& S, const SchoolYear&Y)
 {
+	system("cls");
 	ListCourses l = ReadListCourses(Y);
 	ListCourses list = courseOfStudent(l, S,Y);
 	gotoxy(0, 32);
+	int STT = 0;
 	if (list.head == NULL)
 		cout << "chua dang ki mon nao!" << endl;
 	else
 	{
-		cout << setw(10) << left << "ID" << setw(50) << left << "Name of course";
-		cout << setw(50) << left << "Teacher name" << setw(8) << left << "Credit";
-		cout << setw(20) << "Number of student";
-		cout << setw(10) << left << "Thu" << setw(10) << left << "Time";
-		cout << setw(10) << left << "Thu" << setw(10) << left << "Time" << endl;
+		//gotoxy(10, 3); cout << "\t\t---------------------------- " << k->course.Name << " ----------------------------";
+		gotoxy(20, 3); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 4); cout << char(124) << "  " << setw(10) << left << "Ma mon hoc" << char(124) << "  " << setw(30) << left << "Ten mon hoc" << char(124) << "  " << setw(25) << left << "Ten GV" << char(124) << "  " << setw(8) << left << "So TC" << char(124) << "  " << setw(15) << "So sinh vien" << char(124) << "  " << setw(20) << left << "       Lich hoc";
+		gotoxy(149, 4); cout << char(124) << endl;
+		gotoxy(20, 5); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
+
 		NodeCourse* temp1 = list.head;
 		while (temp1 != NULL)
 		{
-			cout << setw(10) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
-			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
-			cout << setw(20) << temp1->course.MaxNumOfStudents;
-			cout << setw(10) << left << temp1->course.Session1.thu << setw(2) << left << temp1->course.Session1.gio << ":" << setw(8) << temp1->course.Session1.phut;
-			cout << setw(10) << left << temp1->course.Session2.thu << setw(2) << left << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut << endl;
+			gotoxy(20, 6 + STT); cout << char(124) << "  " << setw(10) << left << temp1->course.ID << char(124) << "  " << setw(30) << left << temp1->course.Name << char(124) << "  " << setw(25) << left << temp1->course.TeacherName << char(124) << "  " << setw(8) << left << temp1->course.NumOfCredits << char(124) << "  " << setw(15) << temp1->course.MaxNumOfStudents << char(124) << "  ";
+			cout << "T" << temp1->course.Session1.thu << " - " << temp1->course.Session1.gio << ":" << temp1->course.Session1.phut << "  " << "T" << temp1->course.Session2.thu << " - " << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut;
+			gotoxy(149, 6 + STT++); cout << char(124) << endl;
 			temp1 = temp1->next;
 		}
+		gotoxy(20, 6 + STT); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(15, 6 + STT + 1);
+
 	}
 }
-
-
-void eraser_erol_course(SinhVien& S,const SchoolYear&Y)
+void eraser_erol_course(SinhVien& S,const SchoolYear&Y, bool &f)
 {
+	view_Enrol_Course(S, Y);
 	char id[10];
+	f = true;
 	cout << "nhap id mon can huy dang ki: ";
 	cin.get(id, 10, '\n');
 	cin.ignore();
 	ListCourses l = ReadListCourses(Y);
 	if (ktra(l, id) == false)
 	{
-		gotoxy(55, 10); cout << "id mon ban nhap khong ton tai" << endl;
+		f = false;
 	}
 	else
 	{
 		ListCourses temp = courseOfStudent(l, S,Y);
 		if (ktra(temp, id) == false)
-			cout << "mon nay ban chua dang ki" << endl;
+			f = false;
 		else
 		{
 			fstream file, file1;
@@ -329,7 +341,6 @@ void eraser_erol_course(SinhVien& S,const SchoolYear&Y)
 			file1.close();
 			remove(Y.StudentOfSubject.c_str());
 			rename("temp.txt", Y.StudentOfSubject.c_str());
-			cout << "eraser thanh cong!!!" << endl;
 		}
 	}
 }

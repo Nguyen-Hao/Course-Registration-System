@@ -1,6 +1,9 @@
 ﻿#include "course.h"
 #include "Header.h"
-#include"SchoolYear.h"
+#include "SchoolYear.h"
+#include "console.h"
+#include <string>
+#include <string.h>
 void initListCourses(ListCourses& list)
 {
 	list.head = NULL;
@@ -11,8 +14,16 @@ void createNewCourse(const SchoolYear& Y)
 	fstream file;
 	file.open(Y.ListCourses, ios::app);
 	Course a;
-	cout << "Nhap hoc ky: ";
-	cin >> a.Sememster;
+	ifstream f(Y.sesmester);
+	semester s;
+	while (!f.eof())
+	{
+		f >> s.name;
+		f.getline(s.schoolyear, 11);
+		f >> s.begin.ngay >> s.begin.thang >> s.begin.nam;
+		f >> s.end.ngay >> s.end.thang >> s.end.nam;
+	}
+	a.Sememster = s.name;
 	cin.ignore();
 	cout << "Nhap ID khoa hoc: ";
 	cin.get(a.ID, 10, '\n');
@@ -121,30 +132,29 @@ void ViewListOfCourse(const SchoolYear& Y)
 	f.seekg(0, ios::end);
 	int i = f.tellg();
 	f.close();
+	int STT = 0;
 	if (i == 0)
 	{
 		cout << "Chua co khoa hoc nao trong danh sach" << endl;
 	}
 	else
 	{
-		cout << "   ";
-		cout << setw(10) << left << "ID" << setw(50) << left << "Name of course";
-		cout << setw(35) << left << "Teacher name" << setw(8) << left << "Credit";
-		cout << setw(15) << "Number of student";
-		cout << setw(10) << left << "Thu" << setw(10) << left << "Time";
-		cout << setw(10) << left << "Thu" << setw(10) << left << "Time" << endl;
+		gotoxy(20, 3); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 4); cout << char(124) << "  " << setw(10) << left << "Ma mon hoc" << char(124) << "  " << setw(30) << left << "Ten mon hoc" << char(124) << "  " << setw(25) << left << "Ten GV" << char(124) << "  " << setw(8) << left << "So TC" << char(124) << "  " << setw(15) << "So sinh vien" << char(124) << "  " << setw(20) << left << "       Lich hoc";
+		gotoxy(149, 4); cout <<char(124) << endl;
+		gotoxy(20, 5); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
+		
 		ListCourses temp =  ReadListCourses(Y);
 		NodeCourse* temp1 = temp.head;
 		while (temp1 != NULL)
 		{
-			cout << "   ";
-			cout << setw(10) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
-			cout << setw(35) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
-			cout << setw(15) << temp1->course.MaxNumOfStudents;
-			cout << setw(10) << left << temp1->course.Session1.thu << setw(2) << left << temp1->course.Session1.gio << ":" << setw(8) << temp1->course.Session1.phut;
-			cout << setw(10) << left << temp1->course.Session2.thu << setw(2) << left << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut << endl;
+			gotoxy(20, 6 + STT); cout << char(124) << "  " << setw(10) << left << temp1->course.ID << char(124) << "  " << setw(30) << left << temp1->course.Name << char(124) << "  " << setw(25) << left << temp1->course.TeacherName << char(124) << "  " << setw(8) << left << temp1->course.NumOfCredits << char(124) << "  " << setw(15) << temp1->course.MaxNumOfStudents << char(124) << "  ";
+			cout << "T" << temp1->course.Session1.thu << " - " << temp1->course.Session1.gio << ":" << temp1->course.Session1.phut << "  " << "T" << temp1->course.Session2.thu << " - " << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut;
+			gotoxy(149, 6 + STT++); cout << char(124) << endl;
 			temp1 = temp1->next;
 		}
+		gotoxy(20, 6 + STT); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(15, 6 + STT + 1);
 	}
 }
 
