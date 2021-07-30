@@ -48,11 +48,11 @@ Nguyen Vu Huy
 30
 2
 BAA00004
-PLDC
+Phap luat dai cuong
 Tran Thien An
-3
+4
 150
-3
+2
 7
 30
 5

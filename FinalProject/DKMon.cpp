@@ -2,6 +2,7 @@
 #include"course.h"
 #include"SchoolYear.h"
 #include"console.h"
+#include "Semester.h"
 #include <string>
 void copy(NodeCourse*& p, NodeCourse* p1)
 {
@@ -58,7 +59,10 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const Schoo
 	ListCourses result;
 	initListCourses(result);
 	fstream file;
-	file.open(Y.StudentOfSubject, ios::in);
+	listSemester li;
+	init(li);
+	int se = getSemester(li, Y);
+	file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 	char ch[10] = "\0", CH[10] = "\n";
 	file.getline(ch, 10);
 	while (!file.eof())
@@ -142,6 +146,9 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 	}
 	else
 	{
+		listSemester li;
+		init(li);
+		int se = getSemester(li, Y);
 		char id[10];
 		cout << "nhap id mon can dang ki: ";
 		cin.get(id, 10, '\n');
@@ -161,7 +168,7 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 			else
 			{
 				fstream file, file1;
-				file.open(Y.StudentOfSubject, ios::in);
+				file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 				file1.open("temp.txt", ios::out);
 				char ch[10] = "\0", CH[10] = "\n";
 				file.getline(ch, 10);
@@ -225,8 +232,8 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 				}
 				file.close();
 				file1.close();
-				remove(Y.StudentOfSubject.c_str());
-				rename("temp.txt", Y.StudentOfSubject.c_str());
+				remove((to_string(se)+Y.StudentOfSubject).c_str());
+				rename("temp.txt", (to_string(se)+Y.StudentOfSubject).c_str());
 				c = "Dang ki thanh cong";
 			}
 			
@@ -284,7 +291,10 @@ void eraser_erol_course(SinhVien& S,const SchoolYear&Y, bool &f)
 		else
 		{
 			fstream file, file1;
-			file.open(Y.StudentOfSubject, ios::in);
+			listSemester li;
+			init(li);
+			int se = getSemester(li, Y);
+			file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 			file1.open("temp.txt", ios::out);
 			char ch[10] = "\0", CH[10] = "\n";
 			file.getline(ch, 10);
@@ -339,8 +349,8 @@ void eraser_erol_course(SinhVien& S,const SchoolYear&Y, bool &f)
 			}
 			file.close();
 			file1.close();
-			remove(Y.StudentOfSubject.c_str());
-			rename("temp.txt", Y.StudentOfSubject.c_str());
+			remove((to_string(se)+Y.StudentOfSubject).c_str());
+			rename("temp.txt", (to_string(se)+Y.StudentOfSubject).c_str());
 		}
 	}
 }
