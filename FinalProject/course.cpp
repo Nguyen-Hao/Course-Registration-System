@@ -128,6 +128,7 @@ void ViewListOfCourse(const SchoolYear& Y)
 	listSemester l;
 	init(l);
 	int se = getSemester(l, Y);
+	cout << se;
 	f.open(to_string(se)+Y.ListCourses);
 	f.seekg(0, ios::end);
 	int i = f.tellg();

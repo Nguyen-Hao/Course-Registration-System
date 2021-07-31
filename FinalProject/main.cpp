@@ -12,10 +12,8 @@ int main()
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
 	SchoolYear y;
-	// ông chỉnh menu chỗ này xíu luôn.
-	//cin.ignore();
 	y = present("SchoolYear.txt");
-	taoDLgia(y); 
+	//taoDLgia(y); 
 	TextColor(224);
 	ListLop dsl;	dsl.n = 0;
 	ListGV dsgv;	dsgv.pHead = NULL;
@@ -26,8 +24,9 @@ int main()
 	ReadFileClass(dsl, y);
 	ReadFileStudent(dsl, y);
 	Read_File_DSGV(dsgv, y);
-	UpdateCSV(dsl, y);
 	UpdateStudent(y);
+	UpdateCSV(dsl, y);
+	//ViewScoreBoardOfACourse(dsmon, y);
 	Menu(dsl, dsgv, dsmon, sv, gv, choice, y);
 	//ViewListOfStudentInClass(dsl);
 	//ViewScoreBoardOfACourse(dsmon, y);

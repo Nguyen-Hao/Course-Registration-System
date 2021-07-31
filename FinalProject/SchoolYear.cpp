@@ -9,11 +9,10 @@ unsigned int nam()
 	if (file.is_open())
 	{
 		unsigned int a = 0, b = 0;
-		file >> a;
-		file >> b;
-		file.ignore();
 		while (!file.eof())
 		{
+			file >> a >> b;
+			file.ignore();
 			SchoolYear c;
 			getline(file, c.DsGiaoVien);
 			getline(file, c.DSLop);
@@ -23,11 +22,9 @@ unsigned int nam()
 			getline(file, c.sesmester);
 			getline(file, c.StudentOfSubject);
 			getline(file, c.TimeDKHP);
-			file >> a >> b;
-			file.ignore();
 		}
 		file.close();
-		return b;
+		return a;
 	}
 	else return 0;
 }
@@ -89,12 +86,12 @@ SchoolYear present(const string& S)
 	if (file.is_open())
 	{
 		unsigned int a = 0, b = 0;
-		file >> a;
-		file >> b;
-		c.NameSchoolYear = to_string(a) + " " + to_string(b);
-		file.ignore();
+		
 		while (!file.eof())
 		{
+			file >> a >> b;
+			c.NameSchoolYear = to_string(a) + " " + to_string(b);
+			file.ignore();
 			getline(file, c.DsGiaoVien);
 			getline(file, c.DSLop);
 			getline(file, c.DSSinhVien);
@@ -103,8 +100,6 @@ SchoolYear present(const string& S)
 			getline(file, c.sesmester);
 			getline(file, c.StudentOfSubject);
 			getline(file, c.TimeDKHP);
-			file >> a >> b;
-			file.ignore();
 		}
 		return c;
 	}

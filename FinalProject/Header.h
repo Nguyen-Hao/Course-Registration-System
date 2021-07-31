@@ -174,7 +174,7 @@ struct SchoolYear
 	string StudentOfSubject = "StudentOfSubject";  //txt
 	string TimeDKHP = "TimeDKHP";  //txt
 	string DsGiaoVien = "DsGiaoVien";  //txt
-	string Filecsv = "Filecsv";  //csv
+	string Filecsv = "DSSV";  //csv
 	string ListCourses = "ListCourses";  //txt
 	string sesmester = "sesmester";  //txt
 };
