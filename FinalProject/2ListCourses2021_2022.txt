@@ -70,3 +70,15 @@ Tran Van Chung
 5
 7
 30
+2
+ENV00002
+Khoa hoc trai dat
+Huynh Van Loc
+2
+50
+2
+7
+30
+7
+7
+30

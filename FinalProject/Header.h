@@ -28,6 +28,7 @@
 #define FILECSV "Filecsv.csv"
 #define FILETIMEDKHP "TimeDKHP.txt"
 #define FILEDSSVMON "StudentOfSubject.txt"
+
 using namespace std;
 
 struct Time
@@ -65,7 +66,7 @@ struct SinhVien
 	char DateOfBirth[50];
 	char SocialID[10];
 	int begin[3];
-	int YearStudent; // Năm nhập học
+	int YearStudent;
 	int Semester;
 };
 
@@ -78,7 +79,7 @@ struct DiemMonHoc
 {
 	double MidTerm;
 	double Final;
-	double Other; // Qua Trinh
+	double Other; 
 	double Total;
 };
 struct NodeDiem
@@ -102,7 +103,7 @@ struct Lop
 };
 struct ListLop
 {
-	int n;						// so luong lop
+	int n;
 	Lop l[maxlop];
 };
 
@@ -169,14 +170,14 @@ struct listSemester
 struct SchoolYear
 {
 	string NameSchoolYear;
-	string DSLop = "DSLop";  //txt
-	string DSSinhVien = "DSSinhVien"; //txt
-	string StudentOfSubject = "StudentOfSubject";  //txt
-	string TimeDKHP = "TimeDKHP";  //txt
-	string DsGiaoVien = "DsGiaoVien";  //txt
-	string Filecsv = "DSSV";  //csv
-	string ListCourses = "ListCourses";  //txt
-	string sesmester = "sesmester";  //txt
+	string DSLop = "DSLop"; 
+	string DSSinhVien = "DSSinhVien";
+	string StudentOfSubject = "StudentOfSubject";  
+	string TimeDKHP = "TimeDKHP";  
+	string DsGiaoVien = "DsGiaoVien"; 
+	string Filecsv = "DSSV"; 
+	string ListCourses = "ListCourses"; 
+	string sesmester = "sesmester";  
 };
 
 
@@ -187,13 +188,17 @@ int sumOfDayInMonth(int nMonth, int nYear);
 bool isDate(int nDay, int nMonth, int nYear);
 bool isTime(int h, int m, int s);
 bool isTimeIn(Time t, Time begin, Time end);
-
-void BackGround();
-void InfoTeam();
-int MenuFirst();
-void KhungDangNhap(int item);
-void TaoThanhCong(int x, int y, string c);
-void TaoThatBai(int x, int y, string c);
-void KhungTaoKiMoi();
-int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv);
+void Information();
+void Team();
+int MenuHeader(); 
+void SignInFrames(int item); 
+void EffectSuccess(int x, int y, string c);
+void EffectFailed(int x, int y, string c);
+void CreateSemesterForm();
+int SignIn(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv);
+void ChangePasswordStudent(SinhVien& sv, ListLop& dsl, char newpass[], const SchoolYear& Y);
+void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y);
+void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, char newpass[], const SchoolYear& Y);
+void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y);
+void MenuChildren(string s[], int& vitri, int size);
 void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, SchoolYear Y);

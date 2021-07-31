@@ -14,7 +14,7 @@ void createNewCourse(const SchoolYear& Y)
 {
 	fstream file;
 	listSemester l;
-	init(l);
+	InitListSemester(l);
 	int se = getSemester(l, Y);
 	file.open(to_string(se)+Y.ListCourses, ios::app);
 	Course a;
@@ -98,7 +98,7 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 	initListCourses(temp);
 	ifstream file;
 	listSemester l;
-	init(l);
+	InitListSemester(l);
 	int se = getSemester(l, Y);
 	file.open(to_string(se)+Y.ListCourses);
 	Course temp0;
@@ -126,7 +126,7 @@ void ViewListOfCourse(const SchoolYear& Y)
 {
 	ifstream f;
 	listSemester l;
-	init(l);
+	InitListSemester(l);
 	int se = getSemester(l, Y);
 	cout << se;
 	f.open(to_string(se)+Y.ListCourses);
@@ -167,7 +167,7 @@ void updateCourse(const SchoolYear& Y)
 	cin.get(a.ID, 20, '\n');
 	fstream file1, file2;
 	listSemester l;
-	init(l);
+	InitListSemester(l);
 	int se = getSemester(l, Y);
 	file1.open(to_string(se)+Y.ListCourses, ios::in);
 	file2.open("ListCourses1.txt", ios::out);
@@ -268,7 +268,6 @@ void updateCourse(const SchoolYear& Y)
 	rename("ListCourses1.txt", (to_string(se)+Y.ListCourses).c_str());
 }
 
-//Tạo phiên đăng ký khóa học (ĐKHP)
 void CreateCourseRegistrationSession(const SchoolYear& Y)
 {
 	Time a;
@@ -308,7 +307,7 @@ void CreateCourseRegistrationSession(const SchoolYear& Y)
 	}
 	fstream file;
 	listSemester l;
-	init(l);
+	InitListSemester(l);
 	int se = getSemester(l, Y);
 	file.open(to_string(se)+Y.TimeDKHP, ios::out);
 	file << a.day << " " << a.month << " " << a.year
@@ -359,7 +358,7 @@ void deleteCourse(const SchoolYear& Y)
 	cin.get(a.ID, 20, '\n');
 	fstream file1, file2;
 	listSemester l;
-	init(l);
+	InitListSemester(l);
 	int se = getSemester(l, Y);
 	file1.open(to_string(se)+Y.ListCourses, ios::in);
 	file2.open("ListCourses1.txt", ios::out);

@@ -11,8 +11,7 @@ int main()
 {
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
-	SchoolYear y;
-	y = present("SchoolYear.txt");
+	SchoolYear y = SchoolYearPresent("SchoolYear.txt");
 	//taoDLgia(y); 
 	TextColor(224);
 	ListLop dsl;	dsl.n = 0;
@@ -23,12 +22,9 @@ int main()
 	ListCourses dsmon = ReadListCourses(y);
 	ReadFileClass(dsl, y);
 	ReadFileStudent(dsl, y);
-	Read_File_DSGV(dsgv, y);
+	ReadFileDSGV(dsgv, y);
 	UpdateStudent(y);
 	UpdateCSV(dsl, y);
-	//ViewScoreBoardOfACourse(dsmon, y);
 	Menu(dsl, dsgv, dsmon, sv, gv, choice, y);
-	//ViewListOfStudentInClass(dsl);
-	//ViewScoreBoardOfACourse(dsmon, y);
 	return 0;
 }

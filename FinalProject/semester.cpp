@@ -2,7 +2,7 @@
 #include"course.h"
 #include "console.h"
 #include "SchoolYear.h"
-void init(listSemester& l)
+void InitListSemester(listSemester& l)
 {
 	l.head = NULL;
 	l.tail = NULL;
@@ -10,7 +10,7 @@ void init(listSemester& l)
 
 void readListSemester(listSemester& l, const SchoolYear&Y)
 {
-	init(l);
+	InitListSemester(l);
 	fstream file;
 	file.open(Y.sesmester, ios::in);
 	while (!file.eof())
@@ -71,7 +71,7 @@ bool CreateSemester(semester& sesmes, const SchoolYear& Y)
 	{
 		l.tail = new NodeSemester;
 		l.tail->semes.name = 0;
-		int n=nam()-1;
+		int n=YearPresent()-1;
 		string s = to_string(n) + '-' + to_string(n + 1);
 		strcpy_s(l.tail->semes.schoolyear, 11, s.c_str());
 	}

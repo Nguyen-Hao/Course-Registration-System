@@ -4,21 +4,22 @@
 #include"console.h"
 #include "Semester.h"
 #include <string>
-void copy(NodeCourse*& p, NodeCourse* p1)
+
+void Copy(NodeCourse*& p, NodeCourse* p1)
 {
 	p->course = p1->course;
 	p->next = NULL;
 }
-void themvaolist(ListCourses& result, ListCourses l, char id[10])
-{
 
+void AddList(ListCourses& result, ListCourses l, char id[10])
+{
 	NodeCourse* temp = l.head;
 	while (temp != NULL)
 	{
 		if (strcmp(temp->course.ID, id) == 0)
 		{
 			NodeCourse* ptr = new NodeCourse;
-			copy(ptr, temp);
+			Copy(ptr, temp);
 			ptr->next = NULL;
 			if (result.head == NULL)
 				result.head = ptr;
@@ -32,7 +33,7 @@ void themvaolist(ListCourses& result, ListCourses l, char id[10])
 	}
 }
 
-bool ktra(const ListCourses& l, string c)
+bool CheckCourses(const ListCourses& l, string c)
 {
 	NodeCourse* temp = l.head;
 	while (temp != NULL)
@@ -60,17 +61,17 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const Schoo
 	initListCourses(result);
 	fstream file;
 	listSemester li;
-	init(li);
+	InitListSemester(li);
 	int se = getSemester(li, Y);
 	file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 	char ch[10] = "\0", CH[10] = "\n";
 	file.getline(ch, 10);
 	while (!file.eof())
 	{
-		while (ktra(l, CH) == false)
+		while (CheckCourses(l, CH) == false)
 		{
 			file.getline(CH, 10);
-			if (ktra(l, CH) == true || strcmp(CH, "\0") == 0) break;
+			if (CheckCourses(l, CH) == true || strcmp(CH, "\0") == 0) break;
 			else
 			{
 				SinhVien s;
@@ -92,7 +93,7 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const Schoo
 				file >> s.Semester;
 				file.ignore();
 				if (strcmp(s.ID, sv.ID) == 0)
-					themvaolist(result, l, ch);
+					AddList(result, l, ch);
 			}
 		}
 		strcpy_s(ch, 10, CH);
@@ -101,7 +102,7 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const Schoo
 	file.close();
 	return result;
 }
-NodeCourse* find(const ListCourses& l, char id[10])
+NodeCourse* FindCourses(const ListCourses& l, char id[10])
 {
 	NodeCourse* ptr = l.head;
 	while (ptr != NULL)
@@ -112,7 +113,7 @@ NodeCourse* find(const ListCourses& l, char id[10])
 	}
 	return NULL;
 }
-bool checkTrung(const ListCourses& l, NodeCourse* ptr)
+bool CheckSameTime(const ListCourses& l, NodeCourse* ptr)
 {
 	NodeCourse* temp = l.head;
 	while (temp != NULL)
@@ -133,12 +134,12 @@ bool checkTrung(const ListCourses& l, NodeCourse* ptr)
 	}
 	return false;
 }
-void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
+void CoursesRegistration(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 {
 	Time t = getTime();
 	ifstream ifs;
 	listSemester li;
-	init(li);
+	InitListSemester(li);
 	int se = getSemester(li, Y);
 	ifs.open(to_string(se) + Y.TimeDKHP);
 	Time begin, end;
@@ -191,15 +192,15 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 		cout << "nhap id mon can dang ki: ";
 		cin.get(id, 10, '\n');
 		cin.ignore();
-		NodeCourse* ptr = find(l, id);
+		NodeCourse* ptr = FindCourses(l, id);
 
-		if (ktra(l, id) == false) {
+		if (CheckCourses(l, id) == false) {
 			c = "Khong ton tai ma mon hoc";
 			f = false;
 		}
 		else
 		{
-			if (checkTrung(temp, ptr) == true) {
+			if (CheckSameTime(temp, ptr) == true) {
 				c = "Trung lich hoc";
 				f = false;
 			}
@@ -227,11 +228,11 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 						file1 << S.YearStudent << endl;
 						file1 << S.Semester << endl;
 					}
-					while (ktra(l, CH) == false)
+					while (CheckCourses(l, CH) == false)
 					{
 						file.getline(CH, 10);
 
-						if (ktra(l, CH) == true || strcmp(CH, "\0") == 0) break;
+						if (CheckCourses(l, CH) == true || strcmp(CH, "\0") == 0) break;
 						else
 						{
 							SinhVien s;
@@ -278,7 +279,7 @@ void dangki(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
 		}
 	}
 }
-void view_Enrol_Course(SinhVien& S, const SchoolYear&Y)
+void ViewEnrollCourses(SinhVien& S, const SchoolYear&Y)
 {
 	system("cls");
 	ListCourses l = ReadListCourses(Y);
@@ -294,7 +295,6 @@ void view_Enrol_Course(SinhVien& S, const SchoolYear&Y)
 		cout << "chua dang ki mon nao!" << endl;
 	else
 	{
-		//gotoxy(10, 3); cout << "\t\t---------------------------- " << k->course.Name << " ----------------------------";
 		gotoxy(20, 3); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(20, 4); cout << char(124) << "  " << setw(10) << left << "Ma mon hoc" << char(124) << "  " << setw(30) << left << "Ten mon hoc" << char(124) << "  " << setw(25) << left << "Ten GV" << char(124) << "  " << setw(8) << left << "So TC" << char(124) << "  " << setw(15) << "So sinh vien" << char(124) << "  " << setw(20) << left << "       Lich hoc";
 		gotoxy(149, 4); cout << char(124) << endl;
@@ -313,29 +313,29 @@ void view_Enrol_Course(SinhVien& S, const SchoolYear&Y)
 
 	}
 }
-void eraser_erol_course(SinhVien& S,const SchoolYear&Y, bool &f)
+void EraserEnrollCourses(SinhVien& S,const SchoolYear&Y, bool &f)
 {
-	view_Enrol_Course(S, Y);
+	ViewEnrollCourses(S, Y);
 	char id[10];
 	f = true;
 	cout << "nhap id mon can huy dang ki: ";
 	cin.get(id, 10, '\n');
 	cin.ignore();
 	ListCourses l = ReadListCourses(Y);
-	if (ktra(l, id) == false)
+	if (CheckCourses(l, id) == false)
 	{
 		f = false;
 	}
 	else
 	{
 		ListCourses temp = courseOfStudent(l, S,Y);
-		if (ktra(temp, id) == false)
+		if (CheckCourses(temp, id) == false)
 			f = false;
 		else
 		{
 			fstream file, file1;
 			listSemester li;
-			init(li);
+			InitListSemester(li);
 			int se = getSemester(li, Y);
 			file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 			file1.open("temp.txt", ios::out);
@@ -344,10 +344,10 @@ void eraser_erol_course(SinhVien& S,const SchoolYear&Y, bool &f)
 			while (!file.eof())
 			{
 				file1 << ch << endl;
-				while (ktra(l, CH) == false)
+				while (CheckCourses(l, CH) == false)
 				{
 					file.getline(CH, 10);
-					if (ktra(l, CH) == true || strcmp(CH, "\0") == 0) break;
+					if (CheckCourses(l, CH) == true || strcmp(CH, "\0") == 0) break;
 					else
 					{
 						SinhVien s;

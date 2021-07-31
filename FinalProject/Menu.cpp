@@ -16,7 +16,8 @@ string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP"
 string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
 string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai", "Huy thanh cong", "Huy that bai"};
-void BackGround()
+
+void Information()
 {
 	TextColor(176);
 	for (int j = 0; j < 6; j++)
@@ -31,7 +32,7 @@ void BackGround()
 	TextColor(228);
 }
 
-void KhungHCN(int x, int y, int width, int length)
+void Frames(int x, int y, int width, int length)
 {
 	gotoxy(x, y); for (int i = 0; i < width; i++) cout << char(196);
 	for (int i = 0; i < length; i++)
@@ -45,10 +46,10 @@ void KhungHCN(int x, int y, int width, int length)
 	gotoxy(x + width, y + length + 1); cout << (char)217;
 	gotoxy(x, y + length + 1); for (int i = 0; i < width; i++) cout << char(196);
 }
-void InfoTeam()
+void Team()
 {
 	TextColor(228);
-	KhungHCN(105, 12, 55, 8);
+	Frames(105, 12, 55, 8);
 	gotoxy(110, 14); cout << "Giang vien huong dan: ThS. Nguyen Le Hoang Dung";
 	gotoxy(110, 15); cout << "SINH VIEN THUC HIEN: ";
 	gotoxy(113, 16); cout << "1. To Tran Son Ba"; gotoxy(130, 16); cout << " - 20120431";
@@ -57,19 +58,19 @@ void InfoTeam()
 	gotoxy(113, 19); cout << "4. Le Kim Hieu"; gotoxy(130, 19); cout << " - 20120474";
 }
 char c, d;
-int MenuFirst()
+int MenuHeader()
 {
 	int vitri = 0;
 	while (true)
 	{
 		system("cls");
 		TextColor(224);
-		KhungHCN(138, 29, 10, 2);
+		Frames(138, 29, 10, 2);
 		gotoxy(140, 30); cout << char(30) << ": UP";
 		gotoxy(140, 31); cout << char(31) << ": DOWN";
-		BackGround();
-		InfoTeam();
-		KhungHCN(8, 12, 22, 1);
+		Information();
+		Team();
+		Frames(8, 12, 22, 1);
 		gotoxy(10, 13); cout << "DANG NHAP DANH CHO: ";
 		int n = 0;
 		for (int i = 0; i < 3; i++)
@@ -112,10 +113,10 @@ int MenuFirst()
 			return vitri + 1;
 	}
 }
-void HuongDan()
+void Instruction()
 {
 	TextColor(224);
-	KhungHCN(125, 27, 25, 5);
+	Frames(125, 27, 25, 5);
 	gotoxy(130, 28); cout << "ESC: Back";
 	gotoxy(130, 30); cout << "Enter: DOWN/Login";
 	gotoxy(130, 29); cout << "Tab: UP/DOWN ";
@@ -123,21 +124,21 @@ void HuongDan()
 	gotoxy(130, 32); cout << char(31) << ": DOWN";
 	TextColor(228);
 }
-void KhungDangNhap(int item)
+void SignInFrames(int item)
 {
-	HuongDan();
+	Instruction();
 	gotoxy(63, 11);
 	if (item == 0) cout << "DANG NHAP - GIAO VIEN";
 	else cout << "DANG NHAP - SINH VIEN";
-	KhungHCN(60, 9, 30, 3);
+	Frames(60, 9, 30, 3);
 	gotoxy(50, 16); cout << "Ten dang nhap: (Toi da 20 ky tu) ";
-	KhungHCN(50, 17, 50, 2);
+	Frames(50, 17, 50, 2);
 
 	gotoxy(50, 22); cout << "Mat khau: (Toi da 20 ky tu)";
-	KhungHCN(50, 23, 50, 2);
+	Frames(50, 23, 50, 2);
 
 }
-void TaoThanhCong(int x, int y, string c)
+void EffectSuccess(int x, int y, string c)
 {
 	TextColor(160); 
 	gotoxy(x, y); for (int i = 0;i <= c.size()+3;i++) cout << " ";
@@ -146,7 +147,7 @@ void TaoThanhCong(int x, int y, string c)
 	gotoxy(x+3, y+1); cout << c;
 	TextColor(224);
 }
-void TaoThatBai(int x, int y , string c)
+void EffectFailed(int x, int y , string c)
 {
 	TextColor(207); 
 	gotoxy(x, y); for (int i = 0;i <= c.size() +3 ;i++) cout << " ";
@@ -155,23 +156,22 @@ void TaoThatBai(int x, int y , string c)
 	gotoxy(x+3, y+1); cout << c;
 	TextColor(224);
 }
-void KhungTaoKiMoi()
+void CreateSemesterForm()
 {
-	
 	TextColor(224);
-	gotoxy(75, 9); cout << "Ki: ";KhungHCN(100, 8, 10, 1); gotoxy(125, 9); cout << "Ex: 1,2,3";// khung nhap ki 
-	gotoxy(75, 13); cout << "Nam hoc: "; KhungHCN(100, 12, 15, 1);// nam
-	gotoxy(75, 17); cout << "Ngay bat dau: "; KhungHCN(100, 16, 10, 1); gotoxy(111, 17); cout << "/"; KhungHCN(113, 16, 10, 1); gotoxy(124, 17); cout << "/"; KhungHCN(126, 16, 10, 1);
-	gotoxy(75, 21); cout << "Ngay ket thuc: "; KhungHCN(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; KhungHCN(113, 20, 10, 1); gotoxy(124, 20); cout << "/"; KhungHCN(126, 20, 10, 1);
-	KhungHCN(130, 28, 30, 3);
+	gotoxy(75, 9); cout << "Ki: ";Frames(100, 8, 10, 1); gotoxy(125, 9); cout << "Ex: 1,2,3";// khung nhap ki 
+	gotoxy(75, 13); cout << "Nam hoc: "; Frames(100, 12, 15, 1);// nam
+	gotoxy(75, 17); cout << "Ngay bat dau: "; Frames(100, 16, 10, 1); gotoxy(111, 17); cout << "/"; Frames(113, 16, 10, 1); gotoxy(124, 17); cout << "/"; Frames(126, 16, 10, 1);
+	gotoxy(75, 21); cout << "Ngay ket thuc: "; Frames(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; Frames(113, 20, 10, 1); gotoxy(124, 20); cout << "/"; Frames(126, 20, 10, 1);
+	Frames(130, 28, 30, 3);
 	gotoxy(132, 30); cout << "ENTER: Fill Next-Create";
 	TextColor(228);
 }
 
-int DangNhap(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv)
+int SignIn(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv)
 {
 ESCAPE:
-	int choice = MenuFirst();
+	int choice = MenuHeader();
 	bool Login = false;
 	if (choice == 3)
 	{
@@ -189,8 +189,8 @@ ESCAPE:
 		USER:
 			while (true)
 			{
-				BackGround();
-				KhungDangNhap(1);
+				Information();
+				SignInFrames(1);
 				gotoxy(55 + i++, 18);
 				char c;
 				c = GetKey();
@@ -271,13 +271,13 @@ ESCAPE:
 				}
 			if (Login == true)
 			{
-				TaoThanhCong(54, 28, ThaoTac[0]);
+				EffectSuccess(54, 28, ThaoTac[0]);
 				Sleep(2000);
 				break;
 			}
 			else
 			{
-				TaoThatBai(54, 28, ThaoTac[1]);
+				EffectFailed(54, 28, ThaoTac[1]);
 				Sleep(2000);
 			}
 		}
@@ -293,8 +293,8 @@ ESCAPE:
 		USERGV:
 			while (true)
 			{
-				BackGround();
-				KhungDangNhap(0);
+				Information();
+				SignInFrames(0);
 				gotoxy(55 + i++, 18);
 				char c;
 				c = GetKey();
@@ -375,13 +375,13 @@ ESCAPE:
 			}
 			if (Login == true)
 			{
-				TaoThanhCong(54, 28, ThaoTac[0]);
+				EffectSuccess(54, 28, ThaoTac[0]);
 				Sleep(2000);
 				break;
 			}
 			else
 			{
-				TaoThatBai(54, 28, ThaoTac[1]);
+				EffectFailed(54, 28, ThaoTac[1]);
 				Sleep(2000);
 			}
 		}
@@ -395,7 +395,7 @@ char* TOUPPER(char* c)
 		toupper(c[i]);
 	return c;
 }
-void doi_password_sv(SinhVien& sv, ListLop& dsl, char newpass[], const SchoolYear& Y)
+void ChangePasswordStudent(SinhVien& sv, ListLop& dsl, char newpass[], const SchoolYear& Y)
 {
 	strcpy_s(sv.pass, newpass);
 	for (int i = 0; i < dsl.n; i++)
@@ -411,7 +411,7 @@ void doi_password_sv(SinhVien& sv, ListLop& dsl, char newpass[], const SchoolYea
 	}
 	WriteFileStudent(dsl, Y);
 }
-void MenuDoiPasswordsv(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
+void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 {
 	char oldpass[30];
 	char newpass[30];
@@ -431,12 +431,12 @@ void MenuDoiPasswordsv(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 	}
 	else
 	{
-		doi_password_sv(sv, dsl, newpass, Y);
+		ChangePasswordStudent(sv, dsl, newpass, Y);
 		gotoxy(30, 25); cout << "Doi mat khau thanh cong!" << endl;
 		gotoxy(30, 26); system("pause");
 	}
 }
-void doi_password_gv(GiaoVien& gv, ListGV& dsgv, char newpass[], const SchoolYear& Y)
+void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, char newpass[], const SchoolYear& Y)
 {
 	strcpy_s(gv.pass, newpass);
 	for (NodeGV* p = dsgv.pHead; p != NULL; p = p->pNext)
@@ -449,7 +449,7 @@ void doi_password_gv(GiaoVien& gv, ListGV& dsgv, char newpass[], const SchoolYea
 	}
 	writeFileTeacher(dsgv, Y);
 }
-void MenuDoiPasswordgv(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
+void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 {
 	char oldpass[30];
 	char newpass[30];
@@ -469,12 +469,12 @@ void MenuDoiPasswordgv(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 	}
 	else
 	{
-		doi_password_gv(gv, dsgv, newpass, Y);
+		ChangePasswordManager(gv, dsgv, newpass, Y);
 		gotoxy(26, 25); cout << "Doi mat khau thanh cong!" << endl;
 		gotoxy(26, 26); system("pause");
 	}
 }
-void MenuCon(string s[], int &vitri, int size)
+void MenuChildren(string s[], int &vitri, int size)
 {
 	int n = 0;
 	for (int i = 0; i < size; i++)
@@ -506,7 +506,7 @@ void MenuCon(string s[], int &vitri, int size)
 void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, SchoolYear Y)
 {
 HOME:
-	choice = DangNhap(ds, dsgv, sv, gv);
+	choice = SignIn(ds, dsgv, sv, gv);
 	int vitri = 0;
 	semester s;
 	if (choice == 2) {
@@ -565,9 +565,9 @@ HOME:
 						system("cls");
 						gotoxy(60, 9);
 						string s;
-						dangki(dsmon, sv, Y, s, f);
-						if (f) TaoThanhCong(55, 15, s);
-						else TaoThatBai(55, 15, s);
+						CoursesRegistration(dsmon, sv, Y, s, f);
+						if (f) EffectSuccess(55, 15, s);
+						else EffectFailed(55, 15, s);
 						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
@@ -575,7 +575,7 @@ HOME:
 					else if (c == 2)
 					{
 						gotoxy(60, 9);
-						view_Enrol_Course(sv, Y);
+						ViewEnrollCourses(sv, Y);
 						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
@@ -584,23 +584,23 @@ HOME:
 					{
 						bool f;
 						gotoxy(60, 9);
-						eraser_erol_course(sv, Y, f);
-						if (f) TaoThanhCong(55, 15, ThaoTac[4]);
-						else TaoThatBai(55, 15, "Xoa Khong thanh cong");
+						EraserEnrollCourses(sv, Y, f);
+						if (f) EffectSuccess(55, 15, ThaoTac[4]);
+						else EffectFailed(55, 15, "Xoa Khong thanh cong");
 						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 4)
 					{
-						ViewScoreBoardOfACourse(dsmon, Y);
+						viewScoreBoardOfStudent(sv, Y);
 						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
 					}
 					else if (c == 5)
 					{
-						MenuDoiPasswordsv(sv, ds, Y);
+						MenuChangePasswordStudent(sv, ds, Y);
 						goto REPEATSV;
 					}
 					else if (c == 6)
@@ -668,7 +668,7 @@ HOME:
 					int vitricon = 0;
 					while (true)
 					{
-						MenuCon(MenuGV1, vitricon, 4);
+						MenuChildren(MenuGV1, vitricon, 4);
 						d = GetKey();
 						if (d == DOWN)
 						{
@@ -689,23 +689,24 @@ HOME:
 							if (vitricon == 0)
 							{
 								CreateSchoolYear(Y);
-								TaoThanhCong(90, 28, ThaoTac[2]);
+								DataFake(Y);
+								EffectSuccess(90, 28, ThaoTac[2]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 1)
 							{
-								KhungTaoKiMoi();
+								CreateSemesterForm();
 								bool f = CreateSemester(s, Y);
-								if (f == true) TaoThanhCong(90, 28, ThaoTac[2]);
-								else TaoThatBai(90, 28, ThaoTac[3]);
+								if (f == true) EffectSuccess(90, 28, ThaoTac[2]);
+								else EffectFailed(90, 28, ThaoTac[3]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 2)
 							{
 								CreateNewClass(ds, Y);
-								TaoThanhCong(90, 28, ThaoTac[2]);
+								EffectSuccess(90, 28, ThaoTac[2]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
@@ -713,7 +714,7 @@ HOME:
 							{
 								// in file DSSV tung lop
 								PrintFileCSV(ds, Y);
-								TaoThanhCong(90, 28, ThaoTac[2]);
+								EffectSuccess(90, 28, ThaoTac[2]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
@@ -725,7 +726,7 @@ HOME:
 					int vitricon = 0;
 					while (true)
 					{
-						MenuCon(MenuGV3, vitricon, 7);
+						MenuChildren(MenuGV3, vitricon, 7);
 						d = GetKey();
 						if (d == DOWN)
 						{
@@ -761,7 +762,7 @@ HOME:
 							{
 								system("cls");
 								ViewListOfClass(ds);
-								//cin.ignore();
+								cin.ignore();
 								ViewListOfStudentInClass(ds);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
@@ -777,7 +778,7 @@ HOME:
 							else if (vitricon == 4)
 							{
 								system("cls");
-								ViewListOfStudentIncourses(Y);
+								ViewListOfCourse(Y);
 								cin.ignore();
 								ViewScoreBoardOfACourse(dsmon, Y);
 								gotoxy(30, 1); system("pause");
@@ -787,7 +788,6 @@ HOME:
 							{
 								system("cls");
 								ViewListOfClass(ds);
-								cin.ignore();
 								ViewScoreOfAClass(ds, dsmon, Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
@@ -795,7 +795,7 @@ HOME:
 							else if (vitricon == 6)
 							{
 								ExportListStudentInCourseToEnterScore(dsmon, Y);
-								TaoThanhCong(90, 28, ThaoTac[2]);
+								EffectSuccess(90, 28, ThaoTac[2]);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
@@ -807,7 +807,7 @@ HOME:
 					int vitricon = 0;
 					while (true)
 					{
-						MenuCon(MenuGV2, vitricon, 4);
+						MenuChildren(MenuGV2, vitricon, 4);
 						d = GetKey();
 						if (d == DOWN)
 						{
@@ -846,7 +846,7 @@ HOME:
 							else if (vitricon == 3)
 							{
 								deleteCourse(Y);
-								TaoThanhCong(55, 10, ThaoTac[4]);
+								EffectSuccess(55, 10, ThaoTac[4]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
@@ -855,7 +855,7 @@ HOME:
 				}
 				else if (c == 4)
 				{
-					MenuDoiPasswordgv(gv, dsgv, Y);
+					MenuChangePasswordManager(gv, dsgv, Y);
 					goto REPEATGV;
 				}
 				else if (c == 5)

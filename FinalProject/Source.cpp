@@ -24,14 +24,12 @@ void ReadFileClass(ListLop& dsl, const SchoolYear&Y)
 	}
 	file.close();
 }
-//Hàm lấy thời gian hệ thống
 Time getTime()
 {
 	struct tm newtime;
 	time_t now = time(0);
 	localtime_s(&newtime, &now);
 	Time a;
-	// các thành phần của cấu trúc tm struct
 	a.year = 1900 + newtime.tm_year;
 	a.month = 1 + newtime.tm_mon;
 	a.day = newtime.tm_mday;
@@ -40,7 +38,6 @@ Time getTime()
 	a.second = newtime.tm_sec;
 	return a;
 }
-//Kiểm tra năm nhuận
 bool isLeapYear(int nYear)
 {
 	if ((nYear % 4 == 0 && nYear % 100 != 0) || nYear % 400 == 0)
@@ -50,7 +47,6 @@ bool isLeapYear(int nYear)
 	return false;
 }
 
-// Hàm trả về số ngày trong tháng thuộc năm cho trước
 int sumOfDayInMonth(int nMonth, int nYear)
 {
 	int nNumOfDays;
@@ -87,31 +83,25 @@ int sumOfDayInMonth(int nMonth, int nYear)
 	return nNumOfDays;
 }
 
-// Hàm kiểm tra ngày dd/mm/yyyy cho trước có phải là ngày hợp lệ
 bool isDate(int nDay, int nMonth, int nYear)
 {
-	// Kiểm tra năm
 	if (nYear < 0)
 	{
 		return false;
 	}
-
-	// Kiểm tra tháng
 	if (nMonth < 1 || nMonth > 12)
 	{
 		return false;
 	}
 
-	// Kiểm tra ngày
 	if (nDay < 1 || nDay > sumOfDayInMonth(nMonth, nYear))
 	{
 		return false;
 	}
 
-	return true; // Trả về trạng thái cuối cùng...
+	return true; 
 }
 
-//Hàm kiểm tra giờ phút giây có hợp lệ hay không
 bool isTime(int h, int m, int s)
 {
 	return ((h >= 0) && (h <= 23) && (m >= 0) && (m <= 59) && (s >= 0) && (s <= 59));
