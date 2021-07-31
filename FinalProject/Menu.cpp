@@ -395,7 +395,7 @@ char* TOUPPER(char* c)
 		toupper(c[i]);
 	return c;
 }
-void doi_password_sv(SinhVien sv, ListLop& dsl, char newpass[], const SchoolYear& Y)
+void doi_password_sv(SinhVien& sv, ListLop& dsl, char newpass[], const SchoolYear& Y)
 {
 	strcpy_s(sv.pass, newpass);
 	for (int i = 0; i < dsl.n; i++)
@@ -411,31 +411,32 @@ void doi_password_sv(SinhVien sv, ListLop& dsl, char newpass[], const SchoolYear
 	}
 	WriteFileStudent(dsl, Y);
 }
-int MenuDoiPasswordsv(SinhVien sv, ListLop& dsl, const SchoolYear& Y)
+void MenuDoiPasswordsv(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 {
 	char oldpass[30];
 	char newpass[30];
 	char newpassAgain[30];
-	gotoxy(26, 30); cout << "Nhap mat khau: "; cin.getline(oldpass, 30);
-	gotoxy(26, 35); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30);
-	gotoxy(26, 40); cout << "Nhap lai mat khau moi: "; cin.getline(newpassAgain, 30);
-	if (strcmp(sv.pass, oldpass) == 0)
+	gotoxy(30, 15); cout << "Nhap mat khau: "; cin.getline(oldpass, 30);
+	gotoxy(30, 17); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30);
+	gotoxy(30, 19); cout << "Nhap lai mat khau moi: "; cin.getline(newpassAgain, 30);
+	if (strcmp(sv.pass, oldpass) != 0)
 	{
-		gotoxy(26, 50); cout << "Mat Khau sai!";
-		return 0;
+		gotoxy(30, 25); cout << "Mat Khau sai!" << endl;
+		gotoxy(30, 26); system("pause");
 	}
-	else if (strcmp(newpass, newpassAgain) == 0)
+	else if (strcmp(newpass, newpassAgain) != 0)
 	{
-		gotoxy(26, 50); cout << "Mat Khau khong khop!";
-		return 0;
+		gotoxy(30, 25); cout << "Mat Khau khong khop!" << endl;
+		gotoxy(30, 26); system("pause");
 	}
 	else
 	{
 		doi_password_sv(sv, dsl, newpass, Y);
-		return 1;
+		gotoxy(30, 25); cout << "Doi mat khau thanh cong!" << endl;
+		gotoxy(30, 26); system("pause");
 	}
 }
-void doi_password_gv(GiaoVien gv, ListGV dsgv, char newpass[], const SchoolYear& Y)
+void doi_password_gv(GiaoVien& gv, ListGV& dsgv, char newpass[], const SchoolYear& Y)
 {
 	strcpy_s(gv.pass, newpass);
 	for (NodeGV* p = dsgv.pHead; p != NULL; p = p->pNext)
@@ -448,7 +449,7 @@ void doi_password_gv(GiaoVien gv, ListGV dsgv, char newpass[], const SchoolYear&
 	}
 	writeFileTeacher(dsgv, Y);
 }
-int MenuDoiPasswordgv(GiaoVien gv, ListGV dsgv, const SchoolYear& Y)
+void MenuDoiPasswordgv(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 {
 	char oldpass[30];
 	char newpass[30];
@@ -456,22 +457,21 @@ int MenuDoiPasswordgv(GiaoVien gv, ListGV dsgv, const SchoolYear& Y)
 	gotoxy(26, 15); cout << "Nhap mat khau: "; cin.getline(oldpass, 30); 
 	gotoxy(26, 17); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30); 
 	gotoxy(26, 19); cout << "Nhap lai mat khau moi: "; cin.getline(newpassAgain, 30);
-	if (strcmp(gv.pass, oldpass) == 0)
+	if (strcmp(gv.pass, oldpass) != 0)
 	{
 		gotoxy(26, 25); cout << "Mat Khau sai!" << endl;
-		system("pause");
-		return 0;
+		gotoxy(26, 26); system("pause");
 	}
-	else if (strcmp(newpass, newpassAgain) == 0)
+	else if (strcmp(newpass, newpassAgain) != 0)
 	{
 		gotoxy(26, 25); cout << "Mat Khau khong khop!" << endl;
-		system("pause");
-		return 0;
+		gotoxy(26, 26); system("pause");
 	}
 	else
 	{
 		doi_password_gv(gv, dsgv, newpass, Y);
-		return 1;
+		gotoxy(26, 25); cout << "Doi mat khau thanh cong!" << endl;
+		gotoxy(26, 26); system("pause");
 	}
 }
 void MenuCon(string s[], int &vitri, int size)
@@ -600,7 +600,8 @@ HOME:
 					}
 					else if (c == 5)
 					{
-						//
+						MenuDoiPasswordsv(sv, ds, Y);
+						goto REPEATSV;
 					}
 					else if (c == 6)
 					{
@@ -738,22 +739,23 @@ HOME:
 							{
 								system("cls");
 								ViewListOfClass(ds);
-								gotoxy(70, 32); system("pause");
+								gotoxy(5, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 2)
 							{
 								system("cls");
 								ViewListOfCourse(Y);
-								gotoxy(70, 32); system("pause");
+								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 1)
 							{
 								system("cls");
-								cin.ignore();
+								ViewListOfClass(ds);
+								//cin.ignore();
 								ViewListOfStudentInClass(ds);
-								gotoxy(70, 32); system("pause");
+								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 3)
@@ -761,28 +763,32 @@ HOME:
 								system("cls");
 								cin.ignore();
 								ViewListOfStudentIncourses(Y);
-								gotoxy(70, 32); system("pause");
+								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 4)
 							{
 								system("cls");
+								ViewListOfStudentIncourses(Y);
+								cin.ignore();
 								ViewScoreBoardOfACourse(dsmon, Y);
-								gotoxy(70, 32); system("pause");
+								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 5)
 							{
 								system("cls");
+								ViewListOfClass(ds);
+								cin.ignore();
 								ViewScoreOfAClass(ds, dsmon, Y);
-								gotoxy(70, 32); system("pause");
+								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 6)
 							{
 								ExportListStudentInCourseToEnterScore(Y);
 								TaoThanhCong(90, 28, ThaoTac[2]);
-								gotoxy(70, 32); system("pause");
+								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
 						}
@@ -841,12 +847,8 @@ HOME:
 				}
 				else if (c == 4)
 				{
-				CHANGEPASSGV:
-					int k = MenuDoiPasswordgv(gv, dsgv, Y);
-					if (k == 1)
-						goto CHANGEPASSGV;
-					else
-						goto REPEATGV;
+					MenuDoiPasswordgv(gv, dsgv, Y);
+					goto REPEATGV;
 				}
 				else if (c == 5)
 				{

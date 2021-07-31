@@ -325,7 +325,7 @@ void ViewListOfClass(ListLop& ds)
 }
 void ViewListOfStudentInClass(ListLop& ds)
 {
-	gotoxy(10, 3);
+	gotoxy(20, 26);
 	cout << "Nhap ma lop: ";
 	int ViTriLop;
 	char Malop[10];
@@ -342,6 +342,7 @@ void ViewListOfStudentInClass(ListLop& ds)
 		cout << "Chua co sinh vien nao trong lop" << endl;
 		return;
 	}
+	system("cls");
 	gotoxy(35, 3); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------";
 	gotoxy(20, 4); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
@@ -576,6 +577,7 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, const SchoolYear&Y)
 			if (strcmp(k->course.ID, mamon.c_str()) == 0)
 				break;
 		}
+		system("cls");
 		getline(fin, s);
 		gotoxy(10, 3); cout << "\t\t---------------------------- " << k->course.Name << " ----------------------------";
 		gotoxy(5, 5); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
@@ -708,6 +710,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm,const SchoolYear&Y)
 	cin.ignore();
 	char malop[50];
 	cout << "Nhap ma lop: "; cin.get(malop, 50, '\n');
+	system("cls");
 	ListCourses ds = ReadListCourses(Y);
 	bool flat = false;
 	int VitriLop;
