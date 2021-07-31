@@ -1,8 +1,5 @@
-﻿  Menu.cpp
-C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(78,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(188,9): warning C4101: 'pre': unreferenced local variable
-C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(292,9): warning C4101: 'pre': unreferenced local variable
-C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(482,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(523,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\PC\Desktop\FinalProject\FinalProject\Menu.cpp(631,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  course.cpp
+C:\Users\PC\Desktop\FinalProject\FinalProject\course.cpp(131,8): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  main.cpp
+  Generating Code...
   FinalProject.vcxproj -> C:\Users\PC\Desktop\FinalProject\x64\Debug\FinalProject.exe

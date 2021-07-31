@@ -16,7 +16,7 @@ void AddList(ListCourses& result, ListCourses l, char id[10])
 	NodeCourse* temp = l.head;
 	while (temp != NULL)
 	{
-		if (strcmp(temp->course.ID, id) == 0)
+		if (temp->course.ID==id)
 		{
 			NodeCourse* ptr = new NodeCourse;
 			Copy(ptr, temp);
@@ -38,7 +38,7 @@ bool CheckCourses(const ListCourses& l, string c)
 	NodeCourse* temp = l.head;
 	while (temp != NULL)
 	{
-		if (strcmp(temp->course.ID, c.c_str()) == 0)
+		if (temp->course.ID==c)
 			return true;
 		temp = temp->next;
 	}
@@ -107,7 +107,7 @@ NodeCourse* FindCourses(const ListCourses& l, char id[10])
 	NodeCourse* ptr = l.head;
 	while (ptr != NULL)
 	{
-		if (strcmp(ptr->course.ID, id) == 0)
+		if (ptr->course.ID==id)
 			return ptr;
 		ptr = ptr->next;
 	}

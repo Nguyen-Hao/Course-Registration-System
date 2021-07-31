@@ -129,9 +129,9 @@ struct ListGV
 struct Course
 {
 	int Sememster;		
-	char ID[10];
-	char Name[50];		
-	char TeacherName[50];
+	string ID;
+	string Name;		
+	string TeacherName;
 	int NumOfCredits;	
 	int MaxNumOfStudents = 50;
 	PhienGio Session1;			

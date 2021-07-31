@@ -20,18 +20,15 @@ void createNewCourse(const SchoolYear& Y)
 	Course a;
 	a.Sememster = se;
 	cout << "Nhap ID khoa hoc: ";
-	cin.get(a.ID, 10, '\n');
-	cin.ignore();
+	getline(cin, a.ID);
 	cout << "Nhap ten khoa hoc: ";
-	cin.get(a.Name, 50, '\n');
-	cin.ignore();
+	getline(cin, a.Name);
 	cout << "Nhap ten giao vien: ";
-	cin.get(a.TeacherName, 50, '\n');
+	getline(cin, a.TeacherName);
 	cout << "Nhap so tin chi: ";
 	cin >> a.NumOfCredits;
 	cout << "Nhap so luong sinh vien toi da: ";
 	cin >> a.MaxNumOfStudents;
-	cin.ignore();
 	cout << "Nhap buoi hoc thu 1: ";
 	do
 	{
@@ -105,9 +102,9 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 	while (file >> temp0.Sememster)
 	{
 		file.ignore();
-		file.getline(temp0.ID, 10);
-		file.getline(temp0.Name, 50); 
-		file.getline(temp0.TeacherName, 50);
+		getline(file, temp0.ID);
+		getline(file, temp0.Name);
+		getline(file, temp0.TeacherName);
 		file >> temp0.NumOfCredits;
 		file >> temp0.MaxNumOfStudents;
 		file >> temp0.Session1.thu;
@@ -164,7 +161,7 @@ void updateCourse(const SchoolYear& Y)
 	ViewListOfCourse(Y);
 	Course a, b;
 	cout << "Nhap ID khoa hoc can update: ";
-	cin.get(a.ID, 20, '\n');
+	getline(cin, a.ID);
 	fstream file1, file2;
 	listSemester l;
 	InitListSemester(l);
@@ -175,9 +172,9 @@ void updateCourse(const SchoolYear& Y)
 	{
 		file1 >> b.Sememster;
 		file1.ignore();
-		file1.getline(b.ID, 10);
-		file1.getline(b.Name, 50);
-		file1.getline(b.TeacherName, 50);
+		getline(file1, b.ID);
+		getline(file1, b.Name);
+		getline(file1, b.TeacherName);
 		file1 >> b.NumOfCredits;
 		file1.ignore();
 		file1 >> b.MaxNumOfStudents;
@@ -186,20 +183,16 @@ void updateCourse(const SchoolYear& Y)
 		file1 >> b.Session2.thu >> b.Session2.gio >> b.Session2.phut;
 		file1.ignore();
 		if (file1.eof()) break;
-		if (strcmp(a.ID, b.ID) == 0)
+		if (a.ID==b.ID)
 		{
 			cout << "Nhap thong tin can cap nhat" << endl;
-			cout << "Nhap hoc ky: ";
-			cin >> a.Sememster;
-			cin.ignore();
+			a.Sememster = se;
 			cout << "Nhap ID khoa hoc: ";
-			cin.get(a.ID, 10, '\n');
-			cin.ignore();
+			getline(cin, a.ID);
 			cout << "Nhap ten khoa hoc: ";
-			cin.get(a.Name, 50, '\n');
-			cin.ignore();
+			getline(cin, a.Name);
 			cout << "Nhap ten giao vien: ";
-			cin.get(a.TeacherName, 50, '\n');
+			getline(cin,a.TeacherName);
 			cout << "Nhap so tin chi: ";
 			cin >> a.NumOfCredits;
 			cout << "Nhap so luong sinh vien toi da: ";
@@ -355,7 +348,7 @@ void deleteCourse(const SchoolYear& Y)
 	ViewListOfCourse(Y);
 	Course a, b;
 	cout << "Nhap ID khoa hoc muon xoa: ";
-	cin.get(a.ID, 20, '\n');
+	getline(cin, a.ID);
 	fstream file1, file2;
 	listSemester l;
 	InitListSemester(l);
@@ -366,18 +359,15 @@ void deleteCourse(const SchoolYear& Y)
 	{
 		file1 >> b.Sememster;
 		file1.ignore();
-		file1.getline(b.ID, 10);
-		file1.getline(b.Name, 50);
-		file1.getline(b.TeacherName, 50);
+		getline(file1, b.ID);
+		getline(file1, b.Name);
+		getline(file1, b.TeacherName);
 		file1 >> b.NumOfCredits;
-		file1.ignore();
 		file1 >> b.MaxNumOfStudents;
-		file1.ignore();
 		file1 >> b.Session1.thu >> b.Session1.gio >> b.Session1.phut;
 		file1 >> b.Session2.thu >> b.Session2.gio >> b.Session2.phut;
-		file1.ignore();
 		if (file1.eof()) break;
-		if (strcmp(a.ID, b.ID) == 0)
+		if (a.ID==b.ID)
 		{
 
 		}

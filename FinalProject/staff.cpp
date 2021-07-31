@@ -116,6 +116,7 @@ void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
 		GiaoVien gv;
 		file.clear();
 		file.getline(gv.ID, 10);
+		if (strlen(gv.ID) == 0) break;
 		file.getline(gv.pass, 20);
 		file.getline(gv.FirstName, 20);
 		file.getline(gv.LastName, 20);
@@ -151,7 +152,7 @@ int Checkcourses(ListCourses dsl, char a[10])
 	int i = 0;
 	for (p; p != NULL; p = p->next)
 	{
-		if (strcmp(p->course.ID, a) == 0)
+		if (p->course.ID==a)
 			if (i == 0) return -1; 
 			else return i;
 		i++;
@@ -267,7 +268,7 @@ void UpdateStudent(const SchoolYear& Y)
 	remove(Y.DSSinhVien.c_str());
 	rename("list.txt", Y.DSSinhVien.c_str());
 }
-ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50], const SchoolYear& Y)
+ListSV* findStudentOfCourses(const ListCourses& l, string mamon, const SchoolYear& Y)
 {
 	ListSV* lsv = NULL;
 	fstream file;
@@ -278,7 +279,7 @@ ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50], const SchoolY
 	string s;
 	while (getline(file, s))
 	{
-		if (strcmp(s.c_str(), mamon) == 0)
+		if (s==mamon)
 		{
 			getline(file, s);
 			while (true)
@@ -447,7 +448,7 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, const SchoolYear& Y)
 		NodeCourse* k = dsmon.head;
 		for (k; k != NULL;k = k->next)
 		{
-			if (strcmp(k->course.ID, mamon.c_str()) == 0)
+			if (k->course.ID==mamon)
 				break;
 		}
 		system("cls");
@@ -663,7 +664,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, const SchoolYear& Y)
 		n++;
 	}
 }
-DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, char* mamon)
+DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, string mamon)
 {
 	int t = YearPresent();
 	ifstream f1;
