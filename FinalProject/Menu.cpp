@@ -11,7 +11,7 @@
 
 string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
 string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", " 5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
-string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi" };
+string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi"," 4. Xuat file nhap DSSV tung lop" };
 string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc", " 4. Xoa khoa hoc" };
 string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
@@ -667,17 +667,17 @@ HOME:
 					int vitricon = 0;
 					while (true)
 					{
-						MenuCon(MenuGV1, vitricon, 3);
+						MenuCon(MenuGV1, vitricon, 4);
 						d = GetKey();
 						if (d == DOWN)
 						{
 							vitricon += 1;
-							if (vitricon == 3) vitricon = 0;
+							if (vitricon == 4) vitricon = 0;
 						}
 						if (d == UP)
 						{
 							vitricon -= 1;
-							if (vitricon == -1) vitricon = 2;
+							if (vitricon == -1) vitricon = 3;
 						}
 						if (d == ESC)
 						{
@@ -704,6 +704,14 @@ HOME:
 							else if (vitricon == 2)
 							{
 								CreateNewClass(ds, Y);
+								TaoThanhCong(90, 28, ThaoTac[2]);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 3)
+							{
+								// in file DSSV tung lop
+								PrintFileCSV(ds, Y);
 								TaoThanhCong(90, 28, ThaoTac[2]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
@@ -780,7 +788,7 @@ HOME:
 							}
 							else if (vitricon == 6)
 							{
-								ExportListStudentInCourseToEnterScore(Y);
+								ExportListStudentInCourseToEnterScore(dsmon, Y);
 								TaoThanhCong(90, 28, ThaoTac[2]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;

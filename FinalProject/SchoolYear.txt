@@ -7,12 +7,3 @@ ListCourses2021_2022.txt
 sesmester2021_2022.txt
 StudentOfSubject2021_2022.txt
 TimeDKHP2021_2022.txt
-2022 2023
-DsGiaoVien2022_2023.txt
-DSLop2022_2023.txt
-DSSinhVien2022_2023.txt
-Filecsv2022_2023.csv
-ListCourses2022_2023.txt
-sesmester2022_2023.txt
-StudentOfSubject2022_2023.txt
-TimeDKHP2022_2023.txt
