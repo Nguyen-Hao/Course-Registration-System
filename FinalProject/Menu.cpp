@@ -583,6 +583,7 @@ HOME:
 					else if (c == 3)
 					{
 						bool f;
+						system("cls");
 						gotoxy(60, 9);
 						EraserEnrollCourses(sv, Y, f);
 						if (f) EffectSuccess(55, 15, ThaoTac[4]);

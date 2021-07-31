@@ -152,9 +152,12 @@ void CoursesRegistration(ListCourses& l, SinhVien& S,const SchoolYear&Y, string 
 	{
 		ifs >> begin.day >> begin.month >> begin.year >>begin.hour>>begin.minute>>begin.second
 			>>end.day >> end.month >> end.year>>end.hour>>end.minute>>end.second;
-		if (!isTimeIn(t, begin, end))
+		char check = isTimeIn(t, begin, end);
+		if (check!=0)
 		{
-			cout << "Chua den thoi gian dang ky hoc phan!" << endl;
+			if (check == 1) cout << "Da qua";
+			else if (check == -1) cout << "Chua den";
+			cout << " thoi gian dang ky hoc phan!" << endl;
 			cout << "Thoi gian dang ky hoc phan tu ";
 			cout << begin.hour << ":";
 			if (begin.minute < 10) cout << "0";
@@ -315,6 +318,45 @@ void ViewEnrollCourses(SinhVien& S, const SchoolYear&Y)
 }
 void EraserEnrollCourses(SinhVien& S,const SchoolYear&Y, bool &f)
 {
+	Time t = getTime();
+	ifstream ifs;
+	listSemester li;
+	InitListSemester(li);
+	int se = getSemester(li, Y);
+	ifs.open(to_string(se) + Y.TimeDKHP);
+	Time begin, end;
+	if (!ifs.is_open())
+	{
+		cout << "Chua co phien dang ky hoc phan!" << endl;
+		return;
+	}
+	else
+	{
+		ifs >> begin.day >> begin.month >> begin.year >> begin.hour >> begin.minute >> begin.second
+			>> end.day >> end.month >> end.year >> end.hour >> end.minute >> end.second;
+		char check = isTimeIn(t, begin, end);
+		if (check != 0)
+		{
+			if (check == 1) cout << "Da qua";
+			else if (check == -1) cout << "Chua den";
+			cout << " thoi gian dang ky hoc phan!" << endl;
+			cout << "Thoi gian dang ky hoc phan tu ";
+			cout << begin.hour << ":";
+			if (begin.minute < 10) cout << "0";
+			cout << begin.minute << ":";
+			if (begin.second < 10) cout << "0";
+			cout << begin.second;
+			cout << " ngay " << begin.day << "/" << begin.month << "/" << begin.year << " den ";
+			cout << end.hour << ":";
+			if (end.minute < 10) cout << "0";
+			cout << end.minute << ":";
+			if (end.second < 10) cout << "0";
+			cout << end.second;
+			cout << " ngay " << end.day << "/" << end.month << "/" << end.year;
+			return;
+		}
+	}
+	ifs.close();
 	ViewEnrollCourses(S, Y);
 	char id[10];
 	f = true;

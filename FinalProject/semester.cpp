@@ -52,7 +52,7 @@ int getSemester(listSemester l, const SchoolYear Y)
 		end.day = p->semes.end.ngay;
 		end.month = p->semes.end.thang;
 		end.year = p->semes.end.nam;
-		if (isTimeIn(time, begin, end))
+		if (isTimeIn(time, begin, end)==0)
 		{
 			return p->semes.name;
 			break;
