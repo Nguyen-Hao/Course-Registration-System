@@ -1,7 +1,7 @@
 #include"Header.h"
 #include"SchoolYear.h"
 #include"student.h"
-
+#include"staff.h"
 unsigned int YearPresent()
 {
 	fstream file;
@@ -61,6 +61,13 @@ void CreateSchoolYear(SchoolYear& S)
 		Y.StudentOfSubject += temp1;
 		Y.TimeDKHP += temp1;
 		S = Y;
+		SchoolYear y1 = SchoolYearPresent(FILESCHOOLYEAR);
+		CopyData(y1.DsGiaoVien, Y.DsGiaoVien);
+		CopyData(y1.DSLop, Y.DSLop);
+		CopyData(y1.DSSinhVien, Y.DSSinhVien);
+		UpdateStudent(Y);
+		CopyData(y1.Filecsv, Y.Filecsv);
+		ExportFileEmpty(Y.sesmester);
 	}
 	fstream file;
 	file.open(FILESCHOOLYEAR, ios::app);
@@ -105,57 +112,28 @@ SchoolYear SchoolYearPresent(const string& S)
 	return c;
 	file.close();
 }
- 
 void CopyData(const string& fileName1, const string& fileName2)
 {
 	fstream file1; 
 	fstream file2;
 	file1.open(fileName1, ios::in);
-	file2.open("temp.txt", ios::out);
-	string a;
 	if (file1.is_open())
 	{
-		getline(file1, a, '\n');
+		file2.open(fileName2, ios::out);
+		string a;
+		getline(file1, a);
 		while (!file1.eof())
 		{
 			file2 << a << endl;
-			getline(file1, a, '\n');
+			getline(file1, a);
 		}
+		file2.close();
 	}
-	file2.close();
 	file1.close();
-	remove(fileName2.c_str());
-	rename("temp.txt", fileName2.c_str());
 }
-
-void DataFake(const SchoolYear& Y)
-{
-	SchoolYear y1 = SchoolYearPresent("DLgia.txt");
-	CopyData(y1.DsGiaoVien, Y.DsGiaoVien);
-	CopyData(y1.DSLop, Y.DSLop);
-	CopyData(y1.DSSinhVien, Y.DSSinhVien);
-	CopyData(y1.Filecsv, Y.Filecsv);
-	CopyData(y1.ListCourses, Y.ListCourses);
-	CopyData(y1.sesmester, Y.sesmester);
-	CopyData(y1.StudentOfSubject, Y.StudentOfSubject);
-	CopyData(y1.TimeDKHP, Y.TimeDKHP);
-}
-
 void ExportFileEmpty(const string& str)
 {
 	fstream file;
 	file.open(str, ios::out);
 	file.close();
-}
-
-void exportFileToImport(const SchoolYear& Y)
-{
-	ExportFileEmpty(Y.DsGiaoVien);
-	ExportFileEmpty(Y.DSLop);
-	ExportFileEmpty(Y.DSSinhVien);
-	ExportFileEmpty(Y.Filecsv);
-	ExportFileEmpty(Y.ListCourses);
-	ExportFileEmpty(Y.sesmester);
-	ExportFileEmpty(Y.StudentOfSubject);
-	ExportFileEmpty(Y.TimeDKHP);
 }

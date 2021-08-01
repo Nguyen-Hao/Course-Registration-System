@@ -128,5 +128,11 @@ bool CreateSemester(semester& sesmes, const SchoolYear& Y)
 	file << sesmes.end.ngay << " " << sesmes.end.thang << " " << sesmes.end.nam << endl;
 	sesmes.lis = ReadListCourses(Y);
 	file.close();
+	file.open(to_string(sesmes.name) + Y.ListCourses);
+	file.close();
+	file.open(to_string(sesmes.name) + Y.StudentOfSubject);
+	file.close();
+	file.open(to_string(sesmes.name) + Y.TimeDKHP);
+	file.close();
 	return true;
 }
