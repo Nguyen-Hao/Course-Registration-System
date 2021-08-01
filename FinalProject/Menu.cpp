@@ -8,6 +8,7 @@
 #include "course.h"
 #include <cctype>
 #include <string>
+#include<algorithm>
 
 string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
 string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", " 5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
@@ -75,7 +76,7 @@ int MenuHeader()
 		int n = 0;
 		for (int i = 0; i < 3; i++)
 		{
-			int k = strlen(Menubegin[i].c_str());
+			int k = Menubegin[i].length();
 			if (k > n) n = k;
 		}
 		for (int i = 0;i < 3;i++)
@@ -185,7 +186,7 @@ ESCAPE:
 			string User = "", Pass = "";
 			system("cls");
 			int i = 0, j = 0;
-			char pre;
+			char pre = NULL;
 		USER:
 			while (true)
 			{
@@ -262,7 +263,7 @@ ESCAPE:
 			for (int i = 0; i < ds.n; i++)
 				for (ListSV* k = ds.l[i].pHead; k != NULL; k = k->pNext)
 				{
-					if (strcmp(k->info.ID, User.c_str()) == 0 && strcmp(k->info.pass, Pass.c_str()) == 0)
+					if (k->info.ID == User && k->info.pass == Pass)
 					{
 						Login = true;
 						sv = k->info;
@@ -289,7 +290,7 @@ ESCAPE:
 			string User = "", Pass = "";
 			system("cls");
 			int i = 0, j = 0;
-			char pre;
+			char pre = NULL;
 		USERGV:
 			while (true)
 			{
@@ -397,14 +398,14 @@ char* TOUPPER(char* c)
 }
 void ChangePasswordStudent(SinhVien& sv, ListLop& dsl, char newpass[], const SchoolYear& Y)
 {
-	strcpy_s(sv.pass, newpass);
+	sv.pass = newpass;
 	for (int i = 0; i < dsl.n; i++)
 	{
 		for (ListSV* p = dsl.l[i].pHead; p != NULL; p = p->pNext)
 		{
-			if (strcmp(sv.ID, p->info.ID) == 0)
+			if (sv.ID == p->info.ID)
 			{
-				strcpy_s(p->info.pass, sv.pass);
+				p->info.pass = sv.pass;
 				break;
 			}
 		}
@@ -419,7 +420,7 @@ void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 	gotoxy(30, 15); cout << "Nhap mat khau: "; cin.getline(oldpass, 30);
 	gotoxy(30, 17); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30);
 	gotoxy(30, 19); cout << "Nhap lai mat khau moi: "; cin.getline(newpassAgain, 30);
-	if (strcmp(sv.pass, oldpass) != 0)
+	if (sv.pass != oldpass)
 	{
 		gotoxy(30, 25); cout << "Mat Khau sai!" << endl;
 		gotoxy(30, 26); system("pause");
@@ -479,7 +480,7 @@ void MenuChildren(string s[], int &vitri, int size)
 	int n = 0;
 	for (int i = 0; i < size; i++)
 	{
-		int k = strlen(s[i].c_str());
+		int k = s[i].length();
 		if (k > n) n = k;
 	}
 	for (int i = 0;i < size;i++)
@@ -514,13 +515,13 @@ HOME:
 		{
 		REPEATSV:
 			system("cls");
-			_strupr_s(sv.FirstName, 50);
-			_strupr_s(sv.LastName, 50);
+			transform(sv.FirstName.begin(), sv.FirstName.end(), sv.FirstName.begin(), toupper);
+			transform(sv.LastName.begin(), sv.LastName.end(), sv.LastName.begin(), toupper);
 			gotoxy(4, 6); cout << "Xin chao : " << sv.FirstName << " " << sv.LastName << " - " << sv.Class;
 			int n = 0;
 			for (int i = 0; i < 7; i++)
 			{
-				int k = strlen(MenuSV[i].c_str());
+				int k = MenuSV[i].length();
 				if (k > n) n = k;
 			}
 			for (int i = 0; i < 7; i++)
@@ -568,6 +569,7 @@ HOME:
 						CoursesRegistration(dsmon, sv, Y, s, f);
 						if (f) EffectSuccess(55, 15, s);
 						else EffectFailed(55, 15, s);
+						f = false;
 						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
@@ -628,7 +630,7 @@ HOME:
 			int n = 0;
 			for (int i = 0; i < 6; i++)
 			{
-				int k = strlen(MenuGV[i].c_str());
+				int k = MenuGV[i].length();
 				if (k > n) n = k;
 			}
 			for (int i = 0; i < 6; i++)

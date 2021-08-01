@@ -57,14 +57,14 @@ struct PhienGio
 
 struct SinhVien
 {
-	char Class[10];
-	char ID[10];
-	char pass[20];
-	char FirstName[50];
-	char LastName[50];
-	char Gender[10];
-	char DateOfBirth[50];
-	char SocialID[10];
+	string Class;
+	string ID;
+	string pass;
+	string FirstName;
+	string LastName;
+	string Gender;
+	string DateOfBirth;
+	string SocialID;
 	int begin[3];
 	int YearStudent;
 	int Semester;
@@ -73,7 +73,7 @@ struct SinhVien
 struct ListSV
 {
 	SinhVien info;
-	ListSV* pNext;
+	ListSV* pNext=NULL;
 };
 struct DiemMonHoc
 {
@@ -86,12 +86,12 @@ struct NodeDiem
 {
 	SinhVien info;
 	DiemMonHoc data;
-	NodeDiem* pNext;
+	NodeDiem* pNext=NULL;
 };
 struct ListDiem
 {
 	NodeDiem* head;
-	NodeDiem* tail;
+	NodeDiem* tail=NULL;
 };
 struct Lop
 {
@@ -99,7 +99,7 @@ struct Lop
 	char Ten[30];
 	char NienKhoa[10];
 	int soluong;
-	ListSV* pHead;
+	ListSV* pHead=NULL;
 };
 struct ListLop
 {
@@ -120,11 +120,11 @@ struct GiaoVien
 struct NodeGV
 {
 	GiaoVien info;
-	NodeGV* pNext;
+	NodeGV* pNext = NULL;
 };
 struct ListGV
 {
-	NodeGV* pHead;
+	NodeGV* pHead = NULL;
 };
 struct Course
 {
@@ -140,17 +140,17 @@ struct Course
 struct NodeCourse
 {
 	Course course;
-	NodeCourse* next;
+	NodeCourse* next = NULL;
 };
 struct ListCourses
 {
-	NodeCourse* head;
+	NodeCourse* head = NULL;
 };
 struct semester
 {
 	int name;
 	char schoolyear[11];
-	int studentYear;
+	int studentYear = 0;
 	Date begin;
 	Date end;
 	ListCourses lis;
@@ -158,12 +158,12 @@ struct semester
 struct NodeSemester
 {
 	semester semes;
-	NodeSemester* next;
+	NodeSemester* next = NULL;
 };
 struct listSemester
 {
-	NodeSemester* head;
-	NodeSemester* tail;
+	NodeSemester* head = NULL;
+	NodeSemester* tail = NULL;
 };
 
 

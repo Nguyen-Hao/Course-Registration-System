@@ -49,7 +49,7 @@ bool isLeapYear(int nYear)
 
 int sumOfDayInMonth(int nMonth, int nYear)
 {
-	int nNumOfDays;
+	int nNumOfDays=0;
 
 	switch (nMonth)
 	{

@@ -8,6 +8,6 @@ int countNodeCourses(const ListCourses& l);
 ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv, const SchoolYear& Y);
 NodeCourse* FindCourses(const ListCourses& l, char id[10]);
 bool CheckSameTime(const ListCourses& l, NodeCourse* ptr);
-void CoursesRegistration(ListCourses& l, SinhVien& S, const SchoolYear& Y, string &c, bool&f);
+void CoursesRegistration(ListCourses& l, SinhVien S, const SchoolYear& Y, string &c, bool&f);
 void ViewEnrollCourses(SinhVien& S, const SchoolYear& Y);
 void EraserEnrollCourses(SinhVien& S, const SchoolYear& Y, bool &f);

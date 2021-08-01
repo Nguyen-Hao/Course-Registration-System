@@ -94,3 +94,14 @@ Le Van A
 7
 8
 30
+CSC012345
+An toan thong tin
+Le Van B
+4
+150
+2
+7
+30
+7
+8
+30

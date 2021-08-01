@@ -75,14 +75,14 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const Schoo
 			else
 			{
 				SinhVien s;
-				strcpy_s(s.Class, 10, CH);
-				file.getline(s.ID, 10);
-				file.getline(s.pass, 20);
-				file.getline(s.FirstName, 50);
-				file.getline(s.LastName, 50);
-				file.getline(s.Gender, 10);
-				file.getline(s.DateOfBirth, 50);
-				file.getline(s.SocialID, 10);
+				s.Class = CH;
+				getline(file, s.ID);
+				getline(file, s.pass);
+				getline(file, s.FirstName);
+				getline(file, s.LastName);
+				getline(file, s.Gender);
+				getline(file, s.DateOfBirth);
+				getline(file, s.SocialID);
 				for (int i = 0; i < 3; i++)
 				{
 					file >> s.begin[i];
@@ -92,7 +92,7 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const Schoo
 				file.ignore();
 				file >> s.Semester;
 				file.ignore();
-				if (strcmp(s.ID, sv.ID) == 0)
+				if (s.ID == sv.ID)
 					AddList(result, l, ch);
 			}
 		}
@@ -134,7 +134,7 @@ bool CheckSameTime(const ListCourses& l, NodeCourse* ptr)
 	}
 	return false;
 }
-void CoursesRegistration(ListCourses& l, SinhVien& S,const SchoolYear&Y, string &c, bool &f)
+void CoursesRegistration(ListCourses& l, SinhVien S,const SchoolYear&Y, string &c, bool &f)
 {
 	Time t = getTime();
 	ifstream ifs;
@@ -178,7 +178,8 @@ void CoursesRegistration(ListCourses& l, SinhVien& S,const SchoolYear&Y, string 
 	l = ReadListCourses(Y);
 	if (l.head == NULL)
 	{
-		cout << "Chua co khoa hoc nao!" << endl;
+		c= "Chua co khoa hoc nao!";
+		f = false;
 		return;
 	}
 	ListCourses temp = courseOfStudent(l, S,Y);
@@ -191,12 +192,12 @@ void CoursesRegistration(ListCourses& l, SinhVien& S,const SchoolYear&Y, string 
 	}
 	else
 	{
-		char id[10];
+		char id[10]="\0";
 		cout << "nhap id mon can dang ki: ";
-		cin.get(id, 10, '\n');
-		cin.ignore();
+		string ID;
+		getline(cin, ID);
+		strcpy_s(id , ID.c_str());
 		NodeCourse* ptr = FindCourses(l, id);
-
 		if (CheckCourses(l, id) == false) {
 			c = "Khong ton tai ma mon hoc";
 			f = false;
@@ -210,7 +211,7 @@ void CoursesRegistration(ListCourses& l, SinhVien& S,const SchoolYear&Y, string 
 			else
 			{
 				fstream file, file1;
-				file.open(to_string(se)+Y.StudentOfSubject, ios::in);
+				file.open(to_string(se) + Y.StudentOfSubject, ios::in);
 				file1.open("temp.txt", ios::out);
 				char ch[10] = "\0", CH[10] = "\n";
 				file.getline(ch, 10);
@@ -239,14 +240,14 @@ void CoursesRegistration(ListCourses& l, SinhVien& S,const SchoolYear&Y, string 
 						else
 						{
 							SinhVien s;
-							strcpy_s(s.Class, 10, CH);
-							file.getline(s.ID, 10);
-							file.getline(s.pass, 20);
-							file.getline(s.FirstName, 50);
-							file.getline(s.LastName, 50);
-							file.getline(s.Gender, 10);
-							file.getline(s.DateOfBirth, 50);
-							file.getline(s.SocialID, 10);
+							s.Class = CH;
+							getline(file, s.ID);
+							getline(file, s.pass);
+							getline(file, s.FirstName);
+							getline(file, s.LastName);
+							getline(file, s.Gender);
+							getline(file, s.DateOfBirth);
+							getline(file, s.SocialID);
 							for (int i = 0; i < 3; i++)
 							{
 								file >> s.begin[i];
@@ -274,11 +275,10 @@ void CoursesRegistration(ListCourses& l, SinhVien& S,const SchoolYear&Y, string 
 				}
 				file.close();
 				file1.close();
-				remove((to_string(se)+Y.StudentOfSubject).c_str());
-				rename("temp.txt", (to_string(se)+Y.StudentOfSubject).c_str());
+				remove((to_string(se) + Y.StudentOfSubject).c_str());
+				rename("temp.txt", (to_string(se) + Y.StudentOfSubject).c_str());
 				c = "Dang ki thanh cong";
 			}
-			
 		}
 	}
 }
@@ -361,8 +361,9 @@ void EraserEnrollCourses(SinhVien& S,const SchoolYear&Y, bool &f)
 	char id[10];
 	f = true;
 	cout << "nhap id mon can huy dang ki: ";
-	cin.get(id, 10, '\n');
-	cin.ignore();
+	string ID;
+	getline(cin, ID);
+	strcpy_s(id, ID.c_str());
 	ListCourses l = ReadListCourses(Y);
 	if (CheckCourses(l, id) == false)
 	{
@@ -393,14 +394,14 @@ void EraserEnrollCourses(SinhVien& S,const SchoolYear&Y, bool &f)
 					else
 					{
 						SinhVien s;
-						strcpy_s(s.Class, 10, CH);
-						file.getline(s.ID, 10);
-						file.getline(s.pass, 20);
-						file.getline(s.FirstName, 50);
-						file.getline(s.LastName, 50);
-						file.getline(s.Gender, 10);
-						file.getline(s.DateOfBirth, 50);
-						file.getline(s.SocialID, 10);
+						s.Class = CH;
+						getline(file, s.ID);
+						getline(file, s.pass);
+						getline(file, s.FirstName);
+						getline(file, s.LastName);
+						getline(file, s.Gender);
+						getline(file, s.DateOfBirth);
+						getline(file, s.SocialID);
 						for (int i = 0; i < 3; i++)
 						{
 							file >> s.begin[i];
@@ -410,7 +411,7 @@ void EraserEnrollCourses(SinhVien& S,const SchoolYear&Y, bool &f)
 						file.ignore();
 						file >> s.Semester;
 						file.ignore();
-						if (strcmp(s.ID, S.ID) == 0 && strcmp(ch, id) == 0)
+						if (s.ID==S.ID && strcmp(ch, id) == 0)
 							continue;
 						else
 						{
