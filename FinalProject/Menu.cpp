@@ -14,9 +14,9 @@ string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
 string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", " 5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
 string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi"," 4. Xuat file nhap DSSV tung lop" };
 string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc", " 4. Xoa khoa hoc" };
-string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
-string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
-string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai", "Huy thanh cong", "Huy that bai"};
+string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc" };
+string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat" };
+string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai", "Huy thanh cong", "Huy that bai" };
 
 void Information()
 {
@@ -79,23 +79,23 @@ int MenuHeader()
 			int k = Menubegin[i].length();
 			if (k > n) n = k;
 		}
-		for (int i = 0;i < 3;i++)
+		for (int i = 0; i < 3; i++)
 		{
 			if (i == vitri)
 			{
 				TextColor(160);
-				gotoxy(12, 17 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-				gotoxy(12, 18 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+				gotoxy(12, 17 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
+				gotoxy(12, 18 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 				gotoxy(12, 18 + i * 4);  cout << Menubegin[i];
-				gotoxy(12, 19 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+				gotoxy(12, 19 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 			}
 			else
 			{
 				TextColor(240);
-				gotoxy(12, 17 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-				gotoxy(12, 18 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+				gotoxy(12, 17 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
+				gotoxy(12, 18 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 				gotoxy(12, 18 + i * 4);  cout << Menubegin[i];
-				gotoxy(12, 19 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+				gotoxy(12, 19 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 			}
 			TextColor(224);
 		}
@@ -139,28 +139,127 @@ void SignInFrames(int item)
 	Frames(50, 23, 50, 2);
 
 }
+int EffectAgree(int x, int y, string c)
+{
+	string yes = "   Co  ";
+	string no = " Khong ";
+	TextColor(240);
+	gotoxy(x, y); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 1); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 2); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x + 3, y + 1); cout << c;
+	gotoxy(x, y + 3); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 4); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 5); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 6); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 7); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 8); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 9); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	//
+	int a = (c.size() - yes.size()) / 2;
+	TextColor(160);
+	gotoxy(x + a - 3, y + 5); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+	gotoxy(x + a - 3, y + 6); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+	gotoxy(x + a - 3, y + 7); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+	gotoxy(x + a - 3, y + 6); cout << yes;
+	//
+	TextColor(224);
+	gotoxy(x + a + yes.size() + 3, y + 5); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+	gotoxy(x + a + yes.size() + 3, y + 6); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+	gotoxy(x + a + yes.size() + 3, y + 7); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+	gotoxy(x + a + yes.size() + 3, y + 6); cout << no;
+	int vitri = 0;
+	char key;
+	while (true)
+	{
+		key = GetKey();
+		if (key == LEFT)
+		{
+			vitri += 1;
+			if (vitri == 2) vitri = 0;
+		}
+		if (key == RIGHT)
+		{
+			vitri -= 1;
+			if (vitri == -1) vitri = 1;
+		}
+		if (vitri == 0)
+		{
+			TextColor(160);
+			gotoxy(x + a - 3, y + 5); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a - 3, y + 6); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a - 3, y + 7); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a - 3, y + 6); cout << yes;
+			//
+			TextColor(224);
+			gotoxy(x + a + yes.size() + 3, y + 5); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a + yes.size() + 3, y + 6); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a + yes.size() + 3, y + 7); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a + yes.size() + 5, y + 6); cout << no;
+		}
+		else if (vitri == 1)
+		{
+			TextColor(224);
+			gotoxy(x + a - 3, y + 5); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a - 3, y + 6); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a - 3, y + 7); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a - 3, y + 6); cout << yes;
+			//
+			TextColor(160);
+			gotoxy(x + a + yes.size() + 3, y + 5); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a + yes.size() + 3, y + 6); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a + yes.size() + 3, y + 7); for (int i = 0; i < yes.size() + 3; i++) cout << " ";
+			gotoxy(x + a + yes.size() + 3, y + 6); cout << no;
+		}
+		if (key == ENTER && vitri == 1)
+		{
+			TextColor(224);
+			return 0;
+		}
+		else if (key == ENTER && vitri == 0)
+		{
+			TextColor(224);
+			return 1;
+		}
+
+	}
+}
+void ClearEffectAgree(int x, int y, string c)
+{
+	TextColor(224);
+	gotoxy(x, y); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 1); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 2); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 3); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 4); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 5); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 6); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 7); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 8); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 9); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+}
 void EffectSuccess(int x, int y, string c)
 {
-	TextColor(160); 
-	gotoxy(x, y); for (int i = 0;i <= c.size()+3;i++) cout << " ";
-	gotoxy(x, y+1); for (int i = 0;i <= c.size()+3;i++) cout << " ";
-	gotoxy(x, y+2); for (int i = 0;i <= c.size()+3;i++) cout << " ";
-	gotoxy(x+3, y+1); cout << c;
+	TextColor(160);
+	gotoxy(x, y); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 1); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 2); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x + 3, y + 1); cout << c;
 	TextColor(224);
 }
-void EffectFailed(int x, int y , string c)
+void EffectFailed(int x, int y, string c)
 {
-	TextColor(207); 
-	gotoxy(x, y); for (int i = 0;i <= c.size() +3 ;i++) cout << " ";
-	gotoxy(x, y+1); for (int i = 0;i <= c.size() + 3;i++) cout << " ";
-	gotoxy(x, y+2); for (int i = 0;i <= c.size()+3;i++) cout << " ";
-	gotoxy(x+3, y+1); cout << c;
+	TextColor(207);
+	gotoxy(x, y); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 1); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x, y + 2); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+	gotoxy(x + 3, y + 1); cout << c;
 	TextColor(224);
 }
 void CreateSemesterForm()
 {
 	TextColor(224);
-	gotoxy(75, 9); cout << "Ki: ";Frames(100, 8, 10, 1); gotoxy(125, 9); cout << "Ex: 1,2,3";// khung nhap ki 
+	gotoxy(75, 9); cout << "Ki: "; Frames(100, 8, 10, 1); gotoxy(125, 9); cout << "Ex: 1,2,3";// khung nhap ki 
 	gotoxy(75, 13); cout << "Nam hoc: "; Frames(100, 12, 15, 1);// nam
 	gotoxy(75, 17); cout << "Ngay bat dau: "; Frames(100, 16, 10, 1); gotoxy(111, 17); cout << "/"; Frames(113, 16, 10, 1); gotoxy(124, 17); cout << "/"; Frames(126, 16, 10, 1);
 	gotoxy(75, 21); cout << "Ngay ket thuc: "; Frames(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; Frames(113, 20, 10, 1); gotoxy(124, 20); cout << "/"; Frames(126, 20, 10, 1);
@@ -455,8 +554,8 @@ void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 	char oldpass[30];
 	char newpass[30];
 	char newpassAgain[30];
-	gotoxy(26, 15); cout << "Nhap mat khau: "; cin.getline(oldpass, 30); 
-	gotoxy(26, 17); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30); 
+	gotoxy(26, 15); cout << "Nhap mat khau: "; cin.getline(oldpass, 30);
+	gotoxy(26, 17); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30);
 	gotoxy(26, 19); cout << "Nhap lai mat khau moi: "; cin.getline(newpassAgain, 30);
 	if (strcmp(gv.pass, oldpass) != 0)
 	{
@@ -475,7 +574,7 @@ void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 		gotoxy(26, 26); system("pause");
 	}
 }
-void MenuChildren(string s[], int &vitri, int size)
+void MenuChildren(string s[], int& vitri, int size)
 {
 	int n = 0;
 	for (int i = 0; i < size; i++)
@@ -483,23 +582,23 @@ void MenuChildren(string s[], int &vitri, int size)
 		int k = s[i].length();
 		if (k > n) n = k;
 	}
-	for (int i = 0;i < size;i++)
+	for (int i = 0; i < size; i++)
 	{
 		if (i == vitri)
 		{
 			TextColor(160);
-			gotoxy(26, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-			gotoxy(26, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+			gotoxy(26, 8 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
+			gotoxy(26, 9 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 			gotoxy(26, 9 + i * 4); cout << s[i];
-			gotoxy(26, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+			gotoxy(26, 10 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 		}
 		else
 		{
 			TextColor(240);
-			gotoxy(26, 8 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
-			gotoxy(26, 9 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+			gotoxy(26, 8 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
+			gotoxy(26, 9 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 			gotoxy(26, 9 + i * 4); cout << s[i];
-			gotoxy(26, 10 + i * 4); for (int i = 0;i <= n;i++)	cout << " ";
+			gotoxy(26, 10 + i * 4); for (int i = 0; i <= n; i++)	cout << " ";
 		}
 		TextColor(224);
 	}
@@ -691,32 +790,55 @@ HOME:
 						{
 							if (vitricon == 0)
 							{
-								CreateSchoolYear(Y);
-								EffectSuccess(90, 28, ThaoTac[2]);
+								string c = " Ban co muon tao nam hoc moi khong? ";
+								int choice = EffectAgree(70, 10, c);
+								if (choice == 1)
+								{
+									CreateSchoolYear(Y);
+									EffectSuccess(90, 28, ThaoTac[2]);
+								}
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 1)
 							{
-								CreateSemesterForm();
-								bool f = CreateSemester(s, Y);
-								if (f == true) EffectSuccess(90, 28, ThaoTac[2]);
-								else EffectFailed(90, 28, ThaoTac[3]);
+								string c = " Ban co muon tao hoc ki moi khong? ";
+								int choice = EffectAgree(70, 10, c);
+								if (choice == 1)
+								{
+									ClearEffectAgree(70, 10, c);
+									CreateSemesterForm();
+									bool f = CreateSemester(s, Y);
+									if (f == true) EffectSuccess(90, 28, ThaoTac[2]);
+									else EffectFailed(90, 28, ThaoTac[3]);
+								}
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 2)
 							{
-								CreateNewClass(ds, Y);
-								EffectSuccess(90, 28, ThaoTac[2]);
+								string c = " Ban co muon tao lop hoc moi khong? ";
+								int choice = EffectAgree(70, 10, c);
+								if (choice == 1)
+								{
+									ClearEffectAgree(70, 10, c);
+									CreateNewClass(ds, Y);
+									EffectSuccess(90, 28, ThaoTac[2]);
+								}
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 3)
 							{
 								// in file DSSV tung lop
-								PrintFileCSV(ds, Y);
-								EffectSuccess(90, 28, ThaoTac[2]);
+								string c = " Ban co muon xuat file csv khong? ";
+								int choice = EffectAgree(70, 10, c);
+								if (choice == 1)
+								{
+									ClearEffectAgree(70, 10, c);
+									PrintFileCSV(ds, Y);
+									EffectSuccess(90, 28, ThaoTac[2]);
+								}
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}

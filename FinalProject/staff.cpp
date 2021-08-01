@@ -422,7 +422,7 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, const SchoolYear& Y)
 	int t = YearPresent();
 	string s, word, mamon;
 	cout << "Nhap ma mon: "; 
-	cin >> mamon;
+	getline(cin, mamon);
 	int STT = 1;
 	listSemester l;
 	InitListSemester(l);

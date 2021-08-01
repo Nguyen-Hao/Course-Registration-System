@@ -43,3 +43,6 @@ Cong nghe thong tin
 19CSH1
 Cong nghe sinh hoc
 2019
+19CSH2
+Cong nghe sinh hoc
+2019
