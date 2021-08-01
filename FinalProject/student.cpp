@@ -22,11 +22,11 @@ void AddTailStudent(ListSV*& ds, SinhVien sv)
 		k->pNext = s;
 	}
 }
-int CheckClass(ListLop dsl, char a[100], int n)
+int CheckClass(ListLop dsl, string a, int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		if (strcmp(dsl.l[i].Ma, a) == 0)
+		if (dsl.l[i].Ma==a)
 			if (i == 0) return -1; 
 			else return i;
 	}

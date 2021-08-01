@@ -2,7 +2,7 @@
 #include "Header.h"
 
 void AddTailStudent(ListSV*& ds, SinhVien sv); 
-int CheckClass(ListLop dsl, char a[100], int n); 
+int CheckClass(ListLop dsl, string a, int n); 
 void AddStudent_Input(ListLop& dsl); 
 
 void WriteFileStudent(ListLop& dsl, const SchoolYear& Y); 

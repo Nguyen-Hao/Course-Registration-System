@@ -40,16 +40,13 @@ void CreateNewClass(ListLop& ds,const SchoolYear&Y)
 	ofstream f;
 	f.open(Y.DSLop, ios::app);
 	Lop c;
-	cout << "Nhap ma lop: "; cin.get(c.Ma, 16, '\n');
+	cout << "Nhap ma lop: "; getline(cin, c.Ma);
 	f << c.Ma << endl;
-	cin.ignore();
-	cout << "Nhap ten lop: "; cin.get(c.Ten, 36, '\n');
+	cout << "Nhap ten lop: "; getline(cin, c.Ten);
 	f << c.Ten << endl;
-	cin.ignore();
-	cout << "Nhap nien khoa: "; cin.get(c.NienKhoa, 10, '\n');
+	cout << "Nhap nien khoa: "; getline(cin, c.NienKhoa);
 	f << c.NienKhoa << endl;
 	c.pHead = NULL;
-	cin.ignore();
 	ds.l[ds.n] = c;
 	ds.n++;
 	f.close();
@@ -278,8 +275,8 @@ ListSV* findStudentOfCourses(const ListCourses& l, string mamon, const SchoolYea
 			while (true)
 			{
 				SinhVien sv;
-				sv.Class = s;
-				getline(file, s);	sv.ID = s;
+				sv.Class=s;
+				getline(file, s);	sv.ID=s;
 				getline(file, s);	sv.pass = s;
 				getline(file, s);	sv.FirstName = s;
 				getline(file, s);	sv.LastName = s;
@@ -318,9 +315,9 @@ void ViewListOfStudentInClass(ListLop& ds)
 	gotoxy(20, 26);
 	cout << "Nhap ma lop: ";
 	int ViTriLop;
-	char Malop[10];
+	string Malop;
 	int STT = 1;
-	cin.get(Malop, 10, '\n');
+	getline(cin, Malop);
 	int KT = CheckClass(ds, Malop, ds.n);
 	if (KT == 0) {
 		cout << "Khong ton tai ma lop " << Malop << endl;
@@ -424,7 +421,8 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, const SchoolYear& Y)
 {
 	int t = YearPresent();
 	string s, word, mamon;
-	cout << "Nhap ma mon: "; cin >> mamon;
+	cout << "Nhap ma mon: "; 
+	cin >> mamon;
 	int STT = 1;
 	listSemester l;
 	InitListSemester(l);
@@ -570,9 +568,8 @@ void updateAStudentResult(const SchoolYear& Y)
 void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, const SchoolYear& Y)
 {
 	int t = YearPresent();
-	cin.ignore();
-	char malop[50];
-	cout << "Nhap ma lop: "; cin.get(malop, 50, '\n');
+	string malop;
+	cout << "Nhap ma lop: "; getline(cin, malop);
 	system("cls");
 	ListCourses ds = ReadListCourses(Y);
 	int VitriLop;
@@ -597,12 +594,12 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, const SchoolYear& Y)
 		double TotalMark = 0;
 		int SoChi = 0;
 		bool flat = false;
-		for (NodeCourse* p = dsm.head;p->next != NULL; p = p->next)
+		for (NodeCourse* p = dsm.head; p!= NULL; p = p->next)
 		{
 			ListSV* psv = findStudentOfCourses(dsm, p->course.ID, Y);
-			for (psv; psv != NULL;psv = psv->pNext)
+			for (psv; psv != NULL; psv = psv->pNext)
 			{
-				if (psv->info.ID> k->info.ID)
+				if (psv->info.ID>k->info.ID)
 				{
 					listSemester l;
 					InitListSemester(l);
@@ -622,7 +619,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, const SchoolYear& Y)
 							{
 								row.push_back(s);
 							}
-							if (row[1].c_str()== k->info.ID)
+							if (row[1]==k->info.ID)
 							{
 								SoChi += p->course.NumOfCredits;
 								TotalMark += stoi(row[4]) * p->course.NumOfCredits;

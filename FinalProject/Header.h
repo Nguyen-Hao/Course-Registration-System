@@ -95,9 +95,9 @@ struct ListDiem
 };
 struct Lop
 {
-	char Ma[16];
-	char Ten[30];
-	char NienKhoa[10];
+	string Ma;
+	string Ten;
+	string NienKhoa;
 	int soluong;
 	ListSV* pHead=NULL;
 };

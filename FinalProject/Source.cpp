@@ -15,9 +15,9 @@ void ReadFileClass(ListLop& dsl, const SchoolYear&Y)
 	while (file.good())
 	{
 		getline(file, c);
-		strcpy_s(dsl.l[dsl.n].Ma, 16, c.c_str());
-		getline(file, c);	strcpy_s(dsl.l[dsl.n].Ten, 30, c.c_str());
-		getline(file, c);	strcpy_s(dsl.l[dsl.n].NienKhoa, 10, c.c_str());
+		dsl.l[dsl.n].Ma=c;
+		getline(file, c);	dsl.l[dsl.n].Ten=c;
+		getline(file, c);	dsl.l[dsl.n].NienKhoa=c;
 		dsl.l[dsl.n].pHead = NULL;
 		if (c.size() == 0) break;
 		dsl.n++;

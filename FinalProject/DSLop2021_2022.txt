@@ -37,3 +37,9 @@ CNTT
 20CTT3A
 CNTT
 2020
+20CTT5
+Cong nghe thong tin
+2020
+19CSH1
+Cong nghe sinh hoc
+2019

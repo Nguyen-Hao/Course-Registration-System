@@ -692,7 +692,6 @@ HOME:
 							if (vitricon == 0)
 							{
 								CreateSchoolYear(Y);
-								DataFake(Y);
 								EffectSuccess(90, 28, ThaoTac[2]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
@@ -765,7 +764,6 @@ HOME:
 							{
 								system("cls");
 								ViewListOfClass(ds);
-								cin.ignore();
 								ViewListOfStudentInClass(ds);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
@@ -773,7 +771,6 @@ HOME:
 							else if (vitricon == 3)
 							{
 								system("cls");
-								cin.ignore();
 								ViewListOfStudentIncourses(Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
@@ -782,7 +779,6 @@ HOME:
 							{
 								system("cls");
 								ViewListOfCourse(Y);
-								cin.ignore();
 								ViewScoreBoardOfACourse(dsmon, Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
