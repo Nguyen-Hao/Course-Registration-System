@@ -298,7 +298,7 @@ ListSV* findStudentOfCourses(const ListCourses& l, char mamon[50], const SchoolY
 				AddTailStudent(lsv, sv);
 				file.ignore();
 				getline(file, s);
-				if (CheckCourses(l, s) == true || s.size() == 0) break;
+				if (CheckCourses(l, s) || s.size() == 0) break;
 			}
 			break;
 		}
@@ -413,12 +413,13 @@ void ExportListStudentInCourseToEnterScore(ListCourses dsm, const SchoolYear& Y)
 			if (!fileCheck.is_open()) {
 				ofstream file(link);
 				file << "STT,ID,First Name,Last Name,Total Mark, Final Mark, Midterm Mark, Other Mark" << endl;
-				for (k; k != NULL; k = k->pNext)
-				{
-					count++;
-					file << count << "," << k->info.ID << "," << k->info.FirstName << ","
-						<< k->info.LastName << "," << a.Total << "," << a.Final << "," << a.MidTerm << "," << a.Other << endl;
-				}
+					while (k != NULL)
+					{
+						count++;
+						file << count << "," << k->info.ID << "," << k->info.FirstName << ","
+							<< k->info.LastName << "," << a.Total << "," << a.Final << "," << a.MidTerm << "," << a.Other << endl;
+						k = k->pNext;
+					}
 				file.close();
 			}
 			fileCheck.close();

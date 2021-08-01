@@ -128,7 +128,6 @@ void ViewListOfCourse(const SchoolYear& Y)
 	listSemester l;
 	InitListSemester(l);
 	int se = getSemester(l, Y);
-	cout << se;
 	f.open(to_string(se)+Y.ListCourses);
 	f.seekg(0, ios::end);
 	int i = f.tellg();
@@ -144,7 +143,6 @@ void ViewListOfCourse(const SchoolYear& Y)
 		gotoxy(20, 4); cout << char(124) << "  " << setw(10) << left << "Ma mon hoc" << char(124) << "  " << setw(30) << left << "Ten mon hoc" << char(124) << "  " << setw(25) << left << "Ten GV" << char(124) << "  " << setw(8) << left << "So TC" << char(124) << "  " << setw(15) << "So sinh vien" << char(124) << "  " << setw(20) << left << "       Lich hoc";
 		gotoxy(149, 4); cout <<char(124) << endl;
 		gotoxy(20, 5); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
-		
 		ListCourses temp =  ReadListCourses(Y);
 		NodeCourse* temp1 = temp.head;
 		while (temp1 != NULL)

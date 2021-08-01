@@ -25,6 +25,8 @@ int main()
 	ReadFileDSGV(dsgv, y);
 	UpdateStudent(y);
 	UpdateCSV(dsl, y);
+	int STT = 0;
 	Menu(dsl, dsgv, dsmon, sv, gv, choice, y);
+	//ViewListOfCourse(y);
 	return 0;
 }

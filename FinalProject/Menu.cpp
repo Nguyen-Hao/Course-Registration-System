@@ -11,8 +11,8 @@
 
 string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
 string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", " 5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
-string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi"," 4. Xuat file nhap DSSV tung lop" };
-string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc", " 4. Xoa khoa hoc" };
+string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi" };
+string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc"," 4. Xuat file nhap DSSV tung lop", " 5. Xoa khoa hoc" };
 string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
 string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai", "Huy thanh cong", "Huy that bai"};
@@ -668,17 +668,17 @@ HOME:
 					int vitricon = 0;
 					while (true)
 					{
-						MenuChildren(MenuGV1, vitricon, 4);
+						MenuChildren(MenuGV1, vitricon, 3);
 						d = GetKey();
 						if (d == DOWN)
 						{
 							vitricon += 1;
-							if (vitricon == 4) vitricon = 0;
+							if (vitricon == 3) vitricon = 0;
 						}
 						if (d == UP)
 						{
 							vitricon -= 1;
-							if (vitricon == -1) vitricon = 3;
+							if (vitricon == -1) vitricon = 2;
 						}
 						if (d == ESC)
 						{
@@ -706,14 +706,6 @@ HOME:
 							else if (vitricon == 2)
 							{
 								CreateNewClass(ds, Y);
-								EffectSuccess(90, 28, ThaoTac[2]);
-								gotoxy(70, 32); system("pause");
-								goto REPEATGV;
-							}
-							else if (vitricon == 3)
-							{
-								// in file DSSV tung lop
-								PrintFileCSV(ds, Y);
 								EffectSuccess(90, 28, ThaoTac[2]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
@@ -754,7 +746,7 @@ HOME:
 							else if (vitricon == 2)
 							{
 								system("cls");
-								ViewListOfCourse(Y);
+								ViewListOfCourse	(Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
@@ -807,17 +799,17 @@ HOME:
 					int vitricon = 0;
 					while (true)
 					{
-						MenuChildren(MenuGV2, vitricon, 4);
+						MenuChildren(MenuGV2, vitricon, 5);
 						d = GetKey();
 						if (d == DOWN)
 						{
 							vitricon += 1;
-							if (vitricon == 4) vitricon = 0;
+							if (vitricon == 5) vitricon = 0;
 						}
 						if (d == UP)
 						{
 							vitricon -= 1;
-							if (vitricon == -1) vitricon = 3;
+							if (vitricon == -1) vitricon = 4;
 						}
 						if (d == ESC)
 						{
@@ -844,6 +836,13 @@ HOME:
 								goto REPEATGV;
 							}
 							else if (vitricon == 3)
+							{
+								PrintFileCSV(ds, Y);
+								EffectSuccess(90, 28, ThaoTac[2]);
+								gotoxy(70, 32); system("pause");
+								goto REPEATGV;
+							}
+							else if (vitricon == 4)
 							{
 								deleteCourse(Y);
 								EffectSuccess(55, 10, ThaoTac[4]);
