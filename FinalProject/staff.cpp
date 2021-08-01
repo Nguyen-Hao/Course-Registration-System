@@ -567,6 +567,9 @@ void updateAStudentResult(const SchoolYear& Y)
 }
 void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, const SchoolYear& Y)
 {
+	listSemester l;
+	InitListSemester(l);
+	int se = getSemester(l, Y);
 	int t = YearPresent();
 	string malop;
 	cout << "Nhap ma lop: "; getline(cin, malop);
@@ -599,11 +602,8 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, const SchoolYear& Y)
 			ListSV* psv = findStudentOfCourses(dsm, p->course.ID, Y);
 			for (psv; psv != NULL; psv = psv->pNext)
 			{
-				if (psv->info.ID>k->info.ID)
+				if (psv->info.ID==k->info.ID)
 				{
-					listSemester l;
-					InitListSemester(l);
-					int se = getSemester(l, Y);
 					string link = "ScoreBoard" + to_string(t) + "_" + to_string(t + 1) + "_" + to_string(se) + "_" + string(p->course.ID) + ".csv";
 					ifstream f(link);
 					if (f.is_open()) {
@@ -671,7 +671,7 @@ DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, string mamon)
 		{
 
 			string Mssv;
-			Mssv = S.ID;
+			Mssv=S.ID;
 			getline(f1, line);
 			if (line.size() == 0) break;
 			stringstream s(line);
@@ -681,14 +681,14 @@ DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, string mamon)
 				row.push_back(word);
 			}
 			SinhVien sv;
-			sv.ID = row[1];
-			sv.FirstName = row[2];
-			sv.LastName = row[3];
+			sv.ID=row[1];
+			sv.FirstName=row[2];
+			sv.LastName=row[3];
 			score.Total = 1.0 * stoi(row[4].c_str());
 			score.Final = 1.0 * stoi(row[5].c_str());
 			score.MidTerm = 1.0 * stoi(row[6].c_str());
 			score.Other = 1.0 * stoi(row[7].c_str());
-			if (sv.ID== Mssv)
+			if (sv.ID==Mssv)
 				break;
 		}
 	}
