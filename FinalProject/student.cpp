@@ -22,11 +22,11 @@ void AddTailStudent(ListSV*& ds, SinhVien sv)
 		k->pNext = s;
 	}
 }
-int CheckClass(ListLop dsl, char a[100], int n)
+int CheckClass(ListLop dsl, string a, int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		if (strcmp(dsl.l[i].Ma, a) == 0)
+		if (dsl.l[i].Ma==a)
 			if (i == 0) return -1; 
 			else return i;
 	}
@@ -64,14 +64,14 @@ void ReadFileStudent(ListLop& dsl, const SchoolYear&Y)
 		int KT = CheckClass(dsl, a, dsl.n);
 		if (KT == -1) STTLop = 0;
 		else STTLop = KT;
-		strcpy_s(sv.Class, 10, s.c_str());
-		getline(file, s);	strcpy_s(sv.ID, 10, s.c_str());
-		getline(file, s);	strcpy_s(sv.pass, 20, s.c_str());
-		getline(file, s);	strcpy_s(sv.FirstName, 50, s.c_str());
-		getline(file, s);	strcpy_s(sv.LastName, 50, s.c_str());
-		getline(file, s);	strcpy_s(sv.Gender, 10, s.c_str());
-		getline(file, s);	strcpy_s(sv.DateOfBirth, 50, s.c_str());
-		getline(file, s);	strcpy_s(sv.SocialID, 10, s.c_str());
+		sv.Class = s;
+		getline(file, s);	sv.ID = s;
+		getline(file, s);	sv.pass = s;
+		getline(file, s);	sv.FirstName = s;
+		getline(file, s);	sv.LastName = s;
+		getline(file, s);	sv.Gender = s;
+		getline(file, s);	sv.DateOfBirth = s;
+		getline(file, s);	sv.SocialID = s;
 		for (int i = 0; i < 3; i++) file >> sv.begin[i];
 		file >> sv.YearStudent;
 		file >> sv.Semester;

@@ -15,9 +15,9 @@ void ReadFileClass(ListLop& dsl, const SchoolYear&Y)
 	while (file.good())
 	{
 		getline(file, c);
-		strcpy_s(dsl.l[dsl.n].Ma, 16, c.c_str());
-		getline(file, c);	strcpy_s(dsl.l[dsl.n].Ten, 30, c.c_str());
-		getline(file, c);	strcpy_s(dsl.l[dsl.n].NienKhoa, 10, c.c_str());
+		dsl.l[dsl.n].Ma=c;
+		getline(file, c);	dsl.l[dsl.n].Ten=c;
+		getline(file, c);	dsl.l[dsl.n].NienKhoa=c;
 		dsl.l[dsl.n].pHead = NULL;
 		if (c.size() == 0) break;
 		dsl.n++;
@@ -49,7 +49,7 @@ bool isLeapYear(int nYear)
 
 int sumOfDayInMonth(int nMonth, int nYear)
 {
-	int nNumOfDays;
+	int nNumOfDays=0;
 
 	switch (nMonth)
 	{
@@ -107,25 +107,49 @@ bool isTime(int h, int m, int s)
 	return ((h >= 0) && (h <= 23) && (m >= 0) && (m <= 59) && (s >= 0) && (s <= 59));
 }
 
-bool isTimeIn(Time t, Time begin, Time end)
+char isTimeIn(Time t, Time begin, Time end)
 {
-	if (begin.year > t.year) return false;
+	if (begin.year > t.year) return -1;
 	else if (begin.year == t.year)
 	{
-		if (begin.month > t.month) return false;
+		if (begin.month > t.month) return -1;
 		else if (begin.month == t.month)
 		{
-			if (begin.day > t.day) return false;
+			if (begin.day > t.day) return -1;
+			else if (begin.day == t.day)
+			{
+				if (begin.hour > t.hour) return -1;
+				else if (begin.hour == t.hour)
+				{
+					if (begin.minute > t.minute) return -1;
+					else if (begin.minute == t.minute)
+					{
+						if (begin.second > t.second) return -1;
+					}
+				}
+			}
 		}
 	}
-	if (end.year < t.year) return false;
+	if (end.year < t.year) return 1;
 	else if (end.year == t.year)
 	{
-		if (end.month < t.month) return false;
+		if (end.month < t.month) return 1;
 		else if (end.month == t.month)
 		{
-			if (end.day < t.day) return false;
+			if (end.day < t.day) return 1;
+			else if (end.day == t.day)
+			{
+				if (end.hour < t.hour) return 1;
+				else if (end.hour == t.hour)
+				{
+					if (end.minute < t.minute) return 1;
+					else if (end.minute == t.minute)
+					{
+						if (end.second < t.second) return 1;
+					}
+				}
+			}
 		}
 	}
-	return true;
+	return 0;
 }

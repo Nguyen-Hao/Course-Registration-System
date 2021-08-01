@@ -76,25 +76,13 @@
     <Text Include="DSLop.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="StudentOfSubject.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="SchoolYear.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="TimeDKHP.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="DsGiaoVien.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="ListCourses.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="ListYearStudent.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="sesmester.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="DLgia.txt">
@@ -109,33 +97,6 @@
     <Text Include="TimeDKHP2021_2022.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DSSV_BAA00004.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="DSSV_MTH00007.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="dssv_ouput.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Filecsv.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="ScoreBoard2021_2022_BAA00004.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="ScoreBoard2021_2022_CSC0003.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="ScoreBoard2021_2022_CSC0005.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="ScoreBoard2021_2022_MTH00007.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="ScoreBoard2021_2022_MTH0004.csv">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="Filecsv2021_2022.csv" />
   </ItemGroup>
 </Project>

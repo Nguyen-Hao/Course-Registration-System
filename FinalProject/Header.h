@@ -57,14 +57,14 @@ struct PhienGio
 
 struct SinhVien
 {
-	char Class[10];
-	char ID[10];
-	char pass[20];
-	char FirstName[50];
-	char LastName[50];
-	char Gender[10];
-	char DateOfBirth[50];
-	char SocialID[10];
+	string Class;
+	string ID;
+	string pass;
+	string FirstName;
+	string LastName;
+	string Gender;
+	string DateOfBirth;
+	string SocialID;
 	int begin[3];
 	int YearStudent;
 	int Semester;
@@ -73,7 +73,7 @@ struct SinhVien
 struct ListSV
 {
 	SinhVien info;
-	ListSV* pNext;
+	ListSV* pNext=NULL;
 };
 struct DiemMonHoc
 {
@@ -86,20 +86,20 @@ struct NodeDiem
 {
 	SinhVien info;
 	DiemMonHoc data;
-	NodeDiem* pNext;
+	NodeDiem* pNext=NULL;
 };
 struct ListDiem
 {
 	NodeDiem* head;
-	NodeDiem* tail;
+	NodeDiem* tail=NULL;
 };
 struct Lop
 {
-	char Ma[16];
-	char Ten[30];
-	char NienKhoa[10];
+	string Ma;
+	string Ten;
+	string NienKhoa;
 	int soluong;
-	ListSV* pHead;
+	ListSV* pHead=NULL;
 };
 struct ListLop
 {
@@ -120,18 +120,18 @@ struct GiaoVien
 struct NodeGV
 {
 	GiaoVien info;
-	NodeGV* pNext;
+	NodeGV* pNext = NULL;
 };
 struct ListGV
 {
-	NodeGV* pHead;
+	NodeGV* pHead = NULL;
 };
 struct Course
 {
 	int Sememster;		
-	char ID[10];
-	char Name[50];		
-	char TeacherName[50];
+	string ID;
+	string Name;		
+	string TeacherName;
 	int NumOfCredits;	
 	int MaxNumOfStudents = 50;
 	PhienGio Session1;			
@@ -140,17 +140,17 @@ struct Course
 struct NodeCourse
 {
 	Course course;
-	NodeCourse* next;
+	NodeCourse* next = NULL;
 };
 struct ListCourses
 {
-	NodeCourse* head;
+	NodeCourse* head = NULL;
 };
 struct semester
 {
 	int name;
 	char schoolyear[11];
-	int studentYear;
+	int studentYear = 0;
 	Date begin;
 	Date end;
 	ListCourses lis;
@@ -158,12 +158,12 @@ struct semester
 struct NodeSemester
 {
 	semester semes;
-	NodeSemester* next;
+	NodeSemester* next = NULL;
 };
 struct listSemester
 {
-	NodeSemester* head;
-	NodeSemester* tail;
+	NodeSemester* head = NULL;
+	NodeSemester* tail = NULL;
 };
 
 
@@ -187,7 +187,7 @@ bool isLeapYear(int nYear);
 int sumOfDayInMonth(int nMonth, int nYear);
 bool isDate(int nDay, int nMonth, int nYear);
 bool isTime(int h, int m, int s);
-bool isTimeIn(Time t, Time begin, Time end);
+char isTimeIn(Time t, Time begin, Time end);
 void Information();
 void Team();
 int MenuHeader(); 
