@@ -55,14 +55,11 @@ int countNodeCourses(const ListCourses& l)
 	}
 	return i;
 }
-ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv,const SchoolYear&Y)
+ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv, int se, const SchoolYear&Y)
 {
 	ListCourses result;
 	initListCourses(result);
 	fstream file;
-	listSemester li;
-	InitListSemester(li);
-	int se = getSemester(li, Y);
 	file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 	char ch[10] = "\0", CH[10] = "\n";
 	file.getline(ch, 10);
@@ -134,13 +131,10 @@ bool CheckSameTime(const ListCourses& l, NodeCourse* ptr)
 	}
 	return false;
 }
-void CoursesRegistration(ListCourses& l, SinhVien S,const SchoolYear&Y, string &c, bool &f)
+void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, string &c, bool &f)
 {
 	Time t = getTime();
 	ifstream ifs;
-	listSemester li;
-	InitListSemester(li);
-	int se = getSemester(li, Y);
 	ifs.open(to_string(se) + Y.TimeDKHP);
 	Time begin, end;
 	if (!ifs.is_open())
@@ -175,17 +169,16 @@ void CoursesRegistration(ListCourses& l, SinhVien S,const SchoolYear&Y, string &
 		}
 	}
 	ifs.close();
-	l = ReadListCourses(Y);
 	if (l.head == NULL)
 	{
 		c= "Chua co khoa hoc nao!";
 		f = false;
 		return;
 	}
-	ListCourses temp = courseOfStudent(l, S,Y);
+	ListCourses temp = courseOfStudent(l, S, se, Y);
 	gotoxy(0, 32);
 	f = true;	
-	ViewListOfCourse(Y);
+	ViewListOfCourse(se, Y);
 	if (countNodeCourses(temp) == 5) {
 		c = "Da dang ki du 5 mon";
 		f = false;
@@ -282,16 +275,16 @@ void CoursesRegistration(ListCourses& l, SinhVien S,const SchoolYear&Y, string &
 		}
 	}
 }
-void ViewEnrollCourses(SinhVien& S, const SchoolYear&Y)
+void ViewEnrollCourses(SinhVien& S, int se, const SchoolYear&Y)
 {
 	system("cls");
-	ListCourses l = ReadListCourses(Y);
+	ListCourses l = ReadListCourses(se, Y);
 	if (l.head == NULL)
 	{
 		cout << "Chua dang ky mon nao!";
 		return;
 	}
-	ListCourses list = courseOfStudent(l, S,Y);
+	ListCourses list = courseOfStudent(l, S, se, Y);
 	gotoxy(0, 32);
 	int STT = 0;
 	if (list.head == NULL)
@@ -316,13 +309,10 @@ void ViewEnrollCourses(SinhVien& S, const SchoolYear&Y)
 
 	}
 }
-void EraserEnrollCourses(SinhVien& S,const SchoolYear&Y, bool &f)
+void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear&Y, bool &f)
 {
 	Time t = getTime();
 	ifstream ifs;
-	listSemester li;
-	InitListSemester(li);
-	int se = getSemester(li, Y);
 	ifs.open(to_string(se) + Y.TimeDKHP);
 	Time begin, end;
 	if (!ifs.is_open())
@@ -357,29 +347,25 @@ void EraserEnrollCourses(SinhVien& S,const SchoolYear&Y, bool &f)
 		}
 	}
 	ifs.close();
-	ViewEnrollCourses(S, Y);
+	ViewEnrollCourses(S,se, Y);
 	char id[10];
 	f = true;
 	cout << "nhap id mon can huy dang ki: ";
 	string ID;
 	getline(cin, ID);
 	strcpy_s(id, ID.c_str());
-	ListCourses l = ReadListCourses(Y);
 	if (CheckCourses(l, id) == false)
 	{
 		f = false;
 	}
 	else
 	{
-		ListCourses temp = courseOfStudent(l, S,Y);
+		ListCourses temp = courseOfStudent(l, S,se,Y);
 		if (CheckCourses(temp, id) == false)
 			f = false;
 		else
 		{
 			fstream file, file1;
-			listSemester li;
-			InitListSemester(li);
-			int se = getSemester(li, Y);
 			file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 			file1.open("temp.txt", ios::out);
 			char ch[10] = "\0", CH[10] = "\n";

@@ -79,13 +79,9 @@ void ReadFileStudent(ListLop& dsl, const SchoolYear&Y)
 	}
 	file.close();
 }
-void viewScoreBoardOfStudent(SinhVien& S, const SchoolYear& Y)
+void viewScoreBoardOfStudent(SinhVien& S, ListCourses l, int se, const SchoolYear& Y)
 {
-	listSemester ls;
-	InitListSemester(ls);
-	int se = getSemester(ls, Y);
-	ListCourses l = ReadListCourses(Y);
-	ListCourses list = courseOfStudent(l, S, Y);
+	ListCourses list = courseOfStudent(l, S, se, Y);
 	if (list.head == NULL)
 		cout << "chua dang ki mon nao!" << endl;
 	else
@@ -98,27 +94,12 @@ void viewScoreBoardOfStudent(SinhVien& S, const SchoolYear& Y)
 		NodeCourse* temp1 = list.head;
 		while (temp1 != NULL)
 		{
-			DiemMonHoc score = ReadfileCSVScore(S, Y, temp1->course.ID);
+			DiemMonHoc score = ReadfileCSVScore(S, Y, se, temp1->course.ID);
 			cout << setw(10) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
 			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
 			cout << setw(20) << score.Other;
 			cout << setw(10) << left << score.MidTerm << setw(10) << left << score.Final << left << setw(10) << score.Total << endl;
 			temp1 = temp1->next;
-		}
-	}
-}
-void PrintFileCSV(ListLop dsl, SchoolYear Y)
-{
-	for(int i=0;i< dsl.n; i++)
-	{
-		string nameFile = string(dsl.l[i].Ma) + "_" + Y.Filecsv ;
-		ifstream fin(nameFile);
-		if (!fin.is_open())
-		{
-			ofstream file;
-			file.open(nameFile);
-			file << "STT, ID, FirstName, LastName,Gender,DOB,SocialID";
-			file.close();
 		}
 	}
 }

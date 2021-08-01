@@ -126,7 +126,7 @@ bool CreateSemester(semester& sesmes, const SchoolYear& Y)
 	file << sesmes.schoolyear << endl;
 	file << sesmes.begin.ngay << " " << sesmes.begin.thang << " " << sesmes.begin.nam << endl;
 	file << sesmes.end.ngay << " " << sesmes.end.thang << " " << sesmes.end.nam << endl;
-	sesmes.lis = ReadListCourses(Y);
+	//sesmes.lis = ReadListCourses(se, Y);
 	file.close();
 	file.open(to_string(sesmes.name) + Y.ListCourses);
 	file.close();

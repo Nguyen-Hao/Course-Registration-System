@@ -54,7 +54,6 @@ struct PhienGio
 	int phut;
 };
 
-
 struct SinhVien
 {
 	string Class;
@@ -201,4 +200,4 @@ void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y);
 void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, char newpass[], const SchoolYear& Y);
 void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y);
 void MenuChildren(string s[], int& vitri, int size);
-void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, SchoolYear Y);
+void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, int se, SchoolYear Y);

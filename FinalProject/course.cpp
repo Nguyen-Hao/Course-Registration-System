@@ -10,15 +10,12 @@ void initListCourses(ListCourses& list)
 	list.head = NULL;
 }
 
-void createNewCourse(const SchoolYear& Y)
+void createNewCourse(int semester, const SchoolYear& Y)
 {
 	fstream file;
-	listSemester l;
-	InitListSemester(l);
-	int se = getSemester(l, Y);
-	file.open(to_string(se)+Y.ListCourses, ios::app);
+	file.open(to_string(semester)+Y.ListCourses, ios::app);
 	Course a;
-	a.Sememster = se;
+	a.Sememster = semester;
 	cout << "Nhap ID khoa hoc: ";
 	getline(cin, a.ID);
 	cout << "Nhap ten khoa hoc: ";
@@ -57,7 +54,7 @@ void createNewCourse(const SchoolYear& Y)
 	} while (!isTime(a.Session2.gio, a.Session2.phut, 0));
 	cin.ignore();
 	ofstream g;
-	g.open(to_string(se)+Y.StudentOfSubject, ios::app);
+	g.open(to_string(semester)+Y.StudentOfSubject, ios::app);
 	g << a.ID << endl;
 	g.close();
 	file << a.Sememster << endl;
@@ -89,14 +86,11 @@ void AddTailListCourse(ListCourses& l, Course co)
 		k->next = p;
 	}
 }
-ListCourses ReadListCourses(const SchoolYear& Y)
+ListCourses ReadListCourses(int se, const SchoolYear& Y)
 {
 	ListCourses temp;
 	initListCourses(temp);
 	ifstream file;
-	listSemester l;
-	InitListSemester(l);
-	int se = getSemester(l, Y);
 	file.open(to_string(se)+Y.ListCourses);
 	Course temp0;
 	while (file >> temp0.Sememster)
@@ -119,12 +113,9 @@ ListCourses ReadListCourses(const SchoolYear& Y)
 	return temp;
 }
 
-void ViewListOfCourse(const SchoolYear& Y)
+void ViewListOfCourse(int se, const SchoolYear& Y)
 {
 	ifstream f;
-	listSemester l;
-	InitListSemester(l);
-	int se = getSemester(l, Y);
 	f.open(to_string(se)+Y.ListCourses);
 	f.seekg(0, ios::end);
 	int i = f.tellg();
@@ -140,7 +131,7 @@ void ViewListOfCourse(const SchoolYear& Y)
 		gotoxy(20, 4); cout << char(124) << "  " << setw(10) << left << "Ma mon hoc" << char(124) << "  " << setw(30) << left << "Ten mon hoc" << char(124) << "  " << setw(25) << left << "Ten GV" << char(124) << "  " << setw(8) << left << "So TC" << char(124) << "  " << setw(15) << "So sinh vien" << char(124) << "  " << setw(20) << left << "       Lich hoc";
 		gotoxy(149, 4); cout <<char(124) << endl;
 		gotoxy(20, 5); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
-		ListCourses temp =  ReadListCourses(Y);
+		ListCourses temp =  ReadListCourses(se, Y);
 		NodeCourse* temp1 = temp.head;
 		while (temp1 != NULL)
 		{
@@ -154,16 +145,13 @@ void ViewListOfCourse(const SchoolYear& Y)
 	}
 }
 
-void updateCourse(const SchoolYear& Y)
+void updateCourse(int se, const SchoolYear& Y)
 {
-	ViewListOfCourse(Y);
+	ViewListOfCourse(se, Y);
 	Course a, b;
 	cout << "Nhap ID khoa hoc can update: ";
 	getline(cin, a.ID);
 	fstream file1, file2;
-	listSemester l;
-	InitListSemester(l);
-	int se = getSemester(l, Y);
 	file1.open(to_string(se)+Y.ListCourses, ios::in);
 	file2.open("ListCourses1.txt", ios::out);
 	while (!file1.eof())
@@ -259,7 +247,7 @@ void updateCourse(const SchoolYear& Y)
 	rename("ListCourses1.txt", (to_string(se)+Y.ListCourses).c_str());
 }
 
-void CreateCourseRegistrationSession(const SchoolYear& Y)
+void CreateCourseRegistrationSession(int se, const SchoolYear& Y)
 {
 	Time a;
 	cout << "Nhap thoi gian bat dau: " << endl;
@@ -297,9 +285,6 @@ void CreateCourseRegistrationSession(const SchoolYear& Y)
 		cin >> a.second;
 	}
 	fstream file;
-	listSemester l;
-	InitListSemester(l);
-	int se = getSemester(l, Y);
 	file.open(to_string(se)+Y.TimeDKHP, ios::out);
 	file << a.day << " " << a.month << " " << a.year
 		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
@@ -341,16 +326,13 @@ void CreateCourseRegistrationSession(const SchoolYear& Y)
 		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
 	file.close();
 }
-void deleteCourse(const SchoolYear& Y)
+void deleteCourse(int se, const SchoolYear& Y)
 {
-	ViewListOfCourse(Y);
+	ViewListOfCourse(se, Y);
 	Course a, b;
 	cout << "Nhap ID khoa hoc muon xoa: ";
 	getline(cin, a.ID);
 	fstream file1, file2;
-	listSemester l;
-	InitListSemester(l);
-	int se = getSemester(l, Y);
 	file1.open(to_string(se)+Y.ListCourses, ios::in);
 	file2.open("ListCourses1.txt", ios::out);
 	while (!file1.eof())
@@ -365,11 +347,7 @@ void deleteCourse(const SchoolYear& Y)
 		file1 >> b.Session1.thu >> b.Session1.gio >> b.Session1.phut;
 		file1 >> b.Session2.thu >> b.Session2.gio >> b.Session2.phut;
 		if (file1.eof()) break;
-		if (a.ID==b.ID)
-		{
-
-		}
-		else
+		if (a.ID != b.ID)
 		{
 			file2 << b.Sememster << endl;
 			file2 << b.ID << endl;

@@ -603,7 +603,7 @@ void MenuChildren(string s[], int& vitri, int size)
 		TextColor(224);
 	}
 }
-void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, SchoolYear Y)
+void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, int se, SchoolYear Y)
 {
 HOME:
 	choice = SignIn(ds, dsgv, sv, gv);
@@ -665,7 +665,7 @@ HOME:
 						system("cls");
 						gotoxy(60, 9);
 						string s;
-						CoursesRegistration(dsmon, sv, Y, s, f);
+						CoursesRegistration(dsmon, sv, se, Y, s, f);
 						if (f) EffectSuccess(55, 15, s);
 						else EffectFailed(55, 15, s);
 						f = false;
@@ -676,7 +676,7 @@ HOME:
 					else if (c == 2)
 					{
 						gotoxy(60, 9);
-						ViewEnrollCourses(sv, Y);
+						ViewEnrollCourses(sv,se, Y);
 						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
@@ -686,7 +686,7 @@ HOME:
 						bool f;
 						system("cls");
 						gotoxy(60, 9);
-						EraserEnrollCourses(sv, Y, f);
+						EraserEnrollCourses(sv, dsmon, se, Y, f);
 						if (f) EffectSuccess(55, 15, ThaoTac[4]);
 						else EffectFailed(55, 15, "Xoa Khong thanh cong");
 						gotoxy(20, 20);
@@ -695,7 +695,7 @@ HOME:
 					}
 					else if (c == 4)
 					{
-						viewScoreBoardOfStudent(sv, Y);
+						viewScoreBoardOfStudent(sv,dsmon,se, Y);
 						gotoxy(20, 20);
 						system("pause");
 						goto REPEATSV;
@@ -864,7 +864,7 @@ HOME:
 							else if (vitricon == 2)
 							{
 								system("cls");
-								ViewListOfCourse(Y);
+								ViewListOfCourse(se,Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
@@ -879,15 +879,15 @@ HOME:
 							else if (vitricon == 3)
 							{
 								system("cls");
-								ViewListOfStudentIncourses(Y);
+								ViewListOfStudentIncourses(dsmon, se ,Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 4)
 							{
 								system("cls");
-								ViewListOfCourse(Y);
-								ViewScoreBoardOfACourse(dsmon, Y);
+								ViewListOfCourse(se,Y);
+								ViewScoreBoardOfACourse(dsmon,se, Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
@@ -895,13 +895,13 @@ HOME:
 							{
 								system("cls");
 								ViewListOfClass(ds);
-								ViewScoreOfAClass(ds, dsmon, Y);
+								ViewScoreOfAClass(ds, dsmon,se, Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 6)
 							{
-								ExportListStudentInCourseToEnterScore(dsmon, Y);
+								ExportListStudentInCourseToEnterScore(dsmon,se , Y);
 								EffectSuccess(90, 28, ThaoTac[2]);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
@@ -940,19 +940,19 @@ HOME:
 							}
 							else if (vitricon == 1)
 							{
-								CreateCourseRegistrationSession(Y);
+								CreateCourseRegistrationSession(se, Y);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 2)
 							{
-								createNewCourse(Y);
+								createNewCourse(se, Y);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
 							else if (vitricon == 4)
 							{
-								deleteCourse(Y);
+								deleteCourse(se, Y);
 								EffectSuccess(55, 10, ThaoTac[4]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
