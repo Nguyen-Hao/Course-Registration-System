@@ -88,14 +88,34 @@
     <Text Include="DLgia.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="DSLop2021_2022.txt" />
-    <Text Include="DSSinhVien2021_2022.txt" />
-    <Text Include="ListCourses2021_2022.txt" />
-    <Text Include="sesmester2021_2022.txt" />
-    <Text Include="StudentOfSubject2021_2022.txt" />
-    <Text Include="TimeDKHP2021_2022.txt" />
+    <Text Include="2ListCourses2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2StudentOfSubject2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="DSLop2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="DSSinhVien2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="ListCourses2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="sesmester2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="StudentOfSubject2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TimeDKHP2021_2022.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Filecsv.csv" />
+    <None Include="Filecsv.csv">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

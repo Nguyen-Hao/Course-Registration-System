@@ -429,6 +429,7 @@ void ViewListOfStudentInClass(ListLop& ds)
 		}
 	}
 }
+
 void ViewListOfStudentIncourses(ListCourses ds, int se,  const SchoolYear& Y)
 {
 	ViewListOfCourse(se, Y);

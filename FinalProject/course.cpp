@@ -286,8 +286,8 @@ void CreateCourseRegistrationSession(int se, const SchoolYear& Y)
 		cin >> a.second;
 	}
 	fstream file;
-	file.open(to_string(se)+Y.TimeDKHP, ios::out);
-	file << a.day << " " << a.month << " " << a.year
+	file.open(Y.TimeDKHP, ios::app);
+	file << se << " " << a.day << " " << a.month << " " << a.year
 		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
 	cout << "Nhap thoi gian ket thuc: " << endl;
 	cout << "Ngay: ";
@@ -324,7 +324,7 @@ void CreateCourseRegistrationSession(int se, const SchoolYear& Y)
 		cin >> a.second;
 	}
 	file << a.day << " " << a.month << " " << a.year
-		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
+		<< " " << a.hour << " " << a.minute << " " << a.second << " " << endl;
 	file.close();
 }
 void deleteCourse(int se, const SchoolYear& Y)
