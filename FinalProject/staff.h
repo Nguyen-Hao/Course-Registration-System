@@ -3,7 +3,7 @@
 #include "student.h"
 
 void CreateNewClass(ListLop& ds, const SchoolYear& Y);
-void AddStudent_Input(ListLop& dsl, const SchoolYear& Y);
+void AddStudent_Input(ListLop& dsl, const SchoolYear& Y); 
 void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y);
 void writeFileTeacher(ListGV dsgv, const SchoolYear& Y);
 void UpdateCSV(ListLop& ds, const SchoolYear& Y);
@@ -16,5 +16,5 @@ void ExportListStudentInCourseToEnterScore(ListCourses dsm, int se, const School
 void ViewScoreBoardOfACourse(ListCourses dsmon, int se, const SchoolYear& Y);
 void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y);
 void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y);
-DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, int se, string mamon);
+DiemMonHoc ReadfileCSVScore(const SinhVien& S, const SchoolYear& Y, int se, string mamon);
 void PrintFileCSV(ListLop dsl, SchoolYear Y);

@@ -163,7 +163,6 @@
   <ItemGroup>
     <Text Include="DLgia.txt" />
     <Text Include="DsGiaoVien.txt" />
-    <Text Include="DsGiaoVien2021_2022.txt" />
     <Text Include="DSLop.txt" />
     <Text Include="DSLop2021_2022.txt" />
     <Text Include="DSSinhVien2021_2022.txt" />
@@ -175,7 +174,7 @@
     <Text Include="TimeDKHP2021_2022.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Filecsv2021_2022.csv" />
+    <None Include="Filecsv.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

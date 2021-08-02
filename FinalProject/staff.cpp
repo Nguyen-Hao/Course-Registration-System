@@ -7,6 +7,7 @@
 #include "Semester.h"
 #include "DKMon.h"
 #include "SchoolYear.h"
+
 ListSV* Create_Node_Sv(SinhVien sv)
 {
 	ListSV* a = new ListSV;
@@ -88,7 +89,7 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 		sv.pass = Pass;
 		AddTailStudent(dsl.l[STTLop].pHead, sv);
 		fstream file;
-		file.open(string(dsl.l[STTLop].Ma) + "_" + Y.Filecsv, ios::in);
+		file.open(string(dsl.l[STTLop].Ma) + "_" + FILECSV+".csv", ios::in);
 		string s[7];
 		int STT = 0;
 		getline(file, s[0]);
@@ -99,7 +100,7 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 			if (s[0] != "") STT = stoi(s[0]);
 		}
 		file.close();
-		file.open(string(dsl.l[STTLop].Ma) + "_" + Y.Filecsv, ios::app);
+		file.open(string(dsl.l[STTLop].Ma) + "_" + FILECSV+".csv", ios::app);
 		file << STT + 1 << "," << sv.ID << "," << sv.FirstName << "," << sv.LastName << "," << sv.Gender << ","
 			<< sv.DateOfBirth << "," << sv.SocialID << endl;
 		file.close();
@@ -114,7 +115,7 @@ void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
 {
 	dsgv.pHead = NULL;
 	ifstream file;
-	file.open(Y.DsGiaoVien);
+	file.open(FILEDSGV);
 	if (file.fail())
 	{
 		cout << "Failed to open this file!" << endl;
@@ -139,7 +140,7 @@ void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
 void writeFileTeacher(ListGV dsgv, const SchoolYear& Y)
 {
 	ofstream file;
-	file.open(Y.DsGiaoVien);
+	file.open(FILEDSGV);
 	if (file.fail())
 	{
 		cout << "Failed to open this file!" << endl;
@@ -174,7 +175,7 @@ void UpdateCSV(ListLop& ds, const SchoolYear& Y)
 	file.open(Y.DSSinhVien, ios_base::app);
 	for (int i = 0;i < ds.n; i++) {
 		ifstream f1;
-		f1.open(string(ds.l[i].Ma) + "_" + Y.Filecsv, ios::in | ios::out);
+		f1.open(string(ds.l[i].Ma) + "_" + FILECSV + ".csv", ios::in | ios::out);
 		string line = "", word;
 		getline(f1, line);
 		int ViTriLop = 0;
@@ -574,7 +575,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 {
 	int t = YearPresent();
 	string malop;
-	cout << "Nhap ma lop: "; 
+	cout << "Nhap ma lop: ";
 	getline(cin, malop);
 	system("cls");
 	ListCourses ds = ReadListCourses(se, Y);
@@ -589,7 +590,6 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 	else
 		VitriLop = KT;
 	NodeCourse* p = ds.head;
-
 	gotoxy(35, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
 	gotoxy(20, 4); cout << "+-----------------------------------------------------------------------------------------------------------------+" << endl;
 	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
@@ -602,7 +602,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 		bool flat = false;
 		for (NodeCourse* p = dsm.head; p->next != NULL; p = p->next)
 		{
-			ListSV* psv = findStudentOfCourses(dsm, p->course.ID,se,  Y);
+			ListSV* psv = findStudentOfCourses(dsm, p->course.ID, se, Y);
 			for (psv; psv != NULL; psv = psv->pNext)
 			{
 				if (psv->info.ID==k->info.ID)
@@ -617,14 +617,13 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 							for (int i = 0; i < 7; i++) getline(f, s[i], ',');
 							getline(f, s[7]);
 							if (s[0] == "") break;
-							if (s[1]==k->info.ID)
+							if (s[1] == k->info.ID)
 							{
 								SoChi += p->course.NumOfCredits;
 								TotalMark += stoi(s[4]) * p->course.NumOfCredits;
 								flat = true;
 								gotoxy(20, 7 + n);
-								cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << s[1] << char(124) << "  " << setw(20) << left << s[2] << char(124) << "  " << setw(20) << s[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << s[4] << char(124) << endl;
-								gotoxy(20, 7 + ++n + 1);
+								cout << char(124) << " " << setw(5) << left << STT++ << char(124) << " " << setw(15) << left << s[1] << char(124) << " " << setw(20) << left << s[2] << char(124) << " " << setw(20) << s[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << s[4] << char(124) << endl; gotoxy(20, 7 + ++n + 1);
 							}
 						}
 					}
@@ -648,43 +647,35 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 		n++;
 	}
 }
-DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, int se, string mamon)
+DiemMonHoc ReadfileCSVScore(const SinhVien& S, const SchoolYear& Y, int se, string mamon)
 {
 	int t = YearPresent();
-	ifstream f1;
-	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" + to_string(se) + "_" + mamon + ".csv";
-	f1.open(link, ios::in | ios::out);
-	string line = "", word;
+	fstream f1;
+	string link = "ScoreBoard" + to_string(t ) + "_" + to_string(t+1) + "_" + to_string(se) + "_" + mamon + ".csv";
+	f1.open(link, ios::in);
 	DiemMonHoc score;
-	score.Final = 0;
-	score.MidTerm = 0;
-	score.Other = 0;
-	score.Total = 0;
 	if (f1.is_open())
 	{
 		while (!f1.eof())
 		{
-
-			string Mssv;
-			Mssv=S.ID;
+			string line = "", word;
 			getline(f1, line);
 			if (line.size() == 0) break;
 			stringstream s(line);
 			vector<string> row;
 			while (getline(s, word, ','))
-			{
 				row.push_back(word);
-			}
-			SinhVien sv;
-			sv.ID=row[1];
-			sv.FirstName=row[2];
-			sv.LastName=row[3];
-			score.Total = 1.0 * atoi(row[4].c_str());
-			score.Final = 1.0 * atoi(row[5].c_str());
-			score.MidTerm = 1.0 * atoi(row[6].c_str());
-			score.Other = 1.0 * atoi(row[7].c_str());
-			if (sv.ID==Mssv)
+			string ID;
+			ID = row[1];
+			if (ID == S.ID)
+			{
+				score.Total = stod(row[4]);
+				score.Final = stod(row[5]);
+				score.MidTerm = stod(row[6]);
+				score.Other = stod(row[7]);
 				break;
+			}
+				
 		}
 	}
 	f1.close();
@@ -694,7 +685,7 @@ void PrintFileCSV(ListLop dsl, SchoolYear Y)
 {
 	for (int i = 0;i < dsl.n; i++)
 	{
-		string nameFile = string(dsl.l[i].Ma) + "_" + Y.Filecsv;
+		string nameFile = string(dsl.l[i].Ma) + "_" + FILECSV;
 		ifstream fin(nameFile);
 		if (!fin.is_open())
 		{

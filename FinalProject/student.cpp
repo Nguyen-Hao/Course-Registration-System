@@ -79,7 +79,7 @@ void ReadFileStudent(ListLop& dsl, const SchoolYear&Y)
 	}
 	file.close();
 }
-void viewScoreBoardOfStudent(SinhVien& S, ListCourses l, int se, const SchoolYear& Y)
+void viewScoreBoardOfStudent(const SinhVien& S, ListCourses l, int se, const SchoolYear& Y)
 {
 	ListCourses list = courseOfStudent(l, S, se, Y);
 	if (list.head == NULL)

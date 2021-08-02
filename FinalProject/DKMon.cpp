@@ -427,6 +427,7 @@ void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear&Y,
 		}
 	}
 }
+
 int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l)
 {
 	int count = 0;

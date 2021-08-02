@@ -88,7 +88,6 @@
     <Text Include="DLgia.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="DsGiaoVien2021_2022.txt" />
     <Text Include="DSLop2021_2022.txt" />
     <Text Include="DSSinhVien2021_2022.txt" />
     <Text Include="ListCourses2021_2022.txt" />
@@ -97,6 +96,6 @@
     <Text Include="TimeDKHP2021_2022.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Filecsv2021_2022.csv" />
+    <None Include="Filecsv.csv" />
   </ItemGroup>
 </Project>
