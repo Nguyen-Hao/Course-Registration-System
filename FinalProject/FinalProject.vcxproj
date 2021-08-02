@@ -161,6 +161,8 @@
     <ClInclude Include="student.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="2ListCourses2021_2022.txt" />
+    <Text Include="2StudentOfSubject2021_2022.txt" />
     <Text Include="DLgia.txt" />
     <Text Include="DsGiaoVien.txt" />
     <Text Include="DSLop.txt" />

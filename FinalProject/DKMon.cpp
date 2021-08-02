@@ -129,45 +129,55 @@ bool CheckSameTime(const ListCourses& l, NodeCourse* ptr)
 	}
 	return false;
 }
-void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, string &c, bool &f)
+Time* ReadTimeRegistration(const SchoolYear& Y)
 {
-	Time t = getTime();
+	Time* a = new Time[2];
+	int se;
 	ifstream ifs;
-	ifs.open(to_string(se) + Y.TimeDKHP);
-	Time begin, end;
+	ifs.open( Y.TimeDKHP);
 	if (!ifs.is_open())
 	{
 		cout << "Chua co phien dang ky hoc phan!" << endl;
-		return;
+		return NULL;
 	}
 	else
-	{
-		ifs >> begin.day >> begin.month >> begin.year >>begin.hour>>begin.minute>>begin.second
-			>>end.day >> end.month >> end.year>>end.hour>>end.minute>>end.second;
-		char check = isTimeIn(t, begin, end);
-		if (check!=0)
+	{ 
+		while (!ifs.eof())
 		{
-			if (check == 1) cout << "Da qua";
-			else if (check == -1) cout << "Chua den";
-			cout << " thoi gian dang ky hoc phan!" << endl;
-			cout << setfill(' ') << setw(70);
-			cout << "Thoi gian dang ky hoc phan tu ";
-			cout << begin.hour << ":";
-			if (begin.minute < 10) cout << "0";
-			cout << begin.minute << ":";
-			if (begin.second < 10) cout << "0";
-			cout<< begin.second;
-			cout << " ngay " << begin.day << "/" << begin.month << "/" << begin.year << " den ";
-			cout << end.hour << ":";
-			if (end.minute < 10) cout << "0";
-			cout << end.minute << ":";
-			if (end.second < 10) cout << "0";
-			cout<< end.second;
-			cout << " ngay " << end.day << "/" << end.month << "/" << end.year;
-			return;
+			ifs >> se >> a[0].day >> a[0].month >> a[0].year >> a[0].hour >> a[0].minute >> a[0].second
+				>> a[1].day >> a[1].month >> a[1].year >> a[1].hour >> a[1].minute >> a[1].second;
 		}
 	}
-	ifs.close();
+	return a;
+}
+void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, string &c, bool &f)
+{
+	Time t = getTime();
+	Time* arrTime = ReadTimeRegistration(Y);	
+	char check = isTimeIn(t, arrTime[0], arrTime[1]);
+	if (check != 0)
+	{
+		if (check == 1) cout << "Da qua";
+		else if (check == -1) cout << "Chua den";
+		cout << " thoi gian dang ky hoc phan!" << endl;
+		cout << setfill(' ') << setw(70);
+		cout << "Thoi gian dang ky hoc phan tu ";
+		cout << arrTime[0].hour << ":";
+		if (arrTime[0].minute < 10) cout << "0";
+		cout << arrTime[0].minute << ":";
+		if (arrTime[0].second < 10) cout << "0";
+		cout << arrTime[0].second;
+		cout << " ngay " << arrTime[0].day << "/" << arrTime[0].month << "/" << arrTime[0].year << " den ";
+		cout << arrTime[1].hour << ":";
+		if (arrTime[1].minute < 10) cout << "0";
+		cout << arrTime[1].minute << ":";
+		if (arrTime[1].second < 10) cout << "0";
+		cout << arrTime[1].second;
+		cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
+		return;
+	}
+	
+	
 	if (l.head == NULL)
 	{
 		c= "Chua co khoa hoc nao!";

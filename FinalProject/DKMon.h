@@ -10,3 +10,4 @@ NodeCourse* FindCourses(const ListCourses& l, char id[10]);
 bool CheckSameTime(const ListCourses& l, NodeCourse* ptr);
 void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear& Y, string& c, bool& f);
 int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l);
+Time* ReadTimeRegistration(const SchoolYear& Y);

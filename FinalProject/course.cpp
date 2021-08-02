@@ -123,7 +123,7 @@ void ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 	else
 	{
 		gotoxy(20, 3); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
-		gotoxy(20, 4); cout << char(124) << setw(13) << left << "  Ma mon hoc" << char(124) << setw(31) << left << "       Ten mon hoc" << char(124) << setw(26) << left << "      Ten GV" << char(124) << setw(9) << left << "   So TC" << char(124) << setw(16) << "  Da dang ky" << char(124) << "  " << setw(20) << left << "     Lich hoc";
+		gotoxy(20, 4); cout << char(124) << setw(13) << left << "  Ma mon hoc" << char(124) << setw(31) << left << "       Ten mon hoc" << char(124) << setw(26) << "     Ten GV" << char(124) << setw(9) << left << "   So TC" << char(124) << setw(16) << "  Da dang ky" << char(124) << "  " << setw(20) << left << "     Lich hoc";
 		gotoxy(153, 4); cout << char(124) << endl;
 		gotoxy(20, 5); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 		NodeCourse* temp1 = temp.head;
@@ -263,8 +263,8 @@ void CreateCourseRegistrationSession(int se, const SchoolYear& Y)
 		cin >> a.second;
 	}
 	fstream file;
-	file.open(to_string(se)+Y.TimeDKHP, ios::out);
-	file << a.day << " " << a.month << " " << a.year
+	file.open(Y.TimeDKHP, ios::app);
+	file << se << " " << a.day << " " << a.month << " " << a.year
 		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
 	cout << "Nhap thoi gian ket thuc: " << endl;
 	cout << "Ngay: ";
@@ -301,7 +301,7 @@ void CreateCourseRegistrationSession(int se, const SchoolYear& Y)
 		cin >> a.second;
 	}
 	file << a.day << " " << a.month << " " << a.year
-		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
+		<< " " << a.hour << " " << a.minute << " " << a.second << " " << endl;
 	file.close();
 }
 void deleteCourse(ListCourses l, int se, const SchoolYear& Y)

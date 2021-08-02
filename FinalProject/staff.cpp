@@ -427,6 +427,7 @@ void ViewListOfStudentInClass(ListLop& ds)
 		}
 	}
 }
+
 void ViewListOfStudentIncourses(ListCourses ds, int se,  const SchoolYear& Y)
 {
 	ViewListOfCourse(ds, se, Y);
@@ -704,11 +705,11 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 
 			TextColor(225);
 			gotoxy(20, 7 + n++);
-			cout << char(124) << "  " << setw(4) << left << "" << char(124) << "  " << setw(14) << left << k->info.ID << char(124) << "  " << setw(19) << left << k->info.FirstName << char(124) << "  " << setw(19) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << (TotalMark / SoChi) * 1.0 << char(124) << endl;
+			cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << (TotalMark / SoChi) * 1.0 << char(124) << endl;
 		}
 		else {
 			gotoxy(20, 7 + n++);
-			cout << char(124) << "  " << setw(4) << left << "" << char(124) << "  " << setw(14) << left << k->info.ID << char(124) << "  " << setw(19) << left << k->info.FirstName << char(124) << "  " << setw(19) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << 0.0 << char(124) << endl;
+			cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << 0.0 << char(124) << endl;
 			TextColor(224);
 		}
 		TextColor(224);
