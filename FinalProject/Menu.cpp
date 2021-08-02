@@ -417,6 +417,7 @@ ESCAPE:
 				}
 				else if (c == ENTER)
 				{
+					i--;
 					break;
 				}
 				else if (c == ESC)

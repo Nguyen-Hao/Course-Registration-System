@@ -11,12 +11,14 @@ int main()
 {
 	FixConsoleWindow();
 	resizeConsole(1200, 600);
-	SchoolYear y = SchoolYearPresent("SchoolYear.txt");
-	//taoDLgia(y); 
+	TextColor(224);
+
+	SchoolYear y = SchoolYearPresent("SchoolYear.txt"); 
+
 	listSemester l;
 	InitListSemester(l);
 	int se = getSemester(l, y);
-	TextColor(224);
+
 	ListLop dsl;	dsl.n = 0;
 	ListGV dsgv;	dsgv.pHead = NULL;
 	SinhVien sv;
@@ -28,8 +30,8 @@ int main()
 	ReadFileDSGV(dsgv, y);
 	UpdateStudent(y);
 	UpdateCSV(dsl, y);
-	int STT = 0;
+
 	Menu(dsl, dsgv, dsmon, sv, gv, choice, se, y);
-	//ViewListOfCourse(y);
+	system("pause");
 	return 0;
 }
