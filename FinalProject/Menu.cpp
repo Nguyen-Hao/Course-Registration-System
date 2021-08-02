@@ -935,7 +935,7 @@ HOME:
 						{
 							if (vitricon == 0)
 							{
-								AddStudent_Input(ds);
+								AddStudent_Input(ds, Y);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}

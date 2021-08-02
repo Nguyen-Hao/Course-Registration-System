@@ -3,7 +3,7 @@
 #include "student.h"
 
 void CreateNewClass(ListLop& ds, const SchoolYear& Y);
-void AddStudent_Input(ListLop& dsl);
+void AddStudent_Input(ListLop& dsl, const SchoolYear& Y);
 void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y);
 void writeFileTeacher(ListGV dsgv, const SchoolYear& Y);
 void UpdateCSV(ListLop& ds, const SchoolYear& Y);

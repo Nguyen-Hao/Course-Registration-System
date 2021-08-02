@@ -52,21 +52,25 @@ void CreateNewClass(ListLop& ds,const SchoolYear&Y)
 	f.close();
 }
 
-void AddStudent_Input(ListLop& dsl)
+void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 {
-	char c[10];
-	char Pass[10] = "123456";
+	string c;
+	string Pass = "123456";
 	SinhVien sv;
 	gotoxy(70, 8);
-	cout << "Nhap ID lop: "; cin.get(c, 10, '\n');
+	cout << "Nhap ID lop: ";
+	getline(cin, c);
 	int STTLop;
 	int KT = CheckClass(dsl, c, dsl.n);
 	if (KT != 0)
 	{
 		gotoxy(70, 9);
-		cout << "Ngay nhap hoc: (dd mm yyyy)"; for (int i = 0; i < 3; i++) cin >> sv.begin[i];
+		cout << "Ngay nhap hoc: (dd mm yyyy)";
+		for (int i = 0; i < 3; i++) cin >> sv.begin[i];
+		cin.ignore();
 		gotoxy(70, 10);
-		cout << "Nhap ID sinh vien: "; getline(cin, sv.ID);
+		cout << "Nhap ID sinh vien: ";
+		getline(cin, sv.ID);
 		gotoxy(70, 11);
 		cout << "Nhap ho: "; getline(cin, sv.FirstName);
 		gotoxy(70, 12);
@@ -84,6 +88,22 @@ void AddStudent_Input(ListLop& dsl)
 		sv.Semester = 1;
 		sv.pass = Pass;
 		AddTailStudent(dsl.l[STTLop].pHead, sv);
+		fstream file;
+		file.open(string(dsl.l[STTLop].Ma) + "_" + Y.Filecsv, ios::in);
+		string s[7];
+		int STT = 0;
+		getline(file, s[0]);
+		while (!file.eof())
+		{
+			for (int i = 0; i < 6; i++) getline(file, s[i], ',');
+			getline(file, s[6]);
+			if (s[0] != "") STT = stoi(s[0]);
+		}
+		file.close();
+		file.open(string(dsl.l[STTLop].Ma) + "_" + Y.Filecsv, ios::app);
+		file << STT + 1 << "," << sv.ID << "," << sv.FirstName << "," << sv.LastName << "," << sv.Gender << ","
+			<< sv.DateOfBirth << "," << sv.SocialID << endl;
+		file.close();
 	}
 	else
 	{

@@ -3,7 +3,7 @@
 
 void AddTailStudent(ListSV*& ds, SinhVien sv); 
 int CheckClass(ListLop dsl, string a, int n); 
-void AddStudent_Input(ListLop& dsl); 
+void AddStudent_Input(ListLop& dsl, const SchoolYear& Y); 
 void WriteFileStudent(ListLop& dsl, const SchoolYear& Y); 
 void ReadFileStudent(ListLop& dsl, const SchoolYear& Y); 
 void viewScoreBoardOfStudent(SinhVien& S, ListCourses l, int se, const SchoolYear& Y);
