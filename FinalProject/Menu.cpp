@@ -866,7 +866,7 @@ HOME:
 							else if (vitricon == 2)
 							{
 								system("cls");
-								ViewListOfCourse(se,Y);
+								ViewListOfCourse(dsmon, se,Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}
@@ -888,7 +888,7 @@ HOME:
 							else if (vitricon == 4)
 							{
 								system("cls");
-								ViewListOfCourse(se,Y);
+								ViewListOfCourse(dsmon, se,Y);
 								ViewScoreBoardOfACourse(dsmon,se, Y);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
@@ -936,7 +936,7 @@ HOME:
 						{
 							if (vitricon == 0)
 							{
-								AddStudent_Input(ds);
+								AddStudent_Input(ds, Y);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;
 							}
@@ -954,7 +954,7 @@ HOME:
 							}
 							else if (vitricon == 4)
 							{
-								deleteCourse(se, Y);
+								deleteCourse(dsmon, se, Y);
 								EffectSuccess(55, 10, ThaoTac[4]);
 								gotoxy(70, 32); system("pause");
 								goto REPEATGV;

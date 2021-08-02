@@ -5,6 +5,7 @@
 #include <string>
 #include <string.h>
 #include "Semester.h"
+#include "DKMon.h"
 void initListCourses(ListCourses& list)
 {
 	list.head = NULL;
@@ -31,27 +32,17 @@ void createNewCourse(int semester, const SchoolYear& Y)
 	{
 		cout << "Thu (2-8): ";
 		cin >> a.Session1.thu;
-	} while (a.Session1.thu < 2 || a.Session1.thu > 8);
-	do
-	{
-		cout << "Gio: ";
-		cin >> a.Session1.gio;
-		cout << "Phut: ";
-		cin >> a.Session1.phut;
-	} while (!isTime(a.Session1.gio, a.Session1.phut, 0));
+		cout << "Nhap ca hoc(1-4): ";
+		cin >> a.Session1.shift;
+	} while (a.Session1.thu < 2 || a.Session1.thu > 8 || a.Session1.shift < 1 || a.Session1.shift > 4);
 	cout << "Nhap buoi hoc thu 2: ";
 	do
 	{
 		cout << "Thu (2-8): ";
 		cin >> a.Session2.thu;
-	} while (a.Session2.thu < 2 || a.Session2.thu > 8);
-	do
-	{
-		cout << "Gio: ";
-		cin >> a.Session2.gio;
-		cout << "Phut: ";
-		cin >> a.Session2.phut;
-	} while (!isTime(a.Session2.gio, a.Session2.phut, 0));
+		cout << "Nhap ca hoc(1-4): ";
+		cin >> a.Session2.shift;
+	} while (a.Session2.thu < 2 || a.Session2.thu > 8 || a.Session2.shift < 1 || a.Session2.shift > 4);
 	cin.ignore();
 	ofstream g;
 	g.open(to_string(semester)+Y.StudentOfSubject, ios::app);
@@ -64,11 +55,9 @@ void createNewCourse(int semester, const SchoolYear& Y)
 	file << a.NumOfCredits << endl;
 	file << a.MaxNumOfStudents << endl;
 	file << a.Session1.thu << endl;
-	file << a.Session1.gio << endl;
-	file << a.Session1.phut << endl;
+	file << a.Session1.shift << endl;
 	file << a.Session2.thu << endl;
-	file << a.Session2.gio << endl;
-	file << a.Session2.phut << endl;
+	file << a.Session2.shift << endl;
 	file.close();
 }
 void AddTailListCourse(ListCourses& l, Course co)
@@ -102,18 +91,24 @@ ListCourses ReadListCourses(int se, const SchoolYear& Y)
 		file >> temp0.NumOfCredits;
 		file >> temp0.MaxNumOfStudents;
 		file >> temp0.Session1.thu;
-		file >> temp0.Session1.gio;
-		file >> temp0.Session1.phut;
+		file >> temp0.Session1.shift;
 		file >> temp0.Session2.thu;
-		file >> temp0.Session2.gio;
-		file >> temp0.Session2.phut;
+		file >> temp0.Session2.shift;
 		AddTailListCourse(temp, temp0);
 	}
 	file.close();
 	return temp;
 }
-
-void ViewListOfCourse(int se, const SchoolYear& Y)
+string TimeShift(int shift)
+{
+	string time;
+	if (shift == 1) time = "(07:30)";
+	else if (shift == 2) time = "(09:30)";	
+	else if (shift == 3) time = "(13:30)";
+	else if (shift == 4) time = "(15:30)";
+	return time;
+}
+void ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 {
 	ifstream f;
 	f.open(to_string(se)+Y.ListCourses);
@@ -127,27 +122,26 @@ void ViewListOfCourse(int se, const SchoolYear& Y)
 	}
 	else
 	{
-		gotoxy(20, 3); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
-		gotoxy(20, 4); cout << char(124) << "  " << setw(10) << left << "Ma mon hoc" << char(124) << "  " << setw(30) << left << "Ten mon hoc" << char(124) << "  " << setw(25) << left << "Ten GV" << char(124) << "  " << setw(8) << left << "So TC" << char(124) << "  " << setw(15) << "So sinh vien" << char(124) << "  " << setw(20) << left << "       Lich hoc";
-		gotoxy(149, 4); cout <<char(124) << endl;
-		gotoxy(20, 5); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
-		ListCourses temp =  ReadListCourses(se, Y);
+		gotoxy(20, 3); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 4); cout << char(124) << setw(13) << left << "  Ma mon hoc" << char(124) << setw(31) << left << "       Ten mon hoc" << char(124) << setw(26) << left << "      Ten GV" << char(124) << setw(9) << left << "   So TC" << char(124) << setw(16) << "  Da dang ky" << char(124) << "  " << setw(20) << left << "     Lich hoc";
+		gotoxy(153, 4); cout << char(124) << endl;
+		gotoxy(20, 5); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 		NodeCourse* temp1 = temp.head;
 		while (temp1 != NULL)
 		{
-			gotoxy(20, 6 + STT); cout << char(124) << "  " << setw(10) << left << temp1->course.ID << char(124) << "  " << setw(30) << left << temp1->course.Name << char(124) << "  " << setw(25) << left << temp1->course.TeacherName << char(124) << "  " << setw(8) << left << temp1->course.NumOfCredits << char(124) << "  " << setw(15) << temp1->course.MaxNumOfStudents << char(124) << "  ";
-			cout << "T" << temp1->course.Session1.thu << " - " << temp1->course.Session1.gio << ":" << temp1->course.Session1.phut << "  " << "T" << temp1->course.Session2.thu << " - " << temp1->course.Session2.gio << ":" << temp1->course.Session2.phut;
-			gotoxy(149, 6 + STT++); cout << char(124) << endl;
+			gotoxy(20, 6 + STT); cout << char(124) << " " << setw(12) << left << temp1->course.ID << char(124) << " " << setw(30) << left << temp1->course.Name << char(124) << " " << setw(25) << left << temp1->course.TeacherName << char(124) << " " << setw(8) << left << temp1->course.NumOfCredits << char(124) << " " << setw(3) << daDangKy(temp1->course, Y, se, temp) << " " << "/" << " " << setw(9) << temp1->course.MaxNumOfStudents << char(124) << " ";
+			cout << "T" << temp1->course.Session1.thu << " - " << "S"<< temp1->course.Session1.shift <<TimeShift(temp1->course.Session1.shift) << "  " << "T" << temp1->course.Session2.thu << " - " << "S" << temp1->course.Session2.shift << TimeShift(temp1->course.Session2.shift);
+			gotoxy(153, 6 + STT++); cout << char(124) << endl;
 			temp1 = temp1->next;
 		}
-		gotoxy(20, 6 + STT); cout << "+--------------------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 6 + STT); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(15, 6 + STT + 1);
 	}
 }
 
-void updateCourse(int se, const SchoolYear& Y)
+void updateCourse(ListCourses l, int se, const SchoolYear& Y)
 {
-	ViewListOfCourse(se, Y);
+	ViewListOfCourse(l, se, Y);
 	Course a, b;
 	cout << "Nhap ID khoa hoc can update: ";
 	getline(cin, a.ID);
@@ -165,8 +159,8 @@ void updateCourse(int se, const SchoolYear& Y)
 		file1.ignore();
 		file1 >> b.MaxNumOfStudents;
 		file1.ignore();
-		file1 >> b.Session1.thu >> b.Session1.gio >> b.Session1.phut;
-		file1 >> b.Session2.thu >> b.Session2.gio >> b.Session2.phut;
+		file1 >> b.Session1.thu >> b.Session1.shift;
+		file1 >> b.Session2.thu >> b.Session2.shift;
 		file1.ignore();
 		if (file1.eof()) break;
 		if (a.ID==b.ID)
@@ -185,33 +179,21 @@ void updateCourse(int se, const SchoolYear& Y)
 			cin >> a.MaxNumOfStudents;
 			cin.ignore();
 			cout << "Nhap buoi hoc thu 1: ";
-			cout << "Thu: ";
 			do
 			{
-				cout << "Thu: ";
+				cout << "Thu (2-8): ";
 				cin >> a.Session1.thu;
-			} while (a.Session1.thu < 2 || a.Session1.thu > 8);
-			do
-			{
-				cout << "Gio: ";
-				cin >> a.Session1.gio;
-				cout << "Phut: ";
-				cin >> a.Session1.phut;
-			} while (!isTime(a.Session1.gio, a.Session1.phut, 0));
+				cout << "Nhap ca hoc(1-4): ";
+				cin >> a.Session1.shift;
+			} while (a.Session1.thu < 2 || a.Session1.thu > 8 || a.Session1.shift < 1 || a.Session1.shift > 4);
 			cout << "Nhap buoi hoc thu 2: ";
-			cout << "Thu: ";
 			do
 			{
-				cout << "Thu: ";
+				cout << "Thu (2-8): ";
 				cin >> a.Session2.thu;
-			} while (a.Session2.thu < 2 || a.Session2.thu > 8);
-			do
-			{
-				cout << "Gio: ";
-				cin >> a.Session2.gio;
-				cout << "Phut: ";
-				cin >> a.Session2.phut;
-			} while (!isTime(a.Session2.gio, a.Session2.phut, 0));
+				cout << "Nhap ca hoc(1-4): ";
+				cin >> a.Session2.shift;
+			} while (a.Session2.thu < 2 || a.Session2.thu > 8 || a.Session2.shift < 1 || a.Session2.shift > 4);
 			file2 << a.Sememster << endl;
 			file2 << a.ID << endl;
 			file2 << a.Name << endl;
@@ -219,11 +201,9 @@ void updateCourse(int se, const SchoolYear& Y)
 			file2 << a.NumOfCredits << endl;
 			file2 << a.MaxNumOfStudents << endl;
 			file2 << a.Session1.thu << endl;
-			file2 << a.Session1.gio << endl;
-			file2 << a.Session1.phut << endl;
+			file2 << a.Session1.shift << endl;
 			file2 << a.Session2.thu << endl;
-			file2 << a.Session2.gio << endl;
-			file2 << a.Session2.phut << endl;
+			file2 << a.Session2.shift << endl;
 		}
 		else
 		{
@@ -234,11 +214,9 @@ void updateCourse(int se, const SchoolYear& Y)
 			file2 << b.NumOfCredits << endl;
 			file2 << b.MaxNumOfStudents << endl;
 			file2 << b.Session1.thu << endl;
-			file2 << b.Session1.gio << endl;
-			file2 << b.Session1.phut << endl;
+			file2 << b.Session1.shift << endl;
 			file2 << b.Session2.thu << endl;
-			file2 << b.Session2.gio << endl;
-			file2 << b.Session2.phut << endl;
+			file2 << b.Session2.shift << endl;
 		}
 	}
 	file1.close();
@@ -326,9 +304,9 @@ void CreateCourseRegistrationSession(int se, const SchoolYear& Y)
 		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
 	file.close();
 }
-void deleteCourse(int se, const SchoolYear& Y)
+void deleteCourse(ListCourses l, int se, const SchoolYear& Y)
 {
-	ViewListOfCourse(se, Y);
+	ViewListOfCourse(l, se, Y);
 	Course a, b;
 	cout << "Nhap ID khoa hoc muon xoa: ";
 	getline(cin, a.ID);
@@ -344,8 +322,8 @@ void deleteCourse(int se, const SchoolYear& Y)
 		getline(file1, b.TeacherName);
 		file1 >> b.NumOfCredits;
 		file1 >> b.MaxNumOfStudents;
-		file1 >> b.Session1.thu >> b.Session1.gio >> b.Session1.phut;
-		file1 >> b.Session2.thu >> b.Session2.gio >> b.Session2.phut;
+		file1 >> b.Session1.thu >> b.Session1.shift;
+		file1 >> b.Session2.thu >> b.Session2.shift;
 		if (file1.eof()) break;
 		if (a.ID != b.ID)
 		{
@@ -356,11 +334,9 @@ void deleteCourse(int se, const SchoolYear& Y)
 			file2 << b.NumOfCredits << endl;
 			file2 << b.MaxNumOfStudents << endl;
 			file2 << b.Session1.thu << endl;
-			file2 << b.Session1.gio << endl;
-			file2 << b.Session1.phut << endl;
+			file2 << b.Session1.shift << endl;
 			file2 << b.Session2.thu << endl;
-			file2 << b.Session2.gio << endl;
-			file2 << b.Session2.phut << endl;
+			file2 << b.Session2.shift << endl;
 		}
 	}
 	file1.close();

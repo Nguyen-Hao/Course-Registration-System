@@ -5,11 +5,9 @@ Nguyen Le Hoang Dung
 4
 150
 2
-23
-50
+1
 4
-17
-30
+3
 2
 CSC10001
 Nhap mon lap trinh
@@ -17,35 +15,29 @@ Truong Toan Thinh
 4
 133
 2
-8
-0
+1
 5
-12
-35
 3
+2
 MTH00030
 Dai so tuyen tinh
 Le Van Hop
 4
 200
 3
+1
 7
-30
-7
-9
-0
-3
+1
+2
 MTH00007
 Vi tich phan 2B
 Nguyen Vu Huy
 3
 120
 4
+1
 7
-35
-7
-5
-30
+3
 2
 BAA00004
 Phap luat dai cuong
@@ -53,11 +45,9 @@ Tran Thien An
 4
 150
 2
-7
-30
+3
 5
-12
-30
+3
 2
 ENV00001
 Moi truong dai cuong
@@ -65,11 +55,9 @@ Tran Van Chung
 2
 50
 2
-7
-30
+2
 5
-7
-30
+4
 2
 ENV00002
 Khoa hoc trai dat
@@ -77,11 +65,9 @@ Huynh Van Loc
 2
 50
 2
+2
 7
-30
-7
-7
-30
+3
 2
 CHE00003
 Hoa dai cuong 3
@@ -89,11 +75,9 @@ Tran Van Chung
 3
 70
 2
-7
-30
+1
 6
-12
-30
+1
 2
 BIO00001
 Sinh dai cuong 1
@@ -101,11 +85,9 @@ Tran Thi Thu
 3
 66
 3
-12
-30
+3
 6
-7
-30
+3
 2
 BAA00104
 Lich su DCSVN
@@ -113,11 +95,9 @@ Phan Thuy Linh
 2
 177
 3
-7
-30
+3
 6
-12
-30
+1
 2
 GEO00002
 Khoa hoc trai dat
@@ -125,11 +105,9 @@ Phan Van Nam
 2
 106
 3
-9
-45
+2
 5
-12
-30
+2
 2
 BAA00021
 The duc 1
@@ -137,11 +115,9 @@ Nguyen Ha Anh
 2
 40
 3
-9
-45
+4
 6
-7
-30
+4
 2
 OMH00001
 Gioi thieu nganh hai duong hoc
@@ -149,11 +125,9 @@ Pham Van Anh Vu
 3
 144
 2
-12
-30
+3
 4
-12
-30
+3
 2
 BIO00010
 Nhap mon Sinh hoc
@@ -161,11 +135,9 @@ Nguyen Thuy Ha
 2
 95
 2
-14
-45
+4
 6
-9
-45
+2
 2
 CSC00003
 Tin hoc co so
@@ -173,11 +145,9 @@ Huynh Phan Anh
 3
 39
 4
-7
-30
+1
 8
-7
-30
+1
 2
 BAA00011
 Anh van 1
@@ -185,11 +155,9 @@ Phan Anh Lam
 3
 50
 2
-12
-30
+3
 5
-7
-30
+1
 2
 BAA00103
 Chu nghia xa hoi khoa hoc
@@ -197,11 +165,9 @@ Nguyen Van Toan
 2
 40
 4
-14
-45
+4
 6
-14
-45
+4
 2
 GEO10001
 Dia Chat Dai Cuong
@@ -209,11 +175,9 @@ Le Bao Thanh
 3
 32
 4
-12
-30
+3
 5
-7
-30
+3
 2
 MTH00002
 Toan cao cap C
@@ -221,11 +185,9 @@ Nguyen Van Minh
 3
 46
 4
-7
-30
+1
 6
-7
-30
+1
 2
 CHE00010
 Gioi thieu nganh hoa hoc
@@ -233,11 +195,9 @@ Bui Thanh Tung
 2
 134
 6
-7
-30
+1
 8
-7
-30
+3
 2
 MTH00010
 Giai tich 1A
@@ -245,11 +205,9 @@ Phan Anh Hung
 3
 151
 4
-12
-30
+3
 5
-12
-30
+1
 2
 MTH00011
 Vi tich phan 1A
@@ -257,8 +215,6 @@ Pham Anh Vu
 3
 183
 4
-12
-30
+1
 8
-12
-30
+3

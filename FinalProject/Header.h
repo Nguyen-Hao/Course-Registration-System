@@ -21,13 +21,8 @@
 #define BACKSPACE 8
 #define SPACE 32
 
-#define FILEDSSV "DSSinhVien.txt"
 #define FILEDSGV "DsGiaoVien.txt"
-#define FILEDSLOP "DSLop.txt"
-#define FILECOURSES "ListCourses.txt"
-#define FILECSV "Filecsv.csv"
-#define FILETIMEDKHP "TimeDKHP.txt"
-#define FILEDSSVMON "StudentOfSubject.txt"
+#define FILECSV "Filecsv"
 
 using namespace std;
 
@@ -50,8 +45,7 @@ struct Date
 struct PhienGio
 {
 	int thu;
-	int gio;
-	int phut;
+	int shift;
 };
 
 struct SinhVien
@@ -76,10 +70,10 @@ struct ListSV
 };
 struct DiemMonHoc
 {
-	double MidTerm;
-	double Final;
-	double Other; 
-	double Total;
+	double MidTerm=0;
+	double Final=0;
+	double Other=0; 
+	double Total=0;
 };
 struct NodeDiem
 {
@@ -173,8 +167,6 @@ struct SchoolYear
 	string DSSinhVien = "DSSinhVien";
 	string StudentOfSubject = "StudentOfSubject";  
 	string TimeDKHP = "TimeDKHP";  
-	string DsGiaoVien = "DsGiaoVien"; 
-	string Filecsv = "DSSV"; 
 	string ListCourses = "ListCourses"; 
 	string sesmester = "sesmester";  
 };

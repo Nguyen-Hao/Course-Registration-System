@@ -3,7 +3,9 @@
 
 void AddTailStudent(ListSV*& ds, SinhVien sv); 
 int CheckClass(ListLop dsl, string a, int n); 
-void AddStudent_Input(ListLop& dsl); 
-void WriteFileStudent(ListLop& dsl, const SchoolYear& Y); 
+void AddStudent_Input(ListLop& dsl, const SchoolYear& Y); 
+void WriteFileStudent(ListLop& dsl, const SchoolYear& Y);
 void ReadFileStudent(ListLop& dsl, const SchoolYear& Y); 
-void viewScoreBoardOfStudent(SinhVien& S, ListCourses l, int se, const SchoolYear& Y);
+void viewScoreBoardOfStudent(const SinhVien& S, ListCourses l, int se, const SchoolYear& Y);
+void ViewEnrollCourses(SinhVien& S, int se, const SchoolYear& Y);
+void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear& Y, bool& f);

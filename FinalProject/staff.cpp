@@ -52,21 +52,25 @@ void CreateNewClass(ListLop& ds,const SchoolYear&Y)
 	f.close();
 }
 
-void AddStudent_Input(ListLop& dsl)
+void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 {
-	char c[10];
-	char Pass[10] = "123456";
+	string c;
+	string Pass = "123456";
 	SinhVien sv;
 	gotoxy(70, 8);
-	cout << "Nhap ID lop: "; cin.get(c, 10, '\n');
+	cout << "Nhap ID lop: ";
+	getline(cin, c);
 	int STTLop;
 	int KT = CheckClass(dsl, c, dsl.n);
 	if (KT != 0)
 	{
 		gotoxy(70, 9);
-		cout << "Ngay nhap hoc: (dd mm yyyy)"; for (int i = 0; i < 3; i++) cin >> sv.begin[i];
+		cout << "Ngay nhap hoc: (dd mm yyyy)";
+		for (int i = 0; i < 3; i++) cin >> sv.begin[i];
+		cin.ignore();
 		gotoxy(70, 10);
-		cout << "Nhap ID sinh vien: "; getline(cin, sv.ID);
+		cout << "Nhap ID sinh vien: ";
+		getline(cin, sv.ID);
 		gotoxy(70, 11);
 		cout << "Nhap ho: "; getline(cin, sv.FirstName);
 		gotoxy(70, 12);
@@ -84,6 +88,22 @@ void AddStudent_Input(ListLop& dsl)
 		sv.Semester = 1;
 		sv.pass = Pass;
 		AddTailStudent(dsl.l[STTLop].pHead, sv);
+		fstream file;
+		file.open(string(dsl.l[STTLop].Ma) + "_" + FILECSV+".csv", ios::in);
+		string s[7];
+		int STT = 0;
+		getline(file, s[0]);
+		while (!file.eof())
+		{
+			for (int i = 0; i < 6; i++) getline(file, s[i], ',');
+			getline(file, s[6]);
+			if (s[0] != "") STT = stoi(s[0]);
+		}
+		file.close();
+		file.open(string(dsl.l[STTLop].Ma) + "_" + FILECSV+".csv", ios::app);
+		file << STT + 1 << "," << sv.ID << "," << sv.FirstName << "," << sv.LastName << "," << sv.Gender << ","
+			<< sv.DateOfBirth << "," << sv.SocialID << endl;
+		file.close();
 	}
 	else
 	{
@@ -95,7 +115,7 @@ void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
 {
 	dsgv.pHead = NULL;
 	ifstream file;
-	file.open(Y.DsGiaoVien);
+	file.open(FILEDSGV);
 	if (file.fail())
 	{
 		cout << "Failed to open this file!" << endl;
@@ -120,7 +140,7 @@ void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
 void writeFileTeacher(ListGV dsgv, const SchoolYear& Y)
 {
 	ofstream file;
-	file.open(Y.DsGiaoVien);
+	file.open(FILEDSGV);
 	if (file.fail())
 	{
 		cout << "Failed to open this file!" << endl;
@@ -155,7 +175,7 @@ void UpdateCSV(ListLop& ds, const SchoolYear& Y)
 	file.open(Y.DSSinhVien, ios_base::app);
 	for (int i = 0;i < ds.n; i++) {
 		ifstream f1;
-		f1.open(string(ds.l[i].Ma) + "_" + Y.Filecsv, ios::in | ios::out);
+		f1.open(string(ds.l[i].Ma) + "_" + FILECSV + ".csv", ios::in | ios::out);
 		string line = "", word;
 		getline(f1, line);
 		int ViTriLop = 0;
@@ -307,6 +327,24 @@ void ViewListOfClass(ListLop& ds)
 	}
 	gotoxy(20, 7 + ds.n); cout << "+---------------------------------------------------------------------------------+" << endl;
 }
+int CountNodeStudent(ListSV* phead)
+{
+	ListSV* p = phead;
+	int i = 0;
+	while (p != NULL)
+	{
+		i++;
+		p = p->pNext;
+	}
+	return i;
+}
+int CountNodePage(int i)
+{
+	int page = i / 5 + 1;
+	if (i % 5 == 0)
+		return page - 1;
+	return page;
+}
 void ViewListOfStudentInClass(ListLop& ds)
 {
 	gotoxy(20, 30);
@@ -326,21 +364,72 @@ void ViewListOfStudentInClass(ListLop& ds)
 		cout << "Chua co sinh vien nao trong lop" << endl;
 		return;
 	}
-	system("cls");
-	gotoxy(35, 3); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------";
-	gotoxy(20, 4); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
-	gotoxy(20, 6); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
-	for (ListSV* k = ds.l[ViTriLop].pHead; k != NULL; k = k->pNext) {
-		gotoxy(20, 6 + STT);
-		cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
+	//
+	char key;
+	char arrowleft = 27;
+	char arrowright = 26;
+	int vitri = 0;
+	int numberofstudent = CountNodeStudent(ds.l[ViTriLop].pHead);
+	int numberofPage = CountNodePage(numberofstudent);
+	int page = 1;
+	while (true)
+	{
+		ListSV* k = ds.l[ViTriLop].pHead;
+		int STT = 5 * (page - 1);
+		for (int i = 1; i < page; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				k = k->pNext;
+			}
+		}
+		int count = 0;
+		system("cls");
+		gotoxy(35, 2); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------"; // Loi in ra man hinh mat chu
+		gotoxy(20, 4); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
+		gotoxy(20, 6); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		for (int i = 0; i < 5; i++)
+		{
+			if (k == NULL) break;
+			count = i + 1;
+			gotoxy(20, 7 + i);
+			cout << char(124) << "  " << setw(5) << left << i + STT + 1 << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
+			k = k->pNext;
+		}
+		gotoxy(20, 7 + count); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(15, 7 + count + 1);
+		gotoxy(50, 28); cout << page << "/" << numberofPage;
+		key = GetKey();
+		if (key == LEFT)// sang trai
+		{
+			vitri = 0;
+		}
+		if (key == RIGHT) // sang phai
+		{
+			vitri = 1;
+		}
+		if (key == ESC) // thoat vong lap
+		{
+			return;
+		}
+		if (vitri == 0 /*&& key == ENTER*/)
+		{
+			if (page == 1) continue;
+			else
+				page--;
+		}
+		if (vitri == 1/* && key == ENTER*/)
+		{
+			if (page == numberofPage) continue;
+			else
+				page++;
+		}
 	}
-	gotoxy(20, 6 + STT); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(15, 6 + STT + 1);
 }
 void ViewListOfStudentIncourses(ListCourses ds, int se,  const SchoolYear& Y)
 {
-	ViewListOfCourse(se, Y);
+	ViewListOfCourse(ds, se, Y);
 	cout << "Nhap ma mon: ";
 	int n = countNodeCourses(ds);
 	int ViTrimon;
@@ -381,7 +470,7 @@ void ViewListOfStudentIncourses(ListCourses ds, int se,  const SchoolYear& Y)
 void ExportListStudentInCourseToEnterScore(ListCourses dsm, int se, const SchoolYear& Y)
 {
 	cin.ignore();
-	ViewListOfCourse(se, Y);
+	ViewListOfCourse(dsm, se, Y);
 	for (NodeCourse* p = dsm.head; p != NULL; p = p->next) {
 		ListSV* Lsv_Of_Courses = findStudentOfCourses(dsm, p->course.ID,se, Y);
 		ListSV* k = Lsv_Of_Courses;
@@ -458,7 +547,7 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, int se,  const SchoolYear& Y)
 void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 {
 	cin.ignore();
-	ViewListOfCourse(se, Y);
+	ViewListOfCourse(ds, se, Y);
 	cout << "Nhap ma mon: ";
 	int n = countNodeCourses(ds);
 	int ViTrimon;
@@ -555,8 +644,10 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 {
 	int t = YearPresent();
 	string malop;
-	cout << "Nhap ma lop: "; getline(cin, malop);
+	cout << "Nhap ma lop: ";
+	getline(cin, malop);
 	system("cls");
+	ListCourses ds = ReadListCourses(se, Y);
 	int VitriLop;
 	int KT = CheckClass(dsl, malop, dsl.n);
 	if (KT == 0)
@@ -567,20 +658,20 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 	if (KT == -1) VitriLop = 0;
 	else
 		VitriLop = KT;
-	NodeCourse* p = dsm.head;
+	NodeCourse* p = ds.head;
 	gotoxy(35, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
-	gotoxy(20, 4); cout << "+-----------------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
-	gotoxy(20, 6); cout << "+-----------------------------------------------------------------------------------------------------------------+" << endl;
+	gotoxy(20, 4); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
+	gotoxy(20, 5); cout << char(124) << "  " << setw(4) << left << "STT" << char(124) << "  " << setw(14) << left << "     MSSV" << char(124) << "  " << setw(19) << left << "         Ho" << char(124) << "  " << setw(19) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
+	gotoxy(20, 6); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
 	int STT = 1, n = 0;
 	for (ListSV* k = dsl.l[VitriLop].pHead; k != NULL; k = k->pNext)
 	{
 		double TotalMark = 0;
 		int SoChi = 0;
 		bool flat = false;
-		for (NodeCourse* p = dsm.head; p!= NULL; p = p->next)
+		for (NodeCourse* p = dsm.head; p->next != NULL; p = p->next)
 		{
-			ListSV* psv = findStudentOfCourses(dsm, p->course.ID,se, Y);
+			ListSV* psv = findStudentOfCourses(dsm, p->course.ID, se, Y);
 			for (psv; psv != NULL; psv = psv->pNext)
 			{
 				if (psv->info.ID==k->info.ID)
@@ -588,26 +679,20 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 					string link = "ScoreBoard" + to_string(t) + "_" + to_string(t + 1) + "_" + to_string(se) + "_" + string(p->course.ID) + ".csv";
 					ifstream f(link);
 					if (f.is_open()) {
-						string s;
-						getline(f, s);
-						while (f.good())
+						string s[8];
+						getline(f, s[0]);
+						while (!f.eof())
 						{
-							getline(f, s);
-							if (s.size() == 0) break;
-							stringstream ss(s);
-							vector<string> row;
-							while (getline(ss, s, ','))
-							{
-								row.push_back(s);
-							}
-							if (row[1]==k->info.ID)
+							for (int i = 0; i < 7; i++) getline(f, s[i], ',');
+							getline(f, s[7]);
+							if (s[0] == "") break;
+							if (s[1] == k->info.ID)
 							{
 								SoChi += p->course.NumOfCredits;
-								TotalMark += stoi(row[4]) * p->course.NumOfCredits;
+								TotalMark += stoi(s[4]) * p->course.NumOfCredits;
 								flat = true;
 								gotoxy(20, 7 + n);
-								cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << row[1] << char(124) << "  " << setw(20) << left << row[2] << char(124) << "  " << setw(20) << row[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << row[4] << char(124) << endl;
-								gotoxy(20, 7 + ++n + 1);
+								cout << char(124) << " " << setw(5) << left << STT++ << char(124) << " " << setw(15) << left << s[1] << char(124) << " " << setw(20) << left << s[2] << char(124) << " " << setw(20) << s[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << s[4] << char(124) << endl; gotoxy(20, 7 + ++n + 1);
 							}
 						}
 					}
@@ -619,55 +704,47 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 
 			TextColor(225);
 			gotoxy(20, 7 + n++);
-			cout << char(124) << "  " << setw(5) << left << "" << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << (TotalMark / SoChi) * 1.0 << char(124) << endl;
+			cout << char(124) << "  " << setw(4) << left << "" << char(124) << "  " << setw(14) << left << k->info.ID << char(124) << "  " << setw(19) << left << k->info.FirstName << char(124) << "  " << setw(19) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << (TotalMark / SoChi) * 1.0 << char(124) << endl;
 		}
 		else {
 			gotoxy(20, 7 + n++);
-			cout << char(124) << "  " << setw(5) << left << "" << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << 0.0 << char(124) << endl;
+			cout << char(124) << "  " << setw(4) << left << "" << char(124) << "  " << setw(14) << left << k->info.ID << char(124) << "  " << setw(19) << left << k->info.FirstName << char(124) << "  " << setw(19) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << 0.0 << char(124) << endl;
 			TextColor(224);
 		}
 		TextColor(224);
-		gotoxy(20, 7 + n); cout << "+-----------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 7 + n); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
 		n++;
 	}
 }
-DiemMonHoc ReadfileCSVScore(SinhVien S, const SchoolYear& Y, int se, string mamon)
+DiemMonHoc ReadfileCSVScore(const SinhVien& S, const SchoolYear& Y, int se, string mamon)
 {
 	int t = YearPresent();
-	ifstream f1;
-	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" + to_string(se) + "_" + mamon + ".csv";
-	f1.open(link, ios::in | ios::out);
-	string line = "", word;
+	fstream f1;
+	string link = "ScoreBoard" + to_string(t ) + "_" + to_string(t+1) + "_" + to_string(se) + "_" + mamon + ".csv";
+	f1.open(link, ios::in);
 	DiemMonHoc score;
-	score.Final = 0;
-	score.MidTerm = 0;
-	score.Other = 0;
-	score.Total = 0;
 	if (f1.is_open())
 	{
 		while (!f1.eof())
 		{
-
-			string Mssv;
-			Mssv=S.ID;
+			string line = "", word;
 			getline(f1, line);
 			if (line.size() == 0) break;
 			stringstream s(line);
 			vector<string> row;
 			while (getline(s, word, ','))
-			{
 				row.push_back(word);
-			}
-			SinhVien sv;
-			sv.ID=row[1];
-			sv.FirstName=row[2];
-			sv.LastName=row[3];
-			score.Total = 1.0 * atoi(row[4].c_str());
-			score.Final = 1.0 * atoi(row[5].c_str());
-			score.MidTerm = 1.0 * atoi(row[6].c_str());
-			score.Other = 1.0 * atoi(row[7].c_str());
-			if (sv.ID==Mssv)
+			string ID;
+			ID = row[1];
+			if (ID == S.ID)
+			{
+				score.Total = stod(row[4]);
+				score.Final = stod(row[5]);
+				score.MidTerm = stod(row[6]);
+				score.Other = stod(row[7]);
 				break;
+			}
+				
 		}
 	}
 	f1.close();
@@ -677,7 +754,7 @@ void PrintFileCSV(ListLop dsl, SchoolYear Y)
 {
 	for (int i = 0;i < dsl.n; i++)
 	{
-		string nameFile = string(dsl.l[i].Ma) + "_" + Y.Filecsv;
+		string nameFile = string(dsl.l[i].Ma) + "_" + FILECSV;
 		ifstream fin(nameFile);
 		if (!fin.is_open())
 		{
