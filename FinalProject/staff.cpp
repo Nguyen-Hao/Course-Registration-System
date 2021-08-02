@@ -327,6 +327,24 @@ void ViewListOfClass(ListLop& ds)
 	}
 	gotoxy(20, 7 + ds.n); cout << "+---------------------------------------------------------------------------------+" << endl;
 }
+int CountNodeStudent(ListSV* phead)
+{
+	ListSV* p = phead;
+	int i = 0;
+	while (p != NULL)
+	{
+		i++;
+		p = p->pNext;
+	}
+	return i;
+}
+int CountNodePage(int i)
+{
+	int page = i / 5 + 1;
+	if (i % 5 == 0)
+		return page - 1;
+	return page;
+}
 void ViewListOfStudentInClass(ListLop& ds)
 {
 	gotoxy(20, 30);
@@ -346,17 +364,70 @@ void ViewListOfStudentInClass(ListLop& ds)
 		cout << "Chua co sinh vien nao trong lop" << endl;
 		return;
 	}
-	system("cls");
-	gotoxy(35, 3); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------";
-	gotoxy(20, 4); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
-	gotoxy(20, 6); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
-	for (ListSV* k = ds.l[ViTriLop].pHead; k != NULL; k = k->pNext) {
-		gotoxy(20, 6 + STT);
-		cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
+	//
+	char key;
+	char arrowleft = 27;
+	char arrowright = 26;
+	int vitri = 0;
+	int numberofstudent = CountNodeStudent(ds.l[ViTriLop].pHead);
+	int numberofPage = CountNodePage(numberofstudent);
+	int page = 1;
+	while (true)
+	{
+		ListSV* k = ds.l[ViTriLop].pHead;
+		int STT = 5 * (page - 1);
+		for (int i = 1; i < page; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				k = k->pNext;
+			}
+		}
+		int count = 0;
+		system("cls");
+		gotoxy(35, 2); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------"; // Loi in ra man hinh mat chu
+		gotoxy(20, 4); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
+		gotoxy(20, 6); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		for (int i = 0; i < 5; i++)
+		{
+			if (k == NULL) break;
+			count = i + 1;
+			gotoxy(20, 7 + i);
+			cout << char(124) << "  " << setw(5) << left << i + STT + 1 << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
+			k = k->pNext;
+		}
+		gotoxy(20, 7 + count); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(15, 7 + count + 1);
+		gotoxy(50, 28); cout << page << "/" << numberofPage;
+		key = GetKey();
+		if (key == LEFT)// sang trai
+		{
+			vitri += 1;
+			if (vitri == 2) vitri = 0;
+		}
+		if (key == RIGHT) // sang phai
+		{
+			vitri -= 1;
+			if (vitri == -1) vitri = 1;
+		}
+		if (key == ESC) // thoat vong lap
+		{
+			return;
+		}
+		if (vitri == 0 /*&& key == ENTER*/)
+		{
+			if (page == 1) continue;
+			else
+				page--;
+		}
+		if (vitri == 1/* && key == ENTER*/)
+		{
+			if (page == numberofPage) continue;
+			else
+				page++;
+		}
 	}
-	gotoxy(20, 6 + STT); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(15, 6 + STT + 1);
 }
 void ViewListOfStudentIncourses(ListCourses ds, int se,  const SchoolYear& Y)
 {
