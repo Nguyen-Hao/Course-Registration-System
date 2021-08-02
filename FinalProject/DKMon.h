@@ -11,3 +11,4 @@ bool CheckSameTime(const ListCourses& l, NodeCourse* ptr);
 void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear& Y, string& c, bool& f);
 void ViewEnrollCourses(SinhVien& S, int se, const SchoolYear& Y);
 void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear& Y, bool &f);
+int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l);

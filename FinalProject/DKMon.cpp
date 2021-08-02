@@ -427,3 +427,43 @@ void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear&Y,
 		}
 	}
 }
+int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l)
+{
+	int count = 0;
+	ifstream file;
+	file.open(to_string(se) + Y.StudentOfSubject);
+	string s = "";
+	SinhVien sv;
+	bool check = false;
+	while (!check)
+	{
+		getline(file, s);
+		check = CheckCourses(l, s) && s == a.ID;
+	}
+	getline(file, s);
+	while (true)
+	{
+		sv.Class = s;
+		getline(file, sv.ID);
+		getline(file, sv.pass);
+		getline(file, sv.FirstName);
+		getline(file, sv.LastName);
+		getline(file, sv.Gender);
+		getline(file, sv.DateOfBirth);
+		getline(file, sv.SocialID);
+		for (int i = 0; i < 3; i++)
+		{
+			file >> sv.begin[i];
+		}
+		file.ignore();
+		file >> sv.YearStudent;
+		file.ignore();
+		file >> sv.Semester;
+		file.ignore();
+		count++;
+		getline(file, s);
+		if (CheckCourses(l, s) || s == "" || file.eof()) break;
+	}
+	file.close();
+	return count;
+}
