@@ -7,7 +7,6 @@
 #include "Semester.h"
 #include "DKMon.h"
 #include "SchoolYear.h"
-
 ListSV* Create_Node_Sv(SinhVien sv)
 {
 	ListSV* a = new ListSV;
@@ -575,8 +574,10 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 {
 	int t = YearPresent();
 	string malop;
-	cout << "Nhap ma lop: "; getline(cin, malop);
+	cout << "Nhap ma lop: "; 
+	getline(cin, malop);
 	system("cls");
+	ListCourses ds = ReadListCourses(se, Y);
 	int VitriLop;
 	int KT = CheckClass(dsl, malop, dsl.n);
 	if (KT == 0)
@@ -587,7 +588,8 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 	if (KT == -1) VitriLop = 0;
 	else
 		VitriLop = KT;
-	NodeCourse* p = dsm.head;
+	NodeCourse* p = ds.head;
+
 	gotoxy(35, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
 	gotoxy(20, 4); cout << "+-----------------------------------------------------------------------------------------------------------------+" << endl;
 	gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
@@ -598,9 +600,9 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 		double TotalMark = 0;
 		int SoChi = 0;
 		bool flat = false;
-		for (NodeCourse* p = dsm.head; p!= NULL; p = p->next)
+		for (NodeCourse* p = dsm.head; p->next != NULL; p = p->next)
 		{
-			ListSV* psv = findStudentOfCourses(dsm, p->course.ID,se, Y);
+			ListSV* psv = findStudentOfCourses(dsm, p->course.ID,se,  Y);
 			for (psv; psv != NULL; psv = psv->pNext)
 			{
 				if (psv->info.ID==k->info.ID)
@@ -608,25 +610,20 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 					string link = "ScoreBoard" + to_string(t) + "_" + to_string(t + 1) + "_" + to_string(se) + "_" + string(p->course.ID) + ".csv";
 					ifstream f(link);
 					if (f.is_open()) {
-						string s;
-						getline(f, s);
-						while (f.good())
+						string s[8];
+						getline(f, s[0]);
+						while (!f.eof())
 						{
-							getline(f, s);
-							if (s.size() == 0) break;
-							stringstream ss(s);
-							vector<string> row;
-							while (getline(ss, s, ','))
-							{
-								row.push_back(s);
-							}
-							if (row[1]==k->info.ID)
+							for (int i = 0; i < 7; i++) getline(f, s[i], ',');
+							getline(f, s[7]);
+							if (s[0] == "") break;
+							if (s[1]==k->info.ID)
 							{
 								SoChi += p->course.NumOfCredits;
-								TotalMark += stoi(row[4]) * p->course.NumOfCredits;
+								TotalMark += stoi(s[4]) * p->course.NumOfCredits;
 								flat = true;
 								gotoxy(20, 7 + n);
-								cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << row[1] << char(124) << "  " << setw(20) << left << row[2] << char(124) << "  " << setw(20) << row[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << row[4] << char(124) << endl;
+								cout << char(124) << "  " << setw(5) << left << STT++ << char(124) << "  " << setw(15) << left << s[1] << char(124) << "  " << setw(20) << left << s[2] << char(124) << "  " << setw(20) << s[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << s[4] << char(124) << endl;
 								gotoxy(20, 7 + ++n + 1);
 							}
 						}
