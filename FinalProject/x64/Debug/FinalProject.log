@@ -1,0 +1,30 @@
+﻿  console.cpp
+  course.cpp
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\course.cpp(116,8): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  DKMon.cpp
+  main.cpp
+  Menu.cpp
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(79,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(159,37): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(167,38): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(168,38): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(169,38): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(170,38): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(195,40): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(196,40): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(197,40): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(198,40): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(209,40): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(210,40): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(211,40): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(212,40): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(583,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(624,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(734,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  SchoolYear.cpp
+  semester.cpp
+  Source.cpp
+  staff.cpp
+  student.cpp
+  Generating Code...
+  FinalProject.vcxproj -> C:\Users\PC\Desktop\QUAN LY SV\x64\Debug\FinalProject.exe

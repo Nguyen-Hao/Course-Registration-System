@@ -30,8 +30,7 @@ int main()
 	ReadFileDSGV(dsgv, y);
 	UpdateStudent(y);
 	UpdateCSV(dsl, y);
-	ViewListOfCourse(dsmon, se, y);
-	//Menu(dsl, dsgv, dsmon, sv, gv, choice, se, y);
+	Menu(dsl, dsgv, dsmon, sv, gv, choice, se, y);
 	system("pause");
 	return 0;
 }

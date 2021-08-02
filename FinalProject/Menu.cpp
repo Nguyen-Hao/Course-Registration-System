@@ -259,7 +259,7 @@ void EffectFailed(int x, int y, string c)
 void CreateSemesterForm()
 {
 	TextColor(224);
-	gotoxy(75, 9); cout << "Ki: "; Frames(100, 8, 10, 1); gotoxy(125, 9); cout << "Ex: 1,2,3";// khung nhap ki 
+	gotoxy(75, 9); cout << "Ki: "; Frames(100, 8, 10, 1); // khung nhap ki 
 	gotoxy(75, 13); cout << "Nam hoc: "; Frames(100, 12, 15, 1);// nam
 	gotoxy(75, 17); cout << "Ngay bat dau: "; Frames(100, 16, 10, 1); gotoxy(111, 17); cout << "/"; Frames(113, 16, 10, 1); gotoxy(124, 17); cout << "/"; Frames(126, 16, 10, 1);
 	gotoxy(75, 21); cout << "Ngay ket thuc: "; Frames(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; Frames(113, 20, 10, 1); gotoxy(124, 20); cout << "/"; Frames(126, 20, 10, 1);

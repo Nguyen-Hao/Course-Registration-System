@@ -71,24 +71,25 @@ bool CreateSemester(semester& sesmes, const SchoolYear& Y)
 	{
 		l.tail = new NodeSemester;
 		l.tail->semes.name = 0;
-		int n=YearPresent()-1;
+		int n = YearPresent();
 		string s = to_string(n) + '-' + to_string(n + 1);
 		strcpy_s(l.tail->semes.schoolyear, 11, s.c_str());
 	}
-	sesmes.name = l.tail->semes.name % 3 + 1;
-	gotoxy(102, 9); cout << (l.tail->semes.name%3 + 1);
-	if (l.tail->semes.name < 3) strcpy_s(sesmes.schoolyear,11,l.tail->semes.schoolyear);
-	else
+	sesmes.name = l.tail->semes.name + 1;
+	if (sesmes.name > 3)
 	{
-		string s = "";
-		for (int i = strlen(l.tail->semes.schoolyear); l.tail->semes.schoolyear[i]!='-'; i--)
-		{
-			s = l.tail->semes.schoolyear[i] + s;
-		}
-		int n = stoi(s, NULL, 10);
-		s = to_string(n) + '-' + to_string(n + 1);
-		strcpy_s(sesmes.schoolyear, 11, s.c_str());
+		string c = "Da tao du 3 ky cua nam hoc " + string(l.tail->semes.schoolyear) + ". Ban can tao nam hoc moi truoc!";
+		int x = 60, y = 25;
+		TextColor(207);
+		gotoxy(x, y); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+		gotoxy(x, y + 1); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+		gotoxy(x, y + 2); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+		gotoxy(x + 3, y + 1); cout << c;
+		TextColor(224);
+		return false;
 	}
+	gotoxy(102, 9); cout << (l.tail->semes.name % 3 + 1);
+	strcpy_s(sesmes.schoolyear, 11, l.tail->semes.schoolyear);
 	gotoxy(102, 13); cout << sesmes.schoolyear;
 	gotoxy(102, 17); cin >> sesmes.begin.ngay;
 	gotoxy(115, 17); cin >> sesmes.begin.thang;
@@ -109,7 +110,7 @@ bool CreateSemester(semester& sesmes, const SchoolYear& Y)
 		TextColor(234);
 		gotoxy(137, 17); cout << "Right";
 	}
-	if (!isDate(sesmes.end.ngay, sesmes.end.thang,sesmes.end.nam)) {
+	if (!isDate(sesmes.end.ngay, sesmes.end.thang, sesmes.end.nam)) {
 		TextColor(228); gotoxy(137, 21); cout << "Wrong";
 		f = false;
 	}
