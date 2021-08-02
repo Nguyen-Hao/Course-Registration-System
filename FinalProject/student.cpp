@@ -86,20 +86,19 @@ void viewScoreBoardOfStudent(SinhVien& S, ListCourses l, int se, const SchoolYea
 		cout << "chua dang ki mon nao!" << endl;
 	else
 	{
-		cout << setw(10) << left << "ID" << setw(50) << left << "Name of course";
-		cout << setw(50) << left << "Teacher name" << setw(8) << left << "Credit";
-		cout << setw(20) << "Score orther";
-		cout << setw(10) << left << "Score middle" << setw(10) << left << "Score Final";
-		cout << setw(10) << left << "Score total" << endl;
+		gotoxy(5, 5); cout << "+---------------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(5, 6); cout << char(124) << "   " << setw(7) << left << "ID" << char(124) << "  " << setw(40) << left << "     Name of course" << char(124) << "  " << setw(40) << left << "         Teacher name" << char(124) << "  " << setw(10) << "  Credit" << char(124) << setw(8) << "  Other" << char(124) << setw(10) << " MidTerm " << char(124) << setw(8) << "  Final" << char(124) << setw(8) << " Total" << char(124) << endl;
+		gotoxy(5, 7); cout << "+---------------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 		NodeCourse* temp1 = list.head;
+		int t = 1;
 		while (temp1 != NULL)
 		{
 			DiemMonHoc score = ReadfileCSVScore(S, Y, se, temp1->course.ID);
-			cout << setw(10) << left << temp1->course.ID << setw(50) << left << temp1->course.Name;
-			cout << setw(50) << left << temp1->course.TeacherName << setw(8) << left << temp1->course.NumOfCredits;
-			cout << setw(20) << score.Other;
-			cout << setw(10) << left << score.MidTerm << setw(10) << left << score.Final << left << setw(10) << score.Total << endl;
+			gotoxy(5, 7 + t);
+			cout << char(124)<<" " << setw(9) << left << temp1->course.ID << char(124) << "  " << setw(40) << left << temp1->course.Name << char(124) << "  " << setw(40) << left << temp1->course.TeacherName << char(124) << "  " << setw(10) << temp1->course.NumOfCredits << char(124) << setw(8) << score.Other << char(124) << setw(10) << score.MidTerm << char(124) << setw(8) << score.Final << char(124) << setw(8) << score.Total << char(124) << endl;
 			temp1 = temp1->next;
+			t++;
 		}
+		gotoxy(5, 7 + t); cout << "+---------------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 	}
 }

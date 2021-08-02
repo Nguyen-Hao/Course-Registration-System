@@ -105,14 +105,14 @@ void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
 	{
 		GiaoVien gv;
 		file.clear();
-		file.getline(gv.ID, 10);
-		if (strlen(gv.ID) == 0) break;
-		file.getline(gv.pass, 20);
-		file.getline(gv.FirstName, 20);
-		file.getline(gv.LastName, 20);
-		file.getline(gv.Gender, 20);
-		file.getline(gv.DateOfBirth, 20);
-		file.getline(gv.SocialID, 20);
+		getline(file, gv.ID);
+		if (gv.ID.length() == 0) break;
+		getline(file, gv.pass);
+		getline(file, gv.FirstName);
+		getline(file, gv.LastName);
+		getline(file, gv.Gender);
+		getline(file, gv.DateOfBirth);
+		getline(file, gv.SocialID);
 		AddTailGV(dsgv, gv);
 	}
 	file.close();
@@ -309,7 +309,7 @@ void ViewListOfClass(ListLop& ds)
 }
 void ViewListOfStudentInClass(ListLop& ds)
 {
-	gotoxy(20, 26);
+	gotoxy(20, 30);
 	cout << "Nhap ma lop: ";
 	int ViTriLop;
 	string Malop;

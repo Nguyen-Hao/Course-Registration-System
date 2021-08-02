@@ -466,7 +466,7 @@ ESCAPE:
 			}
 			for (NodeGV* k = dsgv.pHead; k != NULL; k = k->pNext)
 			{
-				if (strcmp(k->info.ID, User.c_str()) == 0 && strcmp(k->info.pass, Pass.c_str()) == 0)
+				if (k->info.ID == User && k->info.pass == Pass)
 				{
 					Login = true;
 					gv = k->info;
@@ -538,12 +538,12 @@ void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 }
 void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, char newpass[], const SchoolYear& Y)
 {
-	strcpy_s(gv.pass, newpass);
+	gv.pass = newpass;
 	for (NodeGV* p = dsgv.pHead; p != NULL; p = p->pNext)
 	{
-		if (strcmp(gv.ID, p->info.ID) == 0)
+		if (gv.ID == p->info.ID)
 		{
-			strcpy_s(p->info.pass, gv.pass);
+			p->info.pass = gv.pass;
 			break;
 		}
 	}
@@ -557,7 +557,7 @@ void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 	gotoxy(26, 15); cout << "Nhap mat khau: "; cin.getline(oldpass, 30);
 	gotoxy(26, 17); cout << "Nhap mat khau moi: "; cin.getline(newpass, 30);
 	gotoxy(26, 19); cout << "Nhap lai mat khau moi: "; cin.getline(newpassAgain, 30);
-	if (strcmp(gv.pass, oldpass) != 0)
+	if (gv.pass != oldpass)
 	{
 		gotoxy(26, 25); cout << "Mat Khau sai!" << endl;
 		gotoxy(26, 26); system("pause");
@@ -695,6 +695,7 @@ HOME:
 					}
 					else if (c == 4)
 					{
+						system("cls");
 						viewScoreBoardOfStudent(sv,dsmon,se, Y);
 						gotoxy(20, 20);
 						system("pause");
@@ -723,8 +724,8 @@ HOME:
 		{
 		REPEATGV:
 			system("cls");
-			_strupr_s(gv.FirstName, 50);
-			_strupr_s(gv.LastName, 50);
+			transform(gv.FirstName.begin(), gv.FirstName.end(), gv.FirstName.begin(), toupper);
+			transform(gv.LastName.begin(), gv.LastName.end(), gv.LastName.begin(), toupper);
 			gotoxy(4, 6); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
 			int n = 0;
 			for (int i = 0; i < 6; i++)

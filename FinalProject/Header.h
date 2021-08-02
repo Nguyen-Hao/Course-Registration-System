@@ -65,8 +65,8 @@ struct SinhVien
 	string DateOfBirth;
 	string SocialID;
 	int begin[3];
-	int YearStudent;
-	int Semester;
+	int YearStudent=0;
+	int Semester=0;
 };
 
 struct ListSV
@@ -85,19 +85,19 @@ struct NodeDiem
 {
 	SinhVien info;
 	DiemMonHoc data;
-	NodeDiem* pNext=NULL;
+	NodeDiem* pNext = NULL;
 };
 struct ListDiem
 {
-	NodeDiem* head;
-	NodeDiem* tail=NULL;
+	NodeDiem* head = NULL;
+	NodeDiem* tail = NULL;
 };
 struct Lop
 {
 	string Ma;
 	string Ten;
 	string NienKhoa;
-	int soluong;
+	int soluong = 0;
 	ListSV* pHead=NULL;
 };
 struct ListLop
@@ -108,13 +108,13 @@ struct ListLop
 
 struct GiaoVien
 {
-	char ID[10];
-	char pass[20];
-	char FirstName[50];
-	char LastName[50];
-	char Gender[10];
-	char DateOfBirth[50];
-	char SocialID[10];
+	string ID;
+	string pass;
+	string FirstName;
+	string LastName;
+	string Gender;
+	string DateOfBirth;
+	string SocialID;
 };
 struct NodeGV
 {

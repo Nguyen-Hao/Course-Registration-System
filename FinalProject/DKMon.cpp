@@ -152,6 +152,7 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 			if (check == 1) cout << "Da qua";
 			else if (check == -1) cout << "Chua den";
 			cout << " thoi gian dang ky hoc phan!" << endl;
+			cout << setfill(' ') << setw(70);
 			cout << "Thoi gian dang ky hoc phan tu ";
 			cout << begin.hour << ":";
 			if (begin.minute < 10) cout << "0";
