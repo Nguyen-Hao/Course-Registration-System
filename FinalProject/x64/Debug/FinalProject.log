@@ -1,2 +1,12 @@
-﻿  DKMon.cpp
+﻿  Menu.cpp
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(80,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(149,30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(149,52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(163,37): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(234,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(249,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(259,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(596,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(639,28): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\Menu.cpp(743,28): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   FinalProject.vcxproj -> C:\Users\PC\Desktop\QUAN LY SV\x64\Debug\FinalProject.exe
