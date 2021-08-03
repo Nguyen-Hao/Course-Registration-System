@@ -13,12 +13,12 @@ void Copy(NodeCourse*& p, NodeCourse* p1)
 
 void AddList(ListCourses& result, ListCourses l, char id[10])
 {
-	NodeCourse* temp = l.head;
+	NodeCourse* temp = l.head,*ptr;
 	while (temp != NULL)
 	{
 		if (temp->course.ID==id)
 		{
-			NodeCourse* ptr = new NodeCourse;
+			ptr = new NodeCourse;
 			Copy(ptr, temp);
 			ptr->next = NULL;
 			if (result.head == NULL)
@@ -63,6 +63,8 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv, int se, co
 	file.open(to_string(se)+Y.StudentOfSubject, ios::in);
 	char ch[10] = "\0", CH[10] = "\n";
 	file.getline(ch, 10);
+	SinhVien s;
+	int i;
 	while (!file.eof())
 	{
 		while (CheckCourses(l, CH) == false)
@@ -71,7 +73,6 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv, int se, co
 			if (CheckCourses(l, CH) == true || strcmp(CH, "\0") == 0) break;
 			else
 			{
-				SinhVien s;
 				s.Class = CH;
 				getline(file, s.ID);
 				getline(file, s.pass);
@@ -80,7 +81,7 @@ ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv, int se, co
 				getline(file, s.Gender);
 				getline(file, s.DateOfBirth);
 				getline(file, s.SocialID);
-				for (int i = 0; i < 3; i++)
+				for (i = 0; i < 3; i++)
 				{
 					file >> s.begin[i];
 				}
@@ -212,8 +213,10 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 			}
 			else
 			{
+				SinhVien s;
 				fstream file, file1;
-				file.open(to_string(se) + Y.StudentOfSubject, ios::in);
+				string link1=to_string(se) + Y.StudentOfSubject;
+				file.open(link1, ios::in);
 				file1.open("temp.txt", ios::out);
 				char ch[10] = "\0", CH[10] = "\n";
 				file.getline(ch, 10);
@@ -241,7 +244,6 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 						if (CheckCourses(l, CH) == true || strcmp(CH, "\0") == 0) break;
 						else
 						{
-							SinhVien s;
 							s.Class = CH;
 							getline(file, s.ID);
 							getline(file, s.pass);
@@ -277,8 +279,8 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 				}
 				file.close();
 				file1.close();
-				remove((to_string(se) + Y.StudentOfSubject).c_str());
-				rename("temp.txt", (to_string(se) + Y.StudentOfSubject).c_str());
+				remove(link1.c_str());
+				rename("temp.txt", link1.c_str());
 				c = "Dang ki thanh cong";
 			}
 		}
@@ -290,8 +292,7 @@ int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l)
 	int count = 0;
 	ifstream file;
 	file.open(to_string(se) + Y.StudentOfSubject);
-	string s = "";
-	SinhVien sv;
+	string s;
 	bool check = false;
 	while (!check)
 	{
@@ -299,26 +300,26 @@ int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l)
 		check = CheckCourses(l, s) && s == a.ID;
 	}
 	getline(file, s);
+	int i,x;
 	while (true)
 	{
-		sv.Class = s;
-		getline(file, sv.ID);
-		getline(file, sv.pass);
-		getline(file, sv.FirstName);
-		getline(file, sv.LastName);
-		getline(file, sv.Gender);
-		getline(file, sv.DateOfBirth);
-		getline(file, sv.SocialID);
-		for (int i = 0; i < 3; i++)
+		getline(file, s);
+		getline(file, s);
+		getline(file, s);
+		getline(file, s);
+		getline(file, s);
+		getline(file, s);
+		getline(file, s);
+		for (i = 0; i < 3; i++)
 		{
-			file >> sv.begin[i];
+			file >> x;
 		}
 		file.ignore();
-		file >> sv.YearStudent;
+		file >> x;
 		file.ignore();
-		file >> sv.Semester;
+		file >> x;
 		file.ignore();
-		count++;
+		++count;
 		getline(file, s);
 		if (CheckCourses(l, s) || s == "" || file.eof()) break;
 	}
