@@ -4,7 +4,7 @@ void ReadFileClass(ListLop& dsl, const SchoolYear&Y)
 {
 	ifstream file;
 	file.open(Y.DSLop, ios_base::in);
-	for (int i = 0; i < maxlop; i++)
+	for (int i = 0; i < maxlop; ++i)
 	{
 		dsl.l[i].Ma[0] = NULL;
 		dsl.l[i].NienKhoa[0] = NULL;
@@ -15,12 +15,12 @@ void ReadFileClass(ListLop& dsl, const SchoolYear&Y)
 	while (file.good())
 	{
 		getline(file, c);
-		dsl.l[dsl.n].Ma=c;
-		getline(file, c);	dsl.l[dsl.n].Ten=c;
-		getline(file, c);	dsl.l[dsl.n].NienKhoa=c;
-		dsl.l[dsl.n].pHead = NULL;
 		if (c.size() == 0) break;
-		dsl.n++;
+		dsl.l[dsl.n].Ma=c;
+		getline(file, dsl.l[dsl.n].Ten);
+		getline(file, dsl.l[dsl.n].NienKhoa);
+		dsl.l[dsl.n].pHead = NULL;
+		++dsl.n;
 	}
 	file.close();
 }

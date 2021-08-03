@@ -13,9 +13,10 @@ void readListSemester(listSemester& l, const SchoolYear&Y)
 	InitListSemester(l);
 	fstream file;
 	file.open(Y.sesmester, ios::in);
+	NodeSemester* ptr;
 	while (!file.eof())
 	{
-		NodeSemester* ptr = new NodeSemester;
+		ptr = new NodeSemester;
 		ptr->next = NULL;
 		file >> ptr->semes.name;
 		file.ignore();
@@ -40,7 +41,6 @@ void readListSemester(listSemester& l, const SchoolYear&Y)
 }
 int getSemester(listSemester l, const SchoolYear Y)
 {
-	readListSemester(l, Y);
 	Time time = getTime();
 	Time begin, end;
 	if (l.head == NULL) return 1;
@@ -62,11 +62,9 @@ int getSemester(listSemester l, const SchoolYear Y)
 }
 
 
-bool CreateSemester(semester& sesmes, const SchoolYear& Y)
+bool CreateSemester(semester& sesmes, const SchoolYear& Y, listSemester&l)
 {
 	bool f = true;
-	listSemester l;
-	readListSemester(l, Y);
 	if (l.tail == NULL)
 	{
 		l.tail = new NodeSemester;
@@ -79,11 +77,11 @@ bool CreateSemester(semester& sesmes, const SchoolYear& Y)
 	if (sesmes.name > 3)
 	{
 		string c = "Da tao du 3 ky cua nam hoc " + string(l.tail->semes.schoolyear) + ". Ban can tao nam hoc moi truoc!";
-		int x = 60, y = 25;
+		int x = 60, y = 25,i,csize=c.size()+3;
 		TextColor(207);
-		gotoxy(x, y); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
-		gotoxy(x, y + 1); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
-		gotoxy(x, y + 2); for (int i = 0; i <= c.size() + 3; i++) cout << " ";
+		gotoxy(x, y); for (i = 0; i <= csize; ++i) cout << " ";
+		gotoxy(x, y + 1); for (i = 0; i <= csize; ++i) cout << " ";
+		gotoxy(x, y + 2); for (i = 0; i <= csize; ++i) cout << " ";
 		gotoxy(x + 3, y + 1); cout << c;
 		TextColor(224);
 		return false;
@@ -127,7 +125,6 @@ bool CreateSemester(semester& sesmes, const SchoolYear& Y)
 	file << sesmes.schoolyear << endl;
 	file << sesmes.begin.ngay << " " << sesmes.begin.thang << " " << sesmes.begin.nam << endl;
 	file << sesmes.end.ngay << " " << sesmes.end.thang << " " << sesmes.end.nam << endl;
-	//sesmes.lis = ReadListCourses(se, Y);
 	file.close();
 	file.open(to_string(sesmes.name) + Y.ListCourses);
 	file.close();

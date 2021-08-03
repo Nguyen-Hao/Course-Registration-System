@@ -617,7 +617,7 @@ void MenuChildren(string s[], int& vitri, int size)
 		TextColor(224);
 	}
 }
-void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, int se, SchoolYear Y)
+void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, int se, SchoolYear Y, listSemester&l)
 {
 HOME:
 	choice = SignIn(ds, dsgv, sv, gv);
@@ -821,7 +821,7 @@ HOME:
 											{
 												ClearEffectAgree(70, 10, c);
 												CreateSemesterForm();
-												bool f = CreateSemester(s, Y);
+												bool f = CreateSemester(s, Y, l);
 												if (f == true) EffectSuccess(90, 28, ThaoTac[2]);
 												else EffectFailed(90, 28, ThaoTac[3]);
 											}

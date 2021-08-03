@@ -17,6 +17,7 @@ int main()
 
 	listSemester l;
 	InitListSemester(l);
+	readListSemester(l, y);
 	int se = getSemester(l, y);
 
 	ListLop dsl;	dsl.n = 0;
@@ -30,7 +31,7 @@ int main()
 	ReadFileDSGV(dsgv, y);
 	UpdateStudent(y);
 	UpdateCSV(dsl, y);
-	Menu(dsl, dsgv, dsmon, sv, gv, choice, se, y);
+	Menu(dsl, dsgv, dsmon, sv, gv, choice, se, y, l);
 	system("pause");
 	return 0;
 }

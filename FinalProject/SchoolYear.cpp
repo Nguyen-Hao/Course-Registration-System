@@ -9,11 +9,11 @@ unsigned int YearPresent()
 	if (file.is_open())
 	{
 		unsigned int a = 0, b = 0;
+		SchoolYear c;
 		while (!file.eof())
 		{
 			file >> a >> b;
 			file.ignore();
-			SchoolYear c;
 			getline(file, c.DSLop);
 			getline(file, c.DSSinhVien);
 			getline(file, c.ListCourses);
