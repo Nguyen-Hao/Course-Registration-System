@@ -873,8 +873,9 @@ HOME:
 							else if (vitricon == 1)
 							{
 								system("cls");
-								ViewListOfClass(ds);
-								ViewListOfStudentInClass(ds);
+								int choice = ViewListOfClass(ds);
+								if(choice == 1)
+									ViewListOfStudentInClass(ds);
 								gotoxy(30, 1); system("pause");
 								goto REPEATGV;
 							}

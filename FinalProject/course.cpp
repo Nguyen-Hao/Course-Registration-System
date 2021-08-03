@@ -5,6 +5,7 @@
 #include <string>
 #include <string.h>
 #include "Semester.h"
+#include "staff.h"
 #include "DKMon.h"
 void initListCourses(ListCourses& list)
 {
@@ -108,10 +109,101 @@ string TimeShift(int shift)
 	else if (shift == 4) time = "(15:30)";
 	return time;
 }
-void ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
+int CountNodeCourse(NodeCourse* phead)
+{
+	NodeCourse* p = phead;
+	int i = 0;
+	while (p != NULL)
+	{
+		i++;
+		p = p->next;
+	}
+	return i;
+}
+int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 {
 	ifstream f;
-	f.open(to_string(se)+Y.ListCourses);
+	f.open(to_string(se) + Y.ListCourses);
+	f.seekg(0, ios::end);
+	int i = f.tellg();
+	f.close();
+	int STT = 0;
+	if (i == 0)
+	{
+		cout << "Chua co khoa hoc nao trong danh sach" << endl;
+	}
+	else
+	{
+		ListCourses temp = ReadListCourses(se, Y);
+		char key;
+		int vitri = 0;
+		int numberofstudent = CountNodeCourse(temp.head);
+		int numberofPage = CountNodePage(numberofstudent);
+		int page = 1;
+		while (true)
+		{
+
+			NodeCourse* temp1 = temp.head;
+			int STT = 15 * (page - 1);
+			for (int i = 1; i < page; i++)
+			{
+				for (int j = 0; j < 15; j++)
+				{
+					temp1 = temp1->next;
+				}
+			}
+			int count = 0;
+			system("cls");
+			gotoxy(20, 3); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+			gotoxy(20, 4); cout << char(124) << setw(13) << left << "  Ma mon hoc" << char(124) << setw(31) << left << "       Ten mon hoc" << char(124) << setw(26) << "     Ten GV" << char(124) << setw(9) << left << "   So TC" << char(124) << setw(16) << "  Da dang ky" << char(124) << "  " << setw(20) << left << "     Lich hoc";
+			gotoxy(153, 4); cout << char(124) << endl;
+			gotoxy(20, 5); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+			for (int i = 0; i < 15; i++)
+			{
+				if (temp1 == NULL) break;
+				count = i + 1;
+				gotoxy(20, 6 + i);
+				cout << char(124) << " " << setw(12) << left << temp1->course.ID << char(124) << " " << setw(30) << left << temp1->course.Name << char(124) << " " << setw(25) << left << temp1->course.TeacherName << char(124) << " " << setw(8) << left << temp1->course.NumOfCredits << char(124) << " " << setw(3) << daDangKy(temp1->course, Y, se, temp) << " " << "/" << " " << setw(9) << temp1->course.MaxNumOfStudents << char(124) << " ";
+				cout << "T" << temp1->course.Session1.thu << " - " << "S" << temp1->course.Session1.shift << TimeShift(temp1->course.Session1.shift) << "  " << "T" << temp1->course.Session2.thu << " - " << "S" << temp1->course.Session2.shift << TimeShift(temp1->course.Session2.shift);
+				gotoxy(153, 6 + i); cout << char(124) << endl;
+				temp1 = temp1->next;
+			}
+			gotoxy(20, 6 + count); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+			gotoxy(15, 6 + count + 1);
+			gotoxy(50, 28); cout << page << "/" << numberofPage;
+			key = GetKey();
+			if (key == LEFT)// sang trai
+			{
+				vitri = 0;
+			}
+			if (key == RIGHT) // sang phai
+			{
+				vitri = 1;
+			}
+			if (key == ESC) // thoat vong lap
+			{
+				return 0;
+			}
+			if (key == ENTER)
+			{
+				return 1;
+			}
+			if (vitri == 0)
+			{
+				if (page == 1) continue;
+				else
+					page--;
+			}
+			if (vitri == 1)
+			{
+				if (page == numberofPage) continue;
+				else
+					page++;
+			}
+		}
+	}
+	/*ifstream f;
+	f.open(to_string(se) + Y.ListCourses);
 	f.seekg(0, ios::end);
 	int i = f.tellg();
 	f.close();
@@ -130,13 +222,13 @@ void ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 		while (temp1 != NULL)
 		{
 			gotoxy(20, 6 + STT); cout << char(124) << " " << setw(12) << left << temp1->course.ID << char(124) << " " << setw(30) << left << temp1->course.Name << char(124) << " " << setw(25) << left << temp1->course.TeacherName << char(124) << " " << setw(8) << left << temp1->course.NumOfCredits << char(124) << " " << setw(3) << daDangKy(temp1->course, Y, se, temp) << " " << "/" << " " << setw(9) << temp1->course.MaxNumOfStudents << char(124) << " ";
-			cout << "T" << temp1->course.Session1.thu << " - " << "S"<< temp1->course.Session1.shift <<TimeShift(temp1->course.Session1.shift) << "  " << "T" << temp1->course.Session2.thu << " - " << "S" << temp1->course.Session2.shift << TimeShift(temp1->course.Session2.shift);
+			cout << "T" << temp1->course.Session1.thu << " - " << "S" << temp1->course.Session1.shift << TimeShift(temp1->course.Session1.shift) << "  " << "T" << temp1->course.Session2.thu << " - " << "S" << temp1->course.Session2.shift << TimeShift(temp1->course.Session2.shift);
 			gotoxy(153, 6 + STT++); cout << char(124) << endl;
 			temp1 = temp1->next;
 		}
 		gotoxy(20, 6 + STT); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(15, 6 + STT + 1);
-	}
+	}*/
 }
 
 void updateCourse(ListCourses l, int se, const SchoolYear& Y)
