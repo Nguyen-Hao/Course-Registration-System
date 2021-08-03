@@ -851,75 +851,70 @@ HOME:
 								{
 									MenuChildren(MenuGV3, vitricon, 7);
 									d = GetKey();
-									if (d == DOWN)
+									switch (d)
 									{
-										vitricon += 1;
-										if (vitricon == 7) vitricon = 0;
-									}
-									if (d == UP)
-									{
-										vitricon -= 1;
-										if (vitricon == -1) vitricon = 6;
-									}
-									if (d == ESC)
-									{
-										goto REPEATGV;
-									}
-									if (d == ENTER)
-									{
-										if (vitricon == 0)
-										{
-											system("cls");
-											ViewListOfClass(ds);
-											gotoxy(5, 32); system("pause");
+									case DOWN:
+											vitricon += 1;
+											if (vitricon == 7) vitricon = 0;
+											break;
+									case UP:
+											vitricon -= 1;
+											if (vitricon == -1) vitricon = 6;
+											break;
+									case ESC:
 											goto REPEATGV;
-										}
-										else if (vitricon == 2)
+											break;
+									case ENTER:
+										switch (vitricon)
 										{
-											system("cls");
-											ViewListOfCourse(dsmon, se, Y);
-											gotoxy(30, 1); system("pause");
-											goto REPEATGV;
+										case 0:
+												system("cls");
+												ViewListOfClass(ds);
+												gotoxy(5, 32); system("pause");
+												goto REPEATGV;
+												break;
+										case 2:
+												system("cls");
+												ViewListOfCourse(dsmon, se, Y);
+												gotoxy(30, 1); system("pause");
+												goto REPEATGV;
+												break;
+										case 1:
+												system("cls");
+												choice = ViewListOfClass(ds);
+												if (choice == 1)
+													ViewListOfStudentInClass(ds);
+												gotoxy(30, 1); system("pause");
+												goto REPEATGV;
+												break;
+										case 3:
+												system("cls");
+												ViewListOfStudentIncourses(dsmon, se, Y);
+												gotoxy(30, 1); system("pause");
+												goto REPEATGV;
+												break;
+										case 4:
+												system("cls");
+												ViewListOfCourse(dsmon, se, Y);
+												ViewScoreBoardOfACourse(dsmon, se, Y);
+												gotoxy(30, 1); system("pause");
+												goto REPEATGV;
+												break;
+										case 5:
+												system("cls");
+												ViewListOfClass(ds);
+												ViewScoreOfAClass(ds, dsmon, se, Y);
+												gotoxy(30, 1); system("pause");
+												goto REPEATGV;
+												break;
+										case 6:
+												ExportListStudentInCourseToEnterScore(dsmon, se, Y);
+												EffectSuccess(90, 28, ThaoTac[2]);
+												gotoxy(30, 1); system("pause");
+												goto REPEATGV;
+												break;
 										}
-										else if (vitricon == 1)
-										{
-											system("cls");
-											int choice = ViewListOfClass(ds);
-											if (choice == 1)
-												ViewListOfStudentInClass(ds);
-											gotoxy(30, 1); system("pause");
-											goto REPEATGV;
-										}
-										else if (vitricon == 3)
-										{
-											system("cls");
-											ViewListOfStudentIncourses(dsmon, se, Y);
-											gotoxy(30, 1); system("pause");
-											goto REPEATGV;
-										}
-										else if (vitricon == 4)
-										{
-											system("cls");
-											ViewListOfCourse(dsmon, se, Y);
-											ViewScoreBoardOfACourse(dsmon, se, Y);
-											gotoxy(30, 1); system("pause");
-											goto REPEATGV;
-										}
-										else if (vitricon == 5)
-										{
-											system("cls");
-											ViewListOfClass(ds);
-											ViewScoreOfAClass(ds, dsmon, se, Y);
-											gotoxy(30, 1); system("pause");
-											goto REPEATGV;
-										}
-										else if (vitricon == 6)
-										{
-											ExportListStudentInCourseToEnterScore(dsmon, se, Y);
-											EffectSuccess(90, 28, ThaoTac[2]);
-											gotoxy(30, 1); system("pause");
-											goto REPEATGV;
-										}
+										break;
 									}
 								}
 								break;

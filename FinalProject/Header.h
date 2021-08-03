@@ -58,9 +58,9 @@ struct SinhVien
 	string Gender;
 	string DateOfBirth;
 	string SocialID;
-	int begin[3];
 	int YearStudent=0;
 	int Semester=0;
+	int begin[3];
 };
 
 struct ListSV
@@ -91,13 +91,13 @@ struct Lop
 	string Ma;
 	string Ten;
 	string NienKhoa;
-	int soluong = 0;
 	ListSV* pHead=NULL;
+	int soluong = 0;
 };
 struct ListLop
 {
-	int n;
 	Lop l[maxlop];
+	int n;
 };
 
 struct GiaoVien
@@ -120,15 +120,15 @@ struct ListGV
 	NodeGV* pHead = NULL;
 };
 struct Course
-{
-	int Sememster;		
+{		
 	string ID;
 	string Name;		
 	string TeacherName;
-	int NumOfCredits;	
-	int MaxNumOfStudents = 50;
 	PhienGio Session1;			
-	PhienGio Session2;			
+	PhienGio Session2;		
+	int Sememster;
+	int NumOfCredits;
+	int MaxNumOfStudents = 50;
 };
 struct NodeCourse
 {
@@ -141,12 +141,12 @@ struct ListCourses
 };
 struct semester
 {
-	int name;
-	char schoolyear[11];
-	int studentYear = 0;
 	Date begin;
 	Date end;
 	ListCourses lis;
+	char schoolyear[11];
+	int studentYear = 0;
+	int name;
 };
 struct NodeSemester
 {

@@ -572,7 +572,6 @@ void ViewListOfStudentIncourses(ListCourses ds, int se,  const SchoolYear& Y)
 
 void ExportListStudentInCourseToEnterScore(ListCourses dsm, int se, const SchoolYear& Y)
 {
-	cin.ignore();
 	ViewListOfCourse(dsm, se, Y);
 	for (NodeCourse* p = dsm.head; p != NULL; p = p->next) {
 		ListSV* Lsv_Of_Courses = findStudentOfCourses(dsm, p->course.ID,se, Y);
