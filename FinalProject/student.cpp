@@ -24,7 +24,7 @@ void AddTailStudent(ListSV*& ds, SinhVien sv)
 }
 int CheckClass(ListLop dsl, string a, int n)
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; ++i)
 	{
 		if (dsl.l[i].Ma==a)
 			if (i == 0) return -1; 
@@ -36,9 +36,10 @@ void WriteFileStudent(ListLop& dsl,const SchoolYear&Y)
 {
 	ofstream file;
 	file.open(Y.DSSinhVien, ios::out);
-	for (int i = 0; i < dsl.n; i++)
+	ListSV* k;
+	for (int i = 0; i < dsl.n; ++i)
 	{
-		for (ListSV* k = dsl.l[i].pHead; k != NULL; k = k->pNext)
+		for (k = dsl.l[i].pHead; k != NULL; k = k->pNext)
 		{
 			file << dsl.l[i].Ma << endl;
 			file << k->info.ID << endl << k->info.pass << endl; 
@@ -55,13 +56,14 @@ void ReadFileStudent(ListLop& dsl, const SchoolYear&Y)
 	string s;
 	int STTLop;
 	char a[10];
+	SinhVien sv;
+	int KT;
 	while (!file.eof())
 	{
-		SinhVien sv;
 		getline(file, s);
 		if (s.size() == 0) break;
 		strcpy_s(a, 10, s.c_str());
-		int KT = CheckClass(dsl, a, dsl.n);
+		KT = CheckClass(dsl, a, dsl.n);
 		if (KT == -1) STTLop = 0;
 		else STTLop = KT;
 		sv.Class = s;
@@ -116,44 +118,33 @@ void ViewEnrollCourses(SinhVien& S, int se, const SchoolYear& Y)
 void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear& Y, bool& f)
 {
 	Time t = getTime();
-	ifstream ifs;
-	ifs.open(to_string(se) + Y.TimeDKHP);
-	Time begin, end;
-	if (!ifs.is_open())
+	Time* arrTime = ReadTimeRegistration(Y);
+	char check = isTimeIn(t, arrTime[0], arrTime[1]);
+	if (check != 0)
 	{
-		cout << "Chua co phien dang ky hoc phan!" << endl;
+		if (check == 1) cout << "Da qua";
+		else if (check == -1) cout << "Chua den";
+		cout << " thoi gian dang ky hoc phan!" << endl;
+		cout << setfill(' ') << setw(70);
+		cout << "Thoi gian dang ky hoc phan tu ";
+		cout << arrTime[0].hour << ":";
+		if (arrTime[0].minute < 10) cout << "0";
+		cout << arrTime[0].minute << ":";
+		if (arrTime[0].second < 10) cout << "0";
+		cout << arrTime[0].second;
+		cout << " ngay " << arrTime[0].day << "/" << arrTime[0].month << "/" << arrTime[0].year << " den ";
+		cout << arrTime[1].hour << ":";
+		if (arrTime[1].minute < 10) cout << "0";
+		cout << arrTime[1].minute << ":";
+		if (arrTime[1].second < 10) cout << "0";
+		cout << arrTime[1].second;
+		cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
 		return;
 	}
-	else
-	{
-		ifs >> begin.day >> begin.month >> begin.year >> begin.hour >> begin.minute >> begin.second
-			>> end.day >> end.month >> end.year >> end.hour >> end.minute >> end.second;
-		char check = isTimeIn(t, begin, end);
-		if (check != 0)
-		{
-			if (check == 1) cout << "Da qua";
-			else if (check == -1) cout << "Chua den";
-			cout << " thoi gian dang ky hoc phan!" << endl;
-			cout << "Thoi gian dang ky hoc phan tu ";
-			cout << begin.hour << ":";
-			if (begin.minute < 10) cout << "0";
-			cout << begin.minute << ":";
-			if (begin.second < 10) cout << "0";
-			cout << begin.second;
-			cout << " ngay " << begin.day << "/" << begin.month << "/" << begin.year << " den ";
-			cout << end.hour << ":";
-			if (end.minute < 10) cout << "0";
-			cout << end.minute << ":";
-			if (end.second < 10) cout << "0";
-			cout << end.second;
-			cout << " ngay " << end.day << "/" << end.month << "/" << end.year;
-			return;
-		}
-	}
-	ifs.close();
 	ViewEnrollCourses(S, se, Y);
 	char id[10];
 	f = true;
+	int i;
 	cout << "nhap id mon can huy dang ki: ";
 	string ID;
 	getline(cin, ID);
@@ -169,6 +160,7 @@ void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear& Y
 			f = false;
 		else
 		{
+			SinhVien s;
 			fstream file, file1;
 			file.open(to_string(se) + Y.StudentOfSubject, ios::in);
 			file1.open("temp.txt", ios::out);
@@ -183,7 +175,6 @@ void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear& Y
 					if (CheckCourses(l, CH) == true || strcmp(CH, "\0") == 0) break;
 					else
 					{
-						SinhVien s;
 						s.Class = CH;
 						getline(file, s.ID);
 						getline(file, s.pass);
@@ -192,7 +183,7 @@ void EraserEnrollCourses(SinhVien& S, ListCourses l, int se, const SchoolYear& Y
 						getline(file, s.Gender);
 						getline(file, s.DateOfBirth);
 						getline(file, s.SocialID);
-						for (int i = 0; i < 3; i++)
+						for (i = 0; i < 3; ++i)
 						{
 							file >> s.begin[i];
 						}
@@ -242,13 +233,14 @@ void viewScoreBoardOfStudent(const SinhVien& S, ListCourses l, int se, const Sch
 		gotoxy(5, 7); cout << "+---------------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 		NodeCourse* temp1 = list.head;
 		int t = 1;
+		DiemMonHoc score;
 		while (temp1 != NULL)
 		{
-			DiemMonHoc score = ReadfileCSVScore(S, Y, se, temp1->course.ID);
+			score = ReadfileCSVScore(S, Y, se, temp1->course.ID);
 			gotoxy(5, 7 + t);
 			cout << char(124)<<" " << setw(9) << left << temp1->course.ID << char(124) << "  " << setw(40) << left << temp1->course.Name << char(124) << "  " << setw(40) << left << temp1->course.TeacherName << char(124) << "  " << setw(10) << temp1->course.NumOfCredits << char(124) << setw(8) << score.Other << char(124) << setw(10) << score.MidTerm << char(124) << setw(8) << score.Final << char(124) << setw(8) << score.Total << char(124) << endl;
 			temp1 = temp1->next;
-			t++;
+			++t;
 		}
 		gotoxy(5, 7 + t); cout << "+---------------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 	}
