@@ -1,4 +1,4 @@
 ﻿  course.cpp
-C:\Users\taiga\Desktop\New folder\FinalProject\course.cpp(128,8): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
-C:\Users\taiga\Desktop\New folder\FinalProject\course.cpp(232): warning C4715: 'ViewListOfCourse': not all control paths return a value
-  FinalProject.vcxproj -> C:\Users\taiga\Desktop\New folder\x64\Debug\FinalProject.exe
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\course.cpp(131,8): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\PC\Desktop\QUAN LY SV\FinalProject\course.cpp(207): warning C4715: 'ViewListOfCourse': not all control paths return a value
+  FinalProject.vcxproj -> C:\Users\PC\Desktop\QUAN LY SV\x64\Debug\FinalProject.exe
