@@ -10,3 +10,4 @@ void CreateCourseRegistrationSession(int se, const SchoolYear& Y);
 void deleteCourse(ListCourses l, int se, const SchoolYear& Y);
 string TimeShift(int shift);
 int CountNodeCourse(NodeCourse* phead);
+int CountNodePage2(int n);

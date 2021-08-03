@@ -829,68 +829,115 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 	if (KT == -1) VitriLop = 0;
 	else
 		VitriLop = KT;
-	NodeCourse* p = ds.head;
-	gotoxy(35, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
-	gotoxy(20, 4); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
-	gotoxy(20, 5); cout << char(124) << "  " << setw(4) << left << "STT" << char(124) << "  " << setw(14) << left << "     MSSV" << char(124) << "  " << setw(19) << left << "         Ho" << char(124) << "  " << setw(19) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
-	gotoxy(20, 6); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
-	int STT = 1, n = 0,i;
-	double TotalMark; 
-	int SoChi; 
-	bool flat;
-	ListSV* psv,*k;
-	string link;
-	ifstream f;
-	string s[8];
-	for (k = dsl.l[VitriLop].pHead; k != NULL; k = k->pNext)
+	
+	char key;
+	int vitri = 0, n = 0;
+	int numberofstudent = CountNodeStudent(dsl.l[VitriLop].pHead);
+	int numberofPage = CountNodePage2(numberofstudent);
+	int page = 1;
+	while (true)
 	{
-		TotalMark = 0;
-		SoChi = 0;
-		flat = false;
-		for (p = dsm.head; p->next != NULL; p = p->next)
+		ListSV* k = dsl.l[VitriLop].pHead;
+		int STT = 3 * (page - 1);
+		for (int i = 1; i < page; i++)
 		{
-			psv = findStudentOfCourses(dsm, p->course.ID, se, Y);
-			for (psv; psv != NULL; psv = psv->pNext)
+			for (int j = 0; j < 3; j++)
 			{
-				if (psv->info.ID==k->info.ID)
-				{
-					link = "ScoreBoard" + to_string(t) + "_" + to_string(t + 1) + "_" + to_string(se) + "_" + string(p->course.ID) + ".csv";
-					f.open(link);
-					if (f.is_open()) {
-						getline(f, s[0]);
-						while (!f.eof())
-						{
-							for (i = 0; i < 7; ++i) getline(f, s[i], ',');
-							getline(f, s[7]);
-							if (s[0] == "") break;
-							if (s[1] == k->info.ID)
-							{
-								SoChi += p->course.NumOfCredits;
-								TotalMark += stoi(s[4]) * p->course.NumOfCredits;
-								flat = true;
-								gotoxy(20, 7 + n);
-								cout << char(124) << " " << setw(5) << left << STT++ << char(124) << " " << setw(15) << left << s[1] << char(124) << " " << setw(20) << left << s[2] << char(124) << " " << setw(20) << s[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << s[4] << char(124) << endl; gotoxy(20, 7 + ++n + 1);
-							}
-						}
-					}
-					f.close();
-				}
+				k = k->pNext;
 			}
 		}
-		if (flat == true) {
+		int count = 0;
+		int i = 0;
+		system("cls");
+		gotoxy(35, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
+		gotoxy(20, 4); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 5); cout << char(124) << "  " << setw(4) << left << "STT" << char(124) << "  " << setw(14) << left << "     MSSV" << char(124) << "  " << setw(19) << left << "         Ho" << char(124) << "  " << setw(19) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
+		gotoxy(20, 6); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
+		for (int j = 0; j < 3; j++)
+		{
+			if (k == NULL) break;
 
-			TextColor(225);
-			gotoxy(20, 7 + n++);
-			cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << (TotalMark / SoChi) * 1.0 << char(124) << endl;
-		}
-		else {
-			gotoxy(20, 7 + n++);
-			cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << 0.0 << char(124) << endl;
+			double TotalMark = 0;
+			int SoChi = 0;
+			bool flat = false;
+			for (NodeCourse* p = dsm.head; p->next != NULL; p = p->next)
+			{
+				ListSV* psv = findStudentOfCourses(dsm, p->course.ID, se, Y);
+				for (psv; psv != NULL; psv = psv->pNext)
+				{
+					if (psv->info.ID == k->info.ID)
+					{
+						string link = "ScoreBoard" + to_string(t) + "_" + to_string(t + 1) + "_" + to_string(se) + "_" + string(p->course.ID) + ".csv";
+						ifstream f(link);
+						if (f.is_open()) {
+							string s[8];
+							getline(f, s[0]);
+							while (!f.eof())
+							{
+								for (int i = 0; i < 7; i++) getline(f, s[i], ',');
+								getline(f, s[7]);
+								if (s[0] == "") break;
+								if (s[1] == k->info.ID)
+								{
+									count++;
+									SoChi += p->course.NumOfCredits;
+									TotalMark += stoi(s[4]) * p->course.NumOfCredits;
+									flat = true;
+									gotoxy(20, 6 + count + 2 * j);
+									cout << char(124) << " " << setw(5) << left << j + STT + 1 << char(124) << " " << setw(15) << left << s[1] << char(124) << " " << setw(20) << left << s[2] << char(124) << " " << setw(20) << s[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << s[4] << char(124) << endl; gotoxy(20, 7 + ++n + 1);
+								}
+							}
+						}
+						f.close();
+					}
+				}
+			}
+			i = count + 1;
+			if (flat == true) {
+
+				TextColor(225);
+				gotoxy(20, 6 + i + 2 * j);
+				i++;
+				cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << (TotalMark / SoChi) * 1.0 << char(124) << endl;
+			}
+			else {
+				gotoxy(20, 6 + i + 2 * j);
+				i++;
+				cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << 0.0 << char(124) << endl;
+				TextColor(224);
+			}
 			TextColor(224);
+			gotoxy(20, 6 + i + 2 * j); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
+			i++;
+			k = k->pNext;
 		}
-		TextColor(224);
-		gotoxy(20, 7 + n); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
-		n++;
+		//gotoxy(5, 7 + count); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(50, 28); cout << page << "/" << numberofPage;
+		key = GetKey();
+		if (key == LEFT)// sang trai
+		{
+			vitri = 0;
+		}
+		if (key == RIGHT) // sang phai
+		{
+			vitri = 1;
+		}
+		if (key == ESC) // thoat vong lap
+		{
+			return;
+		}
+		if (vitri == 0)
+		{
+			if (page == 1) continue;
+			else
+				page--;
+		}
+		if (vitri == 1)
+		{
+			if (page == numberofPage) continue;
+			else
+				page++;
+		}
 	}
 }
 DiemMonHoc ReadfileCSVScore(const SinhVien& S, const SchoolYear& Y, int se, string mamon)

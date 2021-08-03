@@ -123,6 +123,13 @@ int CountNodeCourse(NodeCourse* phead)
 	}
 	return i;
 }
+int CountNodePage2(int i)
+{
+	int page = i / 3 + 1;
+	if (i % 3 == 0)
+		return page - 1;
+	return page;
+}
 int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 {
 	ifstream f;
