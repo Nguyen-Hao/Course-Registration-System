@@ -1,0 +1,63 @@
+17CTT4
+CNTT
+2017
+18HOH1
+Hoa hoc
+2018
+19TTH1
+Toan tin hoc
+2019
+19CTT3
+CNTT
+2019
+20CTT1
+Cong nghe thong tin
+2020
+20DTV1
+Dien tu vien thong
+2020
+20CSH2
+Cong nghe sinh hoc
+2020
+20CTT2
+Cong nghe thong tin
+2020
+20SHH1
+Sinh hoc - cong nghe sinh hoc
+2020
+20DCH1
+Dia chat
+2020
+20CTT3C
+CNTT
+2020
+20CTT3B
+CNTT
+2020
+20CTT3A
+CNTT
+2020
+21HOH1
+Hoa hoc
+2021
+21CTT3
+Cong nghe thong tin
+2021
+21KVL1
+Khoa hoc vat lieu
+2021
+21KDL1
+Khoa hoc du lieu
+2021
+21HDH1
+Hai duong hoc
+2021
+21DTV1
+Dien tu vien thong
+2021
+21TTH1
+Toan tin hoc
+2021
+21CSH2
+Cong nghe sinh hoc
+2021

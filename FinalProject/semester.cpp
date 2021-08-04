@@ -62,9 +62,11 @@ int getSemester(listSemester l, const SchoolYear Y)
 }
 
 
-bool CreateSemester(semester& sesmes, const SchoolYear& Y, listSemester&l)
+bool CreateSemester(semester& sesmes, const SchoolYear& Y,listSemester&l)
 {
 	bool f = true;
+	InitListSemester(l);
+	readListSemester(l, Y);
 	if (l.tail == NULL)
 	{
 		l.tail = new NodeSemester;

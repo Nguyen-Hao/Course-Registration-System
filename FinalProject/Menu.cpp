@@ -13,10 +13,10 @@
 string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
 string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", " 5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
 string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi" };
-string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc"," 4. Xuat file nhap DSSV tung lop", " 5. Xoa khoa hoc" };
+string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc"," 4. Xuat file nhap DSSV tung lop", " 5. Xoa khoa hoc" ," 6. Cap nhat khoa hoc"};
 string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
-string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai", "Huy thanh cong", "Huy that bai"};
+string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai", "Huy thanh cong", "Huy that bai", "Da cap nhat"};
 
 void Information()
 {
@@ -1087,6 +1087,8 @@ HOME:
 										case 2:
 											c = " Ban co muon tao lop hoc moi khong? ";
 											choice = EffectAgree(70, 10, c);
+											int z;
+											
 											if (choice == 1)
 											{
 												int z;
@@ -1183,53 +1185,50 @@ HOME:
 								vitricon = 0;
 								while (true)
 								{
-									MenuChildren(MenuGV2, vitricon, 5);
+									MenuChildren(MenuGV2, vitricon, 6);
 									d = GetKey();
-									if (d == DOWN)
+									switch (d)
 									{
+									case DOWN:
 										vitricon += 1;
-										if (vitricon == 5) vitricon = 0;
-									}
-									if (d == UP)
-									{
+										if (vitricon == 6) vitricon = 0;
+										break;
+									case UP:
 										vitricon -= 1;
-										if (vitricon == -1) vitricon = 4;
-									}
-									if (d == ESC)
-									{
+										if (vitricon == -1) vitricon = 5;
+										break;
+									case ESC:
 										goto REPEATGV;
-									}
-									if (d == ENTER)
-									{
-										if (vitricon == 0)
+										break;
+									case ENTER:
+										string c;
+										int choice;
+										switch (vitricon)
 										{
+										case 0:
 											AddStudent_Input(ds, Y);
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
-										}
-										else if (vitricon == 1)
-										{
+											break;
+										case 1:
 											CreateCourseRegistrationSession(se, Y);
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
-										}
-										else if (vitricon == 2)
-										{
+											break;
+										case 2:
 											createNewCourse(se, Y);
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
-										}
-										else if (vitricon == 4)
-										{
+											break;
+										case 4:
 											deleteCourse(dsmon, se, Y);
 											EffectSuccess(55, 10, ThaoTac[4]);
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
-										}
-										else if (vitricon == 3)
-										{
-											string c = " Ban co muon xuat file csv khong? ";
-											int choice = EffectAgree(70, 10, c);
+											break;
+										case 3:
+											c = " Ban co muon xuat file csv khong? ";
+											choice = EffectAgree(70, 10, c);
 											if (choice == 1)
 											{
 												ClearEffectAgree(70, 10, c);
@@ -1238,7 +1237,15 @@ HOME:
 											}
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
+											break;
+										case 5:
+											updateCourse(dsmon, se, Y);
+											EffectSuccess(55, 10, ThaoTac[6]);
+											gotoxy(70, 32); system("pause");
+											goto REPEATGV;
+											break;
 										}
+										break;
 									}
 								}
 								break;
