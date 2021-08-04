@@ -21,3 +21,4 @@ void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string newpass, const Sch
 void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y);
 void MenuChildren(string s[], int& vitri, int size);
 void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, int se, SchoolYear Y, listSemester& l);
+void CreateSignInForm();

@@ -274,6 +274,16 @@ void CreateSemesterForm()
 	gotoxy(132, 30); cout << "ENTER: Fill Next-Create";
 	TextColor(228);
 }
+void CreateSignInForm()
+{
+	TextColor(224);
+	gotoxy(80, 9); cout << "Nhap mat khau: ";
+	Frames(80, 10, 50, 1);
+	gotoxy(80, 14); cout << "Nhap mat khau moi:";
+	Frames(80, 15, 50, 1);
+	gotoxy(80, 19); cout << "Nhap lai mat khau moi ";
+	Frames(80, 20, 50, 1);
+}
 
 int SignIn(ListLop ds, ListGV dsgv, SinhVien& sv, GiaoVien& gv)
 {
@@ -521,30 +531,153 @@ void ChangePasswordStudent(SinhVien& sv, ListLop& dsl, string newpass, const Sch
 }
 void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 {
-	string oldpass, newpass, newpassAgain;
-	gotoxy(30, 15); cout << "Nhap mat khau: "; getline(cin, oldpass);
-	gotoxy(30, 17); cout << "Nhap mat khau moi: "; getline(cin, newpass);
-	gotoxy(30, 19); cout << "Nhap lai mat khau moi: "; getline(cin,newpassAgain);
+	CreateSignInForm();
+	string oldpass = "", newpass = "", newpassAgain = "";
+	int i = 0, j = 0;
+	char pre = NULL;
+	OLDPASS:
+		j = 0;
+		while (1) {
+			gotoxy(83 + j++, 11);
+			c = GetKey();
+			if (c == ENTER) break;
+			else if (c == UP)
+			{
+				j--;
+				goto NEWPASSAGAIN;
+			}
+			else if (c == DOWN)
+			{
+				j--;
+				goto NEWPASS;
+			}
+			else if (c == LEFT || c == RIGHT) j--;
+			else if (c == BACKSPACE && oldpass.size() == 0)
+				j--;
+			else if (c == BACKSPACE)
+			{
+				printf("\b ");
+				j -= 2;
+				if (j < 0) j = 0;
+				gotoxy(83 + j, 11);
+
+				if (!oldpass.empty())
+					oldpass.erase(oldpass.size() - 1);
+			}
+			else if (c == ESC)
+			{
+				return;
+			}
+			else if (c != BACKSPACE && c != ENTER && oldpass.size() == 20)
+				--j;
+			else
+			{
+				oldpass += c;
+				cout << "*";
+			}
+		}
+	NEWPASS:
+		j = 0;
+		while (1) {
+			gotoxy(83 + j++, 16);
+			c = GetKey();
+			if (c == ENTER) break;
+			else if (c == UP)
+			{
+				j--;
+				goto OLDPASS;
+			}
+			else if (c == DOWN)
+			{
+				j--;
+				goto NEWPASSAGAIN;
+			}
+			else if (c == LEFT || c == RIGHT) j--;
+			else if (c == BACKSPACE && newpass.size() == 0)
+				j--;
+			else if (c == BACKSPACE)
+			{
+				printf("\b ");
+				j -= 2;
+				if (j < 0) j = 0;
+				gotoxy(83 + j, 16);
+
+				if (!newpass.empty())
+					newpass.erase(newpass.size() - 1);
+			}
+			else if (c == ESC)
+			{
+				return;
+			}
+			else if (c != BACKSPACE && c != ENTER && newpass.size() == 20)
+				--j;
+			else
+			{
+				newpass += c;
+				cout << "*";
+			}
+		}
+	NEWPASSAGAIN:
+		j = 0;
+		while (1) {
+			gotoxy(83 + j++, 21);
+			c = GetKey();
+			if (c == ENTER) break;
+			else if (c == UP)
+			{
+				j--;
+				goto NEWPASS;
+			}
+			else if (c == DOWN)
+			{
+				j--;
+				goto OLDPASS;
+			}
+			else if (c == LEFT || c == RIGHT) j--;
+			else if (c == BACKSPACE && newpassAgain.size() == 0)
+				j--;
+			else if (c == BACKSPACE)
+			{
+				printf("\b ");
+				j -= 2;
+				if (j < 0) j = 0;
+				gotoxy(83 + j, 21);
+
+				if (!newpassAgain.empty())
+					newpassAgain.erase(newpassAgain.size() - 1);
+			}
+			else if (c == ESC)
+			{
+				return;
+			}
+			else if (c != BACKSPACE && c != ENTER && newpassAgain.size() == 20)
+				--j;
+			else
+			{
+				newpassAgain += c;
+				cout << "*";
+			}
+		}
 	if (newpass.empty())
 	{
-	gotoxy(30, 25); cout << "Mat Khau khong duoc de trong!" << endl;
-	gotoxy(30, 26); system("pause");
+		gotoxy(80, 25); cout << "Mat Khau khong duoc de trong!" << endl;
+		gotoxy(80, 26); system("pause");
 	}
 	else if (sv.pass != oldpass)
 	{
-		gotoxy(30, 25); cout << "Mat Khau sai!" << endl;
-		gotoxy(30, 26); system("pause");
+		gotoxy(80, 25); cout << "Mat Khau sai!" << endl;
+		gotoxy(80, 26); system("pause");
 	}
-	else if (newpass!=newpassAgain)
+	else if (newpass != newpassAgain)
 	{
-		gotoxy(30, 25); cout << "Mat Khau khong khop!" << endl;
-		gotoxy(30, 26); system("pause");
+		gotoxy(80, 25); cout << "Mat Khau khong khop!" << endl;
+		gotoxy(80, 26); system("pause");
 	}
 	else
 	{
 		ChangePasswordStudent(sv, dsl, newpass, Y);
-		gotoxy(30, 25); cout<<"Doi mat khau thanh cong!" <<endl;
-		gotoxy(30, 26); system("pause");
+		gotoxy(80, 25); cout << "Doi mat khau thanh cong!" << endl;
+		gotoxy(80, 26); system("pause");
 	}
 }
 void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string newpass, const SchoolYear& Y)
@@ -562,30 +695,153 @@ void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string newpass, const Sch
 }
 void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 {
-	string oldpass, newpass,newpassAgain;
-	gotoxy(26, 15); cout << "Nhap mat khau: "; getline(cin, oldpass);
-	gotoxy(26, 17); cout << "Nhap mat khau moi: "; getline(cin,newpass);
-	gotoxy(26, 19); cout << "Nhap lai mat khau moi: "; getline(cin,newpassAgain);
+	CreateSignInForm();
+	string oldpass = "", newpass = "", newpassAgain = "";
+	int i = 0, j = 0;
+	char pre = NULL;
+	OLDPASS:
+		j = 0;
+		while (1) {
+			gotoxy(83 + j++, 11);
+			c = GetKey();
+			if (c == ENTER) break;
+			else if (c == UP)
+			{
+				j--;
+				goto NEWPASSAGAIN;
+			}
+			else if (c == DOWN)
+			{
+				j--;
+				goto NEWPASS;
+			}
+			else if (c == LEFT || c == RIGHT) j--;
+			else if (c == BACKSPACE && oldpass.size() == 0)
+				j--;
+			else if (c == BACKSPACE)
+			{
+				printf("\b ");
+				j -= 2;
+				if (j < 0) j = 0;
+				gotoxy(83 + j, 11);
+
+				if (!oldpass.empty())
+					oldpass.erase(oldpass.size() - 1);
+			}
+			else if (c == ESC)
+			{
+				return;
+			}
+			else if (c != BACKSPACE && c != ENTER && oldpass.size() == 20)
+				--j;
+			else
+			{
+				oldpass += c;
+				cout << "*";
+			}
+		}
+	NEWPASS:
+		j = 0;
+		while (1) {
+			gotoxy(83 + j++, 16);
+			c = GetKey();
+			if (c == ENTER) break;
+			else if (c == UP)
+			{
+				j--;
+				goto OLDPASS;
+			}
+			else if (c == DOWN)
+			{
+				j--;
+				goto NEWPASSAGAIN;
+			}
+			else if (c == LEFT || c == RIGHT) j--;
+			else if (c == BACKSPACE && newpass.size() == 0)
+				j--;
+			else if (c == BACKSPACE)
+			{
+				printf("\b ");
+				j -= 2;
+				if (j < 0) j = 0;
+				gotoxy(83 + j, 16);
+
+				if (!newpass.empty())
+					newpass.erase(newpass.size() - 1);
+			}
+			else if (c == ESC)
+			{
+				return;
+			}
+			else if (c != BACKSPACE && c != ENTER && newpass.size() == 20)
+				--j;
+			else
+			{
+				newpass += c;
+				cout << "*";
+			}
+		}
+	NEWPASSAGAIN:
+		j = 0;
+		while (1) {
+			gotoxy(83 + j++, 21);
+			c = GetKey();
+			if (c == ENTER) break;
+			else if (c == UP)
+			{
+				j--;
+				goto NEWPASS;
+			}
+			else if (c == DOWN)
+			{
+				j--;
+				goto OLDPASS;
+			}
+			else if (c == LEFT || c == RIGHT) j--;
+			else if (c == BACKSPACE && newpassAgain.size() == 0)
+				j--;
+			else if (c == BACKSPACE)
+			{
+				printf("\b ");
+				j -= 2;
+				if (j < 0) j = 0;
+				gotoxy(83 + j, 21);
+
+				if (!newpassAgain.empty())
+					newpassAgain.erase(newpassAgain.size() - 1);
+			}
+			else if (c == ESC)
+			{
+				return;
+			}
+			else if (c != BACKSPACE && c != ENTER && newpassAgain.size() == 20)
+				--j;
+			else
+			{
+				newpassAgain += c;
+				cout << "*";
+			}
+		}
 	if (newpass.empty())
 	{
-		gotoxy(26, 25); cout << "Mat Khau khong duoc de trong!" << endl;
-		gotoxy(26, 26); system("pause");
+		gotoxy(80, 25); cout << "Mat Khau khong duoc de trong!" << endl;
+		gotoxy(80, 26); system("pause");
 	}
 	else if (gv.pass != oldpass)
 	{
-		gotoxy(26, 25); cout << "Mat Khau sai!" << endl;
-		gotoxy(26, 26); system("pause");
+		gotoxy(80, 25); cout << "Mat Khau sai!" << endl;
+		gotoxy(80, 26); system("pause");
 	}
-	else if (newpass!=newpassAgain)
+	else if (newpass != newpassAgain)
 	{
-		gotoxy(26, 25); cout << "Mat Khau khong khop!" << endl;
-		gotoxy(26, 26); system("pause");
+		gotoxy(80, 25); cout << "Mat Khau khong khop!" << endl;
+		gotoxy(80, 26); system("pause");
 	}
 	else
 	{
 		ChangePasswordManager(gv, dsgv, newpass, Y);
-		gotoxy(26, 25); cout << "Doi mat khau thanh cong!" << endl;
-		gotoxy(26, 26); system("pause");
+		gotoxy(80, 25); cout << "Doi mat khau thanh cong!" << endl;
+		gotoxy(80, 26); system("pause");
 	}
 }
 void MenuChildren(string s[], int& vitri, int size)
@@ -882,7 +1138,7 @@ HOME:
 										case 1:
 												system("cls");
 												choice = ViewListOfClass(ds);
-												if (choice == 1)
+												
 													ViewListOfStudentInClass(ds);
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
@@ -895,15 +1151,17 @@ HOME:
 												break;
 										case 4:
 												system("cls");
-												ViewListOfCourse(dsmon, se, Y);
-												ViewScoreBoardOfACourse(dsmon, se, Y);
+												choice = ViewListOfCourse(dsmon, se, Y);
+												if (choice == 1)
+													ViewScoreBoardOfACourse(dsmon, se, Y);
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
 												break;
 										case 5:
 												system("cls");
-												ViewListOfClass(ds);
-												ViewScoreOfAClass(ds, dsmon, se, Y);
+												choice = ViewListOfClass(ds);
+												if (choice == 1)
+													ViewScoreOfAClass(ds, dsmon, se, Y);
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
 												break;

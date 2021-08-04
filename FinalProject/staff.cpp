@@ -910,8 +910,8 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 			gotoxy(20, 6 + i + 2 * j); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
 			i++;
 			k = k->pNext;
+			gotoxy(0, 0);
 		}
-		//gotoxy(5, 7 + count); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(50, 28); cout << page << "/" << numberofPage;
 		key = GetKey();
 		if (key == LEFT)// sang trai

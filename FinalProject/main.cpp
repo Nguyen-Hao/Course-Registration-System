@@ -6,13 +6,13 @@
 #include "Semester.h"
 #include "DKMon.h"
 #include "SchoolYear.h"
+#include "Menu.h"
 
 int main()
 {
 	FixConsoleWindow();
-	resizeConsole(1200, 600);
+	resizeConsole(1200, 650);
 	TextColor(224);
-
 	SchoolYear y = SchoolYearPresent("SchoolYear.txt"); 
 
 	listSemester l;
