@@ -60,6 +60,7 @@ void CreateSchoolYear(SchoolYear& S)
 		CopyData(y1.DSSinhVien, Y.DSSinhVien);
 		UpdateStudent(Y);
 		ExportFileEmpty(Y.sesmester);
+		ExportFileEmpty(Y.TimeDKHP);
 	}
 	fstream file;
 	file.open(FILESCHOOLYEAR, ios::app);

@@ -130,7 +130,5 @@ bool CreateSemester(semester& sesmes, const SchoolYear& Y, listSemester&l)
 	file.close();
 	file.open(to_string(sesmes.name) + Y.StudentOfSubject);
 	file.close();
-	file.open(to_string(sesmes.name) + Y.TimeDKHP);
-	file.close();
 	return true;
 }

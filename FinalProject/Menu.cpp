@@ -1089,9 +1089,12 @@ HOME:
 											choice = EffectAgree(70, 10, c);
 											if (choice == 1)
 											{
+												int z;
 												ClearEffectAgree(70, 10, c);
-												CreateNewClass(ds, Y);
+												CreateNewClass(ds, Y, z);
+												if(z==1)
 												EffectSuccess(90, 28, ThaoTac[2]);
+												else EffectFailed(90, 28, ThaoTac[3]);
 											}
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;

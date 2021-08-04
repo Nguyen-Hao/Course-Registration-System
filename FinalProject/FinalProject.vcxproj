@@ -177,6 +177,27 @@
     <Text Include="TimeDKHP2021_2022.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="17CTT4_Filecsv.csv" />
+    <None Include="18HOH1_Filecsv.csv" />
+    <None Include="19CTT3_Filecsv.csv" />
+    <None Include="19TTH1_Filecsv.csv" />
+    <None Include="20CSH2_Filecsv.csv" />
+    <None Include="20CTT1_Filecsv.csv" />
+    <None Include="20CTT2_Filecsv.csv" />
+    <None Include="20CTT3A_Filecsv.csv" />
+    <None Include="20CTT3B_Filecsv.csv" />
+    <None Include="20CTT3C_Filecsv.csv" />
+    <None Include="20DCH1_Filecsv.csv" />
+    <None Include="20DTV1_Filecsv.csv" />
+    <None Include="20SHH1_Filecsv.csv" />
+    <None Include="21CSH2_Filecsv.csv" />
+    <None Include="21CTT3_Filecsv.csv" />
+    <None Include="21DTV1_Filecsv.csv" />
+    <None Include="21HDH1_Filecsv.csv" />
+    <None Include="21HOH1_Filecsv.csv" />
+    <None Include="21KDL1_Filecsv.csv" />
+    <None Include="21KVL1_Filecsv.csv" />
+    <None Include="21TTH1_Filecsv.csv" />
     <None Include="Filecsv.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
