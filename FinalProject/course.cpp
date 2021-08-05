@@ -7,6 +7,7 @@
 #include "Semester.h"
 #include "staff.h"
 #include "DKMon.h"
+#include "Menu.h"
 void initListCourses(ListCourses& list)
 {
 	list.head = NULL;
@@ -130,7 +131,7 @@ int CountNodePage2(int i)
 		return page - 1;
 	return page;
 }
-int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
+int ViewListOfCourse(ListCourses temp, int se, string&e, bool&fl,  const SchoolYear& Y)
 {
 	ifstream f;
 	f.open(to_string(se) + Y.ListCourses);
@@ -139,11 +140,13 @@ int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 	f.close();
 	if (x == 0)
 	{
-		cout << "Chua co khoa hoc nao trong danh sach" << endl;
+		e = "Chua co khoa hoc nao trong danh sach";
+		fl = false;
 	}
 	else
 	{
-		ListCourses temp = ReadListCourses(se, Y);
+		system("cls");
+		fl = true;
 		NodeCourse* temp1;
 		char key;
 		int vitri = 0, i, j;
@@ -163,6 +166,7 @@ int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 			}
 			count = 0;
 			system("cls");
+			FormMenu2();
 			gotoxy(40, 2); TextColor(164); cout << "DANH SACH MON HOC MO KI " << se << " - Nam hoc " << Y.NameSchoolYear;
 			TextColor(224);
 			gotoxy(15, 3); cout << "+----------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
@@ -216,7 +220,9 @@ int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 
 void updateCourse(ListCourses l, int se, const SchoolYear& Y)
 {
-	ViewListOfCourse(l, se, Y);
+	string str;
+	bool f;
+	ViewListOfCourse(l, se,str,f, Y);
 	Course a, b;
 	cout << "Nhap ID khoa hoc can update: ";
 	getline(cin, a.ID);
@@ -383,7 +389,9 @@ void CreateCourseRegistrationSession(int se, const SchoolYear& Y)
 }
 void deleteCourse(ListCourses l, int se, const SchoolYear& Y)
 {
-	ViewListOfCourse(l, se, Y);
+	string str;
+	bool f;
+	ViewListOfCourse(l, se, str, f, Y);
 	Course a, b;
 	cout << "Nhap ID khoa hoc muon xoa: ";
 	getline(cin, a.ID);

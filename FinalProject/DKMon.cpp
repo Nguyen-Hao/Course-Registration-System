@@ -180,7 +180,9 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 	ListCourses temp = courseOfStudent(l, S, se, Y);
 	gotoxy(0, 32);
 	f = true;	
-	ViewListOfCourse(l, se, Y);
+	string s;
+	bool fl;
+	ViewListOfCourse(l, se, s, fl, Y);
 	if (countNodeCourses(temp) == 5) {
 		c = "Da dang ki du 5 mon";
 		f = false;

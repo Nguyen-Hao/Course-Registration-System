@@ -13,7 +13,7 @@
 string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
 string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", " 5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
 string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi" };
-string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc"," 4. Xuat file nhap DSSV tung lop", " 5. Xoa khoa hoc" };
+string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc"," 4. Xuat file nhap DSSV tung lop", " 5. Xoa khoa hoc" ," 6. Cap nhat khoa hoc"};
 string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
 
@@ -46,6 +46,15 @@ void Frames(int x, int y, int width, int length)
 	gotoxy(x - 1, y); cout << (char)218;
 	gotoxy(x + width, y + length + 1); cout << (char)217;
 	gotoxy(x, y + length + 1); for (i = 0; i < width; ++i) cout << char(196);
+}
+void CleanForm(int x, int y, int width, int length)
+{
+	for (int i = 0; i <= length + 1; i++)
+	{
+		gotoxy(x - 1, y + i);
+		for (int j = 0; j <= width + 1; j++)
+			cout << " ";
+	}
 }
 void Team()
 {
@@ -268,7 +277,7 @@ void CreateSemesterForm()
 	gotoxy(75, 9); cout << "Ki: "; Frames(100, 8, 10, 1); // khung nhap ki 
 	gotoxy(75, 13); cout << "Nam hoc: "; Frames(100, 12, 15, 1);// nam
 	gotoxy(75, 17); cout << "Ngay bat dau: "; Frames(100, 16, 10, 1); gotoxy(111, 17); cout << "/"; Frames(113, 16, 10, 1); gotoxy(124, 17); cout << "/"; Frames(126, 16, 10, 1);
-	gotoxy(75, 21); cout << "Ngay ket thuc: "; Frames(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; Frames(113, 20, 10, 1); gotoxy(124, 20); cout << "/"; Frames(126, 20, 10, 1);
+	gotoxy(75, 21); cout << "Ngay ket thuc: "; Frames(100, 20, 10, 1); gotoxy(111, 21); cout << "/"; Frames(113, 20, 10, 1); gotoxy(124, 21); cout << "/"; Frames(126, 20, 10, 1);
 	Frames(130, 28, 30, 3);
 	gotoxy(132, 30); cout << "ENTER: Fill Next-Create";
 	TextColor(228);
@@ -694,6 +703,29 @@ void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string newpass, const Sch
 	}
 	writeFileTeacher(dsgv, Y);
 }
+void FormMenu()
+{
+	Frames(138, 29, 18, 4);
+	gotoxy(140, 30); cout << "ESC : QUAY LAI";
+	gotoxy(140, 31); cout << "ENTER : CHON";
+	gotoxy(140, 32); cout << char(30) << ": LEN";
+	gotoxy(140, 33); cout << char(31) << ": XUONG";
+}
+void FormMenu2()
+{
+	Frames(128, 29, 25, 4);
+	gotoxy(130, 30); cout << "ESC : QUAY LAI";
+	gotoxy(130, 31); cout << "ENTER : NHAP DU LIEU";
+	gotoxy(130, 32); cout << char(17) << ": SANG TRAI";
+	gotoxy(130, 33); cout << char(16) << ": SANG PHAI";
+}
+void FormMenu3()
+{
+	Frames(128, 31, 25, 3);
+	gotoxy(130, 32); cout << "ESC : QUAY LAI";
+	gotoxy(130, 33); cout << char(17) << ": SANG TRAI";
+	gotoxy(130, 34); cout << char(16) << ": SANG PHAI";
+}
 bool MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string& e, const SchoolYear& Y)
 {
 	CreateSignInForm();
@@ -878,6 +910,8 @@ void MenuChildren(string s[], int& vitri, int size)
 void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, int& se, SchoolYear& Y, listSemester&l)
 {
 HOME:
+	string ef;
+	bool fl;
 	choice = SignIn(ds, dsgv, sv, gv);
 	int vitri = 0,n,i,k,j;
 	semester s;
@@ -888,6 +922,7 @@ HOME:
 			{
 			REPEATSV:
 				system("cls");
+				FormMenu();
 				transform(sv.FirstName.begin(), sv.FirstName.end(), sv.FirstName.begin(), toupper);
 				transform(sv.LastName.begin(), sv.LastName.end(), sv.LastName.begin(), toupper);
 				gotoxy(4, 5); 
@@ -1017,6 +1052,7 @@ HOME:
 			{
 			REPEATGV:
 				system("cls");
+				FormMenu();
 				transform(gv.FirstName.begin(), gv.FirstName.end(), gv.FirstName.begin(), toupper);
 				transform(gv.LastName.begin(), gv.LastName.end(), gv.LastName.begin(), toupper);
 				gotoxy(4, 5);
@@ -1110,6 +1146,7 @@ HOME:
 											choice = EffectAgree(70, 10, c);
 											if (choice == 1)
 											{
+												CleanForm(138, 29, 18, 4);
 												ClearEffectAgree(70, 10, c);
 												CreateSemesterForm();
 												bool f = CreateSemester(s, Y, l);
@@ -1174,14 +1211,14 @@ HOME:
 												break;
 										case 2:
 												system("cls");
-												ViewListOfCourse(dsmon, se, Y);
+												ViewListOfCourse(dsmon, se, ef, fl, Y);
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
 												break;
 										case 1:
 												system("cls");
 												choice = ViewListOfClass(ds);
-												
+												if(choice == 1)
 													ViewListOfStudentInClass(ds);
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
@@ -1194,9 +1231,10 @@ HOME:
 												break;
 										case 4:
 												system("cls");
-												choice = ViewListOfCourse(dsmon, se, Y);
-												if (choice == 1)
+												choice = ViewListOfCourse(dsmon, se, ef, fl, Y);
+												if (fl == true && choice == 1)
 													ViewScoreBoardOfACourse(dsmon, se, Y);
+												else EffectFailed(80, 13, "Chua co khoa hoc nao");
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
 												break;
@@ -1223,53 +1261,50 @@ HOME:
 								vitricon = 0;
 								while (true)
 								{
-									MenuChildren(MenuGV2, vitricon, 5);
+									MenuChildren(MenuGV2, vitricon, 6);
 									d = GetKey();
-									if (d == DOWN)
+									switch (d)
 									{
+									case DOWN:
 										vitricon += 1;
-										if (vitricon == 5) vitricon = 0;
-									}
-									if (d == UP)
-									{
+										if (vitricon == 6) vitricon = 0;
+										break;
+									case UP:
 										vitricon -= 1;
-										if (vitricon == -1) vitricon = 4;
-									}
-									if (d == ESC)
-									{
+										if (vitricon == -1) vitricon = 5;
+										break;
+									case ESC:
 										goto REPEATGV;
-									}
-									if (d == ENTER)
-									{
-										if (vitricon == 0)
+										break;
+									case ENTER:
+										string c;
+										int choice;
+										switch (vitricon)
 										{
+										case 0:
 											AddStudent_Input(ds, Y);
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
-										}
-										else if (vitricon == 1)
-										{
+											break;
+										case 1:
 											CreateCourseRegistrationSession(se, Y);
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
-										}
-										else if (vitricon == 2)
-										{
+											break;
+										case 2:
 											createNewCourse(se, Y);
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
-										}
-										else if (vitricon == 4)
-										{
+											break;
+										case 4:
 											deleteCourse(dsmon, se, Y);
 											EffectSuccess(55, 10, "Xoa thanh cong ");
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
-										}
-										else if (vitricon == 3)
-										{
-											string c = " Ban co muon xuat file csv khong? ";
-											int choice = EffectAgree(70, 10, c);
+											break;
+										case 3:
+											c = " Ban co muon xuat file csv khong? ";
+											choice = EffectAgree(70, 10, c);
 											if (choice == 1)
 											{
 												ClearEffectAgree(70, 10, c);
@@ -1278,7 +1313,15 @@ HOME:
 											}
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
+											break;
+										case 5:
+											updateCourse(dsmon, se, Y);
+											EffectSuccess(55, 10, "Cap nhap thanh cong");
+											gotoxy(70, 32); system("pause");
+											goto REPEATGV;
+											break;
 										}
+										break;
 									}
 								}
 								break;
