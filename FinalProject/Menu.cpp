@@ -14,7 +14,7 @@ string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
 string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", " 5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
 string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi" };
 string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc"," 4. Xuat file nhap DSSV tung lop", " 5. Xoa khoa hoc" ," 6. Cap nhat khoa hoc"};
-string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
+string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc", " 8. Cap nhat ket qua hoc tap sinh vien trong khoa hoc"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
 
 void Information()
@@ -913,7 +913,7 @@ HOME:
 	string ef;
 	bool fl;
 	choice = SignIn(ds, dsgv, sv, gv);
-	system("pause");
+	//system("pause");
 	int vitri = 0,n,i,k,j;
 	semester s;
 	switch (choice)
@@ -994,11 +994,9 @@ HOME:
 									break;
 							
 							case 2: {
-								string e;
-								bool f;
 								gotoxy(60, 9);
-								ViewEnrollCourses(dsmon, sv, se, e, f, Y);
-								if (!f) EffectFailed(80, 13, e);
+								ViewEnrollCourses(dsmon, sv, se, s, f, Y);
+								if (!f) EffectFailed(80, 13, s);
 								gotoxy(60, 32);
 								system("pause");
 								goto REPEATSV;
@@ -1006,32 +1004,27 @@ HOME:
 							}
 							
 							case 3: {
-								string e;
-								bool f;
 								gotoxy(60, 9);
-								EraserEnrollCourses(sv, dsmon,e, f, se, Y);
+								EraserEnrollCourses(sv, dsmon,s, f, se, Y);
 								if (f) EffectSuccess(50, 25, "Xoa thanh cong ");
-								else EffectFailed(50, 25, e);
+								else EffectFailed(50, 25, s);
 								gotoxy(60, 32);
 								system("pause");
 								goto REPEATSV;
 								break;
 							}
 							case 4: {
-								bool f;
-								string e;
-								viewScoreBoardOfStudent(sv, dsmon, e, f, se, Y);
-								if (!f) EffectFailed(80, 13, e);
+								viewScoreBoardOfStudent(sv, dsmon, s, f, se, Y);
+								if (!f) EffectFailed(80, 13, s);
 								gotoxy(60, 32);
 								system("pause");
 								goto REPEATSV;
 								break;
 							}
 							case 5: {
-								string eff;
-								bool Check = MenuChangePasswordStudent(sv, ds, eff, Y);
-								if (Check) EffectSuccess(80, 26, eff);
-								else EffectFailed(80, 26, eff);
+								bool Check = MenuChangePasswordStudent(sv, ds, s, Y);
+								if (Check) EffectSuccess(80, 26, s);
+								else EffectFailed(80, 26, s);
 								gotoxy(75, 30); system("pause");
 								goto REPEATSV;
 								break;
@@ -1186,17 +1179,17 @@ HOME:
 								vitricon = 0;
 								while (true)
 								{
-									MenuChildren(MenuGV3, vitricon, 7);
+									MenuChildren(MenuGV3, vitricon, 8);
 									d = GetKey();
 									switch (d)
 									{
 									case DOWN:
 											vitricon += 1;
-											if (vitricon == 7) vitricon = 0;
+											if (vitricon == 8) vitricon = 0;
 											break;
 									case UP:
 											vitricon -= 1;
-											if (vitricon == -1) vitricon = 6;
+											if (vitricon == -1) vitricon = 7;
 											break;
 									case ESC:
 											goto REPEATGV;
@@ -1253,6 +1246,11 @@ HOME:
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
 												break;
+										case 7:
+											updateAStudentResult(dsmon, se, Y);
+											gotoxy(30, 1); system("pause");
+											goto REPEATGV;
+											break;
 										}
 										break;
 									}

@@ -1,0 +1,3 @@
+﻿  staff.cpp
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\staff.cpp(239,10): warning C4101: 'k': unreferenced local variable
+  FinalProject.vcxproj -> C:\Users\PC\Desktop\FINALPROJECT\x64\Debug\FinalProject.exe

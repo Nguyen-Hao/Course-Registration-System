@@ -114,9 +114,9 @@ void UpdateData(const SchoolYear& Y)
 	file1.open("temp.txt", ios::out);
 	if (file.is_open())
 	{
+		SinhVien sv;
 		while (!file.eof())
 		{
-			SinhVien sv;
 			getline(file, sv.Class);
 			getline(file, sv.ID);
 			getline(file, sv.pass);

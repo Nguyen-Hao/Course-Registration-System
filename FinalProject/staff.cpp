@@ -179,9 +179,9 @@ void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
 		cout << "Failed to open this file!" << endl;
 		exit(0);
 	}
+	GiaoVien gv;
 	while (!file.eof())
 	{
-		GiaoVien gv;
 		file.clear();
 		getline(file, gv.ID);
 		if (gv.ID.length() == 0) break;
@@ -235,14 +235,14 @@ void UpdateCSV(ListLop& ds, const SchoolYear& Y)
 	int ViTriLop;
 	vector<string> row;
 	SinhVien sv;
+	ifstream f1;
+	ListSV* k;
 	for (int i = 0; i < ds.n; ++i)
 	{
-		ifstream f1;
 		f1.open(string(ds.l[i].Ma) + "_" + FILECSV + ".csv", ios::in | ios::out);
 		string line = "", word;
 		getline(f1, line);
 		ViTriLop = 0;
-		ListSV* k;
 		while (f1.is_open())
 		{
 			getline(f1, line);
@@ -800,17 +800,35 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 {
 	string str;
 	bool f;
-	cin.ignore();
 	ViewListOfCourse(ds, se, str, f, Y);
-	cout << "Nhap ma mon: ";
+	Frames(45, 29, 30, 1);
+	Frames(45, 33, 30, 1);
+	Frames(45, 37, 7, 1);
+	Frames(60, 37, 7, 1);
+	Frames(75, 37, 7, 1);
+	Frames(90, 37, 7, 1);
+	gotoxy(37, 30);
+	cout << "Ma mon:";
+	gotoxy(31, 34);
+	cout << "ID Sinh Vien:";
+	gotoxy(44, 36);
+	cout << "Total mark";
+	gotoxy(58, 36);
+	cout << "Final mark";
+	gotoxy(73, 36);
+	cout << "Midterm mark";
+	gotoxy(88, 36);
+	cout << "Other mark";
 	int n = countNodeCourses(ds);
 	int ViTrimon;
 	char Mamon[50];
 	int STT = 1;
+	cin.ignore();
+	gotoxy(45, 30);
 	cin.get(Mamon, 50, '\n');
 	int KT = Checkcourses(ds, Mamon);
 	if (KT == 0) {
-		cout << "Khong ton tai ma mon " << Mamon << endl;
+		EffectFailed(80, 13, "Khong ton tai ma mon!");
 		return;
 	}
 	else if (KT == -1) ViTrimon = 0;
@@ -823,12 +841,12 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	ListSV* Lsv_Of_Courses = findStudentOfCourses(ds, Mamon, se, Y);
 	ListSV* k = Lsv_Of_Courses;
 	if (Lsv_Of_Courses == NULL) {
-		cout << "Chua co sinh vien nao trong mon" << endl;
+		EffectFailed(80, 13, "Chua co sinh vien nao trong mon");
 		return;
 	}
 	char ID[10];
 	cin.ignore();
-	cout << "Nhap ID sinh vien: ";
+	gotoxy(45, 34);
 	cin.get(ID, 10, '\n');
 	bool check = false;
 	for (ListSV* i = k; i != NULL; i = i->pNext)
@@ -841,7 +859,7 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	}
 	if (!check)
 	{
-		cout << "Khong ton tai sinh vien nay trong khoa hoc!" << endl;
+		EffectFailed(80, 13, "Khong ton tai sinh vien nay trong khoa hoc!");
 		return;
 	}
 	ifstream file;
@@ -849,11 +867,11 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	int count = 0;
 	string mamon = Mamon;
 	int t = YearPresent();
-	string link = "ScoreBoard" + to_string(t - 1) + "_" + to_string(t) + "_" + to_string(se) + "_" + mamon + ".csv";
+	string link = "ScoreBoard" + to_string(t) + "_" + to_string(t+1) + "_" + to_string(se) + "_" + mamon + ".csv";
 	file.open(link);
 	if (!file.is_open())
 	{
-		cout << "Bang diem khoa hoc nay chua duoc nhap!" << endl;
+		EffectFailed(80, 13, "Bang diem khoa hoc nay chua duoc nhap!");
 		return;
 	}
 	file1.open("tam.csv");
@@ -864,31 +882,32 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	for (k; k != NULL; k = k->pNext)
 	{
 		file >> count;
-		getline(file, k->info.ID, ',');				file.get();
-		getline(file, k->info.FirstName, ',');		file.get();
-		getline(file, k->info.LastName, ',');		file.get();
+		file.get();
+		getline(file, k->info.ID, ',');	
+		getline(file, k->info.FirstName, ',');	
+		getline(file, k->info.LastName, ',');
 		file >> a.Total;
-		file.ignore();
+		file.get();
 		file >> a.Final;
-		file.ignore();
+		file.get();
 		file >> a.MidTerm;
-		file.ignore();
+		file.get();
 		file >> a.Other;
 		if (k->info.ID == ID)
 		{
-			cout << "Nhap diem cap nhat:" << endl;
-			cout << "Total mark: ";
+			gotoxy(46, 38);
 			cin >> a.Total;
-			cout << "Final mark: ";
+			gotoxy(61, 38);
 			cin >> a.Final;
-			cout << "Midterm mark: ";
+			gotoxy(76, 38);
 			cin >> a.MidTerm;
-			cout << "Other mark: ";
+			gotoxy(91, 38);
 			cin >> a.Other;
 		}
 		file1 << count << "," << k->info.ID << "," << k->info.FirstName << ","
 			<< k->info.LastName << "," << a.Total << "," << a.Final << "," << a.MidTerm << "," << a.Other << endl;
 	}
+	EffectSuccess(90, 28, "Da cap nhat");
 	file.close();
 	file1.close();
 	remove(link.c_str());
