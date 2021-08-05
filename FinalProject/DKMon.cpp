@@ -177,14 +177,6 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 		cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
 		return;
 	}
-	
-	
-	if (l.head == NULL)
-	{
-		c= "Chua co khoa hoc nao!";
-		f = false;
-		return;
-	}
 	ListCourses temp = courseOfStudent(l, S, se, Y);
 	gotoxy(0, 32);
 	f = true;	

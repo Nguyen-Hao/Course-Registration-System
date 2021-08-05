@@ -16,7 +16,6 @@ string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc m
 string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc"," 4. Xuat file nhap DSSV tung lop", " 5. Xoa khoa hoc" };
 string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
-string ThaoTac[] = { " Dang nhap thanh cong", " Ten tai khoan hoac mat khau chua dung", " Tao thanh cong", " Tao that bai", "Huy thanh cong", "Huy that bai"};
 
 void Information()
 {
@@ -250,7 +249,7 @@ void EffectSuccess(int x, int y, string c)
 	gotoxy(x, y); for (i = 0; i <= csize; ++i) cout << " ";
 	gotoxy(x, y + 1); for (i = 0; i <= csize ; ++i) cout << " ";
 	gotoxy(x, y + 2); for (i = 0; i <= csize; ++i) cout << " ";
-	gotoxy(x + 3, y + 1); cout << c;
+	gotoxy(x + 2, y + 1); cout << c;
 	TextColor(224);
 }
 void EffectFailed(int x, int y, string c)
@@ -260,7 +259,7 @@ void EffectFailed(int x, int y, string c)
 	gotoxy(x, y); for (i = 0; i <= csize; ++i) cout << " ";
 	gotoxy(x, y + 1); for (i = 0; i <= csize; ++i) cout << " ";
 	gotoxy(x, y + 2); for (i = 0; i <= csize; ++i) cout << " ";
-	gotoxy(x + 3, y + 1); cout << c;
+	gotoxy(x + 2, y + 1); cout << c;
 	TextColor(224);
 }
 void CreateSemesterForm()
@@ -277,7 +276,7 @@ void CreateSemesterForm()
 void CreateSignInForm()
 {
 	TextColor(224);
-	gotoxy(80, 9); cout << "Nhap mat khau: ";
+	gotoxy(80, 9); cout << "Nhap mat khau cu: ";
 	Frames(80, 10, 50, 1);
 	gotoxy(80, 14); cout << "Nhap mat khau moi:";
 	Frames(80, 15, 50, 1);
@@ -388,13 +387,13 @@ ESCAPE:
 				}
 			if (Login == true)
 			{
-				EffectSuccess(54, 28, ThaoTac[0]);
+				EffectSuccess(54, 28, "Dang nhap thanh cong ");
 				Sleep(2000);
 				break;
 			}
 			else
 			{
-				EffectFailed(54, 28, ThaoTac[1]);
+				EffectFailed(54, 28, "Ten tai khoan hoac mat khau khong dung ");
 				Sleep(2000);
 			}
 		}
@@ -493,13 +492,13 @@ ESCAPE:
 			}
 			if (Login == true)
 			{
-				EffectSuccess(54, 28, ThaoTac[0]);
+				EffectSuccess(54, 28, "Dang nhap thanh cong ");
 				Sleep(2000);
 				break;
 			}
 			else
 			{
-				EffectFailed(54, 28, ThaoTac[1]);
+				EffectFailed(54, 28, "Ten tai khoan hoac mat khau khong dung ");
 				Sleep(2000);
 			}
 		}
@@ -529,7 +528,7 @@ void ChangePasswordStudent(SinhVien& sv, ListLop& dsl, string newpass, const Sch
 	}
 	WriteFileStudent(dsl, Y);
 }
-void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
+bool MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, string& eff, const SchoolYear& Y)
 {
 	CreateSignInForm();
 	string oldpass = "", newpass = "", newpassAgain = "";
@@ -566,7 +565,8 @@ void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 			}
 			else if (c == ESC)
 			{
-				return;
+				eff = "Thoat";
+				return false;
 			}
 			else if (c != BACKSPACE && c != ENTER && oldpass.size() == 20)
 				--j;
@@ -607,7 +607,8 @@ void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 			}
 			else if (c == ESC)
 			{
-				return;
+				eff = "Thoat";
+				return false;
 			}
 			else if (c != BACKSPACE && c != ENTER && newpass.size() == 20)
 				--j;
@@ -648,7 +649,8 @@ void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 			}
 			else if (c == ESC)
 			{
-				return;
+				eff = "Thoat";
+				return false;
 			}
 			else if (c != BACKSPACE && c != ENTER && newpassAgain.size() == 20)
 				--j;
@@ -660,25 +662,24 @@ void MenuChangePasswordStudent(SinhVien& sv, ListLop& dsl, const SchoolYear& Y)
 		}
 	if (newpass.empty())
 	{
-		gotoxy(80, 25); cout << "Mat Khau khong duoc de trong!" << endl;
-		gotoxy(80, 26); system("pause");
+		eff =  "Mat Khau khong duoc de trong!" ;
 	}
 	else if (sv.pass != oldpass)
 	{
-		gotoxy(80, 25); cout << "Mat Khau sai!" << endl;
-		gotoxy(80, 26); system("pause");
+		eff = "Mat Khau sai!";
+		return false;
 	}
 	else if (newpass != newpassAgain)
 	{
-		gotoxy(80, 25); cout << "Mat Khau khong khop!" << endl;
-		gotoxy(80, 26); system("pause");
+		eff = "Mat Khau khong khop!";
 	}
 	else
 	{
 		ChangePasswordStudent(sv, dsl, newpass, Y);
-		gotoxy(80, 25); cout << "Doi mat khau thanh cong!" << endl;
-		gotoxy(80, 26); system("pause");
+		eff =  "Doi mat khau thanh cong!";
+		return true;
 	}
+	return false;
 }
 void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string newpass, const SchoolYear& Y)
 {
@@ -693,7 +694,7 @@ void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string newpass, const Sch
 	}
 	writeFileTeacher(dsgv, Y);
 }
-void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
+bool MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string& e, const SchoolYear& Y)
 {
 	CreateSignInForm();
 	string oldpass = "", newpass = "", newpassAgain = "";
@@ -730,7 +731,8 @@ void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 			}
 			else if (c == ESC)
 			{
-				return;
+				e = "Thoat";
+				return false;
 			}
 			else if (c != BACKSPACE && c != ENTER && oldpass.size() == 20)
 				--j;
@@ -771,7 +773,8 @@ void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 			}
 			else if (c == ESC)
 			{
-				return;
+				e = "Thoat";
+				return false;
 			}
 			else if (c != BACKSPACE && c != ENTER && newpass.size() == 20)
 				--j;
@@ -812,7 +815,8 @@ void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 			}
 			else if (c == ESC)
 			{
-				return;
+				e = "Thoat";
+				return false;
 			}
 			else if (c != BACKSPACE && c != ENTER && newpassAgain.size() == 20)
 				--j;
@@ -824,25 +828,23 @@ void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 		}
 	if (newpass.empty())
 	{
-		gotoxy(80, 25); cout << "Mat Khau khong duoc de trong!" << endl;
-		gotoxy(80, 26); system("pause");
+		e = "Mat Khau khong duoc de trong ";
 	}
 	else if (gv.pass != oldpass)
 	{
-		gotoxy(80, 25); cout << "Mat Khau sai!" << endl;
-		gotoxy(80, 26); system("pause");
+		e = "Mat Khau sai ";
 	}
 	else if (newpass != newpassAgain)
 	{
-		gotoxy(80, 25); cout << "Mat Khau khong khop!" << endl;
-		gotoxy(80, 26); system("pause");
+		e = "Mat Khau khong khop ";
 	}
 	else
 	{
 		ChangePasswordManager(gv, dsgv, newpass, Y);
-		gotoxy(80, 25); cout << "Doi mat khau thanh cong!" << endl;
-		gotoxy(80, 26); system("pause");
+		e = "Doi mat khau thanh cong ";
+		return true;
 	}
+	return false;
 }
 void MenuChildren(string s[], int& vitri, int size)
 {
@@ -873,7 +875,7 @@ void MenuChildren(string s[], int& vitri, int size)
 		TextColor(224);
 	}
 }
-void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, int se, SchoolYear Y, listSemester&l)
+void Menu(ListLop ds, ListGV dsgv, ListCourses dsmon, SinhVien& sv, GiaoVien& gv, int& choice, int& se, SchoolYear& Y, listSemester&l)
 {
 HOME:
 	choice = SignIn(ds, dsgv, sv, gv);
@@ -888,6 +890,10 @@ HOME:
 				system("cls");
 				transform(sv.FirstName.begin(), sv.FirstName.end(), sv.FirstName.begin(), toupper);
 				transform(sv.LastName.begin(), sv.LastName.end(), sv.LastName.begin(), toupper);
+				gotoxy(4, 5); 
+				se == -1 ?
+					cout << "Ki: " << '_' << " - Nam hoc: " << Y.NameSchoolYear
+					: cout << "Ki: " << se << " - Nam hoc: " << Y.NameSchoolYear;
 				gotoxy(4, 6); cout << "Xin chao : " << sv.FirstName << " " << sv.LastName << " - " << sv.Class;
 				n = 0;
 				for (i = 0; i < 7; ++i)
@@ -934,45 +940,66 @@ HOME:
 							bool f;
 							switch (c)
 							{
-							case 1:
-									system("cls");
-									gotoxy(60, 9);
-									CoursesRegistration(dsmon, sv, se, Y, s, f);
-									if (f) EffectSuccess(55, 15, s);
-									else EffectFailed(55, 15, s);
-									f = false;
-									gotoxy(20, 20);
+							case 1: 
+									
+									if (dsmon.head == NULL) {
+									EffectFailed(80,13,"Chua co khoa hoc nao");
+									}
+									else {
+										system("cls");
+										gotoxy(60, 9);
+										CoursesRegistration(dsmon, sv, se, Y, s, f);
+										if (f) EffectSuccess(55, 30, s);
+										else EffectFailed(55, 30, s);
+									}
+									gotoxy(40, 34);
 									system("pause");
 									goto REPEATSV;
 									break;
-							case 2:
-									gotoxy(60, 9);
-									ViewEnrollCourses(sv, se, Y);
-									gotoxy(20, 20);
-									system("pause");
-									goto REPEATSV;
-									break;
-							case 3:
-									system("cls");
-									gotoxy(60, 9);
-									EraserEnrollCourses(sv, dsmon, se, Y, f);
-									if (f) EffectSuccess(55, 15, ThaoTac[4]);
-									else EffectFailed(55, 15, "Xoa Khong thanh cong");
-									gotoxy(20, 20);
-									system("pause");
-									goto REPEATSV;
-									break;
-							case 4:
-									system("cls");
-									viewScoreBoardOfStudent(sv, dsmon, se, Y);
-									gotoxy(20, 20);
-									system("pause");
-									goto REPEATSV;
-									break;
-							case 5:
-									MenuChangePasswordStudent(sv, ds, Y);
-									goto REPEATSV;
-									break;
+							
+							case 2: {
+								string e;
+								bool f;
+								gotoxy(60, 9);
+								ViewEnrollCourses(dsmon, sv, se, e, f, Y);
+								if (!f) EffectFailed(80, 13, e);
+								gotoxy(60, 32);
+								system("pause");
+								goto REPEATSV;
+								break;
+							}
+							
+							case 3: {
+								string e;
+								bool f;
+								gotoxy(60, 9);
+								EraserEnrollCourses(sv, dsmon,e, f, se, Y);
+								if (f) EffectSuccess(50, 25, "Xoa thanh cong ");
+								else EffectFailed(50, 25, e);
+								gotoxy(60, 32);
+								system("pause");
+								goto REPEATSV;
+								break;
+							}
+							case 4: {
+								bool f;
+								string e;
+								viewScoreBoardOfStudent(sv, dsmon, e, f, se, Y);
+								if (!f) EffectFailed(80, 13, e);
+								gotoxy(60, 32);
+								system("pause");
+								goto REPEATSV;
+								break;
+							}
+							case 5: {
+								string eff;
+								bool Check = MenuChangePasswordStudent(sv, ds, eff, Y);
+								if (Check) EffectSuccess(80, 26, eff);
+								else EffectFailed(80, 26, eff);
+								gotoxy(75, 30); system("pause");
+								goto REPEATSV;
+								break;
+							}
 							case 6:
 									goto HOME;
 									break;
@@ -992,8 +1019,12 @@ HOME:
 				system("cls");
 				transform(gv.FirstName.begin(), gv.FirstName.end(), gv.FirstName.begin(), toupper);
 				transform(gv.LastName.begin(), gv.LastName.end(), gv.LastName.begin(), toupper);
+				gotoxy(4, 5);
+				se == -1 ?
+					cout << "Ki: " << '_' << " - Nam hoc: " << Y.NameSchoolYear
+					: cout << "Ki: " << se << " - Nam hoc: " << Y.NameSchoolYear;
 				gotoxy(4, 6); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
-				int n = 0,i,k,j;
+				int n = 0, i, k, j;
 				for (i = 0; i < 6; ++i)
 				{
 					k = MenuGV[i].length();
@@ -1065,7 +1096,11 @@ HOME:
 											if (choice == 1)
 											{
 												CreateSchoolYear(Y);
-												EffectSuccess(90, 28, ThaoTac[2]);
+												EffectSuccess(90, 28, "Tao thanh cong ");
+												Y = SchoolYearPresent("SchoolYear.txt");
+												InitListSemester(l);
+												readListSemester(l, Y);
+												se = getSemester(l, Y);
 											}
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
@@ -1078,8 +1113,13 @@ HOME:
 												ClearEffectAgree(70, 10, c);
 												CreateSemesterForm();
 												bool f = CreateSemester(s, Y, l);
-												if (f == true) EffectSuccess(90, 28, ThaoTac[2]);
-												else EffectFailed(90, 28, ThaoTac[3]);
+												if (f == true) {
+													EffectSuccess(90, 28, "Tao thanh cong ");
+													InitListSemester(l);
+													readListSemester(l, Y);
+													se = getSemester(l, Y);
+												}
+												else EffectFailed(90, 28, "Tao that bai ");
 											}
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
@@ -1093,8 +1133,8 @@ HOME:
 												ClearEffectAgree(70, 10, c);
 												CreateNewClass(ds, Y, z);
 												if(z==1)
-												EffectSuccess(90, 28, ThaoTac[2]);
-												else EffectFailed(90, 28, ThaoTac[3]);
+												EffectSuccess(90, 28, "Tao thanh cong ");
+												else EffectFailed(90, 28, "Tao that bai ");
 											}
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
@@ -1170,7 +1210,7 @@ HOME:
 												break;
 										case 6:
 												ExportListStudentInCourseToEnterScore(dsmon, se, Y);
-												EffectSuccess(90, 28, ThaoTac[2]);
+												EffectSuccess(90, 28, "Tao file thanh cong ");
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
 												break;
@@ -1222,7 +1262,7 @@ HOME:
 										else if (vitricon == 4)
 										{
 											deleteCourse(dsmon, se, Y);
-											EffectSuccess(55, 10, ThaoTac[4]);
+											EffectSuccess(55, 10, "Xoa thanh cong ");
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
 										}
@@ -1234,7 +1274,7 @@ HOME:
 											{
 												ClearEffectAgree(70, 10, c);
 												PrintFileCSV(ds, Y);
-												EffectSuccess(90, 28, ThaoTac[2]);
+												EffectSuccess(90, 28, "Xuat file thanh cong ");
 											}
 											gotoxy(70, 32); system("pause");
 											goto REPEATGV;
@@ -1242,10 +1282,15 @@ HOME:
 									}
 								}
 								break;
-						case 4:
-								MenuChangePasswordManager(gv, dsgv, Y);
-								goto REPEATGV;
-								break;
+						case 4: {
+							string effect;
+							bool Check = MenuChangePasswordManager(gv, dsgv, effect, Y);
+							if (Check) EffectSuccess(80, 25, effect);
+							else EffectFailed(80, 25, effect);
+							gotoxy(75, 30); system("pause");
+							goto REPEATGV;
+							break;
+						}
 						case 5:
 								goto HOME;
 								break;

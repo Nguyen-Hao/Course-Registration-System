@@ -14,12 +14,10 @@ int main()
 	resizeConsole(1200, 650);
 	TextColor(224);
 	SchoolYear y = SchoolYearPresent("SchoolYear.txt"); 
-
 	listSemester l;
 	InitListSemester(l);
 	readListSemester(l, y);
 	int se = getSemester(l, y);
-
 	ListLop dsl;	dsl.n = 0;
 	ListGV dsgv;	dsgv.pHead = NULL;
 	SinhVien sv;

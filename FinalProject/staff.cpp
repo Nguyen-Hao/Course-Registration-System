@@ -7,7 +7,7 @@
 #include "Semester.h"
 #include "DKMon.h"
 #include "SchoolYear.h"
-
+#include <algorithm>
 ListSV* Create_Node_Sv(SinhVien sv)
 {
 	ListSV* a = new ListSV;
@@ -386,6 +386,8 @@ int ViewListOfClass(ListLop& ds)
 		STT = 15 * (page - 1);
 		count = 0;
 		system("cls");
+		gotoxy(55, 2); TextColor(164); cout << " DANH SACH LOP HOC ";
+		TextColor(224);\
 		gotoxy(20, 4); cout << "+---------------------------------------------------------------------------------+" << endl;
 		gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << " STT " << char(124) << "  " << setw(15) << left << "   Ma lop   " << char(124) << "  " << setw(40) << left << "                  Ten lop " << char(124) << "  " << setw(10) << left << "Nam hoc" << char(124) << endl;
 		gotoxy(20, 6); cout << "+---------------------------------------------------------------------------------+" << endl;
@@ -489,7 +491,8 @@ void ViewListOfStudentInClass(ListLop& ds)
 		}
 		count = 0;
 		system("cls");
-		gotoxy(35, 2); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------"; // Loi in ra man hinh mat chu
+		gotoxy(50, 2); TextColor(164); cout << "DANH SACH SINH VIEN LOP " << ds.l[ViTriLop].Ma;
+		TextColor(224);
 		gotoxy(20, 4); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
 		gotoxy(20, 6); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
@@ -566,6 +569,7 @@ void ViewListOfStudentIncourses(ListCourses ds, int se,  const SchoolYear& Y)
 	int numberofstudent = CountNodeStudent(Lsv_Of_Courses);
 	int numberofPage = CountNodePage(numberofstudent);
 	int page = 1,count,j;
+	gotoxy(40, 2); 
 	while (true)
 	{
 		k = Lsv_Of_Courses;
@@ -579,21 +583,23 @@ void ViewListOfStudentIncourses(ListCourses ds, int se,  const SchoolYear& Y)
 		}
 		count = 0;
 		system("cls");
-		gotoxy(10, 3); cout << "---------------------------- " << p->course.Name << " ----------------------------";
-		gotoxy(5, 5); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
-		gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
-		gotoxy(5, 7); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		transform(p->course.Name.begin(), p->course.Name.end(), p->course.Name.begin(), toupper);
+		gotoxy(25, 2); TextColor(164); cout << "DANH SACH SINH VIEN DANG KY MON " << p->course.Name << " - KI " << se << " - Nam hoc " << Y.NameSchoolYear;
+		TextColor(224);
+		gotoxy(20, 5); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << char(124);
+		gotoxy(20, 7); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 		for (i = 0; i < 15; ++i)
 		{
 			if (k == NULL) break;
 			count = i + 1;
-			gotoxy(5, 7 + i);
+			gotoxy(20, 8 + i);
 			cout << char(124) << "  " << setw(5) << left << STT + i + 1 << char(124) << "  " << setw(15) << left << k->info.ID << char(124) << "  " << setw(20) << left << k->info.FirstName << char(124) << "  " << setw(20) << k->info.LastName << char(124) << "  " << setw(10) << left << k->info.Gender << char(124) << "  " << setw(10) << k->info.DateOfBirth << char(124) << "  " << setw(10) << left << k->info.SocialID << char(124);
 			k = k->pNext;
 		}
-		gotoxy(5, 7 + count); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 7 + count); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(0, 7 + count + 1);
-		gotoxy(50, 28); cout << page << "/" << numberofPage;
+		gotoxy(60, 28); cout << page << "/" << numberofPage;
 		key = GetKey();
 		switch (key)
 		{
@@ -712,10 +718,12 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, int se,  const SchoolYear& Y)
 		}
 		count = 0;
 		system("cls");
-		gotoxy(10, 3); cout << "\t\t---------------------------- " << p->course.Name << " ----------------------------";
-		gotoxy(5, 5); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
-		gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "        Ten" << char(124) << setw(10) << "  Total" << char(124) << setw(10) << "  Final" << char(124) << setw(10) << "  Midterm" << char(124) << setw(10) << "  Other" << char(124) << endl;
-		gotoxy(5, 7); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
+		transform(p->course.Name.begin(), p->course.Name.end(), p->course.Name.begin(), toupper);
+		gotoxy(45, 2); TextColor(164); cout << "BANG DIEM TONG KET MON " << p->course.Name << " - KI " << se << " - Nam hoc " << Y.NameSchoolYear;
+		TextColor(224);
+		gotoxy(20, 5); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(20, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "        Ten" << char(124) << setw(10) << " Tong ket" << char(124) << setw(10) << " Cuoi ki" << char(124) << setw(10) << " Giua ki" << char(124) << setw(10) << "Qua trinh" << char(124) << endl;
+		gotoxy(20, 7); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
 		for (i = 0; i < 15; ++i)
 		{
 			count = i + 1;
@@ -731,7 +739,7 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, int se,  const SchoolYear& Y)
 			{
 				row.push_back(word);
 			}
-			gotoxy(5, 7 + i);
+			gotoxy(20, 8 + i);
 			cout << char(124) << "  " << setw(5) << left << i + STT + 1 << char(124) << "  " << setw(15) << left << row[1] << char(124) << "  " << setw(20) << left << row[2] << char(124) << "  " << setw(20) << row[3] << char(124) << setw(10) << row[4] << char(124) << setw(10) << row[5] << char(124) << setw(10) << row[6] << char(124) << setw(10) << row[7] << char(124) << endl;
 			if (fin.eof())
 			{
@@ -739,9 +747,9 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, int se,  const SchoolYear& Y)
 				break;
 			}
 		}
-		gotoxy(5, 7 + count); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
-		gotoxy(0, 7 + count + 1);
-		gotoxy(50, 28); cout << page << "/" << numberofPage;
+		gotoxy(20, 8 + count); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
+		gotoxy(0, 8 + count + 1);
+		gotoxy(70, 28); cout << page << "/" << numberofPage;
 		fin.close();
 		key = GetKey();
 		switch (key)
@@ -904,7 +912,8 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 		int count = 0;
 		int i = 0;
 		system("cls");
-		gotoxy(35, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
+		gotoxy(45, 2); TextColor(164); cout << "BANG DIEM TONG KET LOP " << malop << " - KI " << se << " - Nam hoc " << Y.NameSchoolYear;
+		TextColor(224);
 		gotoxy(20, 4); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(20, 5); cout << char(124) << "  " << setw(4) << left << "STT" << char(124) << "  " << setw(14) << left << "     MSSV" << char(124) << "  " << setw(19) << left << "         Ho" << char(124) << "  " << setw(19) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
 		gotoxy(20, 6); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;

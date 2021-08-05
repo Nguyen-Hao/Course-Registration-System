@@ -43,7 +43,7 @@ int getSemester(listSemester l, const SchoolYear Y)
 {
 	Time time = getTime();
 	Time begin, end;
-	if (l.head == NULL) return 1;
+	if (l.head == NULL) return -1;
 	for (NodeSemester* p = l.head; p != NULL; p = p->next)
 	{
 		begin.day = p->semes.begin.ngay;
@@ -58,7 +58,7 @@ int getSemester(listSemester l, const SchoolYear Y)
 			break;
 		}
 	}
-	return 1;
+	return -1;
 }
 
 

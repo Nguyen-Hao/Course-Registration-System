@@ -61,3 +61,6 @@ Toan tin hoc
 21CSH2
 Cong nghe sinh hoc
 2021
+21CMT1
+Khoa hoc cong nghe moi truong
+2021

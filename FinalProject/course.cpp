@@ -137,7 +137,6 @@ int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 	f.seekg(0, ios::end);
 	int x = f.tellg();
 	f.close();
-	int STT;
 	if (x == 0)
 	{
 		cout << "Chua co khoa hoc nao trong danh sach" << endl;
@@ -154,7 +153,7 @@ int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 		{
 
 			temp1 = temp.head;
-			STT = 15 * (page - 1);
+			int STT = 15 * (page - 1);
 			for (i = 1; i < page; i++)
 			{
 				for (j= 0; j < 15; j++)
@@ -164,21 +163,23 @@ int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 			}
 			count = 0;
 			system("cls");
-			gotoxy(20, 3); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
-			gotoxy(20, 4); cout << char(124) << setw(13) << left << "  Ma mon hoc" << char(124) << setw(31) << left << "       Ten mon hoc" << char(124) << setw(26) << "     Ten GV" << char(124) << setw(9) << left << "   So TC" << char(124) << setw(16) << "  Da dang ky" << char(124) << "  " << setw(20) << left << "     Lich hoc";
-			gotoxy(153, 4); cout << char(124) << endl;
-			gotoxy(20, 5); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+			gotoxy(40, 2); TextColor(164); cout << "DANH SACH MON HOC MO KI " << se << " - Nam hoc " << Y.NameSchoolYear;
+			TextColor(224);
+			gotoxy(15, 3); cout << "+----------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+			gotoxy(15, 4); cout << char(124) << setw(5) << " STT" << char(124) << setw(13) << left << "  Ma mon hoc" << char(124) << setw(31) << left << "       Ten mon hoc" << char(124) << setw(26) << "     Ten GV" << char(124) << setw(9) << left << "   So TC" << char(124) << setw(16) << "  Da dang ky" << char(124) << "  " << setw(20) << left << "     Lich hoc";
+			gotoxy(158, 4); cout << char(124) << endl;
+			gotoxy(15, 5); cout << "+----------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 			for (i = 0; i < 15; i++)
 			{
 				if (temp1 == NULL) break;
 				count = i + 1;
-				gotoxy(20, 6 + i);
-				cout << char(124) << " " << setw(12) << left << temp1->course.ID << char(124) << " " << setw(30) << left << temp1->course.Name << char(124) << " " << setw(25) << left << temp1->course.TeacherName << char(124) << " " << setw(8) << left << temp1->course.NumOfCredits << char(124) << " " << setw(3) << daDangKy(temp1->course, Y, se, temp) << " " << "/" << " " << setw(9) << temp1->course.MaxNumOfStudents << char(124) << " ";
+				gotoxy(15, 6 + i);
+				cout << char(124) << setw(5) << STT++ + 1 << char(124) << " " << setw(12) << left << temp1->course.ID << char(124) << " " << setw(30) << left << temp1->course.Name << char(124) << " " << setw(25) << left << temp1->course.TeacherName << char(124) << " " << setw(8) << left << temp1->course.NumOfCredits << char(124) << " " << setw(3) << daDangKy(temp1->course, Y, se, temp) << " " << "/" << " " << setw(9) << temp1->course.MaxNumOfStudents << char(124) << " ";
 				cout << "T" << temp1->course.Session1.thu << " - " << "S" << temp1->course.Session1.shift << TimeShift(temp1->course.Session1.shift) << "  " << "T" << temp1->course.Session2.thu << " - " << "S" << temp1->course.Session2.shift << TimeShift(temp1->course.Session2.shift);
-				gotoxy(153, 6 + i); cout << char(124) << endl;
+				gotoxy(158, 6 + i); cout << char(124) << endl;
 				temp1 = temp1->next;
 			}
-			gotoxy(20, 6 + count); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+			gotoxy(15, 6 + count); cout << "+----------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 			gotoxy(15, 6 + count + 1);
 			gotoxy(50, 28); cout << page << "/" << numberofPage;
 			key = GetKey();
