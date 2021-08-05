@@ -2,6 +2,8 @@
 #include"SchoolYear.h"
 #include"student.h"
 #include"staff.h"
+#include"Semester.h"
+#include"Menu.h"
 unsigned int YearPresent()
 {
 	fstream file;
@@ -72,6 +74,13 @@ void CreateSchoolYear(SchoolYear& S)
 	file << S.StudentOfSubject << endl;
 	file << S.TimeDKHP << endl;
 	file.close();
+	semester r;
+	listSemester l;
+	Sleep(50);
+	CreateSemesterForm();
+	bool t = CreateSemester(r, S, l);
+	if (t == true) EffectSuccess(90, 28, "  Tao thanh cong");
+	else EffectFailed(90, 28, " Tao that bai");
 }
 
 

@@ -136,7 +136,7 @@ Time* ReadTimeRegistration(const SchoolYear& Y)
 	Time* a = new Time[2];
 	int se;
 	ifstream ifs;
-	ifs.open( Y.TimeDKHP);
+	ifs.open(Y.TimeDKHP);
 	if (!ifs.is_open())
 	{
 		cout << "Chua co phien dang ky hoc phan!" << endl;
@@ -149,13 +149,17 @@ Time* ReadTimeRegistration(const SchoolYear& Y)
 			ifs >> se >> a[0].day >> a[0].month >> a[0].year >> a[0].hour >> a[0].minute >> a[0].second
 				>> a[1].day >> a[1].month >> a[1].year >> a[1].hour >> a[1].minute >> a[1].second;
 		}
+	
 	}
-	return a;
+	if (a[0].day < 0)
+		return NULL;
+	else return a;
+	
 }
 void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, string &c, bool &f)
 {
 	Time t = getTime();
-	Time* arrTime = ReadTimeRegistration(Y);	
+	Time* arrTime = ReadTimeRegistration(Y);
 	char check = isTimeIn(t, arrTime[0], arrTime[1]);
 	if (check != 0)
 	{

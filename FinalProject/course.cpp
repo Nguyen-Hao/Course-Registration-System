@@ -19,31 +19,78 @@ void createNewCourse(int semester, const SchoolYear& Y)
 	file.open(to_string(semester) + Y.ListCourses, ios::app);
 	Course a;
 	a.Sememster = semester;
+	gotoxy(70, 3);
 	cout << "Nhap ID khoa hoc: ";
+	Frames(70, 4, 25, 1);
+	gotoxy(73, 5);
 	getline(cin, a.ID);
+	gotoxy(100, 3);
 	cout << "Nhap ten khoa hoc: ";
+	Frames(100, 4, 40, 1);
+	gotoxy(103, 5);
 	getline(cin, a.Name);
+	gotoxy(70, 7);
 	cout << "Nhap ten giao vien: ";
+	Frames(70, 8, 70, 1);
+	gotoxy(75, 9);
 	getline(cin, a.TeacherName);
+	gotoxy(70, 11);
 	cout << "Nhap so tin chi: ";
+	Frames(70, 12, 25, 1);
+	gotoxy(75, 13);
 	cin >> a.NumOfCredits;
+	gotoxy(100, 11);
 	cout << "Nhap so luong sinh vien toi da: ";
+	Frames(100, 12, 40, 1);
+	gotoxy(105, 13);
 	cin >> a.MaxNumOfStudents;
+	gotoxy(90, 15);
 	cout << "Nhap buoi hoc thu 1: ";
 	do
 	{
+		CleanForm(70, 17, 25, 1);
+		CleanForm(100, 17, 40, 1);
+		cleanEffectFailed(75, 28, " Nhap sai du lieu!");
+		gotoxy(70, 16);
 		cout << "Thu (2-8): ";
+		Frames(70, 17, 25, 1);
+		gotoxy(75, 18);
 		cin >> a.Session1.thu;
+		gotoxy(100, 16);
 		cout << "Nhap ca hoc(1-4): ";
+		Frames(100, 17, 40, 1);
+		gotoxy(103, 18);
 		cin >> a.Session1.shift;
+		if (a.Session1.thu < 2 || a.Session1.thu > 8 || a.Session1.shift < 1 || a.Session1.shift > 4)
+		{
+			EffectFailed(75, 28, " Nhap sai du lieu!");
+			gotoxy(75, 30);
+			system("pause");
+		}
 	} while (a.Session1.thu < 2 || a.Session1.thu > 8 || a.Session1.shift < 1 || a.Session1.shift > 4);
+	gotoxy(90, 21);
 	cout << "Nhap buoi hoc thu 2: ";
 	do
 	{
+		CleanForm(70, 23, 25, 1);
+		CleanForm(100, 23, 40, 1);
+		cleanEffectFailed(75, 28, " Nhap sai du lieu!");
+		gotoxy(70, 22);
 		cout << "Thu (2-8): ";
+		Frames(70, 23, 25, 1);
+		gotoxy(75, 24);
 		cin >> a.Session2.thu;
+		gotoxy(100, 22);
 		cout << "Nhap ca hoc(1-4): ";
+		Frames(100, 23, 40, 1);
+		gotoxy(103, 24);
 		cin >> a.Session2.shift;
+		if (a.Session2.thu < 2 || a.Session2.thu > 8 || a.Session2.shift < 1 || a.Session2.shift > 4)
+		{
+			EffectFailed(75, 28, " Nhap sai du lieu!");
+			gotoxy(75, 30);
+			system("pause");
+		}
 	} while (a.Session2.thu < 2 || a.Session2.thu > 8 || a.Session2.shift < 1 || a.Session2.shift > 4);
 	cin.ignore();
 	ofstream g;
@@ -224,7 +271,10 @@ void updateCourse(ListCourses l, int se, const SchoolYear& Y)
 	bool f;
 	ViewListOfCourse(l, se,str,f, Y);
 	Course a, b;
+	gotoxy(40, 29);
 	cout << "Nhap ID khoa hoc can update: ";
+	Frames(40, 30, 30, 1);
+	gotoxy(43, 31);
 	getline(cin, a.ID);
 	fstream file1, file2;
 	string link1 = to_string(se) + Y.ListCourses,
@@ -248,34 +298,79 @@ void updateCourse(ListCourses l, int se, const SchoolYear& Y)
 		if (file1.eof()) break;
 		if (a.ID==b.ID)
 		{
-			cout << "Nhap thong tin can cap nhat" << endl;
-			a.Sememster = se;
+			system("cls");
+			gotoxy(70, 3);
 			cout << "Nhap ID khoa hoc: ";
+			Frames(70, 4, 25, 1);
+			gotoxy(73, 5);
 			getline(cin, a.ID);
+			gotoxy(100, 3);
 			cout << "Nhap ten khoa hoc: ";
+			Frames(100, 4, 40, 1);
+			gotoxy(103, 5);
 			getline(cin, a.Name);
+			gotoxy(70, 7);
 			cout << "Nhap ten giao vien: ";
-			getline(cin,a.TeacherName);
+			Frames(70, 8, 70, 1);
+			gotoxy(75, 9);
+			getline(cin, a.TeacherName);
+			gotoxy(70, 11);
 			cout << "Nhap so tin chi: ";
+			Frames(70, 12, 25, 1);
+			gotoxy(75, 13);
 			cin >> a.NumOfCredits;
+			gotoxy(100, 11);
 			cout << "Nhap so luong sinh vien toi da: ";
+			Frames(100, 12, 40, 1);
+			gotoxy(105, 13);
 			cin >> a.MaxNumOfStudents;
-			cin.ignore();
+			gotoxy(90, 15);
 			cout << "Nhap buoi hoc thu 1: ";
 			do
 			{
+				CleanForm(70, 17, 25, 1);
+				CleanForm(100, 17, 40, 1);
+				cleanEffectFailed(75, 28, " Nhap sai du lieu!");
+				gotoxy(70, 16);
 				cout << "Thu (2-8): ";
+				Frames(70, 17, 25, 1);
+				gotoxy(75, 18);
 				cin >> a.Session1.thu;
+				gotoxy(100, 16);
 				cout << "Nhap ca hoc(1-4): ";
+				Frames(100, 17, 40, 1);
+				gotoxy(103, 18);
 				cin >> a.Session1.shift;
+				if (a.Session1.thu < 2 || a.Session1.thu > 8 || a.Session1.shift < 1 || a.Session1.shift > 4)
+				{
+					EffectFailed(75, 28, " Nhap sai du lieu!");
+					gotoxy(75, 30);
+					system("pause");
+				}
 			} while (a.Session1.thu < 2 || a.Session1.thu > 8 || a.Session1.shift < 1 || a.Session1.shift > 4);
+			gotoxy(90, 21);
 			cout << "Nhap buoi hoc thu 2: ";
 			do
 			{
+				CleanForm(70, 23, 25, 1);
+				CleanForm(100, 23, 40, 1);
+				cleanEffectFailed(75, 28, " Nhap sai du lieu!");
+				gotoxy(70, 22);
 				cout << "Thu (2-8): ";
+				Frames(70, 23, 25, 1);
+				gotoxy(75, 24);
 				cin >> a.Session2.thu;
+				gotoxy(100, 22);
 				cout << "Nhap ca hoc(1-4): ";
+				Frames(100, 23, 40, 1);
+				gotoxy(103, 24);
 				cin >> a.Session2.shift;
+				if (a.Session2.thu < 2 || a.Session2.thu > 8 || a.Session2.shift < 1 || a.Session2.shift > 4)
+				{
+					EffectFailed(75, 28, " Nhap sai du lieu!");
+					gotoxy(75, 30);
+					system("pause");
+				}
 			} while (a.Session2.thu < 2 || a.Session2.thu > 8 || a.Session2.shift < 1 || a.Session2.shift > 4);
 			file2 << a.Sememster << endl;
 			file2 << a.ID << endl;
@@ -311,76 +406,100 @@ void updateCourse(ListCourses l, int se, const SchoolYear& Y)
 void CreateCourseRegistrationSession(int se, const SchoolYear& Y)
 {
 	Time a;
-	cout << "Nhap thoi gian bat dau: " << endl;
-	cout << "Ngay: ";
+	gotoxy(90, 8); cout << "Nhap thoi gian bat dau:";
+	Frames(110, 9, 30, 1);
+	gotoxy(70, 10);
+	cout << "Ngay thang nam (dd mm yy): " ;
+	gotoxy(115, 10);
 	cin >> a.day;
-	cout << "Thang: ";
 	cin >> a.month;
-	cout << "Nam: ";
 	cin >> a.year;
 	while (!isDate(a.day, a.month, a.year))
 	{
-		cout << "Ngay thang nam khong hop le! Moi nhap lai: " << endl;
-		cout << "Nhap thoi gian bat dau: " << endl;
-		cout << "Ngay: ";
+		EffectFailed(75, 26, "Ngay thang nam khong hop le!");
+		gotoxy(75, 29);
+		system("pause");
+		cleanEffectFailed(75, 26, "Ngay thang nam khong hop le!");
+		CleanForm(110, 9, 30, 1);
+		Frames(110, 9, 30, 1);
+		gotoxy(70, 10);
+		cout << "Nhap thoi gian bat dau (dd mm yy): ";
+		gotoxy(115, 10);
+		cin.clear();
 		cin >> a.day;
-		cout << "Thang: ";
 		cin >> a.month;
-		cout << "Nam: ";
 		cin >> a.year;
 	}
-	cout << "Gio: ";
+	Frames(110, 13, 30, 1);
+	gotoxy(70, 14);
+	cout << "Gio phut giay (h m s): ";
+	gotoxy(115, 10);
 	cin >> a.hour;
-	cout << "Phut: ";
 	cin >> a.minute;
-	cout << "Giay: ";
 	cin >> a.second;
 	while (!isTime(a.hour, a.minute, a.second))
 	{
-		cout << "Gio phut giay khong hop le! Moi nhap lai: " << endl;
-		cout << "Gio: ";
+		EffectFailed(75, 26, "Gio phut giay khong hop le!");
+		gotoxy(75, 29);
+		system("pause");
+		cleanEffectFailed(75, 26, "Gio phut giay khong hop le!");
+		Frames(110, 13, 30, 1);
+		gotoxy(70, 14);
+		cout << "Gio phut giay (h m s): ";
+		gotoxy(115, 10);
+		cin.clear();
 		cin >> a.hour;
-		cout << "Phut: ";
 		cin >> a.minute;
-		cout << "Giay: ";
 		cin >> a.second;
 	}
 	fstream file;
 	file.open(Y.TimeDKHP, ios::app);
 	file << se << " " << a.day << " " << a.month << " " << a.year
 		<< " " << a.hour << " " << a.minute << " " << a.second << " ";
-	cout << "Nhap thoi gian ket thuc: " << endl;
-	cout << "Ngay: ";
+	gotoxy(90, 18); cout << "Nhap thoi gian ket thuc: " << endl;
+	Frames(110, 19, 30, 1);
+	gotoxy(70, 20);
+	cout << "Ngay thang nam (dd mm yy): ";
+	gotoxy(115, 20);
 	cin >> a.day;
-	cout << "Thang: ";
 	cin >> a.month;
-	cout << "Nam: ";
 	cin >> a.year;
 	while (!isDate(a.day, a.month, a.year))
 	{
-		cout << "Ngay thang nam khong hop le! Moi nhap lai: " << endl;
-		cout << "Nhap thoi gian bat dau: " << endl;
-		cout << "Ngay: ";
+		EffectFailed(75, 26, "Ngay thang nam khong hop le!");
+		gotoxy(75, 29);
+		system("pause");
+		cleanEffectFailed(75, 26, "Ngay thang nam khong hop le!");
+		CleanForm(110, 9, 30, 1);
+		Frames(110, 19, 30, 1);
+		gotoxy(70, 20);
+		cout << "Nhap thoi gian bat dau (dd mm yy): ";
+		gotoxy(115, 20);
+		cin.clear();
 		cin >> a.day;
-		cout << "Thang: ";
 		cin >> a.month;
-		cout << "Nam: ";
 		cin >> a.year;
 	}
-	cout << "Gio: ";
+	Frames(110, 22, 30, 1);
+	gotoxy(70, 23);
+	cout << "Gio phut giay (h m s): ";
+	gotoxy(115, 24);
 	cin >> a.hour;
-	cout << "Phut: ";
 	cin >> a.minute;
-	cout << "Giay: ";
 	cin >> a.second;
 	while (!isTime(a.hour, a.minute, a.second))
 	{
-		cout << "Gio phut giay khong hop le! Moi nhap lai: " << endl;
-		cout << "Gio: ";
+		EffectFailed(75, 26, "Gio phut giay khong hop le!");
+		gotoxy(75, 29);
+		system("pause");
+		cleanEffectFailed(75, 26, "Gio phut giay khong hop le!");
+		Frames(110, 22, 30, 1);
+		gotoxy(70, 23);
+		cout << "Gio phut giay (h m s): ";
+		gotoxy(115, 24);
+		cin.clear();
 		cin >> a.hour;
-		cout << "Phut: ";
 		cin >> a.minute;
-		cout << "Giay: ";
 		cin >> a.second;
 	}
 	file << a.day << " " << a.month << " " << a.year
@@ -393,7 +512,10 @@ void deleteCourse(ListCourses l, int se, const SchoolYear& Y)
 	bool f;
 	ViewListOfCourse(l, se, str, f, Y);
 	Course a, b;
+	gotoxy(40, 31);
 	cout << "Nhap ID khoa hoc muon xoa: ";
+	Frames(70, 30, 30, 1);
+	gotoxy(73, 31);
 	getline(cin, a.ID);
 	fstream file1, file2;
 	string link1 = to_string(se) + Y.ListCourses,

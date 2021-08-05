@@ -57,15 +57,13 @@ void ReadFileStudent(ListLop& dsl, const SchoolYear&Y)
 	file.open(Y.DSSinhVien, ios::in);
 	string s;
 	int STTLop;
-	char a[10];
-	SinhVien sv;
 	int KT;
 	while (!file.eof())
 	{
+		SinhVien sv;
 		getline(file, s);
 		if (s.size() == 0) break;
-		strcpy_s(a, 10, s.c_str());
-		KT = CheckClass(dsl, a, dsl.n);
+		KT = CheckClass(dsl, s, dsl.n);
 		if (KT == -1) STTLop = 0;
 		else STTLop = KT;
 		sv.Class = s;
@@ -79,12 +77,86 @@ void ReadFileStudent(ListLop& dsl, const SchoolYear&Y)
 		for (int i = 0; i < 3; i++) file >> sv.begin[i];
 		file >> sv.YearStudent;
 		file >> sv.Semester;
+		file.ignore();
 		AddTailStudent(dsl.l[STTLop].pHead, sv);
 	}
 	file.close();
 }
+
+bool checkSameData(const SchoolYear& Y, const SinhVien& S)
+{
+	bool t = false;
+	fstream file;
+	file.open(S.Class + "_Filecsv.csv", ios::in | ios::out);
+	if(file.is_open())
+	{
+		while (!file.eof())
+		{
+			string a;
+			SinhVien sv;
+			getline(file, a, ',');
+			getline(file, sv.ID, ','); 
+			getline(file, sv.FirstName, ','); 
+			getline(file, sv.LastName, ','); 
+			getline(file, sv.Gender, ',');
+			getline(file, sv.DateOfBirth, ',');
+			getline(file, sv.SocialID, '\n'); 
+			if (sv.ID == S.ID)
+				t = true;
+		}
+		file.close();
+	}
+	return t;
+}
+
+void UpdateData(const SchoolYear& Y)
+{
+	fstream file, file1;
+	file.open(Y.DSSinhVien, ios::in | ios::out);
+	file1.open("temp.txt", ios::out);
+	if (file.is_open())
+	{
+		SinhVien sv;
+		while (!file.eof())
+		{
+			getline(file, sv.Class);
+			getline(file, sv.ID);
+			getline(file, sv.pass);
+			getline(file, sv.FirstName);
+			getline(file, sv.LastName);
+			getline(file, sv.Gender);
+			getline(file, sv.DateOfBirth);
+			getline(file, sv.SocialID);
+			file >> sv.begin[0] >> sv.begin[1] >> sv.begin[2];
+			file >> sv.YearStudent;
+			file >> sv.Semester;
+			file.ignore();
+			if (checkSameData(Y, sv))
+			{
+				file1 << sv.Class << endl;
+				file1 << sv.ID << endl;
+				file1 << sv.pass << endl;
+				file1 << sv.FirstName << endl;
+				file1 << sv.LastName << endl;
+				file1 << sv.Gender << endl;
+				file1 << sv.DateOfBirth << endl;
+				file1 << sv.SocialID << endl;
+				file1 << sv.begin[0] << " " << sv.begin[1] << " " << sv.begin[2] << endl;
+				file1 << sv.YearStudent << endl;
+				file1 << sv.Semester << endl;
+			}
+		}
+		
+	}
+	file.close();
+	file1.close();
+	remove(Y.DSSinhVien.c_str());
+	rename("temp.txt", Y.DSSinhVien.c_str());
+}
+
 void ViewEnrollCourses(ListCourses l, SinhVien& S, int se, string&e, bool&f,  const SchoolYear& Y)
 {
+	f = true;
 	if (l.head == NULL)
 	{
 		e =  "Chua co khoa hoc nao";

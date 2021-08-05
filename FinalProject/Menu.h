@@ -26,3 +26,4 @@ void CleanForm(int x, int y, int width, int length);
 void FormMenu();
 void FormMenu2();
 void FormMenu3();
+void cleanEffectFailed(int x, int y, string c);

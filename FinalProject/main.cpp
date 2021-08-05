@@ -25,10 +25,11 @@ int main()
 	int choice;
 	ListCourses dsmon = ReadListCourses(se, y);
 	ReadFileClass(dsl, y);
-	ReadFileStudent(dsl, y);
 	ReadFileDSGV(dsgv, y);
 	UpdateStudent(y);
 	UpdateCSV(dsl, y);
+	UpdateData(y);
+	ReadFileStudent(dsl, y);
 	Menu(dsl, dsgv, dsmon, sv, gv, choice, se, y, l);
 	system("pause");
 	return 0;
