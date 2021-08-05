@@ -44,9 +44,9 @@ void CreateNewClass(ListLop& ds, const SchoolYear& Y, int& t)
 	ofstream f;
 	f.open(Y.DSLop, ios::app);
 	Lop c;
-	gotoxy(60, 10); cout << "Nhap ma lop: "; getline(cin, c.Ma);
-	gotoxy(60, 11); cout << "Nhap ten lop: "; getline(cin, c.Ten);
-	gotoxy(60, 12); cout << "Nhap nien khoa: "; getline(cin, c.NienKhoa);
+	gotoxy(102, 9); getline(cin, c.Ma);
+	gotoxy(102, 13); getline(cin, c.Ten);
+	gotoxy(102, 17); getline(cin, c.NienKhoa);
 	if (CheckClass(ds, c.Ma, ds.n) == 0)
 	{
 		f << c.Ma << endl;

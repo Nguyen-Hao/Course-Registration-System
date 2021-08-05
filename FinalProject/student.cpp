@@ -7,6 +7,8 @@
 #include "staff.h"
 #include "SchoolYear.h"
 #include <algorithm>
+#include "Menu.h"
+
 void AddTailStudent(ListSV*& ds, SinhVien sv)
 {
 	ListSV* s = new ListSV;
@@ -127,22 +129,32 @@ void EraserEnrollCourses(SinhVien& S, ListCourses l,string &eff, bool& flat, int
 	char check = isTimeIn(t, arrTime[0], arrTime[1]);
 	if (check != 0)
 	{
-		if (check == 1) eff = "Het han thoi gian";
-		else if (check == -1) eff =  "Chua den thoi gian";
-		gotoxy(50, 18);
-		cout << "Thoi gian dang ky hoc phan tu ";
-		cout << arrTime[0].hour << ":";
-		if (arrTime[0].minute < 10) cout << "0";
-		cout << arrTime[0].minute << ":";
-		if (arrTime[0].second < 10) cout << "0";
-		cout << arrTime[0].second;
-		cout << " ngay " << arrTime[0].day << "/" << arrTime[0].month << "/" << arrTime[0].year << " den ";
-		cout << arrTime[1].hour << ":";
-		if (arrTime[1].minute < 10) cout << "0";
-		cout << arrTime[1].minute << ":";
-		if (arrTime[1].second < 10) cout << "0";
-		cout << arrTime[1].second;
-		cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
+		if (check == 1) {
+			eff = "Da qua thoi gian xoa hoc phan";
+			cout << "Thoi gian dang ky da het tu ";
+			cout << arrTime[0].hour << ":";
+			if (arrTime[0].minute < 10) cout << "0";
+			cout << arrTime[0].minute << ":";
+			if (arrTime[0].second < 10) cout << "0";
+			cout << arrTime[0].second;
+			cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
+		}
+		else if (check == -1) {
+			eff = "Chua den thoi gian xoa hoc phan";
+			cout << "Thoi gian dang ky hoc phan bat dau luc ";
+			cout << arrTime[0].hour << ":";
+			if (arrTime[0].minute < 10) cout << "0";
+			cout << arrTime[0].minute << ":";
+			if (arrTime[0].second < 10) cout << "0";
+			cout << arrTime[0].second;
+			cout << " ngay " << arrTime[0].day << "/" << arrTime[0].month << "/" << arrTime[0].year << " den ";
+			cout << arrTime[1].hour << ":";
+			if (arrTime[1].minute < 10) cout << "0";
+			cout << arrTime[1].minute << ":";
+			if (arrTime[1].second < 10) cout << "0";
+			cout << arrTime[1].second;
+			cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
+		}
 		flat = false;
 		return;
 	}
@@ -157,8 +169,11 @@ void EraserEnrollCourses(SinhVien& S, ListCourses l,string &eff, bool& flat, int
 		char id[10];
 		flat = true;
 		int i;
-		cout << "nhap id mon can huy dang ki: ";
+		Frames(45, 32, 30, 1);
+		gotoxy(45, 31);
+		cout << "Nhap ma mon can huy dang ky: ";
 		string ID;
+		gotoxy(47, 33);
 		getline(cin, ID);
 		strcpy_s(id, ID.c_str());
 		if (CheckCourses(l, id) == false)

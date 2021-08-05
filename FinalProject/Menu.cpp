@@ -282,6 +282,14 @@ void CreateSemesterForm()
 	gotoxy(132, 30); cout << "ENTER: Fill Next-Create";
 	TextColor(228);
 }
+void CreateClassForm()
+{
+	TextColor(224);
+	gotoxy(75, 9); cout << "Ma lop: "; Frames(100, 8, 15, 1);
+	gotoxy(75, 13); cout << "Ten lop: "; Frames(100, 12, 30, 1);
+	gotoxy(75, 17); cout << "Khoa: "; Frames(100, 16, 10, 1);
+	TextColor(228);
+}
 void CreateSignInForm()
 {
 	TextColor(224);
@@ -981,11 +989,14 @@ HOME:
 									EffectFailed(80,13,"Chua co khoa hoc nao");
 									}
 									else {
-										system("cls");
 										gotoxy(60, 9);
 										CoursesRegistration(dsmon, sv, se, Y, s, f);
-										if (f) EffectSuccess(55, 30, s);
-										else EffectFailed(55, 30, s);
+										if (f) {
+											EffectSuccess(55, 30, s); 
+										}
+										else {
+											EffectFailed(80, 13, s);
+										}
 									}
 									gotoxy(40, 34);
 									system("pause");
@@ -1010,7 +1021,7 @@ HOME:
 								gotoxy(60, 9);
 								EraserEnrollCourses(sv, dsmon,e, f, se, Y);
 								if (f) EffectSuccess(50, 25, "Xoa thanh cong ");
-								else EffectFailed(50, 25, e);
+								else EffectFailed(80, 13, e);
 								gotoxy(60, 32);
 								system("pause");
 								goto REPEATSV;
@@ -1168,6 +1179,7 @@ HOME:
 											{
 												int z;
 												ClearEffectAgree(70, 10, c);
+												CreateClassForm();
 												CreateNewClass(ds, Y, z);
 												if(z==1)
 												EffectSuccess(90, 28, "Tao thanh cong ");

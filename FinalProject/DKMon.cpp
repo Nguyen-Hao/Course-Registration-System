@@ -4,6 +4,7 @@
 #include"console.h"
 #include "Semester.h"
 #include <string>
+#include "Menu.h"
 
 void Copy(NodeCourse*& p, NodeCourse* p1)
 {
@@ -158,23 +159,33 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 	char check = isTimeIn(t, arrTime[0], arrTime[1]);
 	if (check != 0)
 	{
-		if (check == 1) cout << "Da qua";
-		else if (check == -1) cout << "Chua den";
-		cout << " thoi gian dang ky hoc phan!" << endl;
-		cout << setfill(' ') << setw(70);
-		cout << "Thoi gian dang ky hoc phan tu ";
-		cout << arrTime[0].hour << ":";
-		if (arrTime[0].minute < 10) cout << "0";
-		cout << arrTime[0].minute << ":";
-		if (arrTime[0].second < 10) cout << "0";
-		cout << arrTime[0].second;
-		cout << " ngay " << arrTime[0].day << "/" << arrTime[0].month << "/" << arrTime[0].year << " den ";
-		cout << arrTime[1].hour << ":";
-		if (arrTime[1].minute < 10) cout << "0";
-		cout << arrTime[1].minute << ":";
-		if (arrTime[1].second < 10) cout << "0";
-		cout << arrTime[1].second;
-		cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
+		if (check == 1) {
+			c = "Da qua thoi gian DKHP";
+			cout << "Thoi gian dang ky da het tu ";
+			cout << arrTime[0].hour << ":";
+			if (arrTime[0].minute < 10) cout << "0";
+			cout << arrTime[0].minute << ":";
+			if (arrTime[0].second < 10) cout << "0";
+			cout << arrTime[0].second;
+			cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
+		}
+		else if (check == -1) {
+			c = "Chua den thoi gian DKHP";
+			cout << "Thoi gian dang ky hoc phan bat dau luc ";
+			cout << arrTime[0].hour << ":";
+			if (arrTime[0].minute < 10) cout << "0";
+			cout << arrTime[0].minute << ":";
+			if (arrTime[0].second < 10) cout << "0";
+			cout << arrTime[0].second;
+			cout << " ngay " << arrTime[0].day << "/" << arrTime[0].month << "/" << arrTime[0].year << " den ";
+			cout << arrTime[1].hour << ":";
+			if (arrTime[1].minute < 10) cout << "0";
+			cout << arrTime[1].minute << ":";
+			if (arrTime[1].second < 10) cout << "0";
+			cout << arrTime[1].second;
+			cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
+		}
+		f = false;
 		return;
 	}
 	ListCourses temp = courseOfStudent(l, S, se, Y);
@@ -182,6 +193,7 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 	f = true;	
 	string s;
 	bool fl;
+	system("cls");
 	ViewListOfCourse(l, se, s, fl, Y);
 	if (countNodeCourses(temp) == 5) {
 		c = "Da dang ki du 5 mon";
@@ -190,8 +202,11 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 	else
 	{
 		char id[10]="\0";
-		cout << "nhap id mon can dang ki: ";
+		Frames(45, 32, 30, 1);
+		gotoxy(45, 31);
+		cout << "Nhap ma mon dang ky: ";
 		string ID;
+		gotoxy(47, 33);
 		getline(cin, ID);
 		strcpy_s(id , ID.c_str());
 		NodeCourse* ptr = FindCourses(l, id);
