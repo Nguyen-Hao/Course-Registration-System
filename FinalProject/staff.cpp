@@ -229,6 +229,7 @@ int Checkcourses(ListCourses dsl, string a)
 }
 void UpdateCSV(ListLop& ds, const SchoolYear& Y)
 {
+	Time t = getTime();
 	ofstream file;
 	file.open(Y.DSSinhVien, ios_base::app);
 	int ViTriLop;
@@ -262,17 +263,18 @@ void UpdateCSV(ListLop& ds, const SchoolYear& Y)
 			sv.pass = "123456";
 			sv.Semester = 1;
 			sv.YearStudent = 1;
-			sv.begin[0] = 5; sv.begin[1] = 10; sv.begin[2] = 2020; // gan co dinh
-			bool flat = true;
-			for (k = ds.l[i].pHead; k != NULL; k = k->pNext)
-				if (k->info.ID == sv.ID && k->info.FirstName == sv.FirstName && k->info.LastName == sv.LastName && k->info.SocialID == sv.SocialID && k->info.ID == sv.ID && k->info.Gender == sv.Gender)
-					flat = false;
-			if (flat == true) AddTailStudent(ds.l[i].pHead, sv);
+			sv.begin[0] = t.day; sv.begin[1] = t.month; sv.begin[2] = t.year; // gan co dinh
+			if (!CheckStudent(Y, sv.ID))
+			{
+				file << sv.Class << endl;
+				file << sv.ID << endl << sv.pass << endl;
+				file << sv.FirstName << endl << sv.LastName << endl << sv.Gender << endl << sv.DateOfBirth << endl << sv.SocialID << endl;
+				file << sv.begin[0] << " " << sv.begin[1] << " " << sv.begin[2] << " " << endl << sv.YearStudent << endl << sv.Semester << endl;
+			}
 		}
 		f1.close();
 	}
 	file.close();
-	WriteFileStudent(ds, Y);
 }
 
 void UpdateStudent(const SchoolYear& Y)

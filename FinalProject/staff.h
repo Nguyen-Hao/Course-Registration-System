@@ -20,3 +20,4 @@ DiemMonHoc ReadfileCSVScore(const SinhVien& S, const SchoolYear& Y, int se, stri
 void PrintFileCSV(ListLop dsl, SchoolYear Y);
 int CountNodeStudent(ListSV* phead);
 int CountNodePage(int i);
+bool CheckStudent(const SchoolYear& Y, const string& a);

@@ -9,3 +9,5 @@ void ReadFileStudent(ListLop& dsl, const SchoolYear& Y);
 void viewScoreBoardOfStudent(const SinhVien& S, ListCourses l, string& e, bool& f, int se, const SchoolYear& Y);
 void ViewEnrollCourses(ListCourses l, SinhVien& S, int se, string& e, bool &f, const SchoolYear& Y);
 void EraserEnrollCourses(SinhVien& S, ListCourses l, string& eff, bool& flat, int se, const SchoolYear& Y);
+bool checkSameData(const SchoolYear& Y, const SinhVien& S);
+void UpdateData(const SchoolYear& Y);

@@ -100,9 +100,6 @@
     <Text Include="DSLop2021_2022.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="DSSinhVien2021_2022.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="ListCourses2021_2022.txt">
       <Filter>Resource Files</Filter>
     </Text>

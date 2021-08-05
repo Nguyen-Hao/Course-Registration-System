@@ -913,6 +913,7 @@ HOME:
 	string ef;
 	bool fl;
 	choice = SignIn(ds, dsgv, sv, gv);
+	system("pause");
 	int vitri = 0,n,i,k,j;
 	semester s;
 	switch (choice)
