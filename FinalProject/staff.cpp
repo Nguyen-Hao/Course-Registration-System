@@ -97,31 +97,41 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 	string c;
 	string Pass = "123456";
 	SinhVien sv;
-	gotoxy(70, 8);
+	Frames(105, 5, 50, 1);
+	gotoxy(70, 6);
 	cout << "Nhap ID lop: ";
-	getline(cin, c);
+	gotoxy(108, 6); getline(cin, c);
 	sv.Class = c;
 	int STTLop, i;
 	int KT = CheckClass(dsl, c, dsl.n);
 	if (KT != 0)
 	{
+		Frames(105, 8, 50, 1);
 		gotoxy(70, 9);
 		cout << "Ngay nhap hoc: (dd mm yyyy)";
+		gotoxy(108, 9);
 		for (i = 0; i < 3; ++i) cin >> sv.begin[i];
+		Frames(105, 11, 50, 1);
 		cin.ignore();
-		gotoxy(70, 10);
-		cout << "Nhap ID sinh vien: ";
-		getline(cin, sv.ID);
-		gotoxy(70, 11);
-		cout << "Nhap ho: "; getline(cin, sv.FirstName);
 		gotoxy(70, 12);
-		cout << "Nhap ten: "; getline(cin, sv.LastName);
-		gotoxy(70, 13);
-		cout << "Nhap gioi tinh: "; getline(cin, sv.Gender);
-		gotoxy(70, 14);
-		cout << "Nhap ngay sinh (dd/mm/yyyy): "; getline(cin, sv.DateOfBirth);
+		cout << "Nhap ID sinh vien: ";
+		gotoxy(108, 12);
+		getline(cin, sv.ID);
+		Frames(105, 14, 50, 1);
 		gotoxy(70, 15);
-		cout << "Nhap Social ID: "; getline(cin, sv.SocialID);
+		cout << "Nhap ho: "; gotoxy(108, 15); getline(cin, sv.FirstName);
+		Frames(105, 17, 50, 1);
+		gotoxy(70, 18);
+		cout << "Nhap ten: "; gotoxy(108, 18); getline(cin, sv.LastName);
+		Frames(105, 20, 50, 1);
+		gotoxy(70, 21);
+		cout << "Nhap gioi tinh (Nam / Nu): "; gotoxy(108, 21); getline(cin, sv.Gender);
+		Frames(105, 23, 50, 1);
+		gotoxy(70, 24);
+		cout << "Nhap ngay sinh (dd/mm/yyyy): "; gotoxy(108, 24); getline(cin, sv.DateOfBirth);
+		Frames(105, 23, 50, 1);
+		gotoxy(70, 24);
+		cout << "Nhap Social ID: "; gotoxy(108, 24); getline(cin, sv.SocialID);
 		if (KT == -1)
 			STTLop = 0;
 		else STTLop = KT;
@@ -161,12 +171,11 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 			file << sv.Semester << endl;
 			file.close();
 		}
-		else cout << "ID Sinh vien da ton tai!" << endl;
+		else EffectFailed(70, 26, "ID Sinh vien da ton tai!");
 	}
 	else
 	{
-		cout << "Khong tim thay lop " << c << endl;
-		cout << "Vui long nhap lai..." << endl;
+		EffectFailed(70, 26, "Khong tim thay lop. Vui long nhap lai...");
 	}
 }
 void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
@@ -176,7 +185,7 @@ void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
 	file.open(FILEDSGV);
 	if (file.fail())
 	{
-		cout << "Failed to open this file!" << endl;
+		EffectFailed(70, 26, "Failed to open this file!");
 		exit(0);
 	}
 	GiaoVien gv;
@@ -201,7 +210,7 @@ void writeFileTeacher(ListGV dsgv, const SchoolYear& Y)
 	file.open(FILEDSGV);
 	if (file.fail())
 	{
-		cout << "Failed to open this file!" << endl;
+		EffectFailed(70, 26, "Failed to open this file!");
 		exit(0);
 	}
 	NodeGV* p = dsgv.pHead;

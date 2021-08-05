@@ -271,6 +271,15 @@ void EffectFailed(int x, int y, string c)
 	gotoxy(x + 2, y + 1); cout << c;
 	TextColor(224);
 }
+void cleanEffectFailed(int x, int y, string c)
+{
+	TextColor(224);
+	for (int i = 0; i < 4; i++)
+	{
+		gotoxy(x, y + i);
+		for (int j = 0; j < c.size() + 4; j++) cout << " ";
+	}
+}
 void CreateSemesterForm()
 {
 	TextColor(224);
