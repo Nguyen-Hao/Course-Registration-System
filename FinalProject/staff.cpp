@@ -7,6 +7,7 @@
 #include "Semester.h"
 #include "DKMon.h"
 #include "SchoolYear.h"
+#include "Menu.h"
 
 ListSV* Create_Node_Sv(SinhVien sv)
 {
@@ -386,12 +387,13 @@ int ViewListOfClass(ListLop& ds)
 		STT = 15 * (page - 1);
 		count = 0;
 		system("cls");
+		FormMenu2();
 		gotoxy(20, 4); cout << "+---------------------------------------------------------------------------------+" << endl;
 		gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << " STT " << char(124) << "  " << setw(15) << left << "   Ma lop   " << char(124) << "  " << setw(40) << left << "                  Ten lop " << char(124) << "  " << setw(10) << left << "Nam hoc" << char(124) << endl;
 		gotoxy(20, 6); cout << "+---------------------------------------------------------------------------------+" << endl;
 		for (i = 0; i < 15; ++i)
 		{
-			if (STT + i > ds.n) break;
+			if (STT + i >= ds.n) break;
 			if (sizeof(ds.l[i + STT].Ten) == 0) break;
 			count = i + 1;
 			gotoxy(20, 7 + i);
@@ -450,11 +452,13 @@ int CountNodePage(int i)
 }
 void ViewListOfStudentInClass(ListLop& ds)
 {
-	gotoxy(20, 30);
+	Frames(45, 32, 30, 1);
+	gotoxy(45, 31);
 	cout << "Nhap ma lop: ";
 	int ViTriLop;
 	string Malop;
 	int STT = 1;
+	gotoxy(48, 33);
 	getline(cin, Malop);
 	int KT = CheckClass(ds, Malop, ds.n);
 	if (KT == 0) {
@@ -489,6 +493,7 @@ void ViewListOfStudentInClass(ListLop& ds)
 		}
 		count = 0;
 		system("cls");
+		FormMenu3();
 		gotoxy(35, 2); cout << "---------------------------- " << ds.l[ViTriLop].Ma << " ----------------------------"; // Loi in ra man hinh mat chu
 		gotoxy(20, 4); cout << "+--------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(20, 5); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
@@ -535,11 +540,14 @@ void ViewListOfStudentInClass(ListLop& ds)
 void ViewListOfStudentIncourses(ListCourses ds, int se, const SchoolYear& Y)
 {
 	ViewListOfCourse(ds, se, Y);
+	Frames(45, 32, 30, 1);
+	gotoxy(45, 31);
 	cout << "Nhap ma mon: ";
 	int n = countNodeCourses(ds);
 	int ViTrimon;
 	string Mamon;
 	int STT = 1;
+	gotoxy(48, 33);
 	getline(cin, Mamon);
 	int KT = Checkcourses(ds, Mamon);
 	if (KT == 0) {
@@ -579,6 +587,7 @@ void ViewListOfStudentIncourses(ListCourses ds, int se, const SchoolYear& Y)
 		}
 		count = 0;
 		system("cls");
+		FormMenu3();
 		gotoxy(10, 3); cout << "---------------------------- " << p->course.Name << " ----------------------------";
 		gotoxy(5, 5); cout << "+--------------------------------=-----------------------------------------------------------------------------+" << endl;
 		gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "   MSSV   " << char(124) << "  " << setw(20) << left << " Ho " << char(124) << "  " << setw(20) << " Ten" << char(124) << "  " << setw(10) << left << "Gioi tinh" << char(124) << "  " << setw(10) << "Ngay sinh" << char(124) << "  " << setw(10) << left << "CMND/CCCD" << endl;
@@ -664,7 +673,10 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, int se, const SchoolYear& Y)
 {
 	int t = YearPresent();
 	string s, word, mamon;
+	Frames(45, 32, 30, 1);
+	gotoxy(45, 31);
 	cout << "Nhap ma mon: ";
+	gotoxy(48, 33);
 	getline(cin, mamon);
 	string link = "ScoreBoard" + to_string(t) + "_" + to_string(t + 1) + "_" + to_string(se) + "_" + mamon + ".csv";
 	ifstream fin;
@@ -712,6 +724,7 @@ void ViewScoreBoardOfACourse(ListCourses dsmon, int se, const SchoolYear& Y)
 		}
 		count = 0;
 		system("cls");
+		FormMenu3();
 		gotoxy(10, 3); cout << "\t\t---------------------------- " << p->course.Name << " ----------------------------";
 		gotoxy(5, 5); cout << "+-------------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(5, 6); cout << char(124) << "  " << setw(5) << left << "STT" << char(124) << "  " << setw(15) << left << "     MSSV" << char(124) << "  " << setw(20) << left << "         Ho" << char(124) << "  " << setw(20) << "        Ten" << char(124) << setw(10) << "  Total" << char(124) << setw(10) << "  Final" << char(124) << setw(10) << "  Midterm" << char(124) << setw(10) << "  Other" << char(124) << endl;
@@ -870,7 +883,10 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 {
 	int t = YearPresent();
 	string malop;
+	Frames(45, 32, 30, 1);
+	gotoxy(45, 31);
 	cout << "Nhap ma lop: ";
+	gotoxy(48, 33);
 	getline(cin, malop);
 	system("cls");
 	ListCourses ds = ReadListCourses(se, Y);
@@ -904,6 +920,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 		int count = 0;
 		int i = 0;
 		system("cls");
+		FormMenu3();
 		gotoxy(35, 3); cout << "\t\t---------------------------- " << malop << " ----------------------------";
 		gotoxy(20, 4); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(20, 5); cout << char(124) << "  " << setw(4) << left << "STT" << char(124) << "  " << setw(14) << left << "     MSSV" << char(124) << "  " << setw(19) << left << "         Ho" << char(124) << "  " << setw(19) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;

@@ -7,6 +7,7 @@
 #include "Semester.h"
 #include "staff.h"
 #include "DKMon.h"
+#include "Menu.h"
 void initListCourses(ListCourses& list)
 {
 	list.head = NULL;
@@ -164,6 +165,7 @@ int ViewListOfCourse(ListCourses temp, int se, const SchoolYear& Y)
 			}
 			count = 0;
 			system("cls");
+			FormMenu2();
 			gotoxy(20, 3); cout << "+------------------------------------------------------------------------------------------------------------------------------------+" << endl;
 			gotoxy(20, 4); cout << char(124) << setw(13) << left << "  Ma mon hoc" << char(124) << setw(31) << left << "       Ten mon hoc" << char(124) << setw(26) << "     Ten GV" << char(124) << setw(9) << left << "   So TC" << char(124) << setw(16) << "  Da dang ky" << char(124) << "  " << setw(20) << left << "     Lich hoc";
 			gotoxy(153, 4); cout << char(124) << endl;

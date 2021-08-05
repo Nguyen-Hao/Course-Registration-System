@@ -48,6 +48,15 @@ void Frames(int x, int y, int width, int length)
 	gotoxy(x + width, y + length + 1); cout << (char)217;
 	gotoxy(x, y + length + 1); for (i = 0; i < width; ++i) cout << char(196);
 }
+void CleanForm(int x, int y, int width, int length)
+{
+	for (int i = 0; i <= length + 1; i++)
+	{
+		gotoxy(x - 1, y + i);
+		for (int j = 0; j <= width + 1; j++)
+			cout << " ";
+	}
+}
 void Team()
 {
 	TextColor(228);
@@ -693,6 +702,29 @@ void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string newpass, const Sch
 	}
 	writeFileTeacher(dsgv, Y);
 }
+void FormMenu()
+{
+	Frames(138, 29, 18, 4);
+	gotoxy(140, 30); cout << "ESC : QUAY LAI";
+	gotoxy(140, 31); cout << "ENTER : CHON";
+	gotoxy(140, 32); cout << char(30) << ": LEN";
+	gotoxy(140, 33); cout << char(31) << ": XUONG";
+}
+void FormMenu2()
+{
+	Frames(128, 29, 25, 4);
+	gotoxy(130, 30); cout << "ESC : QUAY LAI";
+	gotoxy(130, 31); cout << "ENTER : NHAP DU LIEU";
+	gotoxy(130, 32); cout << char(17) << ": SANG TRAI";
+	gotoxy(130, 33); cout << char(16) << ": SANG PHAI";
+}
+void FormMenu3()
+{
+	Frames(128, 29, 25, 3);
+	gotoxy(130, 30); cout << "ESC : QUAY LAI";
+	gotoxy(130, 31); cout << char(17) << ": SANG TRAI";
+	gotoxy(130, 32); cout << char(16) << ": SANG PHAI";
+}
 void MenuChangePasswordManager(GiaoVien& gv, ListGV& dsgv, const SchoolYear& Y)
 {
 	CreateSignInForm();
@@ -886,6 +918,7 @@ HOME:
 			{
 			REPEATSV:
 				system("cls");
+				FormMenu();
 				transform(sv.FirstName.begin(), sv.FirstName.end(), sv.FirstName.begin(), toupper);
 				transform(sv.LastName.begin(), sv.LastName.end(), sv.LastName.begin(), toupper);
 				gotoxy(4, 6); cout << "Xin chao : " << sv.FirstName << " " << sv.LastName << " - " << sv.Class;
@@ -990,6 +1023,7 @@ HOME:
 			{
 			REPEATGV:
 				system("cls");
+				FormMenu();
 				transform(gv.FirstName.begin(), gv.FirstName.end(), gv.FirstName.begin(), toupper);
 				transform(gv.LastName.begin(), gv.LastName.end(), gv.LastName.begin(), toupper);
 				gotoxy(4, 6); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
@@ -1075,6 +1109,7 @@ HOME:
 											choice = EffectAgree(70, 10, c);
 											if (choice == 1)
 											{
+												CleanForm(138, 29, 18, 4);
 												ClearEffectAgree(70, 10, c);
 												CreateSemesterForm();
 												bool f = CreateSemester(s, Y, l);
@@ -1143,7 +1178,7 @@ HOME:
 										case 1:
 												system("cls");
 												choice = ViewListOfClass(ds);
-												
+												if(choice == 1)
 													ViewListOfStudentInClass(ds);
 												gotoxy(30, 1); system("pause");
 												goto REPEATGV;
