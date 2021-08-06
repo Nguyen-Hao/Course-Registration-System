@@ -5,6 +5,7 @@
 #include "Semester.h"
 #include <string>
 #include "Menu.h"
+#include"DKMon.h"
 
 void Copy(NodeCourse*& p, NodeCourse* p1)
 {
@@ -213,89 +214,96 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 		gotoxy(47, 33);
 		getline(cin, ID);
 		strcpy_s(id , ID.c_str());
-		NodeCourse* ptr = FindCourses(l, id);
-		if (CheckCourses(l, id) == false) {
-			c = "Khong ton tai ma mon hoc";
-			f = false;
-		}
-		else
+		if (checkNumber(Y, ID))
 		{
-			if (CheckSameTime(temp, ptr) == true) {
-				c = "Trung lich hoc";
+			NodeCourse* ptr = FindCourses(l, id);
+			if (CheckCourses(l, id) == false) {
+				c = "Khong ton tai ma mon hoc";
 				f = false;
 			}
 			else
 			{
-				SinhVien s;
-				fstream file, file1;
-				string link1=to_string(se) + Y.StudentOfSubject;
-				file.open(link1, ios::in);
-				file1.open("temp.txt", ios::out);
-				char ch[10] = "\0", CH[10] = "\n";
-				file.getline(ch, 10);
-				while (!file.eof())
-				{
-					file1 << ch << endl;
-					if (strcmp(ch, id) == 0)
-					{
-						file1 << S.Class << endl;
-						file1 << S.ID << endl;
-						file1 << S.pass << endl;
-						file1 << S.FirstName << endl;
-						file1 << S.LastName << endl;
-						file1 << S.Gender << endl;
-						file1 << S.DateOfBirth << endl;
-						file1 << S.SocialID << endl;
-						file1 << S.begin[0] << " " << S.begin[1] << " " << S.begin[2] << endl;
-						file1 << S.YearStudent << endl;
-						file1 << S.Semester << endl;
-					}
-					while (CheckCourses(l, CH) == false)
-					{
-						file.getline(CH, 10);
-
-						if (CheckCourses(l, CH) == true || strcmp(CH, "\0") == 0) break;
-						else
-						{
-							s.Class = CH;
-							getline(file, s.ID);
-							getline(file, s.pass);
-							getline(file, s.FirstName);
-							getline(file, s.LastName);
-							getline(file, s.Gender);
-							getline(file, s.DateOfBirth);
-							getline(file, s.SocialID);
-							for (int i = 0; i < 3; i++)
-							{
-								file >> s.begin[i];
-							}
-							file.ignore();
-							file >> s.YearStudent;
-							file.ignore();
-							file >> s.Semester;
-							file.ignore();
-							file1 << s.Class << endl;
-							file1 << s.ID << endl;
-							file1 << s.pass << endl;
-							file1 << s.FirstName << endl;
-							file1 << s.LastName << endl;
-							file1 << s.Gender << endl;
-							file1 << s.DateOfBirth << endl;
-							file1 << s.SocialID << endl;
-							file1 << s.begin[0] << " " << s.begin[1] << " " << s.begin[2] << endl;
-							file1 << s.YearStudent << endl;
-							file1 << s.Semester << endl;
-						}
-					}
-					strcpy_s(ch, 10, CH);
-					strcpy_s(CH, 10, "\n");
+				if (CheckSameTime(temp, ptr) == true) {
+					c = "Trung lich hoc";
+					f = false;
 				}
-				file.close();
-				file1.close();
-				remove(link1.c_str());
-				rename("temp.txt", link1.c_str());
-				c = "Dang ki thanh cong";
+				else
+				{
+					SinhVien s;
+					fstream file, file1;
+					string link1 = to_string(se) + Y.StudentOfSubject;
+					file.open(link1, ios::in);
+					file1.open("temp.txt", ios::out);
+					char ch[10] = "\0", CH[10] = "\n";
+					file.getline(ch, 10);
+					while (!file.eof())
+					{
+						file1 << ch << endl;
+						if (strcmp(ch, id) == 0)
+						{
+							file1 << S.Class << endl;
+							file1 << S.ID << endl;
+							file1 << S.pass << endl;
+							file1 << S.FirstName << endl;
+							file1 << S.LastName << endl;
+							file1 << S.Gender << endl;
+							file1 << S.DateOfBirth << endl;
+							file1 << S.SocialID << endl;
+							file1 << S.begin[0] << " " << S.begin[1] << " " << S.begin[2] << endl;
+							file1 << S.YearStudent << endl;
+							file1 << S.Semester << endl;
+						}
+						while (CheckCourses(l, CH) == false)
+						{
+							file.getline(CH, 10);
+							if (CheckCourses(l, CH) == true || strcmp(CH, "\0") == 0) break;
+							else
+							{
+								s.Class = CH;
+								getline(file, s.ID);
+								getline(file, s.pass);
+								getline(file, s.FirstName);
+								getline(file, s.LastName);
+								getline(file, s.Gender);
+								getline(file, s.DateOfBirth);
+								getline(file, s.SocialID);
+								for (int i = 0; i < 3; i++)
+								{
+									file >> s.begin[i];
+								}
+								file.ignore();
+								file >> s.YearStudent;
+								file.ignore();
+								file >> s.Semester;
+								file.ignore();
+								file1 << s.Class << endl;
+								file1 << s.ID << endl;
+								file1 << s.pass << endl;
+								file1 << s.FirstName << endl;
+								file1 << s.LastName << endl;
+								file1 << s.Gender << endl;
+								file1 << s.DateOfBirth << endl;
+								file1 << s.SocialID << endl;
+								file1 << s.begin[0] << " " << s.begin[1] << " " << s.begin[2] << endl;
+								file1 << s.YearStudent << endl;
+								file1 << s.Semester << endl;
+							}
+						}
+						strcpy_s(ch, 10, CH);
+						strcpy_s(CH, 10, "\n");
+					}
+					file.close();
+					file1.close();
+					remove(link1.c_str());
+					rename("temp.txt", link1.c_str());
+					c = "Dang ki thanh cong";
+				}
 			}
+		}
+		else
+		{
+			f = false;
+			c = "Da du danh sach hoc vien";
 		}
 	}
 }
@@ -338,4 +346,61 @@ int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l)
 	}
 	file.close();
 	return count;
+}
+int NumberMaxStudent(const SchoolYear& Y, const string& S, int se, const ListCourses& l)
+{
+	for (NodeCourse* ptr = l.head; ptr != NULL; ptr = ptr->next)
+	{
+		if (ptr->course.ID == S)
+			return ptr->course.MaxNumOfStudents;
+	}
+	return -1;
+}
+
+bool checkNumber(const SchoolYear& Y, const string& S)
+{
+	listSemester l;
+	readListSemester(l, Y);
+	int se = getSemester(l, Y);
+	ListCourses list = ReadListCourses(se, Y);
+	int num = NumberMaxStudent(Y, S, se, list);
+	fstream file;
+	file.open(to_string(se) + Y.StudentOfSubject, ios::in);
+	int result = 0;
+	if (file.is_open())
+	{
+		string ch, CH;
+		while (!file.eof())
+		{
+			getline(file, ch);
+			if (ch == S)
+			{
+				while (!file.eof())
+				{
+					getline(file, CH);
+					if (CheckCourses(list, CH))
+						break;
+					else {
+						SinhVien sv;
+						sv.Class = CH;
+						getline(file, sv.ID);
+						getline(file, sv.pass);
+						getline(file, sv.FirstName);
+						getline(file, sv.LastName);
+						getline(file, sv.Gender);
+						getline(file, sv.DateOfBirth);
+						getline(file, sv.SocialID);
+						file >> sv.begin[0] >> sv.begin[1] >> sv.begin[2];
+						file >> sv.YearStudent;
+						file >> sv.Semester;
+						file.ignore();
+						result++;
+					}
+				}
+			}
+		}
+	}
+	if (result < num)
+		return true;
+	else return false;
 }

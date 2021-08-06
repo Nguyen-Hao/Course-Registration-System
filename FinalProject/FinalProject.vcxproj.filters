@@ -112,6 +112,7 @@
     <Text Include="TimeDKHP2021_2022.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="DSSinhVien2021_2022.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Filecsv.csv">

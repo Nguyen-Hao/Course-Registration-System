@@ -106,10 +106,11 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 	int KT = CheckClass(dsl, c, dsl.n);
 	if (KT != 0)
 	{
-		gotoxy(70, 9); cout << "Ngay nhap hoc "; Frames(105, 8, 10, 1); gotoxy(116, 9); cout << "/"; Frames(118, 8, 10, 1); gotoxy(129, 9); cout << "/"; Frames(131, 8, 10, 1);
-		gotoxy(107, 9); cin >> sv.begin[0];
-		gotoxy(120, 9); cin >> sv.begin[1];
-		gotoxy(133, 9); cin >> sv.begin[2];
+		Frames(105, 8, 50, 1);
+		gotoxy(70, 9);
+		cout << "Ngay nhap hoc: (dd mm yyyy)";
+		gotoxy(108, 9);
+		for (i = 0; i < 3; ++i) cin >> sv.begin[i];
 		Frames(105, 11, 50, 1);
 		cin.ignore();
 		gotoxy(70, 12);
@@ -127,7 +128,7 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 		cout << "Nhap gioi tinh (Nam / Nu): "; gotoxy(108, 21); getline(cin, sv.Gender);
 		Frames(105, 23, 50, 1);
 		gotoxy(70, 24);
-		cout << "Nhap ngay sinh (dd/mm/yyyy): "; gotoxy(108, 24); getline(cin, sv.DateOfBirth);	
+		cout << "Nhap ngay sinh (dd/mm/yyyy): "; gotoxy(108, 24); getline(cin, sv.DateOfBirth);
 		Frames(105, 23, 50, 1);
 		gotoxy(70, 24);
 		cout << "Nhap Social ID: "; gotoxy(108, 24); getline(cin, sv.SocialID);
@@ -867,7 +868,7 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	}
 	if (!check)
 	{
-		EffectFailed(50, 24, "Khong ton tai sinh vien nay trong khoa hoc!");
+		EffectFailed(80, 13, "Khong ton tai sinh vien nay trong khoa hoc!");
 		return;
 	}
 	ifstream file;
@@ -879,7 +880,7 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	file.open(link);
 	if (!file.is_open())
 	{
-		EffectFailed(50, 24, "Bang diem khoa hoc nay chua duoc nhap!");
+		EffectFailed(80, 13, "Bang diem khoa hoc nay chua duoc nhap!");
 		return;
 	}
 	file1.open("tam.csv");
@@ -915,7 +916,7 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 		file1 << count << "," << k->info.ID << "," << k->info.FirstName << ","
 			<< k->info.LastName << "," << a.Total << "," << a.Final << "," << a.MidTerm << "," << a.Other << endl;
 	}
-	EffectSuccess(50, 24, "Da cap nhat");
+	EffectSuccess(90, 28, "Da cap nhat");
 	file.close();
 	file1.close();
 	remove(link.c_str());

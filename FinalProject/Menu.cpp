@@ -516,7 +516,7 @@ ESCAPE:
 			}
 			if (Login == true)
 			{
-				EffectSuccess(60, 28, "Dang nhap thanh cong ");
+				EffectSuccess(54, 28, "Dang nhap thanh cong ");
 				Sleep(2000);
 				break;
 			}

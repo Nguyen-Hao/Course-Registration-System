@@ -11,3 +11,5 @@ bool CheckSameTime(const ListCourses& l, NodeCourse* ptr);
 void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear& Y, string& c, bool& f);
 int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l);
 Time* ReadTimeRegistration(const SchoolYear& Y);
+bool checkNumber(const SchoolYear& Y, const string& S);
+int NumberMaxStudent(const SchoolYear& Y, const string& S, int se, const ListCourses& l);

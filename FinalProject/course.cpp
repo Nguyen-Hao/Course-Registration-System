@@ -299,121 +299,77 @@ void updateCourse(ListCourses l, int se, const SchoolYear& Y)
 		if (a.ID==b.ID)
 		{
 			system("cls");
-			Frames(40, 1, 70, 3);
-			gotoxy(55, 3); cout << "CAP NHAP THONG TIN KHOA HOC " << b.ID;
-			Frames(40, 7, 25, 1);
-			Frames(70, 7, 40, 1);
-			Frames(40, 11, 70, 1);
-			Frames(40, 15, 25, 1);
-			Frames(40, 20, 25, 1);
-			Frames(70, 20, 40, 1);
-			Frames(40, 26, 25, 1);
-			Frames(70, 26, 40, 1);
-			Frames(70, 15, 40, 1);
-			gotoxy(40, 6);
+			gotoxy(70, 3);
 			cout << "Nhap ID khoa hoc: ";
-			gotoxy(70, 6);
-			cout << "Nhap ten khoa hoc: ";
-			gotoxy(40, 10);
-			cout << "Nhap ten giao vien: ";
-			gotoxy(40, 14);
-			cout << "Nhap so tin chi: ";
-			gotoxy(70, 14);
-			cout << "Nhap so luong sinh vien toi da: ";
-			gotoxy(60, 18);
-			cout << "Nhap buoi hoc thu 1: ";
-			gotoxy(40, 19);
-			cout << "Thu (2-8): ";
-			gotoxy(70, 19);
-			cout << "Nhap ca hoc(1-4): ";
-			gotoxy(60, 24);
-			cout << "Nhap buoi hoc thu 2: ";
-			gotoxy(40, 25);
-			cout << "Thu (2-8): ";
-			gotoxy(70, 25);
-			cout << "Nhap ca hoc(1-4): ";
-			gotoxy(43, 8);
+			Frames(70, 4, 25, 1);
+			gotoxy(73, 5);
 			getline(cin, a.ID);
-			gotoxy(73, 8);
+			gotoxy(100, 3);
+			cout << "Nhap ten khoa hoc: ";
+			Frames(100, 4, 40, 1);
+			gotoxy(103, 5);
 			getline(cin, a.Name);
-			gotoxy(45, 12);
+			gotoxy(70, 7);
+			cout << "Nhap ten giao vien: ";
+			Frames(70, 8, 70, 1);
+			gotoxy(75, 9);
 			getline(cin, a.TeacherName);
+			gotoxy(70, 11);
+			cout << "Nhap so tin chi: ";
+			Frames(70, 12, 25, 1);
+			gotoxy(75, 13);
+			cin >> a.NumOfCredits;
+			gotoxy(100, 11);
+			cout << "Nhap so luong sinh vien toi da: ";
+			Frames(100, 12, 40, 1);
+			gotoxy(105, 13);
+			cin >> a.MaxNumOfStudents;
+			gotoxy(90, 15);
+			cout << "Nhap buoi hoc thu 1: ";
 			do
 			{
-				CleanForm(40, 15, 25, 1);
-				cleanEffectFailed(60, 31, "       Nhap sai du lieu!      ");
-				Frames(40, 15, 25, 1);
-				gotoxy(45, 16);
-				cin >> a.NumOfCredits;
-				if (cin.fail())
-				{
-					EffectFailed(60, 31, "       Nhap sai du lieu!      ");
-					gotoxy(60, 34);
-					system("pause");
-					cin.clear();
-					cin.ignore();
-				}
-				else
-					break;
-			}while (true);
-			do
-			{
-				CleanForm(70, 15, 40, 1);
-				cleanEffectFailed(60, 31, "       Nhap sai du lieu!      ");
-				Frames(70, 15, 40, 1);
-				gotoxy(75, 16);
-				cin >> a.MaxNumOfStudents;
-				if (cin.fail())
-				{
-					EffectFailed(60, 31, "       Nhap sai du lieu!      ");
-					gotoxy(60, 34);
-					system("pause");
-					cin.clear();
-					cin.ignore();
-				}
-				else
-					break;
-			} while (true);
-				
-			do
-			{
-				CleanForm(40, 20, 25, 1);
-				CleanForm(70, 20, 40, 1);
-				cleanEffectFailed(60, 31, "       Nhap sai du lieu!      ");
-				Frames(40, 20, 25, 1);
-				Frames(70, 20, 40, 1);
-				gotoxy(45, 21);
+				CleanForm(70, 17, 25, 1);
+				CleanForm(100, 17, 40, 1);
+				cleanEffectFailed(75, 28, " Nhap sai du lieu!");
+				gotoxy(70, 16);
+				cout << "Thu (2-8): ";
+				Frames(70, 17, 25, 1);
+				gotoxy(75, 18);
 				cin >> a.Session1.thu;
-				gotoxy(73, 21);
+				gotoxy(100, 16);
+				cout << "Nhap ca hoc(1-4): ";
+				Frames(100, 17, 40, 1);
+				gotoxy(103, 18);
 				cin >> a.Session1.shift;
 				if (a.Session1.thu < 2 || a.Session1.thu > 8 || a.Session1.shift < 1 || a.Session1.shift > 4)
 				{
-					EffectFailed(60, 31, "       Nhap sai du lieu!      ");
-					gotoxy(60, 34);
+					EffectFailed(75, 28, " Nhap sai du lieu!");
+					gotoxy(75, 30);
 					system("pause");
-					cin.clear();
-					cin.ignore();
 				}
 			} while (a.Session1.thu < 2 || a.Session1.thu > 8 || a.Session1.shift < 1 || a.Session1.shift > 4);
+			gotoxy(90, 21);
+			cout << "Nhap buoi hoc thu 2: ";
 			do
 			{
-				CleanForm(40, 26, 25, 1);
-				CleanForm(70, 26, 40, 1);
-				cleanEffectFailed(60, 31, "       Nhap sai du lieu!      ");
-				Frames(40, 26, 25, 1);
-				Frames(70, 26, 40, 1);
-				
-				gotoxy(45, 27);
+				CleanForm(70, 23, 25, 1);
+				CleanForm(100, 23, 40, 1);
+				cleanEffectFailed(75, 28, " Nhap sai du lieu!");
+				gotoxy(70, 22);
+				cout << "Thu (2-8): ";
+				Frames(70, 23, 25, 1);
+				gotoxy(75, 24);
 				cin >> a.Session2.thu;
-				gotoxy(73, 27);
+				gotoxy(100, 22);
+				cout << "Nhap ca hoc(1-4): ";
+				Frames(100, 23, 40, 1);
+				gotoxy(103, 24);
 				cin >> a.Session2.shift;
 				if (a.Session2.thu < 2 || a.Session2.thu > 8 || a.Session2.shift < 1 || a.Session2.shift > 4)
 				{
-					EffectFailed(60, 31, "       Nhap sai du lieu!      ");
-					gotoxy(60, 34);
+					EffectFailed(75, 28, " Nhap sai du lieu!");
+					gotoxy(75, 30);
 					system("pause");
-					cin.clear();
-					cin.ignore();
 				}
 			} while (a.Session2.thu < 2 || a.Session2.thu > 8 || a.Session2.shift < 1 || a.Session2.shift > 4);
 			file2 << a.Sememster << endl;

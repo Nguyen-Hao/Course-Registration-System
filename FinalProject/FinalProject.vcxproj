@@ -168,6 +168,7 @@
     <Text Include="DsGiaoVien.txt" />
     <Text Include="DSLop.txt" />
     <Text Include="DSLop2021_2022.txt" />
+    <Text Include="DSSinhVien2021_2022.txt" />
     <Text Include="ListCourses2021_2022.txt" />
     <Text Include="ListYearStudent.txt" />
     <Text Include="SchoolYear.txt" />
