@@ -85,7 +85,7 @@ int sumOfDayInMonth(int nMonth, int nYear)
 
 bool isDate(int nDay, int nMonth, int nYear)
 {
-	if (nYear < 0)
+	if (nYear < 1900)
 	{
 		return false;
 	}
@@ -98,8 +98,7 @@ bool isDate(int nDay, int nMonth, int nYear)
 	{
 		return false;
 	}
-
-	return true; 
+	return true;
 }
 
 bool isTime(int h, int m, int s)

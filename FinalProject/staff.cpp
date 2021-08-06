@@ -112,6 +112,10 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 			gotoxy(107, 9); cin >> sv.begin[0];
 			gotoxy(120, 9); cin >> sv.begin[1];
 			gotoxy(133, 9); cin >> sv.begin[2];
+			if (!isDate(sv.begin[0], sv.begin[1], sv.begin[2])) {
+				EffectFailed(70, 26, "Ngay khong hop le");
+				return;
+			}
 			Frames(105, 11, 50, 1);
 			cin.ignore();
 			gotoxy(70, 12);
@@ -130,9 +134,9 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 			Frames(105, 23, 50, 1);
 			gotoxy(70, 24);
 			cout << "Nhap ngay sinh (dd/mm/yyyy): "; gotoxy(108, 24); getline(cin, sv.DateOfBirth);
-			Frames(105, 23, 50, 1);
-			gotoxy(70, 24);
-			cout << "Nhap Social ID: "; gotoxy(108, 24); getline(cin, sv.SocialID);
+			Frames(105, 26, 50, 1);
+			gotoxy(70, 27);
+			cout << "Nhap Social ID: "; gotoxy(108, 27); getline(cin, sv.SocialID);
 			if (KT == -1)
 				STTLop = 0;
 			else STTLop = KT;
@@ -172,11 +176,11 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 				file << sv.Semester << endl;
 				file.close();
 			}
-			else EffectFailed(70, 26, "ID Sinh vien da ton tai!");
+			else EffectFailed(70, 30, "ID Sinh vien da ton tai!");
 		}
 		else
 		{
-			EffectFailed(70, 26, "Khong tim thay lop. Vui long nhap lai...");
+			EffectFailed(70, 30, "Khong tim thay lop. Vui long nhap lai...");
 		}
 	}
 }

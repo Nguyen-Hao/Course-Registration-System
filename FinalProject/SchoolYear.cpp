@@ -79,8 +79,8 @@ void CreateSchoolYear(SchoolYear& S)
 	Sleep(50);
 	CreateSemesterForm();
 	bool t = CreateSemester(r, S, l);
-	if (t == true) EffectSuccess(90, 28, "  Tao thanh cong");
-	else EffectFailed(90, 28, " Tao that bai");
+	if (t == true) EffectSuccess(90, 28, "  Tao ki moi thanh cong");
+	else EffectFailed(90, 28, " Tao ki moi that bai");
 }
 
 

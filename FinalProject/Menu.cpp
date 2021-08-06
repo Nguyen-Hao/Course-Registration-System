@@ -530,12 +530,6 @@ ESCAPE:
 	return choice;
 }
 
-char* TOUPPER(char* c)
-{
-	for (int i = 0; i < strlen(c); ++i)
-		toupper(c[i]);
-	return c;
-}
 void ChangePasswordStudent(SinhVien& sv, ListLop& dsl, string newpass, const SchoolYear& Y)
 {
 	sv.pass = newpass;
@@ -929,12 +923,11 @@ HOME:
 	string ef;
 	bool fl;
 	choice = SignIn(ds, dsgv, sv, gv);
-	//system("pause");
 	int vitri = 0,n,i,k,j;
 	semester s;
 	switch (choice)
 	{
-	case 2:
+		case 2:
 			while (true)
 			{
 			REPEATSV:
@@ -1069,9 +1062,13 @@ HOME:
 				transform(gv.FirstName.begin(), gv.FirstName.end(), gv.FirstName.begin(), toupper);
 				transform(gv.LastName.begin(), gv.LastName.end(), gv.LastName.begin(), toupper);
 				gotoxy(4, 5);
-				se == -1 ?
-					cout << "Ki: " << '_' << " - Nam hoc: " << Y.NameSchoolYear
-					: cout << "Ki: " << se << " - Nam hoc: " << Y.NameSchoolYear;
+				if (se == -1) {
+					cout << "Ki: " << '_' << " - Nam hoc: " << Y.NameSchoolYear << "   ";
+					TextColor(228);
+					if (se == -1) cout << "(Can tao ki moi truoc khi su dung)";
+					TextColor(224);
+				}
+				else cout << "Ki: " << se << " - Nam hoc: " << Y.NameSchoolYear;
 				gotoxy(4, 6); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
 				int n = 0, i, k, j;
 				for (i = 0; i < 6; ++i)
@@ -1146,7 +1143,6 @@ HOME:
 											{
 												CleanForm(70, 10, 50, 8);
 												CreateSchoolYear(Y);
-												EffectSuccess(90, 28, "Tao thanh cong ");
 												Y = SchoolYearPresent("SchoolYear.txt");
 												InitListSemester(l);
 												readListSemester(l, Y);
@@ -1308,13 +1304,12 @@ HOME:
 										goto REPEATGV;
 										break;
 									case 2:
-										createNewCourse(se, Y);
+										createNewCourse(dsmon, se, Y);
 										gotoxy(70, 32); system("pause");
 										goto REPEATGV;
 										break;
 									case 4:
 										deleteCourse(dsmon, se, Y);
-										EffectSuccess(55, 10, "Xoa thanh cong ");
 										gotoxy(70, 32); system("pause");
 										goto REPEATGV;
 										break;
@@ -1332,7 +1327,6 @@ HOME:
 										break;
 									case 5:
 										updateCourse(dsmon, se, Y);
-										EffectSuccess(55, 10, "Cap nhap thanh cong");
 										gotoxy(70, 32); system("pause");
 										goto REPEATGV;
 										break;

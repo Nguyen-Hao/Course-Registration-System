@@ -138,46 +138,46 @@ Nguyen Thuy Ha
 4
 6
 2
-2
+-858993460
 CSC00003
 Tin hoc co so
-Huynh Phan Anh
+Nguyen Bui Chau
 3
-39
-4
+100
+2
 1
 8
-1
-2
+3
+-858993460
 BAA00011
 Anh van 1
-Phan Anh Lam
+Nguyen Thi Linh
 3
-50
-2
-3
-5
+150
+6
 1
-2
+7
+4
+-858993460
 BAA00103
 Chu nghia xa hoi khoa hoc
-Nguyen Van Toan
+Nguyen Tinh Chung
 2
-40
+100
+5
+3
+8
 4
-4
-6
-4
-2
+-858993460
 GEO10001
-Dia Chat Dai Cuong
+Dia chat dai cuong
 Le Bao Thanh
 3
-32
+90
 4
 3
 5
-3
+2
 2
 MTH00002
 Toan cao cap C
