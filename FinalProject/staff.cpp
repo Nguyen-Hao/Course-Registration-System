@@ -225,6 +225,22 @@ void writeFileTeacher(ListGV dsgv, const SchoolYear& Y)
 	file.close();
 }
 
+void writeFileCSVTeacher(ListGV dsgv)
+{
+	ofstream file("DsGiaoVien.csv");
+	file << "STT,ID,Password,First Name,Last Name,Gender,Date of Birth,Social ID" << endl;
+	NodeGV* p = dsgv.pHead;
+	int stt = 0;
+	while (p != NULL)
+	{
+		++stt;
+		file << stt<<","<<p->info.ID << "," << p->info.pass << "," << p->info.FirstName << "," << p->info.LastName << ",";
+		file << p->info.Gender << "," << p->info.DateOfBirth << "," << p->info.SocialID << endl;
+		p = p->pNext;
+	}
+	file.close();
+}
+
 int Checkcourses(ListCourses dsl, string a)
 {
 	NodeCourse* p = dsl.head;
@@ -1000,7 +1016,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 									TotalMark += stoi(s[4]) * p->course.NumOfCredits;
 									flat = true;
 									gotoxy(20, 6 + count + 2 * j);
-									cout << char(124) << " " << setw(5) << left << j + STT + 1 << char(124) << " " << setw(15) << left << s[1] << char(124) << " " << setw(20) << left << s[2] << char(124) << " " << setw(20) << s[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << s[4] << char(124) << endl; gotoxy(20, 7 + ++n + 1);
+									cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << s[1] << char(124) << " " << setw(20) << left << s[2] << char(124) << " " << setw(20) << s[3] << char(124) << setw(30) << p->course.Name << char(124) << setw(10) << s[4] << char(124) << endl; gotoxy(20, 7 + ++n + 1);
 								}
 							}
 						}
@@ -1013,14 +1029,15 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 				TextColor(225);
 				gotoxy(20, 6 + i + 2 * j);
 				i++;
-				cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << (TotalMark / SoChi) * 1.0 << char(124) << endl;
+				cout << char(124) << " " << setw(5) << left << STT+1 << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << (TotalMark / SoChi) * 1.0 << char(124) << endl;
 			}
 			else {
 				gotoxy(20, 6 + i + 2 * j);
 				i++;
-				cout << char(124) << " " << setw(5) << left << "" << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << 0.0 << char(124) << endl;
+				cout << char(124) << " " << setw(5) << left << STT+1 << char(124) << " " << setw(15) << left << k->info.ID << char(124) << " " << setw(20) << left << k->info.FirstName << char(124) << " " << setw(20) << k->info.LastName << char(124) << setw(30) << "GPA ki" << char(124) << setw(10) << 0.0 << char(124) << endl;
 				TextColor(224);
 			}
+			STT += 1;
 			TextColor(224);
 			gotoxy(20, 6 + i + 2 * j); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
 			i++;
@@ -1107,4 +1124,23 @@ void PrintFileCSV(ListLop dsl, SchoolYear Y)
 			file.close();
 		}
 	}
+}
+void updateDSGV()
+{
+	ifstream fileCSV("DsGiaoVien.csv");
+	ofstream fileTXT(FILEDSGV);
+	string s[8];
+	getline(fileCSV, s[0]);
+	while (!fileCSV.eof())
+	{
+		for (int i = 0; i < 7; i++)
+			getline(fileCSV, s[i], ',');
+		getline(fileCSV, s[7]);
+		if (!s[0].empty())
+		{
+			fileTXT << s[1] << endl << s[2] <<endl<< s[3] <<endl<< s[4] << endl<<s[5] <<endl<< s[6]<<endl << s[7] << endl;
+		}
+	}
+	fileCSV.close();
+	fileTXT.close();
 }

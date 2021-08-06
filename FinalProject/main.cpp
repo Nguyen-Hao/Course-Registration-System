@@ -13,6 +13,7 @@ int main()
 	FixConsoleWindow();
 	resizeConsole(1200, 650);
 	TextColor(224);
+	updateDSGV();
 	SchoolYear y = SchoolYearPresent("SchoolYear.txt"); 
 	listSemester l;
 	InitListSemester(l);

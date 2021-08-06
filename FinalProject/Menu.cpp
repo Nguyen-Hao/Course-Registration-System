@@ -717,6 +717,7 @@ void ChangePasswordManager(GiaoVien& gv, ListGV& dsgv, string newpass, const Sch
 		}
 	}
 	writeFileTeacher(dsgv, Y);
+	writeFileCSVTeacher(dsgv);
 }
 void FormMenu()
 {

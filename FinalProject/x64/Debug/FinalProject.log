@@ -1,0 +1,22 @@
+﻿  Menu.cpp
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(88,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(157,30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(157,52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(171,37): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(242,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(257,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(267,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(902,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(953,28): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\Menu.cpp(1079,28): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  SchoolYear.cpp
+  course.cpp
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\course.cpp(186,8): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  main.cpp
+  staff.cpp
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\staff.cpp(105,14): warning C4101: 'i': unreferenced local variable
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\staff.cpp(266,10): warning C4101: 'k': unreferenced local variable
+  student.cpp
+  Generating Code...
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\course.cpp(266): warning C4715: 'ViewListOfCourse': not all control paths return a value
+  FinalProject.vcxproj -> C:\Users\PC\Desktop\FINALPROJECT\x64\Debug\FinalProject.exe

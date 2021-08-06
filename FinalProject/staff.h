@@ -21,3 +21,5 @@ void PrintFileCSV(ListLop dsl, SchoolYear Y);
 int CountNodeStudent(ListSV* phead);
 int CountNodePage(int i);
 bool CheckStudent(const SchoolYear& Y, const string& a);
+void updateDSGV();
+void writeFileCSVTeacher(ListGV dsgv);
