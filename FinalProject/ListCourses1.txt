@@ -1,0 +1,140 @@
+2
+CSC10002
+Ky thuat lap trinh
+Nguyen Le Hoang Dung
+4
+100
+2
+1
+4
+3
+2
+CSC10001
+Nhap mon lap trinh
+Truong Toan Thinh
+4
+133
+2
+1
+5
+3
+2
+MTH00030
+Dai so tuyen tinh
+Le Van Hop
+4
+200
+3
+1
+7
+1
+2
+MTH00007
+Vi tich phan 2B
+Nguyen Vu Huy
+3
+120
+4
+1
+7
+3
+2
+BAA00004
+Phap luat dai cuong
+Tran Thien An
+4
+150
+2
+3
+5
+3
+2
+ENV00001
+Moi truong dai cuong
+Tran Van Chung
+2
+50
+2
+2
+5
+4
+2
+ENV00002
+Khoa hoc trai dat
+Huynh Van Loc
+2
+50
+2
+2
+7
+3
+2
+CHE00003
+Hoa dai cuong 3
+Tran Van Chung
+3
+70
+2
+1
+6
+1
+2
+BIO00001
+Sinh dai cuong 1
+Tran Thi Thu
+3
+66
+3
+3
+6
+3
+2
+BAA00104
+Lich su DCSVN
+Phan Thuy Linh
+2
+177
+3
+3
+6
+1
+2
+GEO00002
+Khoa hoc trai dat
+Phan Van Nam
+2
+106
+3
+2
+5
+2
+2
+BAA00021
+The duc 1
+Nguyen Ha Anh
+2
+40
+3
+4
+6
+4
+2
+OMH00001
+Gioi thieu nganh hai duong hoc
+Pham Van Anh Vu
+3
+144
+2
+3
+4
+3
+2
+BIO00010
+Nhap mon Sinh hoc
+Nguyen Thuy Ha
+2
+95
+2
+4
+6
+2
