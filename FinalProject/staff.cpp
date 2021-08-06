@@ -106,76 +106,78 @@ void AddStudent_Input(ListLop& dsl, const SchoolYear& Y)
 	int KT = CheckClass(dsl, c, dsl.n);
 	if (KT != 0)
 	{
-		Frames(105, 8, 50, 1);
-		gotoxy(70, 9);
-		cout << "Ngay nhap hoc: (dd mm yyyy)";
-		gotoxy(108, 9);
-		for (i = 0; i < 3; ++i) cin >> sv.begin[i];
-		Frames(105, 11, 50, 1);
-		cin.ignore();
-		gotoxy(70, 12);
-		cout << "Nhap ID sinh vien: ";
-		gotoxy(108, 12);
-		getline(cin, sv.ID);
-		Frames(105, 14, 50, 1);
-		gotoxy(70, 15);
-		cout << "Nhap ho: "; gotoxy(108, 15); getline(cin, sv.FirstName);
-		Frames(105, 17, 50, 1);
-		gotoxy(70, 18);
-		cout << "Nhap ten: "; gotoxy(108, 18); getline(cin, sv.LastName);
-		Frames(105, 20, 50, 1);
-		gotoxy(70, 21);
-		cout << "Nhap gioi tinh (Nam / Nu): "; gotoxy(108, 21); getline(cin, sv.Gender);
-		Frames(105, 23, 50, 1);
-		gotoxy(70, 24);
-		cout << "Nhap ngay sinh (dd/mm/yyyy): "; gotoxy(108, 24); getline(cin, sv.DateOfBirth);
-		Frames(105, 23, 50, 1);
-		gotoxy(70, 24);
-		cout << "Nhap Social ID: "; gotoxy(108, 24); getline(cin, sv.SocialID);
-		if (KT == -1)
-			STTLop = 0;
-		else STTLop = KT;
-		sv.YearStudent = 1;
-		sv.Semester = 1;
-		sv.pass = Pass;
-		if (!CheckStudent(Y, sv.ID))
+		if (KT != 0)
 		{
-			AddTailStudent(dsl.l[STTLop].pHead, sv);
-			fstream file;
-			file.open(string(dsl.l[STTLop].Ma) + "_" + FILECSV + ".csv", ios::in);
-			string s[7];
-			int STT = 0;
-			getline(file, s[0]);
-			while (!file.eof())
+			gotoxy(70, 9); cout << "Ngay nhap hoc "; Frames(105, 8, 10, 1); gotoxy(116, 9); cout << "/"; Frames(118, 8, 10, 1); gotoxy(129, 9); cout << "/"; Frames(131, 8, 10, 1);
+			gotoxy(107, 9); cin >> sv.begin[0];
+			gotoxy(120, 9); cin >> sv.begin[1];
+			gotoxy(133, 9); cin >> sv.begin[2];
+			Frames(105, 11, 50, 1);
+			cin.ignore();
+			gotoxy(70, 12);
+			cout << "Nhap ID sinh vien: ";
+			gotoxy(108, 12);
+			getline(cin, sv.ID);
+			Frames(105, 14, 50, 1);
+			gotoxy(70, 15);
+			cout << "Nhap ho: "; gotoxy(108, 15); getline(cin, sv.FirstName);
+			Frames(105, 17, 50, 1);
+			gotoxy(70, 18);
+			cout << "Nhap ten: "; gotoxy(108, 18); getline(cin, sv.LastName);
+			Frames(105, 20, 50, 1);
+			gotoxy(70, 21);
+			cout << "Nhap gioi tinh (Nam / Nu): "; gotoxy(108, 21); getline(cin, sv.Gender);
+			Frames(105, 23, 50, 1);
+			gotoxy(70, 24);
+			cout << "Nhap ngay sinh (dd/mm/yyyy): "; gotoxy(108, 24); getline(cin, sv.DateOfBirth);
+			Frames(105, 23, 50, 1);
+			gotoxy(70, 24);
+			cout << "Nhap Social ID: "; gotoxy(108, 24); getline(cin, sv.SocialID);
+			if (KT == -1)
+				STTLop = 0;
+			else STTLop = KT;
+			sv.YearStudent = 1;
+			sv.Semester = 1;
+			sv.pass = Pass;
+			if (!CheckStudent(Y, sv.ID))
 			{
-				for (int i = 0; i < 6; ++i) getline(file, s[i], ',');
-				getline(file, s[6]);
-				if (s[0] != "") STT = stoi(s[0]);
+				AddTailStudent(dsl.l[STTLop].pHead, sv);
+				fstream file;
+				file.open(string(dsl.l[STTLop].Ma) + "_" + FILECSV + ".csv", ios::in);
+				string s[7];
+				int STT = 0;
+				getline(file, s[0]);
+				while (!file.eof())
+				{
+					for (int i = 0; i < 6; ++i) getline(file, s[i], ',');
+					getline(file, s[6]);
+					if (s[0] != "") STT = stoi(s[0]);
+				}
+				file.close();
+				file.open(string(dsl.l[STTLop].Ma) + "_" + FILECSV + ".csv", ios::app);
+				file << STT + 1 << "," << sv.ID << "," << sv.FirstName << "," << sv.LastName << "," << sv.Gender << ","
+					<< sv.DateOfBirth << "," << sv.SocialID << endl;
+				file.close();
+				file.open(Y.DSSinhVien, ios::app);
+				file << sv.Class << endl;
+				file << sv.ID << endl;
+				file << sv.pass << endl;
+				file << sv.FirstName << endl;
+				file << sv.LastName << endl;
+				file << sv.Gender << endl;
+				file << sv.DateOfBirth << endl;
+				file << sv.SocialID << endl;
+				file << sv.begin[0] << " " << sv.begin[1] << " " << sv.begin[2] << endl;
+				file << sv.YearStudent << endl;
+				file << sv.Semester << endl;
+				file.close();
 			}
-			file.close();
-			file.open(string(dsl.l[STTLop].Ma) + "_" + FILECSV + ".csv", ios::app);
-			file << STT + 1 << "," << sv.ID << "," << sv.FirstName << "," << sv.LastName << "," << sv.Gender << ","
-				<< sv.DateOfBirth << "," << sv.SocialID << endl;
-			file.close();
-			file.open(Y.DSSinhVien, ios::app);
-			file << sv.Class << endl;
-			file << sv.ID << endl;
-			file << sv.pass << endl;
-			file << sv.FirstName << endl;
-			file << sv.LastName << endl;
-			file << sv.Gender << endl;
-			file << sv.DateOfBirth << endl;
-			file << sv.SocialID << endl;
-			file << sv.begin[0] << " " << sv.begin[1] << " " << sv.begin[2] << endl;
-			file << sv.YearStudent << endl;
-			file << sv.Semester << endl;
-			file.close();
+			else EffectFailed(70, 26, "ID Sinh vien da ton tai!");
 		}
-		else EffectFailed(70, 26, "ID Sinh vien da ton tai!");
-	}
-	else
-	{
-		EffectFailed(70, 26, "Khong tim thay lop. Vui long nhap lai...");
+		else
+		{
+			EffectFailed(70, 26, "Khong tim thay lop. Vui long nhap lai...");
+		}
 	}
 }
 void ReadFileDSGV(ListGV& dsgv, const SchoolYear& Y)
@@ -868,7 +870,7 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	}
 	if (!check)
 	{
-		EffectFailed(80, 13, "Khong ton tai sinh vien nay trong khoa hoc!");
+		EffectFailed(50, 24, "Khong ton tai sinh vien nay trong khoa hoc!");
 		return;
 	}
 	ifstream file;
@@ -876,11 +878,11 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	int count = 0;
 	string mamon = Mamon;
 	int t = YearPresent();
-	string link = "ScoreBoard" + to_string(t) + "_" + to_string(t+1) + "_" + to_string(se) + "_" + mamon + ".csv";
+	string link = "ScoreBoard" + to_string(t) + "_" + to_string(t + 1) + "_" + to_string(se) + "_" + mamon + ".csv";
 	file.open(link);
 	if (!file.is_open())
 	{
-		EffectFailed(80, 13, "Bang diem khoa hoc nay chua duoc nhap!");
+		EffectFailed(50, 24, "Bang diem khoa hoc nay chua duoc nhap!");
 		return;
 	}
 	file1.open("tam.csv");
@@ -892,8 +894,8 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 	{
 		file >> count;
 		file.get();
-		getline(file, k->info.ID, ',');	
-		getline(file, k->info.FirstName, ',');	
+		getline(file, k->info.ID, ',');
+		getline(file, k->info.FirstName, ',');
 		getline(file, k->info.LastName, ',');
 		file >> a.Total;
 		file.get();
@@ -916,7 +918,7 @@ void updateAStudentResult(ListCourses ds, int se, const SchoolYear& Y)
 		file1 << count << "," << k->info.ID << "," << k->info.FirstName << ","
 			<< k->info.LastName << "," << a.Total << "," << a.Final << "," << a.MidTerm << "," << a.Other << endl;
 	}
-	EffectSuccess(90, 28, "Da cap nhat");
+	EffectSuccess(50, 24, "Da cap nhat");
 	file.close();
 	file1.close();
 	remove(link.c_str());
@@ -943,7 +945,6 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 	if (KT == -1) VitriLop = 0;
 	else
 		VitriLop = KT;
-
 	char key;
 	int vitri = 0, n = 0;
 	int numberofstudent = CountNodeStudent(dsl.l[VitriLop].pHead);
@@ -972,7 +973,6 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 		for (int j = 0; j < 3; j++)
 		{
 			if (k == NULL) break;
-
 			double TotalMark = 0;
 			int SoChi = 0;
 			bool flat = false;
@@ -1010,7 +1010,6 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 			}
 			i = count + 1;
 			if (flat == true) {
-
 				TextColor(225);
 				gotoxy(20, 6 + i + 2 * j);
 				i++;
