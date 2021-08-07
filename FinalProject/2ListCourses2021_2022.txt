@@ -1,12 +1,12 @@
 2
-CSC10002
-Ky thuat lap trinh
+CSC10009
+Ky thuat LAP TRINH
 Nguyen Le Hoang Dung
 4
-100
+150
 2
 1
-4
+5
 3
 2
 CSC10001
@@ -138,17 +138,7 @@ Nguyen Thuy Ha
 4
 6
 2
--858993460
-CSC00003
-Tin hoc co so
-Nguyen Bui Chau
-3
-100
 2
-1
-8
-3
--858993460
 BAA00011
 Anh van 1
 Nguyen Thi Linh
@@ -158,7 +148,7 @@ Nguyen Thi Linh
 1
 7
 4
--858993460
+2
 BAA00103
 Chu nghia xa hoi khoa hoc
 Nguyen Tinh Chung
@@ -168,7 +158,7 @@ Nguyen Tinh Chung
 3
 8
 4
--858993460
+2
 GEO10001
 Dia chat dai cuong
 Le Bao Thanh
@@ -228,3 +218,13 @@ Nguyen Thanh Phong
 1
 5
 3
+2
+ABC123456
+Testing
+Nguyen Thi A
+4
+100
+2
+2
+5
+2

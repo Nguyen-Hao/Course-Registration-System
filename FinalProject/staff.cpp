@@ -692,8 +692,8 @@ void ExportListStudentInCourseToEnterScore(ListCourses dsm, int se, const School
 			a.Final = a.MidTerm = a.Other = a.Total = 0.0;
 			mamon = p->course.ID;
 			link = "ScoreBoard" + to_string(t) + "_" + to_string(t + 1) + "_" + to_string(se) + "_" + mamon + ".csv";
-			fileCheck.open(link);
-			if (!fileCheck.is_open())
+			//fileCheck.open(link);
+			//if (!fileCheck.is_open())
 			{
 				file.open(link);
 				file << "STT,ID,First Name,Last Name,Total Mark, Final Mark, Midterm Mark, Other Mark" << endl;

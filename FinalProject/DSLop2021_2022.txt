@@ -64,3 +64,6 @@ Cong nghe sinh hoc
 21CMT1
 Khoa hoc cong nghe moi truong
 2021
+20CTT6
+Cong nghe thong tin
+2020

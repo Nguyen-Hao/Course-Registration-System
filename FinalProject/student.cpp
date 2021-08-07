@@ -198,17 +198,23 @@ void EraserEnrollCourses(SinhVien& S, ListCourses l,string &eff, bool& flat, int
 {
 	Time t = getTime();
 	Time* arrTime = ReadTimeRegistration(Y);
+	if (arrTime == NULL)
+	{
+		flat = false;
+		eff = "Chua co phien DKHP!";
+		return;
+	}
 	char check = isTimeIn(t, arrTime[0], arrTime[1]);
 	if (check != 0)
 	{
 		if (check == 1) {
 			eff = "Da qua thoi gian xoa hoc phan";
 			cout << "Thoi gian dang ky da het tu ";
-			cout << arrTime[0].hour << ":";
-			if (arrTime[0].minute < 10) cout << "0";
-			cout << arrTime[0].minute << ":";
-			if (arrTime[0].second < 10) cout << "0";
-			cout << arrTime[0].second;
+			cout << arrTime[1].hour << ":";
+			if (arrTime[1].minute < 10) cout << "0";
+			cout << arrTime[1].minute << ":";
+			if (arrTime[1].second < 10) cout << "0";
+			cout << arrTime[1].second;
 			cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
 		}
 		else if (check == -1) {

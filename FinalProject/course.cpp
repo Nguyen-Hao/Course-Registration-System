@@ -15,6 +15,7 @@ void initListCourses(ListCourses& list)
 
 void createNewCourse(ListCourses& l, int semester, const SchoolYear& Y)
 {
+	cin.ignore();
 	fstream file;
 	file.open(to_string(semester) + Y.ListCourses, ios::app);
 	Course a;
@@ -181,7 +182,7 @@ int CountNodePage2(int i)
 		return page - 1;
 	return page;
 }
-int ViewListOfCourse(ListCourses temp, int se, string&e, bool&fl,  const SchoolYear& Y)
+int ViewListOfCourse(ListCourses temp, int se, string& e, bool& fl, const SchoolYear& Y)
 {
 	ifstream f;
 	f.open(to_string(se) + Y.ListCourses);
@@ -209,7 +210,7 @@ int ViewListOfCourse(ListCourses temp, int se, string&e, bool&fl,  const SchoolY
 			int STT = 15 * (page - 1);
 			for (i = 1; i < page; i++)
 			{
-				for (j= 0; j < 15; j++)
+				for (j = 0; j < 15; j++)
 				{
 					temp1 = temp1->next;
 				}
@@ -240,17 +241,17 @@ int ViewListOfCourse(ListCourses temp, int se, string&e, bool&fl,  const SchoolY
 			switch (key)
 			{
 			case LEFT:// sang trai
-					vitri = 0;
-					break;
+				vitri = 0;
+				break;
 			case RIGHT: // sang phai
-					vitri = 1;
-					break;
+				vitri = 1;
+				break;
 			case ESC: // thoat vong lap
-					return 0;
-					break;
+				return 0;
+				break;
 			case ENTER:
-					return 1;
-					break;
+				return 1;
+				break;
 			}
 			if (vitri == 0)
 			{
@@ -267,6 +268,7 @@ int ViewListOfCourse(ListCourses temp, int se, string&e, bool&fl,  const SchoolY
 		}
 	}
 }
+
 
 void updateCourse(ListCourses& l, int se, const SchoolYear& Y)
 {
@@ -297,6 +299,7 @@ void updateCourse(ListCourses& l, int se, const SchoolYear& Y)
 		file1 >> b.Session2.thu >> b.Session2.shift;
 		file1.ignore();
 		if (file1.eof()) break;
+		a.Sememster = b.Sememster;
 		if (a.ID == b.ID)
 		{
 			system("cls");
@@ -425,6 +428,25 @@ void updateCourse(ListCourses& l, int se, const SchoolYear& Y)
 			file2 << a.MaxNumOfStudents << endl;
 			file2 << a.Session1.thu << endl << a.Session1.shift << endl;
 			file2 << a.Session2.thu << endl << a.Session2.shift << endl;
+			ifstream file3(to_string(se) + Y.StudentOfSubject);
+			ofstream file4("temp.txt");
+			string s;
+			while (!file3.eof())
+			{
+				getline(file3, s);
+				if (s == b.ID)
+				{
+					file4 << a.ID << endl;
+				}
+				else
+				{
+					file4 << s << endl;
+				}
+			}
+			file3.close();
+			file4.close();
+			remove((to_string(se) + Y.StudentOfSubject).c_str());
+			rename("temp.txt", (to_string(se) + Y.StudentOfSubject).c_str());
 		}
 		else {
 			file2 << b.Sememster << endl;
@@ -510,9 +532,9 @@ void deleteCourse(ListCourses& l, int se, const SchoolYear& Y)
 	Frames(70, 30, 30, 1);
 	gotoxy(73, 31);
 	getline(cin, a.ID);
-	if (CheckCourses(l, a.ID)) {
+	if (!CheckCourses(l, a.ID)) {
 
-		EffectSuccess(75, 26, "Khong ton tai ma mon do");
+		EffectFailed(75, 26, "Khong ton tai ma mon do");
 		return;
 	}
 	fstream file1, file2;

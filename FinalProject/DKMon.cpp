@@ -6,7 +6,7 @@
 #include <string>
 #include "Menu.h"
 #include"DKMon.h"
-
+#include "student.h"
 void Copy(NodeCourse*& p, NodeCourse* p1)
 {
 	p->course = p1->course;
@@ -161,17 +161,22 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 {
 	Time t = getTime();
 	Time* arrTime = ReadTimeRegistration(Y);
+	if (arrTime == NULL)
+	{
+		c = "Chua co phien DKHP!";
+		return;
+	}
 	char check = isTimeIn(t, arrTime[0], arrTime[1]);
 	if (check != 0)
 	{
 		if (check == 1) {
 			c = "Da qua thoi gian DKHP";
 			cout << "Thoi gian dang ky da het tu ";
-			cout << arrTime[0].hour << ":";
-			if (arrTime[0].minute < 10) cout << "0";
-			cout << arrTime[0].minute << ":";
-			if (arrTime[0].second < 10) cout << "0";
-			cout << arrTime[0].second;
+			cout << arrTime[1].hour << ":";
+			if (arrTime[1].minute < 10) cout << "0";
+			cout << arrTime[1].minute << ":";
+			if (arrTime[1].second < 10) cout << "0";
+			cout << arrTime[1].second;
 			cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
 		}
 		else if (check == -1) {
@@ -315,37 +320,36 @@ int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l)
 	file.open(to_string(se) + Y.StudentOfSubject);
 	string s;
 	bool check = false;
-	while (!check)
+	while (!check && !file.eof())
 	{
 		getline(file, s);
-		check = CheckCourses(l, s) && s == a.ID;
+		check = CheckCourses(l, s) && (s == a.ID);
 	}
-	getline(file, s);
-	int i,x;
+	SinhVien sv;
+	int i;
 	while (true)
 	{
-		getline(file, s);
-		getline(file, s);
-		getline(file, s);
-		getline(file, s);
-		getline(file, s);
-		getline(file, s);
-		getline(file, s);
+		if(!getline(file, sv.Class)) break;
+		if (CheckCourses(l, sv.Class)||file.eof()||sv.Class.empty()) break;
+		count += 1;
+		getline(file, sv.ID);
+		getline(file, sv.pass);
+		getline(file, sv.FirstName);
+		getline(file, sv.LastName);
+		getline(file, sv.Gender);
+		getline(file, sv.DateOfBirth);
+		getline(file, sv.SocialID);
 		for (i = 0; i < 3; i++)
 		{
-			file >> x;
+			file >> sv.begin[i];
 		}
 		file.ignore();
-		file >> x;
+		file >> sv.YearStudent;
+		file >> sv.Semester;
 		file.ignore();
-		file >> x;
-		file.ignore();
-		++count;
-		getline(file, s);
-		if (CheckCourses(l, s) || s == "" || file.eof()) break;
 	}
 	file.close();
-	return count;
+	return (count!=0)*(count-1);
 }
 int NumberMaxStudent(const SchoolYear& Y, const string& S, int se, const ListCourses& l)
 {

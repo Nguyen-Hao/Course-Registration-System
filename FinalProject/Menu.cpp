@@ -14,7 +14,7 @@ string Menubegin[] = { " 1. Giao vien", " 2. Hoc sinh"," 3. Thoat" };
 string MenuSV[] = { " 1. Dang ky hoc phan", " 2. Ket qua DKHP", " 3. Xoa hoc phan da dang ky", " 4. Tra cuu ket qua hoc tap", " 5. Doi mat khau" ," 6. Dang xuat" , " 7. Thoat" };
 string MenuGV1[] = { " 1. Tao nam hoc moi", " 2. Tao ki moi", " 3. Tao lop hoc moi" };
 string MenuGV2[] = { " 1. Them sinh vien nam nhat vao lop", " 2. Tao phien DKHP", " 3. Them khoa hoc"," 4. Xuat file nhap DSSV tung lop", " 5. Xoa khoa hoc" ," 6. Cap nhat khoa hoc", " 7. Cap nhat diem trong khoa hoc" };
-string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc"};
+string MenuGV3[] = { " 1. Danh sach lop", " 2. Danh sach sinh vien trong lop", " 3. Danh sach khoa hoc"," 4. Danh sach SV trong khoa hoc", " 5. Xem bang diem trong khoa hoc", " 6. Xem bang diem trong lop"," 7. Xuat CSV File bang diem SV trong khoa hoc de nhap diem"};
 string MenuGV[] = { " 1. Tao moi", " 2. Nhap thong tin", " 3. Tra cuu " ," 4. Doi mat khau", " 5. Dang xuat", " 6.Thoat"};
 
 void Information()
@@ -1062,13 +1062,14 @@ HOME:
 				transform(gv.FirstName.begin(), gv.FirstName.end(), gv.FirstName.begin(), toupper);
 				transform(gv.LastName.begin(), gv.LastName.end(), gv.LastName.begin(), toupper);
 				gotoxy(4, 5);
+				/*
 				if (se == -1) {
 					cout << "Ki: " << '_' << " - Nam hoc: " << Y.NameSchoolYear << "   ";
 					TextColor(228);
 					if (se == -1) cout << "(Can tao ki moi truoc khi su dung)";
 					TextColor(224);
-				}
-				else cout << "Ki: " << se << " - Nam hoc: " << Y.NameSchoolYear;
+				}*/
+				cout << "Ki: " << se << " - Nam hoc: " << Y.NameSchoolYear;
 				gotoxy(4, 6); cout << "Xin chao Thay/Co: " << gv.FirstName << " " << gv.LastName;
 				int n = 0, i, k, j;
 				for (i = 0; i < 6; ++i)

@@ -74,6 +74,13 @@ void CreateSchoolYear(SchoolYear& S)
 	file << S.StudentOfSubject << endl;
 	file << S.TimeDKHP << endl;
 	file.close();
+	string c = "Ban can tao ky moi truoc khi tiep tuc... ";
+	EffectFailed(90, 28, c);
+	gotoxy(92, 28);
+	system("pause");
+	ClearEffectAgree(90, 28, c);
+	gotoxy(90, 28);
+	for (int i = 0; i < c.size(); ++i) cout << " ";
 	semester r;
 	listSemester l;
 	Sleep(50);
