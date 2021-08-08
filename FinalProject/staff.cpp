@@ -969,20 +969,22 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 	int vitri = 0, n = 0;
 	int numberofstudent = CountNodeStudent(dsl.l[VitriLop].pHead);
 	int numberofPage = CountNodePage2(numberofstudent);
-	int page = 1;
+	int page = 1,i,j,count;
+	ListSV* k;
+	ListSV* psv;
 	while (true)
 	{
-		ListSV* k = dsl.l[VitriLop].pHead;
+		k = dsl.l[VitriLop].pHead;
 		int STT = 3 * (page - 1);
-		for (int i = 1; i < page; i++)
+		for (i = 1; i < page; ++i)
 		{
-			for (int j = 0; j < 3; j++)
+			for (j = 0; j < 3; ++j)
 			{
 				k = k->pNext;
 			}
 		}
-		int count = 0;
-		int i = 0;
+		count = 0;
+		i = 0;
 		system("cls");
 		FormMenu3();
 		gotoxy(45, 2); TextColor(164); cout << "BANG DIEM TONG KET LOP " << malop << " - KI " << se << " - Nam hoc " << Y.NameSchoolYear;
@@ -990,7 +992,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 		gotoxy(20, 4); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
 		gotoxy(20, 5); cout << char(124) << "  " << setw(4) << left << "STT" << char(124) << "  " << setw(14) << left << "     MSSV" << char(124) << "  " << setw(19) << left << "         Ho" << char(124) << "  " << setw(19) << "   Ten" << char(124) << setw(30) << "          Mon hoc" << char(124) << setw(10) << "   Diem" << char(124) << endl;
 		gotoxy(20, 6); cout << "+-------------------------------------------------------------------------------------------------------------+" << endl;
-		for (int j = 0; j < 3; j++)
+		for (j = 0; j < 3; ++j)
 		{
 			if (k == NULL) break;
 			double TotalMark = 0;
@@ -998,7 +1000,7 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 			bool flat = false;
 			for (NodeCourse* p = dsm.head; p->next != NULL; p = p->next)
 			{
-				ListSV* psv = findStudentOfCourses(dsm, p->course.ID, se, Y);
+				psv = findStudentOfCourses(dsm, p->course.ID, se, Y);
 				for (psv; psv != NULL; psv = psv->pNext)
 				{
 					if (psv->info.ID == k->info.ID)
@@ -1066,13 +1068,13 @@ void ViewScoreOfAClass(ListLop dsl, ListCourses dsm, int se, const SchoolYear& Y
 		{
 			if (page == 1) continue;
 			else
-				page--;
+				--page;
 		}
 		if (vitri == 1)
 		{
 			if (page == numberofPage) continue;
 			else
-				page++;
+				++page;
 		}
 	}
 }

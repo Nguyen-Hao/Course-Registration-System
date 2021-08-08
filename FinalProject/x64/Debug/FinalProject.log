@@ -1,0 +1,4 @@
+﻿  course.cpp
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\course.cpp(190,8): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\PC\Desktop\FINALPROJECT\FinalProject\course.cpp(270): warning C4715: 'ViewListOfCourse': not all control paths return a value
+  FinalProject.vcxproj -> C:\Users\PC\Desktop\FINALPROJECT\x64\Debug\FinalProject.exe

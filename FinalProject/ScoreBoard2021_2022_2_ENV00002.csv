@@ -1,30 +1,31 @@
 STT,ID,First Name,Last Name,Total Mark, Final Mark, Midterm Mark, Other Mark
-1,12341234,Nguyen,A,2.6,4,1,0
-2,20120471,Nguyen Van,A,4.8,6,1,5
-3,20120484,Tran Van,B,5.8,5,7,7
-4,12341231,Tran,Tho,7.4,8,7,6
-5,20120470,Nguyen Van,Hao,6.2,7,5,5
-6,12315516,Tran,Huu,5.6,6,7,3
-7,12314515,Tran,Hung,5.4,3,8,10
-8,20120789,Nguyen Thi,C,9.2,10,8,8
-9,12341235,Tran,Nam,7.2,6,9,9
-10,65569711,Masha,Mackison,4,5,3,2
-11,72505323,Orlan,Clampton,4.6,6,5,0
-12,43613800,Pam,Fittes,3.4,5,2,0
-13,97407544,Angus,Ells,6,6,4,8
-14,18886479,Shel,Cheal,5.2,3,10,7
-15,68111890,Roth,Hunsworth,8,7,9,10
-16,39156716,Robb,Oseman,7.4,9,2,8
-17,60749293,Silvano,Hebner,2.6,1,4,6
-18,78558387,Angelle,Bonsale,2.4,3,2,1
-19,84111941,Carmita,Perview,4.8,2,8,10
-20,12274378,Adrianna,Pearsey,3.6,5,3,0
-21,10235996,Rhodie,Dodshon,4,2,4,10
-22,24633332,Caroljean,Fazakerley,3.6,3,3,6
-23,18541678,Allina,Castanho,4.4,3,3,10
-24,31976386,Tulley,Edyson,8.8,10,5,9
-25,50381073,Elonore,Caplis,7,10,3,2
-26,16654901,Cahra,Gohn,3.4,5,1,1
-27,16749384,Townie,Franscioni,8.4,10,7,5
-28,79509937,Corinne,Alelsandrowicz,4.8,5,1,8
-29,72891677,Kathe,Teal,6.8,8,3,7
+1,21120454,LE CONG,DAT,0,0,0,0
+2,12341234,Nguyen,A,0,0,0,0
+3,20120471,Nguyen Van,A,0,0,0,0
+4,20120484,Tran Van,B,0,0,0,0
+5,12341231,Tran,Tho,0,0,0,0
+6,20120470,Nguyen Van,Hao,0,0,0,0
+7,12315516,Tran,Huu,0,0,0,0
+8,12314515,Tran,Hung,0,0,0,0
+9,20120789,Nguyen Thi,C,0,0,0,0
+10,12341235,Tran,Nam,0,0,0,0
+11,65569711,Masha,Mackison,0,0,0,0
+12,72505323,Orlan,Clampton,0,0,0,0
+13,43613800,Pam,Fittes,0,0,0,0
+14,97407544,Angus,Ells,0,0,0,0
+15,18886479,Shel,Cheal,0,0,0,0
+16,68111890,Roth,Hunsworth,0,0,0,0
+17,39156716,Robb,Oseman,0,0,0,0
+18,60749293,Silvano,Hebner,0,0,0,0
+19,78558387,Angelle,Bonsale,0,0,0,0
+20,84111941,Carmita,Perview,0,0,0,0
+21,12274378,Adrianna,Pearsey,0,0,0,0
+22,10235996,Rhodie,Dodshon,0,0,0,0
+23,24633332,Caroljean,Fazakerley,0,0,0,0
+24,18541678,Allina,Castanho,0,0,0,0
+25,31976386,Tulley,Edyson,0,0,0,0
+26,50381073,Elonore,Caplis,0,0,0,0
+27,16654901,Cahra,Gohn,0,0,0,0
+28,16749384,Townie,Franscioni,0,0,0,0
+29,79509937,Corinne,Alelsandrowicz,0,0,0,0
+30,72891677,Kathe,Teal,0,0,0,0

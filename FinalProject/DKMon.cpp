@@ -57,12 +57,12 @@ int countNodeCourses(const ListCourses& l)
 	}
 	return i;
 }
-ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv, int se, const SchoolYear&Y)
+ListCourses courseOfStudent(const ListCourses& l, const SinhVien& sv, int se, const SchoolYear& Y)
 {
 	ListCourses result;
 	initListCourses(result);
 	fstream file;
-	file.open(to_string(se)+Y.StudentOfSubject, ios::in);
+	file.open(to_string(se) + Y.StudentOfSubject, ios::in);
 	char ch[10] = "\0", CH[10] = "\n";
 	file.getline(ch, 10);
 	SinhVien s;
@@ -157,26 +157,23 @@ Time* ReadTimeRegistration(const SchoolYear& Y)
 	else return a;
 	
 }
-void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, string &c, bool &f)
+
+void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear& Y, string& c, bool& f)
 {
 	Time t = getTime();
 	Time* arrTime = ReadTimeRegistration(Y);
-	if (arrTime == NULL)
-	{
-		c = "Chua co phien DKHP!";
-		return;
-	}
+	if (arrTime == NULL) return;
 	char check = isTimeIn(t, arrTime[0], arrTime[1]);
 	if (check != 0)
 	{
 		if (check == 1) {
 			c = "Da qua thoi gian DKHP";
 			cout << "Thoi gian dang ky da het tu ";
-			cout << arrTime[1].hour << ":";
-			if (arrTime[1].minute < 10) cout << "0";
-			cout << arrTime[1].minute << ":";
-			if (arrTime[1].second < 10) cout << "0";
-			cout << arrTime[1].second;
+			cout << arrTime[0].hour << ":";
+			if (arrTime[0].minute < 10) cout << "0";
+			cout << arrTime[0].minute << ":";
+			if (arrTime[0].second < 10) cout << "0";
+			cout << arrTime[0].second;
 			cout << " ngay " << arrTime[1].day << "/" << arrTime[1].month << "/" << arrTime[1].year;
 		}
 		else if (check == -1) {
@@ -200,7 +197,7 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 	}
 	ListCourses temp = courseOfStudent(l, S, se, Y);
 	gotoxy(0, 32);
-	f = true;	
+	f = true;
 	string s;
 	bool fl;
 	system("cls");
@@ -211,14 +208,14 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 	}
 	else
 	{
-		char id[10]="\0";
+		char id[10] = "\0";
 		Frames(45, 32, 30, 1);
 		gotoxy(45, 31);
 		cout << "Nhap ma mon dang ky: ";
 		string ID;
 		gotoxy(47, 33);
 		getline(cin, ID);
-		strcpy_s(id , ID.c_str());
+		strcpy_s(id, ID.c_str());
 		if (checkNumber(Y, ID))
 		{
 			NodeCourse* ptr = FindCourses(l, id);
@@ -312,6 +309,7 @@ void CoursesRegistration(ListCourses l, SinhVien S, int se, const SchoolYear&Y, 
 		}
 	}
 }
+
 
 int daDangKy(Course a, const SchoolYear Y, int se, ListCourses l)
 {

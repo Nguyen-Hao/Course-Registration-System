@@ -572,6 +572,44 @@ void deleteCourse(ListCourses& l, int se, const SchoolYear& Y)
 	file2.close();
 	remove(link1.c_str());
 	rename(link2.c_str(), link1.c_str());
+	file1.open(to_string(se) + Y.StudentOfSubject, ios::in);
+	file2.open("temp.txt", ios::out);
+	SinhVien sv;
+	string s;
+	while (!file1.eof())
+	{
+		getline(file1, s);
+		if (s==a.ID)
+		{
+			while (!file1.eof())
+			{
+				getline(file1, sv.Class);
+				if (CheckCourses(l, sv.Class))
+				{
+					file2 << sv.Class << endl;
+					break;
+				}
+				getline(file1, sv.ID);
+				getline(file1, sv.pass);
+				getline(file1, sv.FirstName);
+				getline(file1, sv.LastName);
+				getline(file1, sv.Gender);
+				getline(file1, sv.DateOfBirth);
+				getline(file1, sv.SocialID);
+				file1 >> sv.begin[0] >> sv.begin[1] >> sv.begin[2];
+				file1 >> sv.YearStudent >> sv.Semester;
+				file1.ignore();
+			}
+		}
+		else
+		{
+			file2 << s<<endl;
+		}
+	}
+	file1.close();
+	file2.close();
+	remove((to_string(se) + Y.StudentOfSubject).c_str());
+	rename("temp.txt", (to_string(se) + Y.StudentOfSubject).c_str());
 	l = ReadListCourses(se, Y);
 	EffectSuccess(75, 26, "Xoa thanh cong ");
 }

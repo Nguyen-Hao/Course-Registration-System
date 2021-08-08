@@ -1,43 +1,44 @@
 STT,ID,First Name,Last Name,Total Mark, Final Mark, Midterm Mark, Other Mark
-1,20841930,Gui,Thorald,8,9,7,6
-2,92971778,Cati,Knoles,5.2,5,1,10
-3,45536650,Arch,Arnson,2.8,3,2,3
-4,66774001,Abbie,Patrick,3.2,2,10,0
-5,44219348,Hillary,Ives,4.4,2,8,8
-6,95984540,Carmine,Hellings,3.2,1,3,10
-7,92255150,Jeff,Towne,2.4,3,3,0
-8,21149479,Paulie,Potteridge,5,6,6,1
-9,61693330,Justina,Alldread,6,8,1,5
-10,45467460,Olivero,Tyce,6.4,10,2,0
-11,11381501,Wallie,Flippelli,4.6,5,6,2
-12,74604108,Eve,Beesley,3.4,1,7,7
-13,61601421,Georgianne,Bolderoe,3.8,4,2,5
-14,84532755,Kerrin,Bodimeade,7.6,6,10,10
-15,22095742,Omero,Loffhead,2.6,1,8,2
-16,20120471,Nguyen Van,A,2.2,2,5,0
-17,20120484,Tran Van,B,3,1,3,9
-18,12341231,Tran,Tho,8.6,8,10,9
-19,20120470,Nguyen Van,Hao,6,4,8,10
-20,12315516,Tran,Huu,7.2,6,10,8
-21,12314515,Tran,Hung,7.2,9,3,6
-22,20120789,Nguyen Thi,C,3.4,2,3,8
-23,12341235,Tran,Nam,5.4,6,3,6
-24,65569711,Masha,Mackison,8.4,8,9,9
-25,72505323,Orlan,Clampton,8,8,7,9
-26,43613800,Pam,Fittes,4.6,6,4,1
-27,97407544,Angus,Ells,5,5,7,3
-28,18886479,Shel,Cheal,4,1,9,8
-29,48945837,Elberta,Coole,6.2,10,1,0
-30,51704544,Cathlene,MacGibbon,8,10,3,7
-31,50661946,Giselbert,Robelin,4.2,5,3,3
-32,38794168,Glynnis,Novelli,6.8,6,7,9
-33,51005354,Stacie,Tidey,6.2,9,3,1
-34,54205426,Layne,McNeice,4,3,5,6
-35,37919991,Damon,Remmer,5.2,5,6,5
-36,53617087,Roth,Tomovic,8.4,9,10,5
-37,51139789,Odelinda,Grolmann,2.2,2,5,0
-38,54775523,Petronille,Burnhard,5.4,6,9,0
-39,54757589,Evangelina,Diego,7.4,9,2,8
-40,49907872,Clair,Nutting,5,6,2,5
-41,30848220,Faith,Woolway,3.4,1,10,4
-42,44702795,Perrine,Scotchmoor,5.4,8,1,2
+1,21120454,LE CONG,DAT,0,0,0,0
+2,20841930,Gui,Thorald,0,0,0,0
+3,92971778,Cati,Knoles,0,0,0,0
+4,45536650,Arch,Arnson,0,0,0,0
+5,66774001,Abbie,Patrick,0,0,0,0
+6,44219348,Hillary,Ives,0,0,0,0
+7,95984540,Carmine,Hellings,0,0,0,0
+8,92255150,Jeff,Towne,0,0,0,0
+9,21149479,Paulie,Potteridge,0,0,0,0
+10,61693330,Justina,Alldread,0,0,0,0
+11,45467460,Olivero,Tyce,0,0,0,0
+12,11381501,Wallie,Flippelli,0,0,0,0
+13,74604108,Eve,Beesley,0,0,0,0
+14,61601421,Georgianne,Bolderoe,0,0,0,0
+15,84532755,Kerrin,Bodimeade,0,0,0,0
+16,22095742,Omero,Loffhead,0,0,0,0
+17,20120471,Nguyen Van,A,0,0,0,0
+18,20120484,Tran Van,B,0,0,0,0
+19,12341231,Tran,Tho,0,0,0,0
+20,20120470,Nguyen Van,Hao,0,0,0,0
+21,12315516,Tran,Huu,0,0,0,0
+22,12314515,Tran,Hung,0,0,0,0
+23,20120789,Nguyen Thi,C,0,0,0,0
+24,12341235,Tran,Nam,0,0,0,0
+25,65569711,Masha,Mackison,0,0,0,0
+26,72505323,Orlan,Clampton,0,0,0,0
+27,43613800,Pam,Fittes,0,0,0,0
+28,97407544,Angus,Ells,0,0,0,0
+29,18886479,Shel,Cheal,0,0,0,0
+30,48945837,Elberta,Coole,0,0,0,0
+31,51704544,Cathlene,MacGibbon,0,0,0,0
+32,50661946,Giselbert,Robelin,0,0,0,0
+33,38794168,Glynnis,Novelli,0,0,0,0
+34,51005354,Stacie,Tidey,0,0,0,0
+35,54205426,Layne,McNeice,0,0,0,0
+36,37919991,Damon,Remmer,0,0,0,0
+37,53617087,Roth,Tomovic,0,0,0,0
+38,51139789,Odelinda,Grolmann,0,0,0,0
+39,54775523,Petronille,Burnhard,0,0,0,0
+40,54757589,Evangelina,Diego,0,0,0,0
+41,49907872,Clair,Nutting,0,0,0,0
+42,30848220,Faith,Woolway,0,0,0,0
+43,44702795,Perrine,Scotchmoor,0,0,0,0
